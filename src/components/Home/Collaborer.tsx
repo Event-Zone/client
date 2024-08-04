@@ -1,7 +1,16 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 function Collaborer() {
+  const router = useRouter();
+
+  const handleAddEventClick = () => {
+    router.push("/register");
+  };
+
   return (
     <div>
       <div className="w-[90%] ml-14 my-3">
@@ -22,12 +31,15 @@ function Collaborer() {
             <p className="text-titles">
               Découvrez qui organise des événements dans vos domaines d'intérêt.
             </p>
-            <Link href={"#"} className="text-mainBlue">
+            <Link href="#" className="text-mainBlue">
               Rechercher des événements
             </Link>
           </div>
         </div>
-        <div className="p-10 m-5 flex flex-row bg-mainBlue bg-opacity-[.3] rounded-lg">
+        <div
+          className="p-10 m-5 flex flex-row bg-mainBlue bg-opacity-[.3] rounded-lg cursor-pointer"
+          onClick={handleAddEventClick}
+        >
           <div>
             <img alt="plus-icon" src="/ph_plus-bold.png" />
           </div>
@@ -39,9 +51,9 @@ function Collaborer() {
               Contribuez à l'Excellence Événementielle et Ajoutez Votre
               Événement avec EventZone.{" "}
             </p>
-            <Link href={"#"} className="text-mainBlue">
+            <button className="text-mainBlue underline">
               Ajoutez votre événement{" "}
-            </Link>
+            </button>
           </div>
         </div>
       </div>

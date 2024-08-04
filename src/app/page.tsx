@@ -1,11 +1,16 @@
-import Home from "./components/Home";
-import Navbar from "./components/shared/Navbar";
+"use client";
+
+import Home from "../components/Home";
+import Navbar from "../components/shared/Navbar";
+import { Provider } from "react-redux";
+import { store } from "../store/store";
 
 export default function Main() {
   return (
-    <main className="flex  min-h-screen flex-col  ">
-      <Navbar />
-      <Home />
-    </main>
+    <Provider store={store}>
+      <main className="">
+        <Home />
+      </main>
+    </Provider>
   );
 }

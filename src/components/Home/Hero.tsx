@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
 const Hero = () => {
   const [images, setImages] = useState([
     "/Event.png",
