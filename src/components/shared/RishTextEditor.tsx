@@ -1,0 +1,75 @@
+"use client";
+import React, { FormEventHandler, useRef } from "react";
+
+function RishTextEditor({
+  setFormData,
+  formData,
+}: {
+  setFormData: Function;
+  formData: any;
+}) {
+  const handleDescriptionChange = () => {
+    if (descriptionRef.current) {
+      setFormData({
+        ...formData,
+        eventDescription: descriptionRef.current.innerHTML,
+      });
+    }
+  };
+
+  const descriptionRef = useRef<HTMLDivElement>(null);
+  const lastSelection = useRef<Range | null>(null);
+  const applyFormat = (tag: string) => {
+    if (descriptionRef.current) {
+      document.execCommand(tag, false);
+      saveSelection();
+    }
+  };
+
+  const saveSelection = () => {
+    const sel = window.getSelection();
+    if (sel && sel.rangeCount > 0) {
+      lastSelection.current = sel.getRangeAt(0).cloneRange();
+    }
+  };
+  return (
+    <div className="mb-4 border-gray-300 border-[1.3px] p-2">
+      <label
+        htmlFor="eventDescription"
+        className="block text-sm font-medium poppins-semibold text-gray-700"
+      >
+        Description de l'événement
+      </label>
+      <div
+        id="eventDescription"
+        ref={descriptionRef}
+        contentEditable
+        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+        onInput={handleDescriptionChange}
+        style={{ whiteSpace: "pre-wrap", minHeight: "100px" }}
+      ></div>
+      <div className="flex mt-2 space-x-2">
+        <img
+          alt="bold"
+          src="/ooui_bold-b.png"
+          className="w-5 h-5 cursor-pointer"
+          onClick={() => applyFormat("bold")}
+        />
+        <img
+          alt="list"
+          src="/fe_list-bullet.png"
+          className="w-5 h-5 cursor-pointer"
+          onClick={() => applyFormat("insertUnorderedList")}
+        />
+        <img
+          alt="numbered-list"
+          src="/ph_list-numbers-bold.png"
+          className="w-5 h-5 cursor-pointer"
+          onClick={() => applyFormat("insertOrderedList")}
+        />
+      </div>
+    </div>
+  );
+}
+
+export default RishTextEditor;

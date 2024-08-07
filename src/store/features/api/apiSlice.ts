@@ -41,6 +41,45 @@ export const apiSlice = createApi({
             })
         }),
 
+        //Auth
+        registerUser: builder.mutation<any, any>({
+            query: (data) => ({
+                url: `auth/register`,
+                method: 'POST',
+                body: data
+            })
+        }),
+        loginUser: builder.mutation<any, any>({
+            query: (data) => ({
+                url: `auth/login`,
+                method: 'POST',
+                body: data
+            })
+        }),
+
+        getUser: builder.query<any, any>({
+            query: (_id) => ({
+                url: `auth/${_id}`,
+                method: 'GET',
+            })
+        }),
+
+        //organiser
+        addSubscription: builder.mutation<any, any>({
+            query: (data) => ({
+                url: `organizer/${data._id}`,
+                method: 'POST',
+                body: data
+            })
+        }),
+        getSubscription: builder.query<any, any>({
+            query: (_id) => ({
+                url: `organizer/${_id}`,
+                method: 'GET',
+            })
+        }),
+
+
     }),
 });
 
@@ -49,5 +88,10 @@ export const {
     useCreateEventMutation,
     useDeleteEventMutation,
     useGetEventQuery,
-    useUpdateEventMutation
+    useUpdateEventMutation,
+    useRegisterUserMutation,
+    useAddSubscriptionMutation,
+    useLoginUserMutation,
+    useGetUserQuery,
+    useGetSubscriptionQuery
 } = apiSlice;

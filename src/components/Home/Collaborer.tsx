@@ -8,7 +8,7 @@ function Collaborer() {
   const router = useRouter();
 
   const handleAddEventClick = () => {
-    router.push("/register");
+    router.push("/tarification");
   };
 
   return (

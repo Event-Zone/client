@@ -1,10 +1,27 @@
+"use client";
 import React from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
+import { selectToken, selectUser } from "@/store/features/userSlice";
 
 function Navbar() {
+  const isAuth = useSelector(selectToken);
+  const user = useSelector(selectUser);
+  const router = useRouter();
+  const pathname = usePathname();
+  const isV1 = pathname === "/welcome" || "/tarification";
+  console.log("pathname", pathname);
   return (
     // check The responsiveness bug
-    <div className="flex z-50 items-center justify-between p-4 text-white max-w-full sticky top-0 bg-white">
-      <div className="flex items-center ml-10">
+    <div
+      className={`flex z-50 items-center justify-between p-4 text-white max-w-full sticky top-0 bg-white ${
+        isV1 ? `border-b-gray-500 border-[1.5px]` : ""
+      }`}
+    >
+      <div
+        className="flex items-center ml-10 cursor-pointer"
+        onClick={() => router.push("/")}
+      >
         <img src="/NavbarLogo.svg" alt="Navbar Logo" className="" />
       </div>
       <div className="flex flex-grow mx-14 rounded-[10px] border-gray-500 border overflow-hidden">
@@ -63,14 +80,33 @@ function Navbar() {
           </select>
         </div>
       </div>
-      <div className="flex items-center">
-        <button className="px-10 py-2 text-mainBlue rounded-md">
-          Se connecter
-        </button>
-        <button className="px-10 py-2 bg-mainBlue rounded-md">
-          S'inscrire
-        </button>
-      </div>
+      {!isAuth ? (
+        <div className="flex items-center">
+          <button
+            onClick={() => router.push("/auth/login")}
+            className="px-10 py-2 text-mainBlue rounded-md"
+          >
+            Se connecter
+          </button>
+          <button
+            onClick={() => router.push("/auth/register")}
+            className="px-10 py-2 bg-mainBlue rounded-md"
+          >
+            S'inscrire
+          </button>
+        </div>
+      ) : (
+        <div className="flex items-center flex-row">
+          <img
+            alt="profile"
+            className="rounded-full bg-gray-200 p-2  mr-2"
+            src="/Profile.png"
+          />
+          <h3 className="poppins-regular text-gray-500">
+            {user.firstName} {user.lastName}
+          </h3>
+        </div>
+      )}
     </div>
   );
 }
