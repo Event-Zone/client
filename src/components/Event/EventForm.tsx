@@ -5,25 +5,17 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays, format } from "date-fns";
 
-function EventForm() {
+function EventForm({
+  formData,
+  setFormData,
+}: {
+  formData: any;
+  setFormData: Function;
+}) {
   const [newTag, setNewTag] = useState(""); // State for the new tag
   const [location, setLocation] = useState(0); // State for the new tag
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(addDays(new Date(), 1));
-
-  const [formData, setFormData] = useState({
-    eventName: "",
-    eventAcronym: "",
-    eventDescription: "",
-    tags: [""], // Initialize tags as an empty array
-    startdate: "",
-    enddate: "",
-    startHour: "",
-    endHour: "",
-    mobile: "",
-    website: "",
-    linkInscription: "",
-  });
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -64,7 +56,7 @@ function EventForm() {
   };
 
   const renderTags = () => {
-    return formData.tags.map((tag, index) => (
+    return formData.tags.map((tag: any, index: number) => (
       <span
         key={index}
         className="mr-2 bg-gray-200 rounded-md px-2 py-1 inline-flex  "
@@ -127,7 +119,11 @@ function EventForm() {
           />
         </div>
         <div className="mb-4 w-full flex flex-row">
-          <select className="mr-4 pl-10 flex-1 poppins-regular text-gray-500 focus:outline-none border-gray-300 border-[1.3px] p-2">
+          <select
+            onChange={handleInputChange}
+            name="type"
+            className="mr-4 pl-10 flex-1 poppins-regular text-gray-500 focus:outline-none border-gray-300 border-[1.3px] p-2"
+          >
             <option value="" disabled selected className="text-gray-500">
               Type
             </option>
@@ -148,7 +144,11 @@ function EventForm() {
             </option>
           </select>
 
-          <select className=" poppins-regular flex-1 border-gray-300 border-[1.3px] ml-2 p-2 pl-10 text-gray-500 focus:outline-none">
+          <select
+            onChange={handleInputChange}
+            name="Categorie"
+            className=" poppins-regular flex-1 border-gray-300 border-[1.3px] ml-2 p-2 pl-10 text-gray-500 focus:outline-none"
+          >
             <option value="" disabled selected className="text-gray-500">
               Categorie
             </option>

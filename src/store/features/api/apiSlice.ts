@@ -78,6 +78,19 @@ export const apiSlice = createApi({
                 method: 'GET',
             })
         }),
+        //Event
+        addEvent: builder.mutation<any, any>({
+            query: (data) => {
+
+                console.log(data.getAll('eventImages'))
+                return ({
+                    url: `event/`,
+                    method: 'POST',
+                    body: data
+                })
+            }
+        }),
+
 
 
     }),
@@ -93,5 +106,6 @@ export const {
     useAddSubscriptionMutation,
     useLoginUserMutation,
     useGetUserQuery,
-    useGetSubscriptionQuery
+    useGetSubscriptionQuery,
+    useAddEventMutation
 } = apiSlice;

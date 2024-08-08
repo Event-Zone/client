@@ -1,6 +1,13 @@
 import { IEvent } from "@/types/Event";
 import React from "react";
 
+// Function to format the date
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const options = { day: "numeric", month: "long", year: "numeric" } as const;
+  return new Intl.DateTimeFormat("en-US", options).format(date);
+}
+
 function NextEvent({ events }: { events: IEvent[] }) {
   return (
     <div className="w-full p-4">
@@ -29,17 +36,24 @@ function NextEvent({ events }: { events: IEvent[] }) {
               <img
                 alt="event-img"
                 className="object-cover w-full h-48"
-                src={event.media[0] || "https://via.placeholder.com/300x200"}
+                src={
+                  event.eventImages
+                    ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event.eventImages[0]}`
+                    : "https://via.placeholder.com/300x200"
+                }
               />
               <div className="p-4">
-                <h3 className="text-xl font-semibold">{event.name}</h3>
+                <h3 className="text-xl font-semibold">{event.eventName}</h3>
                 <p className="text-gray-600 flex flex-row items-center">
                   <img alt="location-icon" src="/LocationGray.png" />
                   {event.location}
                 </p>
                 <p className="text-gray-600 flex flex-row items-center">
                   <img alt="calendar-icon" src="/CalendarGray.png" />
-                  {event.startDate} - {event.endDate}
+                  {event.startdate
+                    ? formatDate(event.startdate as unknown as string)
+                    : null}{" "}
+                  {/* Date formatting applied here */}
                 </p>
               </div>
             </div>
