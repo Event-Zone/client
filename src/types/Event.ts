@@ -1,6 +1,6 @@
 interface IEvent {
     _id?: any;
-    location: string;
+    location: any;
     eventName: string;
     eventAcronym: string;
     eventDescription: string;

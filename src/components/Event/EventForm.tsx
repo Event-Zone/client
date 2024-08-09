@@ -4,6 +4,7 @@ import RishTextEditor from "../shared/RishTextEditor";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays, format } from "date-fns";
+import SearchBox from "../shared/SearchBox";
 
 function EventForm({
   formData,
@@ -12,6 +13,8 @@ function EventForm({
   formData: any;
   setFormData: Function;
 }) {
+  const [selectPosition, setSelectPosition] = useState(null);
+
   const [newTag, setNewTag] = useState(""); // State for the new tag
   const [location, setLocation] = useState(0); // State for the new tag
   const [startDate, setStartDate] = useState(new Date());
@@ -27,6 +30,7 @@ function EventForm({
   useEffect(() => {
     console.log(formData);
   }, [formData]);
+
   const handleDateChange = (date: Date | null, type: "start" | "end") => {
     if (type === "start") {
       setStartDate(date || new Date());
@@ -45,6 +49,19 @@ function EventForm({
       });
     }
   };
+  const handleLocation = (position: any) => {
+    setFormData({
+      ...formData,
+      location: {
+        address: position.address,
+        lon: position.lon,
+        lat: position.lat,
+      },
+    });
+  };
+  useEffect(() => {
+    console.log("HEHE", location);
+  }, [location]);
   const handleAddTag = (e: any) => {
     if (e.key === "Enter" && newTag.trim()) {
       // Check for Enter key and non-empty tag
@@ -78,6 +95,7 @@ function EventForm({
     updatedTags.splice(index, 1); // Remove the tag at the specified index
     setFormData({ ...formData, tags: updatedTags });
   };
+
   return (
     <div>
       <h3 className="text-2xl poppins-semibold">Informations de base</h3>
@@ -243,19 +261,37 @@ function EventForm({
           {location !== 2 ? (
             <div className="flex flex-row  border-[1.3px] border-gray-400 py-3 mt-2 px-4">
               {location === 1 ? (
-                <img alt="glob" src="/global.png" />
+                <div className="flex items-center justify-center">
+                  {" "}
+                  <img
+                    alt="search"
+                    src="/Search.svg"
+                    className="w-[20px] h-[20px]"
+                  />{" "}
+                  <input
+                    type="text"
+                    id="link"
+                    name="link"
+                    className=" poppins-regular shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    placeholder="Lien de participation ou "
+                    onChange={handleInputChange}
+                  />
+                </div>
               ) : location === 0 ? (
-                <img alt="search" src="/Search.svg" />
+                <div className="flex items-center justify-center">
+                  <img
+                    alt="glob"
+                    src="/global.png"
+                    className="w-[20px] h-[20px]"
+                  />
+                  <div style={{ width: "50vw" }}>
+                    <SearchBox
+                      location={formData.location}
+                      handleLocation={handleLocation}
+                    />
+                  </div>
+                </div>
               ) : null}
-
-              <input
-                type="text"
-                id="location"
-                name="location"
-                className=" poppins-regular shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                placeholder="Lien de participation ou "
-                onChange={handleInputChange}
-              />
             </div>
           ) : null}
         </div>

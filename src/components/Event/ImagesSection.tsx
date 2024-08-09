@@ -32,6 +32,10 @@ function ImagesSection({
   const handleBarClick = (index: number) => {
     setSelectedImage(index);
   };
+  const handleDeleteImage = (index: number) => {
+    const updatedImages = eventImages.filter((_, i) => i !== index);
+    setEventImages(updatedImages);
+  };
   return (
     <>
       <div className="flex w-full mb-3 justify-between">
@@ -133,13 +137,21 @@ function ImagesSection({
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className="w-24 h-24 m-2"
+                          className={`relative w-24 h-24 m-2`}
                         >
                           <img
                             src={URL.createObjectURL(image)}
                             alt={`event-${index}`}
-                            className="w-full h-full object-cover rounded-lg"
+                            className={`w-full h-full object-cover rounded-lg ${
+                              index === 0 ? " border-8 border-gray-900" : ""
+                            }`}
                           />
+                          <button
+                            onClick={() => handleDeleteImage(index)}
+                            className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                          >
+                            X
+                          </button>
                         </div>
                       )}
                     </Draggable>
@@ -152,7 +164,7 @@ function ImagesSection({
           {/* Here */}
           <div className="mb-4 w-full  border-gray-300 border-[1.3px] p-2">
             <label
-              htmlFor="eventName"
+              htmlFor="videoUrl"
               className="block text-sm font-medium poppins-semibold text-gray-700"
             >
               Video
@@ -165,8 +177,8 @@ function ImagesSection({
               />
               <input
                 type="text"
-                id="video"
-                name="video"
+                id="videoUrl"
+                name="videoUrl"
                 className="shadow-sm p-3 poppins-regular focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                 placeholder="video url"
                 onChange={(e) => setVideoUrl(e.target.value)}

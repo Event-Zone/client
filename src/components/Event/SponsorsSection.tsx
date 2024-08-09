@@ -24,8 +24,14 @@ function SponsorsSection({
       setIsSponsorsCompleted(true);
     }
   };
+
   const toggleSponsorUpload = () => {
     setShowSponsorUpload(!showSponsorUpload);
+  };
+
+  const handleDeleteImage = (index: number) => {
+    const updatedImages = sponsorImages.filter((_, i) => i !== index);
+    setSponsorImages(updatedImages);
   };
 
   return (
@@ -65,12 +71,18 @@ function SponsorsSection({
           </label>
           <div className="flex flex-wrap mt-4">
             {sponsorImages.map((image, index) => (
-              <div key={index} className="w-24 h-24 m-2">
+              <div key={index} className="relative w-24 h-24 m-2">
                 <img
                   src={URL.createObjectURL(image)}
                   alt={`sponsor-${index}`}
                   className="w-full h-full object-cover rounded-lg"
                 />
+                <button
+                  onClick={() => handleDeleteImage(index)}
+                  className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                >
+                  &times;
+                </button>
               </div>
             ))}
           </div>

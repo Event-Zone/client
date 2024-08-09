@@ -69,6 +69,9 @@ function ImagesForm({
     });
     setFormData(updatedFormData);
   }, [sponsorImages, videoUrl, eventImages, formValues]);
+  useEffect(() => {
+    console.log(formData.get("videoUrl"));
+  }, [formData]);
   return (
     <div className=" rounded-3xl p-8 relative flex flex-col justify-center items-center w-full h-full">
       <div className="w-full mb-3 border-[1.4px] border-gray-500 rounded-3xl p-4">

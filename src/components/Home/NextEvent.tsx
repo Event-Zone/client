@@ -1,4 +1,5 @@
 import { IEvent } from "@/types/Event";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 // Function to format the date
@@ -9,6 +10,7 @@ function formatDate(dateString: string): string {
 }
 
 function NextEvent({ events }: { events: IEvent[] }) {
+  const router = useRouter();
   return (
     <div className="w-full p-4">
       <div className="w-[90%] ml-14 my-3">
@@ -30,6 +32,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
         {events.length !== 0 ? (
           events.map((event, index) => (
             <div
+              onClick={() => router.push(`events/details/${event._id}`)}
               key={index}
               className="w-[300px] flex-shrink-0 bg-white shadow-md rounded-lg overflow-hidden"
             >
@@ -46,7 +49,9 @@ function NextEvent({ events }: { events: IEvent[] }) {
                 <h3 className="text-xl font-semibold">{event.eventName}</h3>
                 <p className="text-gray-600 flex flex-row items-center">
                   <img alt="location-icon" src="/LocationGray.png" />
-                  {event.location}
+                  {event.location?.address?.commercial
+                    ? event.location?.address?.commercial
+                    : event.location?.address?.state}
                 </p>
                 <p className="text-gray-600 flex flex-row items-center">
                   <img alt="calendar-icon" src="/CalendarGray.png" />

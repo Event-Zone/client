@@ -11,31 +11,34 @@ function CreateEvent() {
   const [addEvent, addEventResult] = useAddEventMutation();
 
   const [page, setPage] = useState(0);
-  const [firstFormData, setFirstFormData] = useState({
-    location: "",
-    eventName: "",
-    eventAcronym: "",
-    eventDescription: "",
-    tags: [""], // Initialize tags as an empty array
-    startdate: "",
-    enddate: "",
-    startHour: "",
-    endHour: "",
-    mobile: "",
-    website: "",
-    linkInscription: "",
-    type: "",
-    Categorie: "",
+  const [firstFormData, setFirstFormData] = useState<any>({
+    link: null,
+    location: null,
+    eventName: null,
+    eventAcronym: null,
+    eventDescription: null,
+    tags: [null], // Initialize tags as an empty array
+    startdate: null,
+    enddate: null,
+    startHour: null,
+    endHour: null,
+    mobile: null,
+    website: null,
+    linkInscription: null,
+    type: null,
+    Categorie: null,
   });
   const [secondFormData, setSecondFormData] = useState(new FormData());
 
   const handlePublier = async () => {
     const combinedFormData = new FormData();
-
+    if (firstFormData.location) {
+      firstFormData.location = JSON.stringify(firstFormData.location);
+    }
     // Append firstFormData fields to combinedFormData
     Object.keys(firstFormData).forEach((key) => {
       const value = (firstFormData as any)[key];
-      combinedFormData.append(key, value);
+      if (value !== null && value !== "") combinedFormData.append(key, value);
     });
 
     // Append secondFormData fields to combinedFormData
