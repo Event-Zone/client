@@ -22,7 +22,7 @@ function Collaborer() {
       <div className="flex flex-row justify-around">
         <div className="p-10 m-5 flex flex-row bg-mainBlue bg-opacity-[.3] rounded-lg">
           <div>
-            <img alt="search-icon" src="/ion_search.png" />
+            <img alt="search-icon" src="/icons/ion_search.png" />
           </div>
           <div>
             <h2 className="text-titles ml-9 mb-4 font-extrabold text-[30px]">
@@ -41,7 +41,7 @@ function Collaborer() {
           onClick={handleAddEventClick}
         >
           <div>
-            <img alt="plus-icon" src="/ph_plus-bold.png" />
+            <img alt="plus-icon" src="/icons/ph_plus-bold.png" />
           </div>
           <div>
             <h2 className="text-titles ml-14 mb-4 font-extrabold text-[30px]">

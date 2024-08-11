@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEventHandler, useRef } from "react";
+import React, { FormEventHandler, useEffect, useRef } from "react";
 
 function RishTextEditor({
   setFormData,
@@ -25,7 +25,11 @@ function RishTextEditor({
       saveSelection();
     }
   };
-
+  useEffect(() => {
+    if (descriptionRef.current) {
+      descriptionRef.current.innerHTML = formData.eventDescription;
+    }
+  }, []);
   const saveSelection = () => {
     const sel = window.getSelection();
     if (sel && sel.rangeCount > 0) {
@@ -51,19 +55,19 @@ function RishTextEditor({
       <div className="flex mt-2 space-x-2">
         <img
           alt="bold"
-          src="/ooui_bold-b.png"
+          src="/icons/ooui_bold-b.png"
           className="w-5 h-5 cursor-pointer"
           onClick={() => applyFormat("bold")}
         />
         <img
           alt="list"
-          src="/fe_list-bullet.png"
+          src="/icons/fe_list-bullet.png"
           className="w-5 h-5 cursor-pointer"
           onClick={() => applyFormat("insertUnorderedList")}
         />
         <img
           alt="numbered-list"
-          src="/ph_list-numbers-bold.png"
+          src="/icons/ph_list-numbers-bold.png"
           className="w-5 h-5 cursor-pointer"
           onClick={() => applyFormat("insertOrderedList")}
         />

@@ -10,27 +10,27 @@ function Categorie() {
       </div>
       <div className=" flex flex-row justify-around items-center w-full">
         <div className="flex flex-col items-center">
-          <img alt="type-icon" src="/Frame913.png" />
+          <img alt="type-icon" src="/icons/Frame913.png" />
           <p>Business</p>
         </div>
         <div className="flex flex-col items-center">
-          <img alt="type-icon" src="/Frame908.png" />
+          <img alt="type-icon" src="/icons/Frame908.png" />
           <p>Business</p>
         </div>
         <div className="flex flex-col items-center">
-          <img alt="type-icon" src="/Frame909.png" />
+          <img alt="type-icon" src="/icons/Frame909.png" />
           <p>Business</p>
         </div>
         <div className="flex flex-col items-center">
-          <img alt="type-icon" src="/Frame910.png" />
+          <img alt="type-icon" src="/icons/Frame910.png" />
           <p>Business</p>
         </div>
         <div className="flex flex-col items-center">
-          <img alt="type-icon" src="/Frame911.png" />
+          <img alt="type-icon" src="/icons/Frame911.png" />
           <p>Business</p>
         </div>
         <div className="flex flex-col items-center">
-          <img alt="type-icon" src="/Frame912.png" />
+          <img alt="type-icon" src="/icons/Frame912.png" />
           <p>Business</p>
         </div>
       </div>

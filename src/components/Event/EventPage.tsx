@@ -1,202 +1,365 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  useGetSubscriptionQuery,
+  useGetUserQuery,
+} from "@/store/features/api/apiSlice";
 
 function EventPage({ data }: { data: any }) {
-  // const [data, setdata] = React.useState({
-  //   eventName: "Sample Event",
-  //   eventAcronym: "SE",
-  //   eventDescription:
-  //     "<b>DSFSDFSDFSFSDFS</b><div><ul><li>ddfsdf</li><li>ddfsdf</li></ul><ol><li>sdfsdf</li></ol></div>",
-  //   tags: ["tag1", "tag2"],
-  //   startdate: "2023-10-01",
-  //   enddate: "2023-10-02",
-  //   startHour: "10:00 AM",
-  //   endHour: "5:00 PM",
-  //   mobile: "123-456-7890",
-  //   website: "https://example.com",
-  //   linkInscription: "https://example.com/register",
-  //   type: "Conference",
-  //   Categorie: "Technology",
-  // });
-  // const data = new FormData();
-  // data.append("eventImages", new Blob(), "eventImage.jpg");
-  // data.append("organizerImg", "https://via.placeholder.com/150");
-  // data.append("organizerName", "John Doe");
-  // data.append("lieu", "123 Event Street, City, Country");
-  // data.append("sponsorImages", "https://via.placeholder.com/150");
-  // data.append("sponsorImages", "https://via.placeholder.com/150");
+  // geting the organizer data
+  const {
+    data: fetchedOrganizer,
+    error: fetchedOrganizerError,
+    isLoading: fetchedOrganizerIsLoading,
+  } = useGetUserQuery(data.organizerId);
+
+  // getting the subscription data
+  const {
+    data: fetchedSubscription,
+    error: subscriptionError,
+    isLoading: subscriptionIsLoading,
+    refetch,
+  } = useGetSubscriptionQuery(fetchedOrganizer?.subscription, {
+    skip: !fetchedOrganizer,
+  });
+  const [subscritionData, setSubscriptionData] = useState<any>(null);
+  useEffect(() => {
+    if (subscriptionIsLoading) {
+      console.log("Loading events...");
+    } else if (subscriptionError) {
+      console.error("Error fetching events:", subscriptionError);
+    } else if (fetchedSubscription) {
+      console.log("Fetched subscription:", fetchedSubscription);
+      setSubscriptionData(fetchedSubscription);
+    }
+  }, [fetchedSubscription, subscriptionError, subscriptionIsLoading]);
+
+  useEffect(() => {
+    if (fetchedOrganizerIsLoading) {
+      console.log("Loading events...");
+    } else if (fetchedOrganizerError) {
+      console.error("Error fetching events:", fetchedOrganizerError);
+    } else if (fetchedOrganizer) {
+      console.log(" fetchedOrganizer:", fetchedOrganizer);
+    }
+  }, [fetchedOrganizer, fetchedOrganizerError, fetchedOrganizerIsLoading]);
+
+  const [currentImage, setCurrentImage] = useState(0);
+  const [currentBar, setCurrentBar] = useState(0);
+  const handleBarClick = (index: number) => {
+    setCurrentBar(index);
+    setCurrentImage(index);
+  };
   useEffect(() => {
     console.log(data);
   }, []);
   return (
-    <div className="flex flex-col w-full p-44">
-      <div className="flex justify-center items-center ">
-        <img
-          alt="coverImg"
-          className="w-full"
-          src={
-            data.eventImages
-              ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${data.eventImages[0]}`
-              : "https://via.placeholder.com/300"
-          }
-        />
-      </div>
-      <div className="flex ">
-        <p className="poppins-regular text-titles bg-mainBlue bg-opacity-5 rounded-lg px-4 py-2 mr-3">
-          {data.type}
-        </p>
-        <p className="poppins-regular text-titles bg-mainBlue bg-opacity-5 rounded-lg px-4 py-2 mr-3">
-          {data.Categorie}
-        </p>
-      </div>
-      <div className=" ">
-        <p className="poppins-medium text-gray-600  rounded-lg px-4 py-2 ">
-          {data.startdate} / {data.enddate}
-        </p>
-      </div>
-      <div className=" mt-4 poppins-semibold text-titles text-3xl">
-        {data.eventAcronym ? (
-          <h1>
-            {data.eventAcronym} - {data.eventName}
-          </h1>
-        ) : (
-          <h1>{data.eventName}</h1>
-        )}
-      </div>
-
-      <div className="flex justify-around mt-4">
-        <div className="rounded-xl poppins-regular  p-4 text-white bg-mainBlue flex ">
-          <img alt="icon" src="/EditSquare.png" />{" "}
-          <button className="rounded-xl poppins-regular  px-4 h-full w-full  ">
-            Participer{" "}
-          </button>
-        </div>
-        <div className="rounded-xl poppins-regular text-titles p-4 hover:text-white hover:bg-titles flex ">
-          <img alt="icon" src="/global.png" />{" "}
-          <button className="rounded-xl poppins-regular  px-4 h-full w-full  hover:bg-titles">
-            Site Web
-          </button>
-        </div>
-        <div className="rounded-xl poppins-regular text-titles p-4 hover:text-white hover:bg-titles flex ">
-          <img alt="icon" src="/mobile.png" />{" "}
-          <button className="rounded-xl poppins-regular  px-4 h-full w-full  hover:bg-titles">
-            Mobile{" "}
-          </button>
-        </div>
-        <div className="rounded-xl poppins-regular text-titles p-4 hover:text-white hover:bg-titles flex ">
-          <img alt="icon" src="/gps.png" />{" "}
-          <button className="text-sm rounded-xl poppins-regular  px-4 h-full w-full  hover:bg-titles">
-            Voir sur la carte
-          </button>
-        </div>
-      </div>
-      <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
-        <div className="flex items-center p-8">
+    <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full px-4 md:px-20 lg:px-44  py-16">
+        <div className="relative flex items-center justify-center rounded-xl overflow-hidden h-[460px] w-full ">
           <img
-            alt="organizerImg"
-            className="max-w-[50px] max-h-[50px]"
-            src={data?.organizerImg}
+            alt="coverImg"
+            className="h-full w-full"
+            src={
+              data.eventImages
+                ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${data.eventImages[currentImage]}`
+                : "https://via.placeholder.com/300"
+            }
           />
-          <div className="text-gray-600">
-            <h3 className="poppins-medium">Organisateur</h3>
-
-            <p className="poppins-medium text-titles">{data.organizerName}</p>
+          <div className="absolute bottom-3 flex flex-row z-30 justify-center items-center w-full p-4">
+            {data.eventImages.map((_: any, index: number) => (
+              <div
+                key={index}
+                className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
+                onClick={() => handleBarClick(index)}
+              >
+                {index === currentBar && (
+                  <div className=" w-full h-full rounded-md bg-gray-300  "></div>
+                )}
+              </div>
+            ))}
           </div>
-          add the hosted events
         </div>
-      </div>
-      <div className="mt-4 poppins-semibold text-titles">
-        <h3>Date et Horaires</h3>
-        <div className="flex items-center">
-          <img
-            alt="icon"
-            src="/calendarGray.png"
-            className="w-[15px] h-[15px] mr-2"
-          />{" "}
-          <p className="poppins-regular text-gray-600">
-            Du {data.startdate} au {data.enddate}
-          </p>{" "}
-        </div>
-        <div className="flex items-center">
-          <img alt="icon" src="/clock.png" className="w-[15px] h-[15px] mr-2" />{" "}
-          <p className="poppins-regular text-gray-600">
-            {data.startHour} - {data.endHour}
-          </p>{" "}
-        </div>
-        <div className="flex items-center">
-          <img
-            alt="icon"
-            src="/Frame 1170.png"
-            className="w-[15px] h-[15px] mr-2"
-          />{" "}
-          <a
-            target="_blank"
-            href="https://www.google.com/maps/place/"
-            className="poppins-regular text-sm text-mainBlue"
-          >
-            ajouter au calendrie google{" "}
-          </a>{" "}
-        </div>
-      </div>
-      <div className="mt-4 poppins-semibold text-titles">
-        <h3>Localisation</h3>
-        <div className="flex items-center">
-          <img
-            alt="icon"
-            src="/Location.svg"
-            className="w-[20px] h-[20px] mr-2"
-          />{" "}
-          <p className="poppins-regular text-gray-800">
-            {data?.location ? data?.location?.address?.state : <>Online</>}
+        <div className="flex mt-3">
+          <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+            {data.type}
+          </p>
+          <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+            {data.Categorie}
           </p>
         </div>
-        <div className="flex items-center">
-          <img alt="icon" src="/gps.png" className="w-[20px] h-[20px] mr-2" />{" "}
-          <a
-            target="_blank"
-            href={`https://www.google.com/maps/place/${data?.location?.lat},${data?.location?.lon}`}
-            className="poppins-regular text-sm text-mainBlue"
-          >
-            voir sur la carte{" "}
-          </a>{" "}
+        <div className=" ">
+          <p className="poppins-medium text-gray-600 rounded-lg px-4 py-2">
+            {new Date(data.startdate).toLocaleDateString("fr-FR", {
+              day: "2-digit",
+              month: "short",
+            })}{" "}
+            -{" "}
+            {new Date(data.enddate).toLocaleDateString("fr-FR", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            })}
+          </p>
         </div>
-      </div>
-      <div className="mt-4">
-        <h3 className="mt-4 poppins-semibold text-titles text-2xl">
-          A propos de cet événement
-        </h3>
-        <p
-          dangerouslySetInnerHTML={{ __html: data.eventDescription }}
-          className="poppins-regular text-gray-800 list-disc list-inside"
-        />
-      </div>
-      <div className="mt-4 poppins-semibold text-titles">
-        <h3>Sponsors</h3>
-        <div className="flex  ">
-          {data?.sponsorImages.map((img: any, index: number) => (
+        <div className=" mt-4 poppins-semibold text-titles text-3xl">
+          {data.eventAcronym ? (
+            <h1>
+              {data.eventAcronym} - {data.eventName}
+            </h1>
+          ) : (
+            <h1>{data.eventName}</h1>
+          )}
+        </div>
+
+        <div className="flex justify-start mt-4 flex-wrap">
+          {data.linkInscription ? (
+            <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
+              <img
+                alt="icon"
+                src="/icons/Edit Square.png"
+                className="max-w-[30px] max-h-[30px]"
+              />{" "}
+              <button className="rounded-xl ml-2 poppins-regular  ">
+                Participer{" "}
+              </button>
+            </div>
+          ) : null}
+          <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center ">
             <img
-              className="rounded-lg w-[100px] h-[100px] mr-3"
-              key={index}
-              alt={`sponsor-${index}`}
-              src={
-                img
-                  ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${img}`
-                  : "https://via.placeholder.com/300"
-              }
-            />
-          ))}
+              alt="icon"
+              src="/icons/globalDark.png"
+              className="max-w-[30px] max-h-[30px]"
+            />{" "}
+            <button className="rounded-xl ml-2 poppins-regular  ">
+              Site Web
+            </button>
+          </div>
+          <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center ">
+            <img
+              alt="icon"
+              src="/icons/mingcute_phone-line.png"
+              className="max-w-[30px] max-h-[30px]"
+            />{" "}
+            <button className="rounded-xl ml-2 poppins-regular  ">
+              Mobile{" "}
+            </button>
+          </div>
+          <div className="mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center ">
+            <img
+              alt="icon"
+              src="/icons/gps.png"
+              className="max-w-[30px] max-h-[30px]"
+            />{" "}
+            <button className="rounded-xl ml-2 poppins-regular  ">
+              Voir sur la carte{" "}
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="mt-4 poppins-meduim">
-        <h3 className="poppins-semibold text-2xl text-titles">Tags</h3>
-        <div className="flex">
-          {data.tags.map((tag: string, index: number) => (
-            <span
-              key={index}
-              className="tag mr-4 poppins-meduim text-titles rounded-lg px-3 bg-gray-200"
+        <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
+          <div className="flex items-center justify-between p-8">
+            <div className="flex flex-row">
+              <img
+                alt="organizerImg"
+                className="max-w-[50px] max-h-[50px] mr-2"
+                src={
+                  fetchedOrganizer?.orgPicture ||
+                  "https://via.placeholder.com/300"
+                }
+              />
+              <div className="text-gray-600">
+                <h3 className="poppins-medium">Organisateur</h3>
+
+                <p className="poppins-medium text-titles">
+                  {fetchedOrganizer?.orgName}
+                </p>
+              </div>{" "}
+            </div>
+            <div className="flex justify-between items-center cursor-pointer bg-[#DAE6F4] rounded-md p-2">
+              <img
+                alt="icon"
+                src="/icons/calendar-edit.png"
+                className="md:w-[23px] md:h-[23px] h-[14px] w-[14px]"
+              />
+              <p className="text-mainBlue poppins-regular text-sm   ">
+                Other Events Hosted
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-4 poppins-semibold text-titles">
+          <h3 className="text-2xl">Date et Horaires</h3>
+          <div className="flex items-center mt-3">
+            <img
+              alt="icon"
+              src="/icons/calendarGray.png"
+              className="w-[15px] h-[15px] mr-2"
+            />{" "}
+            <p className="poppins-regular text-gray-600 rounded-lg px-4 py-2">
+              Du{" "}
+              {new Date(data.startdate).toLocaleDateString("fr-FR", {
+                day: "2-digit",
+                month: "short",
+              })}{" "}
+              au{" "}
+              {new Date(data.enddate).toLocaleDateString("fr-FR", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
+            </p>
+          </div>
+          <div className="flex items-center">
+            <img
+              alt="icon"
+              src="/icons/clock.png"
+              className="w-[15px] h-[15px] mr-2"
+            />{" "}
+            <p className="poppins-regular text-gray-600">
+              {data.startHour} - {data.endHour}
+            </p>{" "}
+          </div>
+          <div className="flex items-center">
+            <img
+              alt="icon"
+              src="/icons/Frame 1170.png"
+              className="w-[15px] h-[15px] mr-2"
+            />{" "}
+            <a
+              target="_blank"
+              href={`https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+                data.eventName
+              )}&dates=${new Date(data.startdate)
+                .toISOString()
+                .replace(/-|:|\.\d+/g, "")}/${new Date(data.enddate)
+                .toISOString()
+                .replace(/-|:|\.\d+/g, "")}&details=${encodeURIComponent(
+                data.eventDescription
+              )}&location=${encodeURIComponent(
+                data.location?.address?.state || "Online"
+              )}`}
+              className="poppins-regular text-sm text-mainBlue"
             >
-              {tag}
-            </span>
-          ))}
+              ajouter au calendrie google{" "}
+            </a>{" "}
+          </div>
+        </div>
+        <div className="mt-4 poppins-semibold text-titles">
+          <h3 className="text-2xl">Localisation</h3>
+          <div className="flex items-center mt-3">
+            <img
+              alt="icon"
+              src={`/icons/${
+                data.location ? "Location.svg" : "globalDark.png"
+              }`}
+              className="w-[20px] h-[20px] mr-2"
+            />{" "}
+            <p className="poppins-regular text-gray-800">
+              {data?.location ? (
+                data?.location?.address?.commercial ? (
+                  <>
+                    {data?.location?.address?.commercial}{" "}
+                    {<>, {data?.location?.address?.state}</>}
+                  </>
+                ) : null
+              ) : data.link ? (
+                <a
+                  href={data.link}
+                  className="text-mainBlue cursor-pointer poppins-regular"
+                >
+                  Online
+                </a>
+              ) : (
+                <>Online</>
+              )}
+            </p>
+          </div>
+          {data?.location ? (
+            <div className="flex items-center">
+              <img
+                alt="icon"
+                src="/icons/gps.png"
+                className="w-[20px] h-[20px] mr-2"
+              />{" "}
+              <a
+                target="_blank"
+                href={`https://www.google.com/maps/place/${data?.location?.lat},${data?.location?.lon}`}
+                className="poppins-regular text-sm text-mainBlue"
+              >
+                voir sur la carte{" "}
+              </a>{" "}
+            </div>
+          ) : null}
+        </div>
+        <div className="mt-4">
+          <h3 className="mt-4 poppins-semibold text-titles text-2xl">
+            A propos de cet événement
+          </h3>
+          <div className="flex mb-4 mt-3 ">
+            {data.lieu ? (
+              <div className="flex mr-4">
+                <img
+                  alt="icon"
+                  src="/icons/globalBlue.png"
+                  className="max-w-[30px] max-h-[30px]"
+                />
+                <p className="poppins-medium">Evenement {data.lieu}</p>
+              </div>
+            ) : null}
+            {data.accessibilite ? (
+              <div className="flex mr-4 ">
+                <img
+                  alt="icon"
+                  src="/icons/Ticket.png"
+                  className="max-w-[30px] max-h-[30px]"
+                />
+                <p className="poppins-medium">{data.accessibilite}</p>
+              </div>
+            ) : null}
+            {subscritionData?.pack === "Business" ? (
+              <div className="flex ">
+                <img
+                  alt="icon"
+                  src="/icons/ph_seal-check-fill (1).png"
+                  className="max-w-[30px] max-h-[30px]"
+                />
+                <p className="poppins-medium">Premium Organiser</p>
+              </div>
+            ) : null}
+          </div>
+          <p
+            dangerouslySetInnerHTML={{ __html: data.eventDescription }}
+            className="poppins-regular text-gray-800 list-disc list-inside"
+          />
+        </div>
+        <div className="mt-4 poppins-semibold text-titles mb-t">
+          <h3 className="text-2xl mb-3">Sponsors</h3>
+          <div className="flex  ">
+            {data?.sponsorImages.map((img: any, index: number) => (
+              <img
+                className="rounded-lg w-[100px] h-[100px] mr-3"
+                key={index}
+                alt={`sponsor-${index}`}
+                src={
+                  img
+                    ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${img}`
+                    : "https://via.placeholder.com/300"
+                }
+              />
+            ))}
+          </div>
+        </div>
+        <div className="mt-4 poppins-meduim">
+          <h3 className="poppins-semibold text-2xl text-titles mb-3">Tags</h3>
+          <div className="flex">
+            {data.tags[0].split(",").map((tag: string, index: number) => (
+              <span
+                key={index}
+                className="tag mr-4 poppins-meduim text-titles rounded-lg px-3 bg-gray-200"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

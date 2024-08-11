@@ -7,14 +7,14 @@ import { addDays, format } from "date-fns";
 import SearchBox from "../shared/SearchBox";
 
 function EventForm({
+  setIsNext,
   formData,
   setFormData,
 }: {
+  setIsNext: Function;
   formData: any;
   setFormData: Function;
 }) {
-  const [selectPosition, setSelectPosition] = useState(null);
-
   const [newTag, setNewTag] = useState(""); // State for the new tag
   const [location, setLocation] = useState(0); // State for the new tag
   const [startDate, setStartDate] = useState(new Date());
@@ -28,7 +28,40 @@ function EventForm({
     });
   };
   useEffect(() => {
-    console.log(formData);
+    if (
+      formData.startdate &&
+      formData.enddate &&
+      formData.eventName !== "" &&
+      formData.eventName &&
+      formData.type &&
+      formData.Categorie &&
+      formData.type !== "" &&
+      formData.Categorie !== "" &&
+      formData.eventDescription &&
+      formData.eventDescription !== "" &&
+      (formData.location !== "" || formData.location) &&
+      (formData.link || formData.link !== "")
+    ) {
+      console.log("all fields are filled");
+      setIsNext(true);
+    } else {
+      console.log(
+        "not all fields are filled",
+        formData.startdate,
+        formData.enddate,
+        formData.eventName,
+        formData.eventName,
+        formData.type,
+        formData.Categorie,
+        formData.type,
+        formData.Categorie,
+        formData.eventDescription,
+        formData.eventDescription,
+        formData.link,
+        formData.location
+      );
+      setIsNext(false);
+    }
   }, [formData]);
 
   const handleDateChange = (date: Date | null, type: "start" | "end") => {
@@ -60,8 +93,8 @@ function EventForm({
     });
   };
   useEffect(() => {
-    console.log("HEHE", location);
-  }, [location]);
+    console.log("Form", formData);
+  }, []);
   const handleAddTag = (e: any) => {
     if (e.key === "Enter" && newTag.trim()) {
       // Check for Enter key and non-empty tag
@@ -105,7 +138,7 @@ function EventForm({
         rend unique.
       </p>
       <form className="mt-8">
-        <div className="mb-4  border-gray-300 border-[1.3px] p-2">
+        <div className="mb-4  border-gray-300 border-[1.3px] md:p-2">
           <label
             htmlFor="eventName"
             className="block text-sm font-medium poppins-semibold text-gray-700"
@@ -119,6 +152,7 @@ function EventForm({
             className="shadow-sm p-3 poppins-regular focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
             placeholder="soyez claire et descriptifs"
             onChange={handleInputChange}
+            value={formData.eventName}
           />
         </div>
         <div className="mb-4 border-gray-300 border-[1.3px] p-2">
@@ -129,6 +163,7 @@ function EventForm({
             Acronym de nom de l'événement
           </label>
           <input
+            value={formData.eventAcronym}
             className="p-3 w-full poppins-regular"
             id="eventAcronym"
             name="eventAcronym"
@@ -136,11 +171,12 @@ function EventForm({
             onChange={handleInputChange}
           />
         </div>
-        <div className="mb-4 w-full flex flex-row">
+        <div className="mb-4 w-full flex flex-row flex-wrap ">
           <select
+            value={formData.type}
             onChange={handleInputChange}
             name="type"
-            className="mr-4 pl-10 flex-1 poppins-regular text-gray-500 focus:outline-none border-gray-300 border-[1.3px] p-2"
+            className="md:mr-4 pl-10 flex-1 poppins-regular text-gray-500 focus:outline-none border-gray-300 border-[1.3px] p-2"
           >
             <option value="" disabled selected className="text-gray-500">
               Type
@@ -163,9 +199,10 @@ function EventForm({
           </select>
 
           <select
+            value={formData.Categorie}
             onChange={handleInputChange}
             name="Categorie"
-            className=" poppins-regular flex-1 border-gray-300 border-[1.3px] ml-2 p-2 pl-10 text-gray-500 focus:outline-none"
+            className=" poppins-regular flex-1 border-gray-300 border-[1.3px] md:ml-2  p-2 pl-10 text-gray-500 focus:outline-none"
           >
             <option value="" disabled selected className="text-gray-500">
               Categorie
@@ -231,7 +268,10 @@ function EventForm({
           </p>
           <div className="flex flex-row">
             <button
-              onClick={() => setLocation(0)}
+              onClick={() => {
+                setFormData({ ...formData, link: null });
+                setLocation(0);
+              }}
               type="button"
               className={`mr-2  rounded-md py-1 px-4 poppins-medium  text-center ${
                 location === 0 ? "bg-mainBlue text-white" : "text-gray-500"
@@ -240,7 +280,10 @@ function EventForm({
               Lieu physique
             </button>
             <button
-              onClick={() => setLocation(1)}
+              onClick={() => {
+                setFormData({ ...formData, location: null });
+                setLocation(1);
+              }}
               type="button"
               className={`mr-2  rounded-md py-1 px-4 poppins-medium  text-center ${
                 location === 1 ? "bg-mainBlue text-white" : "text-gray-500"
@@ -265,7 +308,7 @@ function EventForm({
                   {" "}
                   <img
                     alt="search"
-                    src="/Search.svg"
+                    src="/icons/Search.svg"
                     className="w-[20px] h-[20px]"
                   />{" "}
                   <input
@@ -275,13 +318,14 @@ function EventForm({
                     className=" poppins-regular shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     placeholder="Lien de participation ou "
                     onChange={handleInputChange}
+                    value={formData.link}
                   />
                 </div>
               ) : location === 0 ? (
                 <div className="flex items-center justify-center">
                   <img
                     alt="glob"
-                    src="/global.png"
+                    src="/icons/global.png"
                     className="w-[20px] h-[20px]"
                   />
                   <div style={{ width: "50vw" }}>
@@ -311,11 +355,11 @@ function EventForm({
               <div className="flex flex-row">
                 <img
                   alt="calendar"
-                  src="/CalendarGray.png"
+                  src="/icons/CalendarGray.png"
                   className="mr-1 w-[20px] h-[20px]"
                 />
                 <DatePicker
-                  selected={startDate}
+                  selected={formData.startdate ? formData.startdate : startDate}
                   onChange={(date) => handleDateChange(date, "start")}
                   dateFormat="yyyy-MM-dd"
                   className="poppins-regular shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
@@ -334,11 +378,11 @@ function EventForm({
               <div className="flex flex-row">
                 <img
                   alt="calendar"
-                  src="/CalendarGray.png"
+                  src="/icons/CalendarGray.png"
                   className="mr-1 w-[20px] h-[20px]"
                 />
                 <DatePicker
-                  selected={endDate}
+                  selected={formData.enddate ? formData.enddate : endDate}
                   onChange={(date) => handleDateChange(date, "end")}
                   dateFormat="yyyy-MM-dd"
                   className="poppins-regular shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
@@ -360,7 +404,7 @@ function EventForm({
               <div className="flex flex-row">
                 <img
                   alt="calendar"
-                  src="/clock.png"
+                  src="/icons/clock.png"
                   className="mr-1 w-[20px] h-[20px]"
                 />
                 <input
@@ -382,7 +426,7 @@ function EventForm({
               <div className="flex flex-row">
                 <img
                   alt="calendar"
-                  src="/clock.png"
+                  src="/icons/clock.png"
                   className="mr-1 w-[20px] h-[20px]"
                 />
                 <input
@@ -404,7 +448,7 @@ function EventForm({
         </p>
 
         <div className="mb-2 border-gray-300 border-[1.3px] p-2 flex flex-row">
-          <img alt="mobile" src={"/mobile.png"} />
+          <img alt="mobile" src={"/icons/mobile.png"} />
           <input
             type="text"
             id="mobile"
@@ -416,7 +460,7 @@ function EventForm({
         </div>
 
         <div className="mb-2 border-gray-300 border-[1.3px] p-2 flex flex-row">
-          <img alt="mobile" src={"/global.png"} />
+          <img alt="mobile" src={"/icons/global.png"} />
 
           <input
             type="text"
@@ -429,7 +473,7 @@ function EventForm({
         </div>
 
         <div className="mb-2 border-gray-300 border-[1.3px] p-2 flex flex-row">
-          <img alt="mobile" src={"/EditSquare.png"} />
+          <img alt="mobile" src={"/icons/EditSquare.png"} />
 
           <input
             type="text"

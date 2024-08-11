@@ -42,7 +42,7 @@ function SponsorsSection({
           <img
             alt="submittedicon"
             className="w-[25px] h-[25px]"
-            src="/submittedIcon.png"
+            src="/icons/submittedIcon.png"
           />
         ) : (
           <button onClick={toggleSponsorUpload} className="text-xl font-bold">
@@ -64,7 +64,11 @@ function SponsorsSection({
               className="relative inset-0 opacity-0 cursor-pointer"
               onChange={handleSponsorImageChange}
             />
-            <img alt="uploadicon" src="/upload.png" className="w-16 h-16" />
+            <img
+              alt="uploadicon"
+              src="/icons/upload.png"
+              className="w-16 h-16"
+            />
             <h3 className="text-mainBlue poppins-medium mt-2">
               Téléchargez des images
             </h3>

@@ -4,12 +4,30 @@ import PropretiesSection from "./PropretiesSection";
 import SponsorsSection from "./SponsorsSection";
 
 function ImagesForm({
+  setIsNext,
   formData,
   setFormData,
 }: {
-  formData: any;
-  setFormData: Function;
+  setIsNext: React.Dispatch<React.SetStateAction<boolean>>;
+  formData: FormData;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
 }) {
+  const [isFormValid, setIsFormValid] = useState(false);
+  useEffect(() => {
+    if (formData.getAll("eventImages").length > 0 && isFormValid) {
+      console.log("all fields are filled");
+      setIsNext(true);
+    } else {
+      console.log(
+        "not all fields are filled",
+        formData.getAll("eventImages").length,
+        isFormValid
+      );
+
+      setIsNext(false);
+    }
+  }, [formData, isFormValid]);
+
   const [sponsorImages, setSponsorImages] = useState<File[]>([]);
 
   const [showEventProperties, setShowEventProperties] = useState(false);
@@ -67,14 +85,15 @@ function ImagesForm({
     (Object.keys(formValues) as (keyof typeof formValues)[]).forEach((key) => {
       updatedFormData.append(key, formValues[key]);
     });
+    let rep = Object.values(formValues).every((value) => value !== "");
+    setIsFormValid(rep);
+    console.log(isFormValid);
     setFormData(updatedFormData);
-  }, [sponsorImages, videoUrl, eventImages, formValues]);
-  useEffect(() => {
-    console.log(formData.get("videoUrl"));
-  }, [formData]);
+  }, [sponsorImages, videoUrl, eventImages, formValues, isFormValid]);
+
   return (
-    <div className=" rounded-3xl p-8 relative flex flex-col justify-center items-center w-full h-full">
-      <div className="w-full mb-3 border-[1.4px] border-gray-500 rounded-3xl p-4">
+    <div className=" rounded-3xl p-8 relative  w-full h-full">
+      <div className=" relative w-full mb-3 border-[1.4px] border-gray-500 rounded-3xl p-4">
         <ImagesSection
           eventImages={eventImages}
           setEventImages={setEventImages}

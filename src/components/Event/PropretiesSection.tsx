@@ -41,7 +41,11 @@ function PropretiesSection({
           className="text-xl poppins-bold"
         >
           {isSubmitted ? (
-            <img src="/submittedIcon.png" alt="submitted" className="w-6 h-6" />
+            <img
+              src="/icons/submittedIcon.png"
+              alt="submitted"
+              className="w-6 h-6"
+            />
           ) : (
             "+"
           )}

@@ -38,7 +38,7 @@ function ImagesSection({
   };
   return (
     <>
-      <div className="flex w-full mb-3 justify-between">
+      <div className="  mb-3 ">
         <div>
           <h3 className="text-2xl poppins-semibold">Images </h3>
           <p className="text-gray-600 poppins-regular">
@@ -48,7 +48,7 @@ function ImagesSection({
       </div>
       <div
         onClick={() => setIsEventImagesSubmitted(false)}
-        className=" relative rounded-md flex justify-center items-center px-72 py-48 md:max-h-[500px] md:max-w-[800px] bg-cover"
+        className=" relative rounded-md flex justify-center items-center  py-48 md:max-h-[500px] md:max-w-[800px] bg-cover"
         style={{
           backgroundImage: `url(${
             eventImages.length > 0
@@ -64,14 +64,14 @@ function ImagesSection({
           <img
             alt="submittedicon"
             className="w-[25px] h-[25px] absolute right-0 top-0"
-            src="/submittedIcon.png"
+            src="/icons/submittedIcon.png"
           />
         ) : null}
         {/* Label acting as a button for file input */}
         {!isEventImagesSubmitted ? (
           <label
             htmlFor="media"
-            className="relative p-8 bg-white inset-0 flex flex-col justify-center items-center cursor-pointer rounded-lg"
+            className="  md:p-8 bg-white  md:w-auto w-[200px]   flex flex-col  items-center cursor-pointer rounded-lg"
           >
             <input
               type="file"
@@ -97,7 +97,11 @@ function ImagesSection({
                 }
               }}
             />
-            <img alt="uploadicon" src="/upload.png" className="w-16 h-16" />
+            <img
+              alt="uploadicon"
+              src="/icons/upload.png"
+              className="md:w-16 md:h-16  "
+            />
             <h3 className="text-mainBlue poppins-medium mt-2">
               Téléchargez des photos
             </h3>
@@ -173,7 +177,7 @@ function ImagesSection({
               <img
                 alt="runicon"
                 className="w-[17px] h-[17px]"
-                src="/Property 34.png"
+                src="/icons/Property 34.png"
               />
               <input
                 type="text"

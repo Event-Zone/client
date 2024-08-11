@@ -14,7 +14,7 @@ function Navbar() {
   return (
     // check The responsiveness bug
     <div
-      className={`flex z-50 items-center justify-between p-4 text-white max-w-full sticky top-0 bg-white ${
+      className={`flex-wrap flex z-50 items-center justify-between p-4 text-white max-w-full sticky top-0 bg-white ${
         isV1 ? `border-b-gray-500 border-[1.5px]` : ""
       }`}
     >
@@ -28,7 +28,7 @@ function Navbar() {
         <div className="relative flex-grow">
           <span className="absolute inset-y-0 left-0 flex items-center pl-2">
             <img
-              src="/Search.svg"
+              src="/icons/Search.svg"
               alt="Search Icon"
               className="h-5 w-5 text-gray-500"
             />
@@ -43,7 +43,7 @@ function Navbar() {
         <div className="relative">
           <span className="absolute inset-y-0 left-0 flex items-center pl-2">
             <img
-              src="/Location.svg"
+              src="/icons/Location.svg"
               alt="Location Icon"
               className="h-5 w-5 text-gray-500"
             />
@@ -62,7 +62,11 @@ function Navbar() {
         </div>
 
         <div className="bg-mainBlue p-2">
-          <img src="/Search.svg" alt="search-icon" className="text-white" />
+          <img
+            src="/icons/Search.svg"
+            alt="search-icon"
+            className="text-white"
+          />
         </div>
       </div>
       <div className="border-gray-500 mx-5">
@@ -100,7 +104,7 @@ function Navbar() {
           <img
             alt="profile"
             className="rounded-full bg-gray-200 p-2  mr-2"
-            src="/Profile.png"
+            src="/icons/Profile.png"
           />
           <h3 className="poppins-regular text-gray-500">
             {user.firstName} {user.lastName}

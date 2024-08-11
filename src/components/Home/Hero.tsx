@@ -63,7 +63,7 @@ const Hero = () => {
           <p className="flex flex-row text-white items-center">
             <img
               alt="location-icon"
-              src="/LocationLight.png"
+              src="/icons/LocationLight.png"
               className="w-[18px] h-[18px] mr-2"
             />{" "}
             Oran International Convention Center Mohamed Ben Ahmed (CCO),
@@ -72,7 +72,7 @@ const Hero = () => {
           <p className="flex flex-row text-white items-center">
             <img
               alt="location-icon"
-              src="/Calendar.png"
+              src="/icons/Calendar.png"
               className="w-[18px] h-[18px] mr-2"
             />{" "}
             14-16 October 2024

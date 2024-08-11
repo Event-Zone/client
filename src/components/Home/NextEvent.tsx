@@ -48,13 +48,13 @@ function NextEvent({ events }: { events: IEvent[] }) {
               <div className="p-4">
                 <h3 className="text-xl font-semibold">{event.eventName}</h3>
                 <p className="text-gray-600 flex flex-row items-center">
-                  <img alt="location-icon" src="/LocationGray.png" />
+                  <img alt="location-icon" src="/icons/LocationGray.png" />
                   {event.location?.address?.commercial
                     ? event.location?.address?.commercial
                     : event.location?.address?.state}
                 </p>
                 <p className="text-gray-600 flex flex-row items-center">
-                  <img alt="calendar-icon" src="/CalendarGray.png" />
+                  <img alt="calendar-icon" src="/icons/CalendarGray.png" />
                   {event.startdate
                     ? formatDate(event.startdate as unknown as string)
                     : null}{" "}

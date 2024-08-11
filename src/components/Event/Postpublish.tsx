@@ -8,10 +8,10 @@ function PostPublish() {
       <div className="flex flex-col items-center justify-center mb-8">
         <img
           alt="confirmedIcon"
-          src="/ph_seal-check.png"
+          src="/icons/ph_seal-check.png"
           className="w-[100px] h-[100px] rounded-3xl"
         />
-        <img alt="logo" src="/Logo.png" className="" />
+        <img alt="logo" src="/icons/Logo.png" className="" />
       </div>
       <div>
         <h3 className="mb-8 text-center text-3xl poppins-semibold text-titles">
