@@ -1,16 +1,81 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { selectToken, selectUser } from "@/store/features/userSlice";
+import {
+  useGetSubscriptionQuery,
+  useSearchEventsQuery,
+  useGetEventsQuery,
+} from "@/store/features/api/apiSlice";
+import { useDispatch } from "react-redux";
+import {
+  resetSearchedEvents,
+  setSearchedEvents,
+} from "@/store/features/eventSlice";
 
 function Navbar() {
+  const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [allSearchEvents, setAllSearchEvents] = useState<any[]>([]);
+
   const isAuth = useSelector(selectToken);
   const user = useSelector(selectUser);
+  const {
+    data: fetchedSubscription,
+    error,
+    isLoading,
+    refetch,
+  } = useGetSubscriptionQuery(user?.subscription);
+  const {
+    data: searchedEvents,
+    error: searchedEventsError,
+    isLoading: searchedEventsLoading,
+  } = useSearchEventsQuery(searchTerm as string, {
+    skip: searchTerm === "", // Skip the query if searchTerm is empty
+  });
+  const {
+    data: allEvents,
+    error: allEventsError,
+    isLoading: allEventsLoading,
+  } = useGetEventsQuery();
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+  useEffect(() => {
+    if (searchedEventsError) {
+      alert("Error whule searching ");
+    } else if (searchedEventsLoading) {
+      console.log("Loading ...");
+    } else if (searchedEvents) {
+      dispatch(setSearchedEvents(searchedEvents));
+    }
+  }, [searchedEventsError, searchedEventsLoading, searchedEvents]);
+
+  useEffect(() => {
+    if (allEventsError) {
+      alert("Error while all events ");
+    } else if (allEventsLoading) {
+      console.log("Loading ...");
+    } else if (allEvents) {
+      setAllSearchEvents(allEvents);
+    }
+  }, [allEventsError, allEventsLoading, allEvents]);
+  useEffect(() => {
+    if (searchTerm === "") {
+      console.log("Clearing searched events", allSearchEvents);
+      dispatch(setSearchedEvents(allSearchEvents));
+    }
+  }, [searchTerm]);
   const router = useRouter();
   const pathname = usePathname();
   const isV1 = pathname === "/welcome" || "/tarification";
-  console.log("pathname", pathname);
+
+  const handlSearchClick = () => {
+    if (pathname !== "search") {
+      router.replace("/search");
+    }
+  };
   return (
     // check The responsiveness bug
     <div
@@ -24,7 +89,10 @@ function Navbar() {
       >
         <img src="/NavbarLogo.svg" alt="Navbar Logo" className="" />
       </div>
-      <div className="flex flex-grow mx-14 rounded-[10px] border-gray-500 border overflow-hidden">
+      <div
+        onClick={handlSearchClick}
+        className="flex flex-grow mx-14 rounded-[10px] border-gray-500 border overflow-hidden"
+      >
         <div className="relative flex-grow">
           <span className="absolute inset-y-0 left-0 flex items-center pl-2">
             <img
@@ -34,6 +102,8 @@ function Navbar() {
             />
           </span>
           <input
+            value={searchTerm as string}
+            onChange={handleSearch}
             type="text"
             placeholder="Search"
             className="p-2 pl-10 w-full text-gray-700 outline-none focus:outline-none border-0"
@@ -99,18 +169,23 @@ function Navbar() {
             S'inscrire
           </button>
         </div>
-      ) : (
+      ) : fetchedSubscription?.pack ? (
         <div className="flex items-center flex-row">
+          <button
+            onClick={() =>
+              router.replace(`/events/create/${fetchedSubscription?.pack}`)
+            }
+            className=" mx-4 text-gray-500 poppins-medium text-center "
+          >
+            + Ajouter Evenement
+          </button>
           <img
             alt="profile"
             className="rounded-full bg-gray-200 p-2  mr-2"
             src="/icons/Profile.png"
           />
-          <h3 className="poppins-regular text-gray-500">
-            {user.firstName} {user.lastName}
-          </h3>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

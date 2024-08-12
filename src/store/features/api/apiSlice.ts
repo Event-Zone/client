@@ -20,6 +20,14 @@ export const apiSlice = createApi({
                 method: 'GET'
             })
         }),
+        getEventAdd: builder.query<any, string[]>({
+            query: (idsarr) => ({
+                url: `event/multi`,
+                method: 'GET',
+                params: { ids: idsarr.join(',') }
+            })
+        }),
+
         updateEvent: builder.mutation<any, any>({
             query: (data) => ({
                 url: `event/${data._id}`,
@@ -38,6 +46,42 @@ export const apiSlice = createApi({
                 url: `event/`,
                 method: 'POST',
                 body: data
+            })
+        }),
+
+        searchEvents: builder.query<any, string>({
+            query: (eventName) => ({
+                url: `event/search`,
+                method: 'GET',
+                params: { eventName }
+            })
+        }),
+        searchEventsByLocation: builder.query<any, string>({
+            query: (location) => ({
+                url: `event/search/location`,
+                method: 'GET',
+                params: { state: location }
+            })
+        }),
+        searchEventsByMonth: builder.query<any, any>({
+            query: (data) => ({
+                url: `event/search/month`,
+                method: 'GET',
+                params: data
+            })
+        }),
+        searchEventsByDateRange: builder.query<any, any>({
+            query: (data) => ({
+                url: `event/search/daterange`,
+                method: 'GET',
+                params: data
+            })
+        }),
+        searchEventsByType: builder.query<any, string>({
+            query: (type) => ({
+                url: `event/search/type`,
+                method: 'GET',
+                params: { type }
             })
         }),
 
@@ -80,15 +124,26 @@ export const apiSlice = createApi({
         }),
         //Event
         addEvent: builder.mutation<any, any>({
-            query: (data) => {
+            query: (data) => ({
+                url: `event/`,
+                method: 'POST',
+                body: data
+            })
 
-                console.log(data.getAll('eventImages'))
-                return ({
-                    url: `event/`,
-                    method: 'POST',
-                    body: data
-                })
-            }
+        }),
+
+        // adds
+        getRunningAdds: builder.query<any, void>({
+            query: () => ({
+                url: `adds/running`,
+                method: 'GET',
+            })
+        }),
+        getAllAdds: builder.query<any, any>({
+            query: () => ({
+                url: `adds/`,
+                method: 'GET',
+            })
         }),
 
 
@@ -107,5 +162,13 @@ export const {
     useLoginUserMutation,
     useGetUserQuery,
     useGetSubscriptionQuery,
-    useAddEventMutation
+    useAddEventMutation,
+    useGetRunningAddsQuery,
+    useGetAllAddsQuery,
+    useGetEventAddQuery,
+    useSearchEventsQuery,
+    useSearchEventsByLocationQuery,
+    useSearchEventsByMonthQuery,
+    useSearchEventsByDateRangeQuery,
+    useSearchEventsByTypeQuery,
 } = apiSlice;

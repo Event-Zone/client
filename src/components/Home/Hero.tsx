@@ -1,6 +1,49 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import {
+  useGetRunningAddsQuery,
+  useGetEventAddQuery,
+} from "@/store/features/api/apiSlice";
+import { useRouter } from "next/navigation";
 const Hero = () => {
+  const router = useRouter();
+  const [adds, setAdds] = useState<string[]>([]);
+  const [eventAdds, setEventAdds] = useState<any[]>([]);
+  const {
+    data: fetchedEventAdds,
+    error: eventAddsError,
+    isLoading: eventAddsIsLoading,
+  } = useGetEventAddQuery(adds, {
+    skip: adds.length < 4,
+  });
+  const {
+    data: fetchedAdds,
+    error: addsError,
+    isLoading: addsIsLoading,
+    refetch,
+  } = useGetRunningAddsQuery();
+
+  useEffect(() => {
+    if (addsIsLoading) {
+      console.log("Loading events...");
+    } else if (addsError) {
+      console.error("Error  fetchedAdds:", addsError);
+    } else if (fetchedAdds) {
+      setAdds(fetchedAdds.map((add: any) => add.eventId));
+      console.log(" fetchedAdds:", fetchedAdds);
+    }
+  }, [fetchedAdds, addsError, addsIsLoading]);
+  useEffect(() => {
+    if (eventAddsIsLoading) {
+      console.log("Loading events...");
+    } else if (eventAddsError) {
+      console.error("Error  eventAddsError:", eventAddsError);
+    } else if (fetchedEventAdds) {
+      setEventAdds(fetchedEventAdds);
+      console.log(" fetchedEventAdds:", fetchedEventAdds);
+    }
+  }, [fetchedEventAdds, eventAddsError, eventAddsIsLoading]);
+
   const [images, setImages] = useState([
     "/Event.png",
     "/Event2.svg",
@@ -33,11 +76,13 @@ const Hero = () => {
 
   return (
     <div
-      className="relative  bg-cover bg-center md:px-44 md:py-20 flex flex-row justify-center items-center"
-      style={{ backgroundImage: `url(${images[currentImage]})` }}
+      className="relative  bg-cover bg-center md:px-44 md:py-20 flex flex-row  items-center"
+      style={{
+        backgroundImage: `url(${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${eventAdds[currentBar]?.eventImages[0]})`,
+      }}
     >
       <div className="hero-overlay"></div>
-      <div className=" flex flex-col z-30 justify-between mr-4">
+      <div className=" z-30  mr-4">
         {images.map((_, index) => (
           <div
             key={index}
@@ -54,8 +99,7 @@ const Hero = () => {
         <div className="flex flex-row relative z-10">
           <div>
             <h2 className="mb-10 text-white font-poppins md:text-[30px] font-semibold text-left">
-              NAPEC 2024 - Africa & Mediterranean Energy & Hydrogen Exhibition
-              and Conference
+              {eventAdds.length > 0 && eventAdds[currentBar].eventName}
             </h2>
           </div>
         </div>
@@ -66,8 +110,18 @@ const Hero = () => {
               src="/icons/LocationLight.png"
               className="w-[18px] h-[18px] mr-2"
             />{" "}
-            Oran International Convention Center Mohamed Ben Ahmed (CCO),
-            Algeria
+            {eventAdds[currentBar]?.location ? (
+              eventAdds[currentBar]?.location.address.commercial ? (
+                <>
+                  {eventAdds[currentBar]?.location.address.commercial}{" "}
+                  {eventAdds[currentBar]?.location.address.state}
+                </>
+              ) : (
+                eventAdds[currentBar]?.location.address.state
+              )
+            ) : (
+              <>Online</>
+            )}
           </p>
           <p className="flex flex-row text-white items-center">
             <img
@@ -75,19 +129,39 @@ const Hero = () => {
               src="/icons/Calendar.png"
               className="w-[18px] h-[18px] mr-2"
             />{" "}
-            14-16 October 2024
+            {new Date(eventAdds[currentBar]?.startdate).toLocaleDateString(
+              "fr-FR",
+              {
+                day: "2-digit",
+                month: "short",
+              }
+            )}{" "}
+            -{" "}
+            {new Date(eventAdds[currentBar]?.enddate).toLocaleDateString(
+              "fr-FR",
+              {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              }
+            )}
           </p>
         </div>
         <div className="mb-2 flex flex-row justify-between w-fit relative z-10">
           <button className="mr-2 rounded-[30px] p-2 bg-transparent text-white text-center border border-white">
-            Salons & Expo
+            {eventAdds[currentBar]?.type}
           </button>
           <button className="rounded-[30px] p-2 bg-transparent text-white text-center border border-white">
-            Conférences et Congrès
+            {eventAdds[currentBar]?.Categorie}
           </button>
         </div>
         <div className="relative z-10">
-          <button className="mr-2 rounded-[10px] px-6 py-3 bg-mainBlue text-white text-center">
+          <button
+            onClick={() =>
+              router.replace(`/events/details/${eventAdds[currentBar]?._id}`)
+            }
+            className="mr-2 rounded-[10px] px-6 py-3 bg-mainBlue text-white text-center"
+          >
             Voir plus
           </button>
         </div>

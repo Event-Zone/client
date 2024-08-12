@@ -83,7 +83,7 @@ function Subscription({ pack }: { pack: string }) {
           <p className="flex flex-row justify-between bg-mainBlue px-4 py-2 rounded-[24px] text-white poppins-medium">
             <img
               alt="badg"
-              src="/badg.png"
+              src="/icons/badg.png"
               className="w-[25px] h-[25px] mr-8"
             />
             {pack} Pack
