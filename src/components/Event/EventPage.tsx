@@ -260,7 +260,9 @@ function EventPage({ data }: { data: any }) {
                     {data?.location?.address?.commercial}{" "}
                     {<>, {data?.location?.address?.state}</>}
                   </>
-                ) : null
+                ) : (
+                  data?.location?.address?.state
+                )
               ) : data.link ? (
                 <a
                   href={data.link}

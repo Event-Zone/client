@@ -1,24 +1,65 @@
+import {
+  useGetSubscriptionQuery,
+  useGetUserQuery,
+} from "@/store/features/api/apiSlice";
 import { IEvent } from "@/types/Event";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 interface EventCardProps {
   event: IEvent;
 }
 
 function EventCard({ event }: EventCardProps) {
+  const {
+    data: fetchedOrganizer,
+    error: fetchedOrganizerError,
+    isLoading: fetchedOrganizerIsLoading,
+  } = useGetUserQuery(event.organizerId);
+
+  // getting the subscription data
+  const {
+    data: fetchedSubscription,
+    error: subscriptionError,
+    isLoading: subscriptionIsLoading,
+    refetch,
+  } = useGetSubscriptionQuery(fetchedOrganizer?.subscription, {
+    skip: !fetchedOrganizer,
+  });
+  const [subscritionData, setSubscriptionData] = useState<any>(null);
+  useEffect(() => {
+    if (subscriptionIsLoading) {
+      console.log("Loading events...");
+    } else if (subscriptionError) {
+      console.error("Error fetching events:", subscriptionError);
+    } else if (fetchedSubscription) {
+      console.log("Fetched subscription:", fetchedSubscription);
+      setSubscriptionData(fetchedSubscription);
+    }
+  }, [fetchedSubscription, subscriptionError, subscriptionIsLoading]);
+
+  useEffect(() => {
+    if (fetchedOrganizerIsLoading) {
+      console.log("Loading events...");
+    } else if (fetchedOrganizerError) {
+      console.error("Error fetching events:", fetchedOrganizerError);
+    } else if (fetchedOrganizer) {
+      console.log(" fetchedOrganizer:", fetchedOrganizer);
+    }
+  }, [fetchedOrganizer, fetchedOrganizerError, fetchedOrganizerIsLoading]);
+  const router = useRouter();
   return (
-    <div className="flex border border-gray-300 rounded-lg overflow-hidden shadow-md">
+    <div
+      onClick={() => router.replace(`/events/details/${event._id}`)}
+      className="flex flex-col sm:flex-row items-start sm:items-center mb-4 border border-gray-300 rounded-lg overflow-hidden shadow-md"
+    >
       <img
         src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event?.eventImages[0]}`}
         alt={event.eventName}
-        className="w-1/3 h-auto object-cover"
+        className="w-full sm:w-[200px] md:w-[245px] h-auto"
       />
-      <div className="p-4 w-2/3">
-        <h3 className="text-xl font-semibold mb-2">{event.eventName}</h3>
-        <p className="text-gray-700 mb-2">
-          {event.location && event.location.address.state}
-        </p>
-        <p className="text-gray-500">
+      <div className="p-4 w-full sm:w-2/3">
+        <p className="text-gray-500 text-sm sm:text-base poppins-regular">
           {new Date(event.startdate).toLocaleDateString("fr-FR", {
             day: "2-digit",
             month: "short",
@@ -30,6 +71,53 @@ function EventCard({ event }: EventCardProps) {
             year: "numeric",
           })}
         </p>
+        <h3 className="text-lg sm:text-2xl poppins-semibold mb-2">
+          {event.eventName}
+        </h3>
+        <p className="text-gray-500 text-sm sm:text-base poppins-medium mb-2 flex">
+          {event.location &&
+            (event.location.address.commercial
+              ? event.location.address.commercial
+              : event.location.address.state)}
+        </p>
+        <div className="flex flex-wrap">
+          {event.lieu ? (
+            <div className="flex items-center mr-4 mb-2">
+              <img
+                alt="icon"
+                src="/icons/globalBlue.png"
+                className="w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]"
+              />
+              <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-base">
+                Evenement {event.lieu}
+              </p>
+            </div>
+          ) : null}
+          {event.accessibilite ? (
+            <div className="flex items-center mr-4 mb-2">
+              <img
+                alt="icon"
+                src="/icons/Ticket.png"
+                className="w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]"
+              />
+              <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-base">
+                {event.accessibilite}
+              </p>
+            </div>
+          ) : null}
+          {subscritionData?.pack === "Business" ? (
+            <div className="flex items-center mb-2">
+              <img
+                alt="icon"
+                src="/icons/ph_seal-check-fill (1).png"
+                className="w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]"
+              />
+              <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-base">
+                Premium Organiser
+              </p>
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );

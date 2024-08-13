@@ -7,20 +7,41 @@ import {
   useSearchEventsByMonthQuery,
   useSearchEventsByDateRangeQuery,
   useSearchEventsByTypeQuery,
+  useGetSearchPageAddsQuery,
 } from "@/store/features/api/apiSlice";
 import EventCard from "./EventCard";
 
-function Search() {
-  const [events, setEvents] = useState<any[]>([]);
+function Search({ initEvents = [] }: { initEvents: any[] | null }) {
+  useEffect(() => {
+    if (initEvents && initEvents?.length > 0) setEvents(initEvents);
+  }, [initEvents]);
+  const [events, setEvents] = useState<any[] | null>([]);
+  const [adds, setAdds] = useState<any[] | null>([]);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [showDialog, setShowDialog] = useState(false);
   const [selectionType, setSelectionType] = useState<"month" | "range">(
     "month"
   );
-  const [location, setLocation] = useState<string | undefined>(undefined);
-  const [type, setType] = useState<string | undefined>(undefined);
+  const [location, setLocation] = useState<string | undefined | 0>(undefined);
+  const [type, setType] = useState<string | undefined | 0>(undefined);
 
+  // Fetch the adds
+  const {
+    data: AddsFetched,
+    isLoading: AddsIsLoading,
+    isError: AddsIsError,
+  } = useGetSearchPageAddsQuery();
+
+  useEffect(() => {
+    if (AddsIsLoading) {
+      console.log("Loading  AddsIsLoading...");
+    } else if (AddsIsError) {
+      alert("Error fetching AddsIsError : " + AddsIsError);
+    } else if (AddsFetched) {
+      setAdds(AddsFetched);
+    }
+  }, [AddsIsLoading, AddsIsError, AddsFetched]);
   // Fetch data using the queries
   const {
     data: eventsByLocation,
@@ -116,22 +137,34 @@ function Search() {
     setStartDate(null);
     setEndDate(null);
   };
-  const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
+  const handleLocationChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setType(0);
     setLocation(event.target.value);
-  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
+    setEvents(eventsByLocation);
+  };
+  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setType(event.target.value);
+    setLocation(0);
 
+    setEvents(eventsByType);
+  };
+  useEffect(() => {
+    console.log(type);
+  }, [type]);
   // Implement the UI
   return (
-    <div className="p-20">
+    <div className="p-1 md:p-20">
       <div className="max-w-full h-fit">
         <div className="flex flex-wrap justify-between w-fit">
           <select
             name="type"
             className="md:mr-3 poppins-regular px-2 bg-gray-200 text-gray-500 focus:outline-none rounded-3xl mb-2 md:mb-0 md:w-auto w-full"
             onChange={handleTypeChange}
+            value={type}
           >
-            <option value="" disabled selected className="text-gray-500">
+            <option value={0} selected={true} className="text-gray-500">
               Tous les types
             </option>
             <option value="salons & exposition" className="text-gray-500">
@@ -168,8 +201,9 @@ function Search() {
             name="location"
             className="poppins-regular px-2 bg-gray-200 text-gray-500 focus:outline-none rounded-3xl mb-2 md:mb-0 md:w-auto w-full"
             onChange={handleLocationChange}
+            value={location}
           >
-            <option value="" disabled selected className="text-gray-500">
+            <option value={0} disabled selected className="text-gray-500">
               N'importe où
             </option>
             {/* Add your location options here */}
@@ -403,7 +437,8 @@ function Search() {
 
       {/* Display Results */}
       <div className="mt-4">
-        {events.length > 0 &&
+        {events &&
+          events?.length > 0 &&
           events.map((event) => <EventCard key={event._id} event={event} />)}
         {/* {eventsByLocation && (
           <div>Events by Location: {JSON.stringify(eventsByLocation)}</div>

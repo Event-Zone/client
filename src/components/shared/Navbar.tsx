@@ -41,6 +41,7 @@ function Navbar() {
   } = useGetEventsQuery();
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
+    if (searchedEvents) dispatch(setSearchedEvents(searchedEvents));
   };
   useEffect(() => {
     if (searchedEventsError) {
