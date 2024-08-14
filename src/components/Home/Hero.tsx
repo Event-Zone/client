@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import {
-  useGetRunningAddsQuery,
+  useGetHeroAddsQuery,
   useGetEventAddQuery,
 } from "@/store/features/api/apiSlice";
 import { useRouter } from "next/navigation";
@@ -21,15 +21,21 @@ const Hero = () => {
     error: addsError,
     isLoading: addsIsLoading,
     refetch,
-  } = useGetRunningAddsQuery();
-
+  } = useGetHeroAddsQuery();
+  useEffect(() => {
+    console.log(eventAdds, adds);
+  }, [adds, eventAdds]);
   useEffect(() => {
     if (addsIsLoading) {
-      console.log("Loading events...");
+      console.log("Loading events H...");
     } else if (addsError) {
-      console.error("Error  fetchedAdds:", addsError);
+      console.error("Error  fetchedAddsH:", addsError);
     } else if (fetchedAdds) {
-      setAdds(fetchedAdds.map((add: any) => add.eventId));
+      setAdds(
+        fetchedAdds.map((add: any, index: number) => {
+          return add.eventId;
+        })
+      );
       console.log(" fetchedAdds:", fetchedAdds);
     }
   }, [fetchedAdds, addsError, addsIsLoading]);

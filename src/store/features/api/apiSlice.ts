@@ -133,9 +133,9 @@ export const apiSlice = createApi({
         }),
 
         // adds
-        getRunningAdds: builder.query<any, void>({
+        getHeroAdds: builder.query<any, void>({
             query: () => ({
-                url: `adds/running`,
+                url: `adds/hero`,
                 method: 'GET',
             })
         }),
@@ -163,7 +163,7 @@ export const {
     useGetUserQuery,
     useGetSubscriptionQuery,
     useAddEventMutation,
-    useGetRunningAddsQuery,
+    useGetHeroAddsQuery,
     useGetSearchPageAddsQuery,
     useGetEventAddQuery,
     useSearchEventsQuery,

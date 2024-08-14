@@ -10,8 +10,11 @@ import {
   useGetSearchPageAddsQuery,
 } from "@/store/features/api/apiSlice";
 import EventCard from "./EventCard";
+import Calendar from "../shared/Calendar";
 
 function Search({ initEvents = [] }: { initEvents: any[] | null }) {
+  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
+  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
   useEffect(() => {
     if (initEvents && initEvents?.length > 0) setEvents(initEvents);
   }, [initEvents]);
@@ -185,16 +188,11 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
           </select>
 
           {/* Trigger for the date picker dialog */}
-          <div onClick={toggleDialog} className="cursor-pointer">
-            <DatePicker
-              selected={startDate}
-              onChange={handleDateChange}
-              dateFormat="MM/yyyy"
-              showMonthYearPicker
-              placeholderText="N'importe quand"
-              className="poppins-regular px-2 bg-gray-200 text-gray-500 focus:outline-none rounded-3xl mb-2 md:mb-0 md:w-auto w-full"
-              readOnly
-            />
+          <div
+            onClick={toggleDialog}
+            className="cursor-pointer md:mr-3 poppins-regular px-2 bg-gray-200 text-gray-500 focus:outline-none rounded-3xl mb-2 md:mb-0 md:w-auto w-full"
+          >
+            N'import quand
           </div>
 
           <select
@@ -356,84 +354,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
       </div>
 
       {/* Dialog */}
-      {showDialog && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg p-4 w-11/12 md:w-1/2 lg:w-1/3">
-            <div className="flex justify-between mb-4">
-              <button
-                className={`p-2 rounded-lg ${
-                  selectionType === "month"
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-gray-500"
-                }`}
-                onClick={() => handleSelectionTypeChange("month")}
-              >
-                By Month
-              </button>
-              <button
-                className={`p-2 rounded-lg ${
-                  selectionType === "range"
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-gray-500"
-                }`}
-                onClick={() => handleSelectionTypeChange("range")}
-              >
-                By Date Range
-              </button>
-            </div>
-
-            {/* Month Picker */}
-            {selectionType === "month" && (
-              <DatePicker
-                selected={startDate}
-                onChange={handleDateChange}
-                dateFormat="MM/yyyy"
-                showMonthYearPicker
-                placeholderText="Select Month"
-                className="poppins-regular px-2 bg-gray-200 text-gray-500 focus:outline-none rounded-3xl w-full"
-              />
-            )}
-
-            {/* Date Range Picker */}
-            {selectionType === "range" && (
-              <div className="flex flex-col space-y-4">
-                <DatePicker
-                  selected={startDate}
-                  onChange={handleDateChange}
-                  selectsStart
-                  startDate={startDate!}
-                  endDate={endDate!}
-                  dateFormat="MM/yyyy"
-                  showMonthYearPicker
-                  placeholderText="Start Month"
-                  className="poppins-regular px-2 bg-gray-200 text-gray-500 focus:outline-none rounded-3xl w-full"
-                />
-                <DatePicker
-                  selected={endDate}
-                  onChange={handleEndDateChange}
-                  selectsEnd
-                  startDate={startDate!}
-                  endDate={endDate!}
-                  dateFormat="MM/yyyy"
-                  showMonthYearPicker
-                  placeholderText="End Month"
-                  className="poppins-regular px-2 bg-gray-200 text-gray-500 focus:outline-none rounded-3xl w-full"
-                  minDate={startDate!}
-                />
-              </div>
-            )}
-
-            <div className="flex justify-end mt-4">
-              <button
-                onClick={toggleDialog}
-                className="p-2 bg-red-500 text-white rounded-lg"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {showDialog && <Calendar setShowDialog={setShowDialog} />}
 
       {/* Display Results */}
       <div className="mt-4">
