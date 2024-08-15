@@ -56,7 +56,7 @@ export const apiSlice = createApi({
                 params: { eventName }
             })
         }),
-        searchEventsByLocation: builder.query<any, string>({
+        searchEventsByLocation: builder.query<any, string[]>({
             query: (location) => ({
                 url: `event/search/location`,
                 method: 'GET',
@@ -77,11 +77,24 @@ export const apiSlice = createApi({
                 params: data
             })
         }),
-        searchEventsByType: builder.query<any, string>({
+        searchEventsByType: builder.query<any, string[]>({
             query: (type) => ({
                 url: `event/search/type`,
                 method: 'GET',
                 params: { type }
+            })
+        }),
+        searchEventsByCategorie: builder.query<any, string[]>({
+            query: (categorie) => ({
+                url: `event/search/categorie`,
+                method: 'GET',
+                params: { categorie }
+            })
+        }),
+        searchEventsLocations: builder.query<any, void>({
+            query: () => ({
+                url: `event/search/locations`,
+                method: 'GET',
             })
         }),
 
@@ -171,4 +184,7 @@ export const {
     useSearchEventsByMonthQuery,
     useSearchEventsByDateRangeQuery,
     useSearchEventsByTypeQuery,
+    useSearchEventsLocationsQuery,
+    useSearchEventsByCategorieQuery
+
 } = apiSlice;

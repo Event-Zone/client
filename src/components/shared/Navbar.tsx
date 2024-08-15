@@ -11,14 +11,20 @@ import {
 import { useDispatch } from "react-redux";
 import {
   resetSearchedEvents,
+  selectInitialEvents,
+  setInitialEvents,
   setSearchedEvents,
 } from "@/store/features/eventSlice";
 
 function Navbar() {
+  const allInitEvents = useSelector(selectInitialEvents);
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [allSearchEvents, setAllSearchEvents] = useState<any[]>([]);
-
+  useEffect(() => {
+    if (searchTerm == "") {
+      dispatch(setSearchedEvents(allInitEvents));
+    }
+  }, [searchTerm]);
   const isAuth = useSelector(selectToken);
   const user = useSelector(selectUser);
   const {
@@ -38,7 +44,12 @@ function Navbar() {
     data: allEvents,
     error: allEventsError,
     isLoading: allEventsLoading,
+    refetch: refetchAllEvents,
   } = useGetEventsQuery();
+
+  useEffect(() => {
+    refetchAllEvents();
+  }, []);
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     if (searchedEvents) dispatch(setSearchedEvents(searchedEvents));
@@ -59,15 +70,10 @@ function Navbar() {
     } else if (allEventsLoading) {
       console.log("Loading ...");
     } else if (allEvents) {
-      setAllSearchEvents(allEvents);
+      dispatch(setInitialEvents(allEvents));
     }
   }, [allEventsError, allEventsLoading, allEvents]);
-  useEffect(() => {
-    if (searchTerm === "") {
-      console.log("Clearing searched events", allSearchEvents);
-      dispatch(setSearchedEvents(allSearchEvents));
-    }
-  }, [searchTerm]);
+
   const router = useRouter();
   const pathname = usePathname();
   const isV1 = pathname === "/welcome" || "/tarification";

@@ -196,6 +196,18 @@ function EventForm({
             <option value="seminaires & ateliers" className="text-gray-500">
               Seminaires & Ateliers
             </option>
+            <option value="webinaires" className="text-gray-500">
+              Webinaires
+            </option>
+            <option value="convention" className="text-gray-500">
+              Convention
+            </option>
+            <option value="competition" className="text-gray-500">
+              Competition
+            </option>
+            <option value="evenement de resautage" className="text-gray-500">
+              evenement de resautage
+            </option>
           </select>
 
           <select
@@ -205,16 +217,7 @@ function EventForm({
             className=" poppins-regular flex-1 border-gray-300 border-[1.3px] md:ml-2  p-2 pl-10 text-gray-500 focus:outline-none"
           >
             <option value="" disabled selected className="text-gray-500">
-              Categorie
-            </option>
-            <option value="sante mental" className="text-gray-500">
-              Santé Mental
-            </option>
-            <option
-              value="robotique et automatisation"
-              className="text-gray-500"
-            >
-              Robotique et Automatisation
+              Catégorie
             </option>
             <option value="recrutement" className="text-gray-500">
               Recrutement
@@ -225,11 +228,89 @@ function EventForm({
             <option value="services evenementiels" className="text-gray-500">
               Services Événementiels
             </option>
-            <option value="communication" className="text-gray-500">
-              Communication
+            <option value="energies renouvelables" className="text-gray-500">
+              Énergies Renouvelables
             </option>
-            <option value="marketing" className="text-gray-500">
-              Marketing
+            <option
+              value="startups et entrepreneuriat"
+              className="text-gray-500"
+            >
+              Startups et Entrepreneuriat
+            </option>
+            <option value="technologie" className="text-gray-500">
+              Technologie
+            </option>
+            <option value="telecommunications" className="text-gray-500">
+              Télécommunications
+            </option>
+            <option value="transport" className="text-gray-500">
+              Transport
+            </option>
+            <option value="travaux publics" className="text-gray-500">
+              Travaux publics
+            </option>
+            <option value="intelligence artificielle" className="text-gray-500">
+              Intelligence Artificielle (IA)
+            </option>
+            <option value="machines et outils" className="text-gray-500">
+              Machines et Outils
+            </option>
+            <option value="marketing et publicite" className="text-gray-500">
+              Marketing et Publicité
+            </option>
+            <option
+              value="mathematiques et statistiques"
+              className="text-gray-500"
+            >
+              Mathématiques et Statistiques
+            </option>
+            <option value="medecine esthetique" className="text-gray-500">
+              Médecine Esthétique
+            </option>
+            <option value="physique" className="text-gray-500">
+              Physique
+            </option>
+            <option value="sante et medecine" className="text-gray-500">
+              Santé et Médecine
+            </option>
+            <option value="sante mentale" className="text-gray-500">
+              Santé Mentale
+            </option>
+            <option
+              value="robotique et automatisation"
+              className="text-gray-500"
+            >
+              Robotique et Automatisation
+            </option>
+            <option value="electricite" className="text-gray-500">
+              Électricité
+            </option>
+            <option value="emballages" className="text-gray-500">
+              Emballages
+            </option>
+            <option value="energie" className="text-gray-500">
+              Énergie
+            </option>
+            <option value="enseignement superieur" className="text-gray-500">
+              Enseignement Supérieur
+            </option>
+            <option value="environnement" className="text-gray-500">
+              Environnement
+            </option>
+            <option value="expedition" className="text-gray-500">
+              Expédition
+            </option>
+            <option value="genie civil" className="text-gray-500">
+              Génie Civil
+            </option>
+            <option value="immobilier" className="text-gray-500">
+              Immobilier
+            </option>
+            <option
+              value="importation et exportation"
+              className="text-gray-500"
+            >
+              Importation et Exportation
             </option>
           </select>
         </div>

@@ -3,10 +3,12 @@ import { RootState } from "../store";
 
 interface searchedEventsState {
   searchedEvents: any[] | null;
+  initialEvents: any[] | null;
 }
 
 const initialState: searchedEventsState = {
   searchedEvents: null,
+  initialEvents: null,
 };
 
 const searchedEventsSlice = createSlice({
@@ -16,6 +18,9 @@ const searchedEventsSlice = createSlice({
     setSearchedEvents(state, action: PayloadAction<any>) {
       state.searchedEvents = action.payload;
     },
+    setInitialEvents(state, action: PayloadAction<any>) {
+      state.initialEvents = action.payload;
+    },
 
     resetSearchedEvents() {
       return initialState;
@@ -23,9 +28,11 @@ const searchedEventsSlice = createSlice({
   },
 });
 
-export const { resetSearchedEvents, setSearchedEvents } =
+export const { resetSearchedEvents, setSearchedEvents, setInitialEvents } =
   searchedEventsSlice.actions;
 export const selectSearchedEvents = (state: RootState) =>
   state.events.searchedEvents;
+export const selectInitialEvents = (state: RootState) =>
+  state.events.initialEvents;
 
 export default searchedEventsSlice.reducer;

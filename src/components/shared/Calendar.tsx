@@ -45,10 +45,12 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
       console.log("Loading events by date range...");
     } else if (eventBuDateRangeError) {
       alert("Error fetching events by date range: " + eventBuDateRangeError);
-    } else {
+    } else if (eventsByDateRange) {
       //  setEvents(eventsByDateRange);
+
       console.log("Fetched events by date range: ", eventsByDateRange);
       dispatch(setSearchedEvents(eventsByDateRange));
+      setShowDialog(false);
     }
   }, [eventByDateRangeIsLoading, eventBuDateRangeError, eventsByDateRange]);
 
@@ -75,6 +77,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
 
   const handleDayClick = (day: Date) => {
     if (!selectedStartDate || (selectedStartDate && selectedEndDate)) {
+      console.log(day);
       setSelectedStartDate(day);
       setSelectedEndDate(null);
       setIsSelectingEndDate(true);
@@ -196,12 +199,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
     // Logging isFilter here will still show the old value due to asynchronous state update
     console.log("Current isFilter value:", isFilter); // This might show the old value
   };
-  useEffect(() => {
-    if (isFilter) setShowDialog(false);
-  }, [isFilter]);
-  useEffect(() => {
-    console.log("isFilter after update:", isFilter);
-  }, [isFilter]);
+
   return (
     <div className="z-30 bg-white absolute w-full max-w-lg mx-auto p-4">
       <div className="flex justify-between border-b border-gray-300">
