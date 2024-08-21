@@ -18,8 +18,12 @@ const userSlice = createSlice({
     setUserData(state, action: PayloadAction<UserState>) {
       return { ...state, ...action.payload };
     },
-    updateUserData(state, action: PayloadAction<UserState>) {
-      state.user = action.payload;
+    updateUserData(state, action: PayloadAction<any>) {
+      // Update immutably
+      return {
+        ...state,
+        user: { ...state.user, ...action.payload },
+      };
     },
     resetUserData() {
       return initialState;

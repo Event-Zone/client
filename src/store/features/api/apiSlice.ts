@@ -49,11 +49,11 @@ export const apiSlice = createApi({
             })
         }),
 
-        searchEvents: builder.query<any, string>({
-            query: (eventName) => ({
+        searchEvents: builder.query<any, { searchTerm: string, stateName: string }>({
+            query: (eventQuery) => ({
                 url: `event/search`,
                 method: 'GET',
-                params: { eventName }
+                params: { searchTerm: eventQuery.searchTerm, state: eventQuery.stateName }
             })
         }),
         searchEventsByLocation: builder.query<any, string[]>({
@@ -82,6 +82,13 @@ export const apiSlice = createApi({
                 url: `event/search/type`,
                 method: 'GET',
                 params: { type }
+            })
+        }),
+        searchEventsByUser: builder.query<any, string>({
+            query: (id) => ({
+                url: `event/search/user/${id}`,
+                method: 'GET',
+
             })
         }),
         searchEventsByCategorie: builder.query<any, string[]>({
@@ -120,6 +127,38 @@ export const apiSlice = createApi({
                 method: 'GET',
             })
         }),
+        updateUser: builder.mutation<any, { _id: string, formData: FormData }>({
+            query: (data) => ({
+                url: `auth/${data._id}`,
+                method: 'PUT',
+                body: data.formData
+            })
+        }),
+        updateUserPassword: builder.mutation<any, { _id: string, newPassword: string, oldPassword: string }>({
+            query: (data) => ({
+                url: `auth/editpassword/${data._id}`,
+                method: 'PUT',
+                body: data
+            })
+        }),
+        updateForgotPassword: builder.mutation<any, any>({
+            query: (data) => ({
+                url: `auth/verify-code/editPassword`,
+                method: 'PUT',
+                body: data
+            })
+        }),
+        forgotPassword: builder.mutation<any, string>({
+            query: (email) => {
+
+                console.log("EMAILLL", email)
+                return ({
+                    url: `auth/forgotpassword`,
+                    method: 'PUT',
+                    body: { email }
+                })
+            }
+        }),
 
         //organiser
         addSubscription: builder.mutation<any, any>({
@@ -127,6 +166,24 @@ export const apiSlice = createApi({
                 url: `organizer/${data._id}`,
                 method: 'POST',
                 body: data
+            })
+        }),
+        updateSubscription: builder.mutation<any, { _id: string, formData: FormData }>({
+            query: (data) => {
+                console.log("data.get('_id')", data.formData.get('company'))
+                return ({
+                    url: `organizer/${data._id}`,
+                    method: 'PUT',
+                    body: data.formData
+                })
+            }
+        }),
+        addVisitore: builder.mutation<any, any>({
+            query: (data) => ({
+
+                url: `auth/explore/${data._id}`,
+                method: 'POST',
+                body: data.formData
             })
         }),
         getSubscription: builder.query<any, any>({
@@ -158,8 +215,20 @@ export const apiSlice = createApi({
                 method: 'GET',
             })
         }),
-
-
+        googleLogin: builder.mutation<any, any>({
+            query: (token) => ({
+                url: `auth/google-login`,
+                method: 'POST',
+                body: token
+            })
+        }),
+        sendA2F: builder.mutation<any, any>({
+            query: (data) => ({
+                url: `auth/verify-code`,
+                method: 'POST',
+                body: data
+            })
+        }),
 
     }),
 });
@@ -185,6 +254,15 @@ export const {
     useSearchEventsByDateRangeQuery,
     useSearchEventsByTypeQuery,
     useSearchEventsLocationsQuery,
-    useSearchEventsByCategorieQuery
+    useSearchEventsByCategorieQuery,
+    useUpdateUserMutation,
+    useUpdateSubscriptionMutation,
+    useAddVisitoreMutation,
+    useGoogleLoginMutation,
+    useSendA2FMutation,
+    useSearchEventsByUserQuery,
+    useUpdateUserPasswordMutation,
+    useForgotPasswordMutation,
+    useUpdateForgotPasswordMutation
 
 } = apiSlice;

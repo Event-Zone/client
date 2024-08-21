@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { selectUser } from "@/store/features/userSlice";
 import { useRouter } from "next/navigation";
 import { useGetSubscriptionQuery } from "@/store/features/api/apiSlice";
+import Progress from "@/components/shared/Progress"; // Import the Progress component
+import Message from "@/components/shared/Message"; // Import the Message component
 
 function Tarification() {
   const user = useSelector(selectUser);
@@ -17,26 +19,38 @@ function Tarification() {
     refetch,
   } = useGetSubscriptionQuery(user?.subscription);
 
+  const [message, setMessage] = useState<{
+    type: 0 | 1;
+    content: string;
+  } | null>(null);
+
   useEffect(() => {
     if (isLoading) {
       console.log("Loading events...");
     } else if (error) {
       console.error("Error fetching events:", error);
+      setMessage({ type: 0, content: "Error fetching events" });
     } else if (fetchedSubscription) {
       console.log("Fetched events:", fetchedSubscription);
+      setMessage({ type: 1, content: "Fetched events successfully" });
     }
   }, [fetchedSubscription, error, isLoading]);
+
   const router = useRouter();
   const [selected, setSelected] = useState("mensuel");
   const [selectedPrice, setSelectedPrice] = useState(4000);
+
   useEffect(() => {
     if (fetchedSubscription) {
-      router.push(`/events/create/${fetchedSubscription.pack}`); // From here
+      router.push(`/events/create/${fetchedSubscription.pack}`);
     }
   }, [fetchedSubscription]);
 
   return (
     <div className="flex flex-col justify-center items-center">
+      {isLoading && <Progress />} {/* Conditionally render the spinner */}
+      {message && <Message message={message} />}{" "}
+      {/* Conditionally render the message dialog */}
       <h3 className="text-mainBlue font-extrabold font-poppins text-xl">
         Forfaits
       </h3>

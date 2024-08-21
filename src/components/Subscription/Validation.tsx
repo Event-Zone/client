@@ -1,9 +1,12 @@
 "use client";
+import { selectUser } from "@/store/features/userSlice";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { useSelector } from "react-redux";
 
 function Validation() {
   const router = useRouter();
+  const user = useSelector(selectUser);
   return (
     <div className="flex flex-col justify-around items-center flex-1">
       <img alt="eventzone-logo" src="/Logo.png" />
@@ -17,11 +20,14 @@ function Validation() {
       </p>
 
       <div className=" p-10 m-5 flex flex-row justify-between items-center  rounded-lg cursor-pointer">
-        <button className="poppins-medium text-gray-500  mr-2 hover:bg-mainBlue hover:text-white border-gray-600 border-[1.4px] rounded-md px-5 py-2">
+        <button
+          onClick={() => router.replace(`/profile/${user?._id}`)}
+          className="poppins-medium text-gray-500  mr-2 hover:bg-mainBlue hover:text-white border-gray-600 border-[1.4px] rounded-md px-5 py-2"
+        >
           Complète ton Profile{" "}
         </button>
         <button
-          onClick={() => router.replace("/welcome")}
+          onClick={() => router.replace("/")}
           className="poppins-medium  bg-mainBlue text-white rounded-md px-9 py-[9px]"
         >
           Page d'accueil{" "}

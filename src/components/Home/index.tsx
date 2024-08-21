@@ -4,10 +4,18 @@ import Categorie from "./Categorie";
 import Villes from "./Villes";
 import NextEvent from "./NextEvent";
 import Collaborer from "./Collaborer";
-import { useGetEventsQuery } from "@/store/features/api/apiSlice";
+import {
+  useGetEventsQuery,
+  useGetSubscriptionQuery,
+} from "@/store/features/api/apiSlice";
+import { useSelector } from "react-redux";
+import { useSelectedLayoutSegment } from "next/navigation";
+import { selectUser } from "@/store/features/userSlice";
 
 function Home() {
   const [events, setEvents] = useState([]);
+  const [subscription, setSubscription] = useState(null);
+  const user = useSelector(selectUser);
   const {
     data: fetchedEvents,
     error,
@@ -32,7 +40,7 @@ function Home() {
       <Categorie />
       <Villes />
       <NextEvent events={events.slice(0, 4)} />
-      <Collaborer />
+      {user ? null : <Collaborer />}
     </div>
   );
 }

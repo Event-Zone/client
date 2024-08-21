@@ -7,6 +7,8 @@ import { selectUser } from "@/store/features/userSlice";
 import { useParams } from "next/navigation";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import Tarification from "@/components/Tarification";
+import Validation from "@/components/Subscription/Validation";
 
 function page() {
   const user = useSelector(selectUser);
@@ -29,8 +31,16 @@ function page() {
   }, [fetchedSubscription, error, isLoading]);
 
   console.log(fetchedSubscription);
-  if (fetchedSubscription?.validated) {
-    return <CreateEvent />;
+
+  if (fetchedSubscription) {
+    if (fetchedSubscription.validated) return <CreateEvent />;
+    else {
+      return (
+        <>
+          <Validation />
+        </>
+      );
+    }
   } else {
     return <Subscription pack={pack as string} />;
   }

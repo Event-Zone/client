@@ -68,7 +68,10 @@ function NextEvent({ events }: { events: IEvent[] }) {
         )}
       </div>
       <div className="w-full flex justify-center items-center">
-        <button className="mr-2 rounded-[10px] px-6 py-3 bg-mainBlue text-white text-center">
+        <button
+          onClick={() => router.replace("/search")}
+          className="mr-2 rounded-[10px] px-6 py-3 bg-mainBlue text-white text-center"
+        >
           Voir plus
         </button>
       </div>

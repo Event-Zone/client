@@ -35,6 +35,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   const [isLocationSelectorVisible, setIsLocationSelectorVisible] =
     useState(false);
   const [typeTerminer, setTypeTerminer] = useState(false);
+  const [categorieTerminer, setCategorieTerminer] = useState(false);
   const [LocationTerminer, setLocationTerminer] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState<
     string | undefined | 0
@@ -146,6 +147,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
     } else if (eventsByType) {
       setEvents(eventsByType);
       setTypeSelectorVisible(false);
+      setTypeTerminer(false);
     }
   }, [eventsByTypeIsLoading, eventsByTypeIsError, eventsByType]);
   const {
@@ -153,7 +155,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
     isLoading: eventsByCategorieIsLoading,
     isError: eventsByCategorieIsError,
   } = useSearchEventsByCategorieQuery(categorie as string[], {
-    skip: (categorie as string[])?.length === 0,
+    skip: (categorie as string[])?.length === 0 || !categorieTerminer,
   });
   useEffect(() => {
     if (eventsByCategorieIsLoading) {
@@ -162,6 +164,10 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
       alert("Error fetching events by Categorie: " + eventsByCategorieIsError);
     } else if (eventsByCategorie) {
       console.log("Fetched events by Categorie:", eventsByCategorie);
+      setEvents(eventsByCategorie);
+
+      setCategorieTerminer(false);
+      setCategorieSelectorVisible(false);
       // setInitEvents(eventsByCategorie);
     }
   }, [eventsByCategorieIsLoading, eventsByCategorieIsError, eventsByCategorie]);
@@ -182,10 +188,25 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
     setType(updatedTypes);
     // setLocation(0);
   };
+  const handleCategorieChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value } = event.target;
+    let updatedCategorie = [...(categorie as string[])];
+
+    if (updatedCategorie.includes(value)) {
+      updatedCategorie = updatedCategorie.filter((item) => item !== value);
+    } else {
+      updatedCategorie.push(value);
+    }
+
+    setCategorie(updatedCategorie);
+    // setLocation(0);
+  };
 
   useEffect(() => {
-    console.log(type);
-  }, [type]);
+    console.log(categorie);
+  }, [categorie]);
   useEffect(() => {
     console.log("selectedLocation: ", selectedLocation);
   }, [selectedLocation]);
@@ -299,7 +320,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
           >
             N'import ou
           </div>
-          <div className="flex flex-wrap justify-between w-fit">
+          <div className="flex flex-wrap justify-between w-fit ">
             <button
               className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
               onClick={() =>
@@ -309,71 +330,239 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
               Choose Categorie
             </button>
             {isCategorieSelectorVisible && (
-              <div className="bg-white p-4 rounded-md shadow-md z-30 absolute">
-                <div className="flex flex-col space-y-2">
+              <div className="bg-white p-4 rounded-md shadow-md z-30 absolute ">
+                <div className="flex flex-col space-y-2 h-[400px] overflow-scroll">
                   <label className="flex items-center space-x-2">
                     <input
                       type="checkbox"
-                      value="salons & exposition"
+                      value="sécurité"
+                      checked={(categorie as string[])?.includes("sécurité")}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Sécurité</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="services événementiels"
                       checked={(categorie as string[])?.includes(
-                        "salons & exposition"
+                        "services événementiels"
                       )}
-                      onChange={handleTypeChange}
+                      onChange={handleCategorieChange}
                       className="form-checkbox h-4 w-4 text-blue-600"
                     />
-                    <span>Salons & Exposition</span>
+                    <span>Services Événementiels</span>
                   </label>
                   <label className="flex items-center space-x-2">
                     <input
                       type="checkbox"
-                      value="conference & exposition"
+                      value="énergies renouvelables"
                       checked={(categorie as string[])?.includes(
-                        "conference & exposition"
+                        "énergies renouvelables"
                       )}
-                      onChange={handleTypeChange}
+                      onChange={handleCategorieChange}
                       className="form-checkbox h-4 w-4 text-blue-600"
                     />
-                    <span>Conference & Exposition</span>
+                    <span>Énergies Renouvelables</span>
                   </label>
                   <label className="flex items-center space-x-2">
                     <input
                       type="checkbox"
-                      value="conference"
-                      checked={(categorie as string[])?.includes("conference")}
-                      onChange={handleTypeChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Conference</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="workshop"
-                      checked={(categorie as string[])?.includes("workshop")}
-                      onChange={handleTypeChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Workshop</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="seminaires & ateliers"
+                      value="startups et entrepreneuriat"
                       checked={(categorie as string[])?.includes(
-                        "seminaires & ateliers"
+                        "startups et entrepreneuriat"
                       )}
-                      onChange={handleTypeChange}
+                      onChange={handleCategorieChange}
                       className="form-checkbox h-4 w-4 text-blue-600"
                     />
-                    <span>Seminaires & Ateliers</span>
+                    <span>Startups et Entrepreneuriat</span>
                   </label>
-                  {/* Add more checkboxes as needed */}
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="technologie"
+                      checked={(categorie as string[])?.includes("technologie")}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Technologie</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="télécommunications"
+                      checked={(categorie as string[])?.includes(
+                        "télécommunications"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Télécommunications</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="transport"
+                      checked={(categorie as string[])?.includes("transport")}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Transport</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="travaux publics"
+                      checked={(categorie as string[])?.includes(
+                        "travaux publics"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Travaux Publics</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="intelligence artificielle (ia)"
+                      checked={(categorie as string[])?.includes(
+                        "intelligence artificielle (ia)"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Intelligence Artificielle (IA)</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="machines et outils"
+                      checked={(categorie as string[])?.includes(
+                        "machines et outils"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Machines et Outils</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="aéronautique"
+                      checked={(categorie as string[])?.includes(
+                        "aéronautique"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Aéronautique</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="agriculture"
+                      checked={(categorie as string[])?.includes("agriculture")}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Agriculture</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="environnement"
+                      checked={(categorie as string[])?.includes(
+                        "environnement"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Environnement</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="industries chimiques"
+                      checked={(categorie as string[])?.includes(
+                        "industries chimiques"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Industries Chimiques</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="métiers de la mer"
+                      checked={(categorie as string[])?.includes(
+                        "métiers de la mer"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Métiers de la Mer</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="éducation"
+                      checked={(categorie as string[])?.includes("éducation")}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Éducation</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="finance et comptabilité"
+                      checked={(categorie as string[])?.includes(
+                        "finance et comptabilité"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Finance et Comptabilité</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="médical"
+                      checked={(categorie as string[])?.includes("médical")}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Médical</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="logistique"
+                      checked={(categorie as string[])?.includes("logistique")}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Logistique</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="ressources humaines"
+                      checked={(categorie as string[])?.includes(
+                        "ressources humaines"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Ressources Humaines</span>
+                  </label>
                 </div>
-                {/* Add your filter and cancel buttons */}
                 <div className="flex justify-between mt-4">
                   <button
                     onClick={() => {
-                      setTypeSelectorVisible(false);
+                      setCategorieSelectorVisible(false);
                     }}
                     className="text-red-500"
                   >
@@ -381,7 +570,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
                   </button>
                   <button
                     onClick={() => {
-                      setTypeTerminer(true);
+                      setCategorieTerminer(true);
                     }}
                     className="bg-blue-500 text-white px-4 py-2 rounded-md"
                   >

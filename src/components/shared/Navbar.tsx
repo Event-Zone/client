@@ -7,6 +7,7 @@ import {
   useGetSubscriptionQuery,
   useSearchEventsQuery,
   useGetEventsQuery,
+  useSearchEventsLocationsQuery,
 } from "@/store/features/api/apiSlice";
 import { useDispatch } from "react-redux";
 import {
@@ -20,6 +21,8 @@ function Navbar() {
   const allInitEvents = useSelector(selectInitialEvents);
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [locations, setLocations] = useState<any[] | null>([]);
+  const [stateName, setStateName] = useState<string>("");
   useEffect(() => {
     if (searchTerm == "") {
       dispatch(setSearchedEvents(allInitEvents));
@@ -27,19 +30,23 @@ function Navbar() {
   }, [searchTerm]);
   const isAuth = useSelector(selectToken);
   const user = useSelector(selectUser);
+
   const {
     data: fetchedSubscription,
     error,
     isLoading,
     refetch,
-  } = useGetSubscriptionQuery(user?.subscription);
+  } = useGetSubscriptionQuery(user?.subscription, { skip: !isAuth });
   const {
     data: searchedEvents,
     error: searchedEventsError,
     isLoading: searchedEventsLoading,
-  } = useSearchEventsQuery(searchTerm as string, {
-    skip: searchTerm === "", // Skip the query if searchTerm is empty
-  });
+  } = useSearchEventsQuery(
+    { searchTerm: searchTerm as string, stateName: stateName as string },
+    {
+      skip: searchTerm === "", // Skip the query if searchTerm is empty
+    }
+  );
   const {
     data: allEvents,
     error: allEventsError,
@@ -63,7 +70,9 @@ function Navbar() {
       dispatch(setSearchedEvents(searchedEvents));
     }
   }, [searchedEventsError, searchedEventsLoading, searchedEvents]);
-
+  useEffect(() => {
+    console.log(stateName);
+  }, [stateName]);
   useEffect(() => {
     if (allEventsError) {
       alert("Error while all events ");
@@ -74,6 +83,23 @@ function Navbar() {
     }
   }, [allEventsError, allEventsLoading, allEvents]);
 
+  const {
+    data: locationsFetched,
+    isLoading: locationsIsLoading,
+    isError: locationsIsError,
+  } = useSearchEventsLocationsQuery();
+
+  useEffect(() => {
+    if (locationsIsLoading) {
+      console.log("Loading  locationsIsLoading...");
+    } else if (locationsIsError) {
+      alert("Error fetching locationsIsError : " + locationsIsError);
+    } else if (locationsFetched) {
+      console.log("Fetched locations: ", locationsFetched);
+      setLocations(locationsFetched);
+    }
+  }, [locationsIsLoading, locationsIsError, locationsFetched]);
+
   const router = useRouter();
   const pathname = usePathname();
   const isV1 = pathname === "/welcome" || "/tarification";
@@ -82,6 +108,9 @@ function Navbar() {
     if (pathname !== "search") {
       router.replace("/search");
     }
+  };
+  const handleStateClick = (e: any) => {
+    setStateName(e.target.value);
   };
   return (
     // check The responsiveness bug
@@ -125,16 +154,15 @@ function Navbar() {
               className="h-5 w-5 text-gray-500"
             />
           </span>
-          <select className="p-2 pl-10 text-gray-500 focus:outline-none">
-            <option value="us" className="text-gray-500" defaultChecked>
-              Alger
-            </option>
-            <option value="ca" className="text-gray-500">
-              CA
-            </option>
-            <option value="uk" className="text-gray-500">
-              UK
-            </option>
+          <select
+            onChange={handleStateClick}
+            className="p-2 pl-10 text-gray-500 focus:outline-none"
+          >
+            {locations?.map((state) => (
+              <option value={state} className="text-gray-500" defaultChecked>
+                {state}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -176,23 +204,34 @@ function Navbar() {
             S'inscrire
           </button>
         </div>
-      ) : fetchedSubscription?.pack ? (
+      ) : (
         <div className="flex items-center flex-row">
           <button
             onClick={() =>
-              router.replace(`/events/create/${fetchedSubscription?.pack}`)
+              router.replace(
+                `${
+                  fetchedSubscription?.pack
+                    ? `/events/create/${fetchedSubscription?.pack}`
+                    : "/tarification"
+                }`
+              )
             }
             className=" mx-4 text-gray-500 poppins-medium text-center "
           >
             + Ajouter Evenement
           </button>
           <img
+            onClick={() => router.push(`/profile/${user?._id}`)}
             alt="profile"
-            className="rounded-full bg-gray-200 p-2  mr-2"
-            src="/icons/Profile.png"
+            className="rounded-full bg-gray-200   mr-2 w-[50px] h-[50px] cursor-pointer"
+            src={
+              user?.profilePicture
+                ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${user.profilePicture}`
+                : "/icons/Profile.png"
+            }
           />
         </div>
-      ) : null}
+      )}
     </div>
   );
 }

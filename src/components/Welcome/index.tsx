@@ -13,7 +13,10 @@ function Welcome() {
         avec nous ?
       </p>
       <div className="flex flex-row justify-between">
-        <div className="border-gray-600 border-2 p-10 m-5 flex flex-col justify-center items-center rounded-lg cursor-pointer">
+        <div
+          onClick={() => router.push("/explore")}
+          className="border-gray-600 border-2 p-10 m-5 flex flex-col justify-center items-center rounded-lg cursor-pointer"
+        >
           <div>
             <img alt="plus-icon" src="/ion_search.png" />
           </div>

@@ -13,13 +13,10 @@ function Subscription({ pack }: { pack: string }) {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const [addSubscription, addSubscriptionResult] = useAddSubscriptionMutation();
-  const { refetch: refetchUser } = useGetUserQuery(user._id);
+  const { refetch: refetchUser } = useGetUserQuery(user?._id);
 
   const [formData, setFormData] = useState({
-    _id: user._id,
-    fullname: "",
-    username: "",
-    email: "",
+    _id: user?._id,
     phone: "",
     company: "",
     role: "",
@@ -96,22 +93,20 @@ function Subscription({ pack }: { pack: string }) {
               <input
                 type="text"
                 name="fullname"
+                disabled
                 className="w-full px-3 py-2 border rounded-lg"
                 placeholder="Nom complet"
-                value={formData.fullname}
-                onChange={handleChange}
-                required
+                value={user?.fullname}
               />
             </div>
             <div>
               <input
                 type="text"
                 name="username"
+                disabled
                 className="w-full px-3 py-2 border rounded-lg"
                 placeholder="Nom d'utilisateur"
-                value={formData.username}
-                onChange={handleChange}
-                required
+                value={user?.username}
               />
             </div>
           </div>
@@ -122,9 +117,8 @@ function Subscription({ pack }: { pack: string }) {
                 name="email"
                 className="w-full px-3 py-2 border rounded-lg"
                 placeholder="E-mail"
-                value={formData.email}
-                onChange={handleChange}
-                required
+                value={user?.email}
+                disabled
               />
             </div>
             <div>
