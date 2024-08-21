@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import GoogleLoginButton from "../shared/GoogleLoginButton";
+import Spinner from "@/components/shared/Progress";
+import MessageDialog from "@/components/shared/Message";
 
 function RegisterForm() {
   const [showFormCode, setShowFormCode] = useState(false);
@@ -17,18 +19,17 @@ function RegisterForm() {
   useEffect(() => {
     dispatch(resetUserData());
   }, []);
+
   const handleA2fSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Process the A2F code here
-
     await sendA2F({ email: formData.email, code: a2fCode }).unwrap();
-
     console.log("A2F Code submitted:");
     // You can add further logic to handle the A2F code submission
   };
+
   const router = useRouter();
   const [registerUser, registerUserResult] = useRegisterUserMutation();
-
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -50,13 +51,11 @@ function RegisterForm() {
       console.error("Passwords do not match");
       return;
     }
-
     try {
       await registerUser({
         email: formData.email,
         fullname: formData.fullname,
         username: formData.username,
-
         password: formData.password,
       }).unwrap();
       console.log("User registered successfully");
@@ -70,7 +69,6 @@ function RegisterForm() {
       console.log("User registered successfully");
       setShowFormCode(true);
       // dispatch(setUserData(registerUserResult.data));
-
       // router.push("/welcome");
     } else if (registerUserResult.isError) {
       console.error("Error registering user:", registerUserResult.error);
@@ -78,6 +76,7 @@ function RegisterForm() {
       console.log("Loading...");
     }
   }, [registerUserResult]);
+
   useEffect(() => {
     if (sendA2FResult.isSuccess) {
       console.log("User registered successfully");
@@ -89,6 +88,7 @@ function RegisterForm() {
       console.log("Loading...");
     }
   }, [sendA2FResult]);
+
   return (
     <>
       {showFormCode ? (
@@ -193,6 +193,12 @@ function RegisterForm() {
           </div>
         </form>
       )}
+      {registerUserResult.isLoading || sendA2FResult.isLoading ? (
+        <Spinner />
+      ) : null}
+      {registerUserResult.isError || sendA2FResult.isError ? (
+        <MessageDialog message={{ type: 0, content: "Error occurred" }} />
+      ) : null}
     </>
   );
 }
