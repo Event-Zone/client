@@ -42,6 +42,7 @@ const reverseGeocode = async (lat: number, lon: number) => {
 export default function SearchBox(props: SearchBoxProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { handleLocation, location } = props;
+  console.log("SearchBox location: ", location);
   const [searchText, setSearchText] = useState<string>("");
   const [listPlace, setListPlace] = useState<Place[]>([]);
   const [noResults, setNoResults] = useState(false);
@@ -115,7 +116,9 @@ export default function SearchBox(props: SearchBoxProps) {
             type="text"
             className="w-full p-2 border border-gray-300 rounded"
             value={
-              !isOpen && location ? location.address?.commercial : searchText
+              location
+                ? location.address?.commercial || location.address?.state
+                : searchText
             }
             onChange={(event) => {
               setIsOpen(true);

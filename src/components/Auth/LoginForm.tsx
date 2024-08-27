@@ -98,7 +98,7 @@ function LoginForm() {
     if (loginUserResult.isSuccess) {
       console.log("User logged in successfully");
       dispatch(setUserData(loginUserResult.data));
-      router.push("/welcome");
+      router.replace("/welcome");
     } else if (loginUserResult.isError) {
       console.error("Error logging in user:", loginUserResult.error);
       setMessage({ type: 0, content: "Error logging in user" });

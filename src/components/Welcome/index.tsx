@@ -18,7 +18,7 @@ function Welcome() {
           className="border-gray-600 border-2 p-10 m-5 flex flex-col justify-center items-center rounded-lg cursor-pointer"
         >
           <div>
-            <img alt="plus-icon" src="/ion_search.png" />
+            <img alt="plus-icon" src="/icons/ion_search.png" />
           </div>
           <h2 className="text-titles ml-14 mb-4 font-extrabold text-[30px]">
             Explorer des événements{" "}
@@ -33,7 +33,7 @@ function Welcome() {
           className="border-gray-600 border-2 p-10 m-5 flex flex-col justify-center items-center rounded-lg cursor-pointer"
         >
           <div>
-            <img alt="plus-icon" src="/ph_plus-bold.png" />
+            <img alt="plus-icon" src="/icons/ph_plus-bold.png" />
           </div>
 
           <h2 className="text-titles ml-14 mb-4 font-extrabold text-[30px]">

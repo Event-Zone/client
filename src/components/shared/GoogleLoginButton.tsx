@@ -27,6 +27,7 @@ const GoogleLoginButton: React.FC = () => {
   useEffect(() => {
     if (googleAuthResult.isSuccess) {
       dispatch(setUserData(googleAuthResult.data));
+      router.replace("/welcome");
     } else if (googleAuthResult.error) {
       console.error("Error fetching user from Google:", googleAuthResult.error);
     } else if (googleAuthResult.isLoading) {

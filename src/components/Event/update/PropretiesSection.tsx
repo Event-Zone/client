@@ -284,8 +284,8 @@ function PropretiesSection({
             <div className="flex justify-end items-center mt-2">
               <button
                 className={`${
-                  isFormComplete ? "bg-primary" : "bg-mainBlue"
-                } text-white poppins-semibold py-2 px-4 rounded bg-mainBlue`}
+                  isFormComplete ? "bg-primary" : "bg-gray-200"
+                } text-white poppins-semibold py-2 px-4 rounded`}
                 disabled={!isFormComplete}
                 onClick={handleSubmit}
               >

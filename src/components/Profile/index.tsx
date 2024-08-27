@@ -15,7 +15,7 @@ import {
   setUserData,
   updateUserData,
 } from "@/store/features/userSlice";
-import EventCard from "../Search/EventCard";
+import EventCard from "./EventCard";
 
 const Profile = () => {
   const [showMyEvents, setShowMyEvents] = useState(false);

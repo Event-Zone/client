@@ -30,7 +30,7 @@ export const apiSlice = createApi({
 
         updateEvent: builder.mutation<any, any>({
             query: (data) => ({
-                url: `event/${data._id}`,
+                url: `event/${data.get('_id')}`,
                 method: 'PUT',
                 body: data
             })
