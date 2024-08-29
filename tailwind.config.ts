@@ -28,6 +28,7 @@ const config: Config = {
       colors: {
         mainBlue: "#0052B4",
         titles: '#001029',
+        blewishGrey: '#BCC6CE'
 
       },
     },

@@ -52,7 +52,7 @@ function Navbar() {
     error: allEventsError,
     isLoading: allEventsLoading,
     refetch: refetchAllEvents,
-  } = useGetEventsQuery();
+  } = useGetEventsQuery("approved");
 
   useEffect(() => {
     refetchAllEvents();

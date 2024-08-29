@@ -8,10 +8,11 @@ export const apiSlice = createApi({
 
     endpoints: (builder) => ({
         //Events endpoints
-        getEvents: builder.query<any, void>({ // change the return type 
-            query: () => ({
+        getEvents: builder.query<any, string>({ // change the return type 
+            query: (status) => ({
                 url: `event`,
-                method: 'GET'
+                method: 'GET',
+                params: { status: status }
             })
         }),
         getEvent: builder.query<any, string>({
@@ -28,9 +29,30 @@ export const apiSlice = createApi({
             })
         }),
 
+        newAd: builder.mutation<any, any>({
+            query: (data) => ({
+                url: `ads/`,
+                method: 'POST',
+                body: data
+            })
+        }),
         updateEvent: builder.mutation<any, any>({
             query: (data) => ({
                 url: `event/${data.get('_id')}`,
+                method: 'PUT',
+                body: data
+            })
+        }),
+        updateEventStatus: builder.mutation<any, { _id: string, status: string }>({
+            query: (data) => ({
+                url: `event/status`,
+                method: 'PUT',
+                body: data
+            })
+        }),
+        updateAdStatus: builder.mutation<any, { _id: string, status: string }>({
+            query: (data) => ({
+                url: `ads/`,
                 method: 'PUT',
                 body: data
             })
@@ -49,7 +71,7 @@ export const apiSlice = createApi({
             })
         }),
 
-        searchEvents: builder.query<any, { searchTerm: string, stateName: string }>({
+        searchEvents: builder.query<any, { searchTerm: string, stateName?: string }>({
             query: (eventQuery) => ({
                 url: `event/search`,
                 method: 'GET',
@@ -125,6 +147,13 @@ export const apiSlice = createApi({
             query: (_id) => ({
                 url: `auth/${_id}`,
                 method: 'GET',
+            })
+        }),
+        getUsersByPack: builder.query<any, any>({
+            query: (pack) => ({
+                url: `auth/`,
+                method: 'GET',
+                params: { pack }
             })
         }),
         updateUser: builder.mutation<any, { _id: string, formData: FormData }>({
@@ -205,13 +234,23 @@ export const apiSlice = createApi({
         // adds
         getHeroAdds: builder.query<any, void>({
             query: () => ({
-                url: `adds/hero`,
+                url: `ads/hero`,
                 method: 'GET',
             })
         }),
+        addOneMonth: builder.mutation<any, void>({
+            query: (_id) => {
+
+                console.log('running', _id)
+                return ({
+                    url: `ads/addmonth/${_id}`,
+                    method: 'PUT',
+                })
+            }
+        }),
         getSearchPageAdds: builder.query<any, void>({
             query: () => ({
-                url: `adds/search`,
+                url: `ads/search`,
                 method: 'GET',
             })
         }),
@@ -263,6 +302,11 @@ export const {
     useSearchEventsByUserQuery,
     useUpdateUserPasswordMutation,
     useForgotPasswordMutation,
-    useUpdateForgotPasswordMutation
+    useUpdateForgotPasswordMutation,
+    useGetUsersByPackQuery,
+    useUpdateEventStatusMutation,
+    useUpdateAdStatusMutation,
+    useNewAdMutation,
+    useAddOneMonthMutation
 
 } = apiSlice;

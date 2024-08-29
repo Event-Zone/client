@@ -1,4 +1,5 @@
 interface IEvent {
+    createdAt?: any;
     _id?: any;
     location: any;
     eventName: string;
