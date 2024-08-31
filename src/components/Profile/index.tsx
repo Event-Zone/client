@@ -90,10 +90,15 @@ const Profile = () => {
     data: fetchedSubscription,
     error: subError,
     isLoading: subIsLoading,
-  } = useGetSubscriptionQuery(user?.subscription, {
-    skip: !user?.subscription,
+  } = useGetSubscriptionQuery(userData?.subscription, {
+    skip: !userData?.subscription,
   });
-
+  useEffect(() => {
+    if (fetchedSubscription) {
+      console.log("FETCH", fetchedSubscription);
+    } else if (subIsLoading) console.log("Loading");
+    else if (subError) console.error("Error", subError);
+  }, [fetchedSubscription]);
   useEffect(() => {
     if (fetchedSubscription) {
       setSubscriptionInputForm({

@@ -149,6 +149,12 @@ export const apiSlice = createApi({
                 method: 'GET',
             })
         }),
+        getUsers: builder.query<any, void>({
+            query: (_id) => ({
+                url: `auth/`,
+                method: 'GET',
+            })
+        }),
         getUsersByPack: builder.query<any, any>({
             query: (pack) => ({
                 url: `auth/`,
@@ -161,6 +167,13 @@ export const apiSlice = createApi({
                 url: `auth/${data._id}`,
                 method: 'PUT',
                 body: data.formData
+            })
+        }),
+        deleteUser: builder.mutation<any, string>({
+            query: (selected) => ({
+                url: `auth/delete`,
+                method: 'DELETE',
+                body: { ids: selected }
             })
         }),
         updateUserPassword: builder.mutation<any, { _id: string, newPassword: string, oldPassword: string }>({
@@ -207,6 +220,16 @@ export const apiSlice = createApi({
                 })
             }
         }),
+        validateSubscription: builder.mutation<any, any>({
+            query: (selected) => {
+                console.log("selected", selected)
+                return ({
+                    url: `organizer/validate`,
+                    method: 'PUT',
+                    body: { ids: selected }
+                })
+            }
+        }),
         addVisitore: builder.mutation<any, any>({
             query: (data) => ({
 
@@ -220,6 +243,37 @@ export const apiSlice = createApi({
                 url: `organizer/${_id}`,
                 method: 'GET',
             })
+        }),
+        updatePack: builder.mutation<any, any>({
+            query: (data) => {
+
+                console.log(data)
+                return ({
+                    url: `organizer/pack/${data._id}`,
+                    method: 'PUT',
+                    body: { pack: data.pack, selected: data.ids }
+                })
+            }
+        }),
+        suspendUser: builder.mutation<any, string>({
+            query: (selected) => {
+
+                console.log(selected)
+                return ({
+                    url: `auth/suspend/`,
+                    method: 'PUT',
+                    body: { ids: selected }
+                })
+            }
+        }),
+        getSubscriptions: builder.query<any, any>({
+            query: (pack) => {
+
+                return ({
+                    url: `organizer/multi/${pack}`,
+                    method: 'GET',
+                })
+            }
         }),
         //Event
         addEvent: builder.mutation<any, any>({
@@ -282,12 +336,14 @@ export const {
     useAddSubscriptionMutation,
     useLoginUserMutation,
     useGetUserQuery,
+    useDeleteUserMutation,
     useGetSubscriptionQuery,
     useAddEventMutation,
     useGetHeroAddsQuery,
     useGetSearchPageAddsQuery,
     useGetEventAddQuery,
     useSearchEventsQuery,
+    useSuspendUserMutation,
     useSearchEventsByLocationQuery,
     useSearchEventsByMonthQuery,
     useSearchEventsByDateRangeQuery,
@@ -307,6 +363,10 @@ export const {
     useUpdateEventStatusMutation,
     useUpdateAdStatusMutation,
     useNewAdMutation,
-    useAddOneMonthMutation
+    useAddOneMonthMutation,
+    useGetSubscriptionsQuery,
+    useGetUsersQuery,
+    useUpdatePackMutation,
+    useValidateSubscriptionMutation
 
 } = apiSlice;

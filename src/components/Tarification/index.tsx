@@ -17,7 +17,9 @@ function Tarification() {
     error,
     isLoading,
     refetch,
-  } = useGetSubscriptionQuery(user?.subscription);
+  } = useGetSubscriptionQuery(user?.subscription, {
+    skip: !user?.subscription,
+  });
 
   const [message, setMessage] = useState<{
     type: 0 | 1;

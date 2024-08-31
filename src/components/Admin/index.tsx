@@ -129,7 +129,7 @@ function Admin() {
         </div>
       </div>
 
-      <div className="w-full h-screen px-10 py-4">
+      <div className="w-full h-screen  py-4">
         {/* User Profile */}
         <div className="w-fit flex mb-6">
           <div className="mr-2">

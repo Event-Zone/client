@@ -65,7 +65,7 @@ function Events() {
       </div>
       {/* Events List */}
       <div className="overflow-y-scroll h-[90%]">
-        {events &&
+        {events ? (
           events.map((event: any) => {
             return (
               <Event
@@ -75,7 +75,10 @@ function Events() {
                 event={event}
               />
             );
-          })}
+          })
+        ) : (
+          <>Loading events</>
+        )}
       </div>
       {eventsLoading && <Progress />}
       {message && <Message message={message} />}
