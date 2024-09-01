@@ -7,16 +7,18 @@ import {
   useGetHeroAddsQuery,
   useGetEventAddQuery,
 } from "@/store/features/api/apiSlice";
+import { skip } from "node:test";
 
-function Ads({ refetchHero }: { refetchHero: boolean }) {
-  const [status, setStatus] = useState(0);
+function Ads({ status, setStatus }: { status: number; setStatus: Function }) {
   const [message, setMessage] = useState<any | null>(null);
-  const [adds, setAdds] = useState<any>([]);
   const [addsDetails, setAddsDetails] = useState<any>([]);
+  // useEffect(() => {
+  //   if (refetchHero) refetchHeroAds();
+  //   console.log(refetchHero);
+  // }, [refetchHero]);
   useEffect(() => {
-    if (refetchHero) refetchHeroAds();
-    console.log(refetchHero);
-  }, [refetchHero]);
+    console.log("addsDetails", addsDetails);
+  }, [addsDetails]);
   const {
     data: searchAds,
     isLoading: searchAdsLoading,
@@ -35,36 +37,56 @@ function Ads({ refetchHero }: { refetchHero: boolean }) {
     error: eventAddsError,
     isLoading: eventAddsIsLoading,
     refetch: refetchEvents,
-  } = useGetEventAddQuery(adds, {
-    skip: adds.length === 0,
-  });
+  } = useGetEventAddQuery(
+    heroAds?.map((ad: any) => ad.eventId),
+    {
+      skip: heroAds?.length === 0 || !heroAds || status === 1,
+    }
+  );
+  useEffect(() => {
+    console.log("fetchedEventAdds", fetchedEventAdds);
+  }, [fetchedEventAdds]);
 
   useEffect(() => {
-    if (fetchedEventAdds) refetchEvents();
-  }, [adds]);
+    if (!(heroAds?.length === 0 || !heroAds || status === 1)) refetchEvents();
+  }, [status, heroAds]);
 
   useEffect(() => {
-    if (status === 0) refetchHeroAds();
-    else refetchSearchAds();
+    if (status === 1) {
+      refetchSearchAds().then(() => {
+        console.log("Search Ads refetched", searchAds);
+      });
+    } else {
+      refetchHeroAds().then(() => {
+        console.log("hero Ads refetched", heroAds);
+        if (heroAds) setAddsDetails(heroAds);
+      });
+    }
   }, [status]);
 
-  useEffect(() => {
-    if (searchAds) {
-      setAddsDetails(searchAds);
-      setAdds(searchAds.map((add: any) => add.eventId));
-    }
-  }, [searchAds]);
+  // useEffect(() => {
+  //   if (searchAds && !searchAdsLoading) {
+  //     console.log("Search successfully", searchAds);
+  //     // Process searchAds
+  //   } else if (searchAdsLoading) {
+  //     console.log("Search is loading");
+  //   } else {
+  //     console.log("Search nothing");
+  //   }
+  // }, [searchAds, searchAdsLoading]);
 
-  useEffect(() => {
-    if (heroAds) {
-      setAddsDetails(heroAds);
-      setAdds(heroAds.map((add: any) => add.eventId));
-    }
-  }, [heroAds]);
+  // useEffect(() => {
+  //   if (heroAds && !heroAdsLoading) {
+  //     console.log("Hero successfully", heroAds);
+  //     setAddsDetails(heroAds);
+  //     setAdds(heroAds.map((add: any) => add.eventId));
+  //   } else if (heroAdsLoading) {
+  //     console.log("Hero is loading");
+  //   }
+  // }, [heroAds, heroAdsLoading]);
 
   return (
     <div className={`bg-[#1A202C] p-6 rounded-lg h-[400px] relative`}>
-      {/* Blur Background if Sidebar is Visible */}
       <div>
         {/* Tabs */}
         <div className="flex space-x-8 text-white text-lg mb-4">
@@ -85,7 +107,7 @@ function Ads({ refetchHero }: { refetchHero: boolean }) {
         {/* Events Header */}
         <div className="grid grid-cols-6 text-[#94A3B8] py-3 border-b border-[#364153]">
           <div className="col-span-2">
-            Events ({status !== 0 ? searchAds?.length : heroAds?.length})
+            {/* Events ({status !== 0 ? adds?.length : adds?.length}) */}
           </div>
           <div>Company</div>
           <div>Statrt Date ⇵</div>
@@ -95,16 +117,33 @@ function Ads({ refetchHero }: { refetchHero: boolean }) {
 
         {/* Events List */}
         <div className="overflow-y-scroll h-[90%]">
-          {fetchedEventAdds?.map((event: any, index: number) => (
-            <Ad
-              index={index}
-              adds={addsDetails}
-              status={status}
-              refetchEvents={refetchHeroAds}
-              key={event._id}
-              event={event}
-            />
-          ))}
+          {status === 0
+            ? fetchedEventAdds &&
+              fetchedEventAdds?.map((event: any, index: number) => (
+                <Ad
+                  index={index}
+                  adds={addsDetails}
+                  status={status}
+                  refetchHero={refetchHeroAds}
+                  refetchSearch={refetchSearchAds}
+                  key={event._id}
+                  event={event}
+                  setStatus={setStatus}
+                />
+              ))
+            : searchAds &&
+              searchAds?.map((event: any, index: number) => (
+                <Ad
+                  setStatus={setStatus}
+                  index={index}
+                  adds={addsDetails}
+                  status={status}
+                  refetchHero={refetchHeroAds}
+                  refetchSearch={refetchSearchAds}
+                  key={event._id}
+                  event={event}
+                />
+              ))}
         </div>
         {(searchAdsLoading || heroAdsLoading) && <Progress />}
         {message && <Message message={message} />}

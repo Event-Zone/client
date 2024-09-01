@@ -30,11 +30,14 @@ export const apiSlice = createApi({
         }),
 
         newAd: builder.mutation<any, any>({
-            query: (data) => ({
-                url: `ads/`,
-                method: 'POST',
-                body: data
-            })
+            query: (data) => {
+                console.log("data", data);
+                return ({
+                    url: `ads/`,
+                    method: 'POST',
+                    body: data
+                })
+            }
         }),
         updateEvent: builder.mutation<any, any>({
             query: (data) => ({
@@ -51,11 +54,14 @@ export const apiSlice = createApi({
             })
         }),
         updateAdStatus: builder.mutation<any, { _id: string, status: string }>({
-            query: (data) => ({
-                url: `ads/`,
-                method: 'PUT',
-                body: data
-            })
+            query: (data) => {
+                console.log(data);
+                return ({
+                    url: `ads/`,
+                    method: 'PUT',
+                    body: data
+                })
+            }
         }),
         deleteEvent: builder.mutation<any, any>({
             query: (_id) => ({

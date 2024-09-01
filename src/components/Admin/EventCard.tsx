@@ -41,8 +41,8 @@ function EventCard({
           Add
         </button>
       </div>
-      {newAdResult.isLoading && <Progress />}
-      {newAdResult.isLoading && (
+      {newAdResult.status === "pending" && <Progress />}
+      {newAdResult.isError && (
         <Message message={{ type: 0, content: "failed to add new ad" }} />
       )}
     </div>

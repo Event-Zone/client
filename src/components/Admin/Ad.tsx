@@ -13,41 +13,52 @@ import { useRouter } from "next/navigation";
 import { useUpdateAdStatusMutation } from "@/store/features/api/apiSlice";
 
 function Ad({
+  setStatus,
+
   index,
   adds,
   status,
   event,
-  refetchEvents,
+  refetchHero,
+  refetchSearch,
 }: {
+  setStatus: Function;
   index: number;
   adds: any;
   status: number;
-  event: IEvent;
-  refetchEvents: Function;
+  event: any;
+  refetchHero: Function;
+  refetchSearch: Function;
 }) {
   const [updateStatus, updateStatusResult] = useUpdateAdStatusMutation();
   useEffect(() => {
-    console.log(adds[index]);
-  }, [index]);
+    console.log("adds", adds);
+  }, [adds]);
   const [message, setMessage] = useState<any | null>(null);
   const router = useRouter();
   const handleApprove = async () => {
     try {
-      await updateStatus({ _id: adds[index]?._id, status: "running" });
+      if (status === 0)
+        await updateStatus({ _id: adds[index]?._id, status: "running" });
+      else await updateStatus({ _id: event?._id, status: "running" });
     } catch (error) {
       console.error("Error updating status", error);
     }
   };
   const handleDecline = async () => {
     try {
-      await updateStatus({ _id: adds[index]?._id, status: "ended" });
+      if (status === 0)
+        await updateStatus({ _id: adds[index]?._id, status: "ended" });
+      else await updateStatus({ _id: event?._id, status: "ended" });
     } catch (error) {
       console.error("Error updating status", error);
     }
   };
   const handlePause = async () => {
     try {
-      await updateStatus({ _id: adds[index]?._id, status: "paused" });
+      if (status === 0)
+        await updateStatus({ _id: adds[index]?._id, status: "paused" });
+      else await updateStatus({ _id: event?._id, status: "paused" });
     } catch (error) {
       console.error("Error updating status", error);
     }
@@ -67,8 +78,13 @@ function Ad({
   const [add1Month, add1MonthResult] = useAddOneMonthMutation();
   useEffect(() => {
     if (updateStatusResult.status === "fulfilled") {
-      console.log(updateStatusResult);
-      refetchEvents();
+      console.log("fulfilled", updateStatusResult.data);
+      refetchHero();
+      refetchSearch();
+
+      if (status === 0) {
+        setStatus(1);
+      } else setStatus(0);
     } else if (updateStatusResult.status === "rejected") {
       setMessage({
         type: 0,
@@ -79,7 +95,8 @@ function Ad({
   const handleAddMonth = async () => {
     try {
       console.log("add month");
-      if (adds[index]) add1Month(adds[index]._id);
+      if (status === 0) await add1Month(adds[index]._id);
+      else await add1Month(event._id);
     } catch (error) {
       console.error("Error updating status", error);
     }
@@ -87,12 +104,20 @@ function Ad({
   const [showChoices, setShowChoices] = useState(false);
   useEffect(() => {
     if (add1MonthResult.status === "fulfilled") {
-      refetchEvents();
+      refetchHero();
+      refetchSearch();
+      if (status === 0) setStatus(1);
+      else setStatus(0);
       console.log("added");
     } else if (add1MonthResult.status === "rejected") {
       console.log(add1MonthResult.error);
     }
   }, [add1MonthResult]);
+  if (!adds || adds?.length === 0) {
+    console.log(adds);
+
+    return null;
+  }
   return (
     <div>
       <div
@@ -101,48 +126,99 @@ function Ad({
       >
         <div className="flex col-span-2 items-center">
           <img
-            src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event.eventImages[0]}`}
+            src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${
+              status === 0 ? event.eventImages[0] : event.picture
+            }`}
             alt={event.eventName}
             className="h-14 w-14 rounded-lg mr-4"
           />
-          <div>
-            <p className="text-white font-bold">{event.eventName}</p>
-            <p className="text-[#94A3B8]">{event.eventAcronym}</p>
-          </div>
+          {status === 0 && (
+            <div>
+              <p className="text-white font-bold">{event.eventName}</p>
+              <p className="text-[#94A3B8]">{event.eventAcronym}</p>
+            </div>
+          )}
         </div>
         <div className="text-white">
           {subData?.company}
           <br />
         </div>
-        <div className="text-white">
-          {new Date(adds[index]?.createdAt).toLocaleDateString("fr-FR", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          })}
-        </div>
-        <div className="text-white">
-          {new Date(adds[index]?.endDate).toLocaleDateString("fr-FR", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          })}
-        </div>
+        {status === 0 ? (
+          <>
+            <div className="text-white">
+              {new Date(adds[index]?.createdAt).toLocaleDateString("fr-FR", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
+            </div>
+            <div className="text-white">
+              {new Date(adds[index]?.endDate).toLocaleDateString("fr-FR", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="text-white">
+              {new Date(event?.createdAt).toLocaleDateString("fr-FR", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
+            </div>
+            <div className="text-white">
+              {new Date(event?.endDate).toLocaleDateString("fr-FR", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
+            </div>
+          </>
+        )}
         <div className="flex space-x-3">
-          {adds[index]?.status === "paused" && (
-            <div className="w-fit h-fit bg-yellow-300 text-white poppins-regular p-3  rounded-2xl">
-              Paused
-            </div>
-          )}
-          {adds[index]?.status === "running" && (
-            <div className="w-fit h-fit bg-green-400 text-white poppins-regular p-3  rounded-2xl">
-              Running
-            </div>
-          )}
-          {adds[index]?.status === "ended" && (
-            <div className="w-fit h-fit bg-red-400 text-white poppins-regular p-3  rounded-2xl">
-              Ended
-            </div>
+          {status === 0 ? (
+            <>
+              (
+              {adds[index]?.status === "paused" && (
+                <div className="w-fit h-fit bg-yellow-300 text-white poppins-regular p-3  rounded-2xl">
+                  Paused
+                </div>
+              )}
+              {adds[index]?.status === "running" && (
+                <div className="w-fit h-fit bg-green-400 text-white poppins-regular p-3  rounded-2xl">
+                  Running
+                </div>
+              )}
+              {adds[index]?.status === "ended" && (
+                <div className="w-fit h-fit bg-red-400 text-white poppins-regular p-3  rounded-2xl">
+                  Ended
+                </div>
+              )}
+              )
+            </>
+          ) : (
+            <>
+              (
+              {event?.status === "paused" && (
+                <div className="w-fit h-fit bg-yellow-300 text-white poppins-regular p-3  rounded-2xl">
+                  Paused
+                </div>
+              )}
+              {event?.status === "running" && (
+                <div className="w-fit h-fit bg-green-400 text-white poppins-regular p-3  rounded-2xl">
+                  Running
+                </div>
+              )}
+              {event?.status === "ended" && (
+                <div className="w-fit h-fit bg-red-400 text-white poppins-regular p-3  rounded-2xl">
+                  Ended
+                </div>
+              )}
+              )
+            </>
           )}
           <div className="relative">
             <div
@@ -253,9 +329,7 @@ function Ad({
           </div>
         </div>
       </div>
-      {(isError || subIsError) && (
-        <Message message={{ type: 0, content: "error" }} />
-      )}
+      {subIsError && <Message message={{ type: 0, content: "subs error" }} />}
       {(userLoading || subLoading || add1MonthResult.isLoading) && <Progress />}
     </div>
   );
