@@ -21,6 +21,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Locations from "../shared/Locations";
+import Ads from "./Ads";
 
 function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   const allEvents = useSelector(selectInitialEvents);
@@ -210,9 +211,8 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   useEffect(() => {
     console.log("selectedLocation: ", selectedLocation);
   }, [selectedLocation]);
-  // Implement the UI
   return (
-    <div className="p-1 md:p-20">
+    <div className="relative p-1 md:p-20 ">
       <div className="max-w-full h-fit">
         <div className="flex flex-wrap justify-between w-fit">
           <button
@@ -590,22 +590,22 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
       )}
 
       {/* Display Results */}
-      <div className="mt-4">
-        {events &&
-          events?.length > 0 &&
-          events.map((event) => <EventCard key={event._id} event={event} />)}
-        {/* {eventsByLocation && (
-          <div>Events by Location: {JSON.stringify(eventsByLocation)}</div>
-        )}
-        {eventsByMonth && (
-          <div>Events by Month: {JSON.stringify(eventsByMonth)}</div>
-        )}
-        {eventsByDateRange && (
-          <div>Events by Date Range: {JSON.stringify(eventsByDateRange)}</div>
-        )}
-        {eventsByType && (
-          <div>Events by Type: {JSON.stringify(eventsByType)}</div>
-        )} */}
+      <div className="flex">
+        <div className="mt-4">
+          {events &&
+            events?.length > 0 &&
+            events.map((event) => <EventCard key={event._id} event={event} />)}
+
+          {eventsByMonth && (
+            <div>Events by Month: {JSON.stringify(eventsByMonth)}</div>
+          )}
+          {eventsByDateRange && (
+            <div>Events by Date Range: {JSON.stringify(eventsByDateRange)}</div>
+          )}
+          {eventsByType && (
+            <div>Events by Type: {JSON.stringify(eventsByType)}</div>
+          )}
+        </div>
       </div>
     </div>
   );

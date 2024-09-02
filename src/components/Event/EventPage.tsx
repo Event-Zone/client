@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import {
   useGetSubscriptionQuery,
   useGetUserQuery,
+  useSearchEventsByUserQuery,
 } from "@/store/features/api/apiSlice";
+import { useDispatch } from "react-redux";
+import { setSearchedEvents } from "@/store/features/eventSlice";
+import { useRouter } from "next/navigation";
 
 function EventPage({ data }: { data: any }) {
   // geting the organizer data
@@ -24,9 +28,9 @@ function EventPage({ data }: { data: any }) {
   const [subscritionData, setSubscriptionData] = useState<any>(null);
   useEffect(() => {
     if (subscriptionIsLoading) {
-      console.log("Loading events...");
+      console.log("Loading subs...");
     } else if (subscriptionError) {
-      console.error("Error fetching events:", subscriptionError);
+      console.error("Error fetching subs:", subscriptionError);
     } else if (fetchedSubscription) {
       console.log("Fetched subscription:", fetchedSubscription);
       setSubscriptionData(fetchedSubscription);
@@ -35,9 +39,12 @@ function EventPage({ data }: { data: any }) {
 
   useEffect(() => {
     if (fetchedOrganizerIsLoading) {
-      console.log("Loading events...");
+      console.log("Loading fetchedOrganizerIsLoading...");
     } else if (fetchedOrganizerError) {
-      console.error("Error fetching events:", fetchedOrganizerError);
+      console.error(
+        "Error fetching fetchedOrganizerError:",
+        fetchedOrganizerError
+      );
     } else if (fetchedOrganizer) {
       console.log(" fetchedOrganizer:", fetchedOrganizer);
     }
@@ -49,9 +56,23 @@ function EventPage({ data }: { data: any }) {
     setCurrentBar(index);
     setCurrentImage(index);
   };
-  useEffect(() => {
-    console.log(data);
-  }, []);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const {
+    data: events,
+    isError: eventsError,
+    isLoading: eventsLoading,
+    refetch: refetchEvents, // Access the refetch function
+  } = useSearchEventsByUserQuery(data?.organizerId as string, {
+    skip: !data?.organizerId,
+  });
+  const handleSearch = async () => {
+    if (events) {
+      dispatch(setSearchedEvents(events));
+      router.push(`/search`);
+    }
+  };
+
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col w-full px-4 md:px-20 lg:px-44  py-16">
@@ -155,37 +176,29 @@ function EventPage({ data }: { data: any }) {
             </button>
           </div>
         </div>
-        <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
-          <div className="flex items-center justify-between p-8">
-            <div className="flex flex-row">
-              <img
-                alt="organizerImg"
-                className="max-w-[50px] max-h-[50px] mr-2"
-                src={
-                  fetchedOrganizer?.orgPicture ||
-                  "https://via.placeholder.com/300"
-                }
-              />
-              <div className="text-gray-600">
-                <h3 className="poppins-medium">Organisateur</h3>
+        {fetchedOrganizer && (
+          <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
+            <div className="flex items-center justify-between p-8">
+              <div className="flex flex-row">
+                <div className="text-gray-600">
+                  <h3 className="poppins-medium">Organisateur</h3>
 
-                <p className="poppins-medium text-titles">
-                  {fetchedOrganizer?.orgName}
+                  <p className="poppins-medium text-titles">
+                    {fetchedSubscription?.company}
+                  </p>
+                </div>{" "}
+              </div>
+              <div
+                onClick={handleSearch}
+                className="flex justify-between items-center cursor-pointer bg-[#DAE6F4] rounded-md p-2"
+              >
+                <p className="text-mainBlue poppins-regular text-sm   ">
+                  Other Events Hosted
                 </p>
-              </div>{" "}
-            </div>
-            <div className="flex justify-between items-center cursor-pointer bg-[#DAE6F4] rounded-md p-2">
-              <img
-                alt="icon"
-                src="/icons/calendar-edit.png"
-                className="md:w-[23px] md:h-[23px] h-[14px] w-[14px]"
-              />
-              <p className="text-mainBlue poppins-regular text-sm   ">
-                Other Events Hosted
-              </p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         <div className="mt-4 poppins-semibold text-titles">
           <h3 className="text-2xl">Date et Horaires</h3>
           <div className="flex items-center mt-3">

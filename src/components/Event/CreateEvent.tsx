@@ -8,6 +8,7 @@ import { useAddEventMutation } from "@/store/features/api/apiSlice";
 import PostPublish from "./Postpublish";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/features/userSlice";
+import Progress from "../shared/Progress";
 
 function CreateEvent() {
   const [isNext1, setIsNext1] = useState(false);
@@ -180,6 +181,7 @@ function CreateEvent() {
           </div>
         )
       ) : null}
+      {addEventResult.status === "pending" && <Progress />}
     </div>
   );
 }

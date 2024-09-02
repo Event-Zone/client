@@ -26,6 +26,7 @@ function ImagesSection({
   const handleTerminerClick = () => {
     setIsEventImagesSubmitted(true);
   };
+
   useEffect(() => {
     console.log(videoUrl);
   }, [videoUrl]);
@@ -110,12 +111,16 @@ function ImagesSection({
       </div>
       {isEventImagesSubmitted ? (
         <div className="flex">
-          {eventImages.map((_, index) => (
+          {eventImages.map((_: any, index: number) => (
             <div
               key={index}
-              className={`progress-bar w-[50px] h-[10px] bg-gray-600 mr-2 rounded-md cursor-pointer`}
-              onClick={() => handleBarClick(index)} // Wrap the function call in an anonymous function
-            ></div>
+              className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
+              onClick={() => handleBarClick(index)}
+            >
+              {index === selectedImage && (
+                <div className=" w-full h-full rounded-md bg-gray-300  "></div>
+              )}
+            </div>
           ))}{" "}
         </div>
       ) : null}

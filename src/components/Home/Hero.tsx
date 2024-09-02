@@ -14,7 +14,7 @@ const Hero = () => {
     error: eventAddsError,
     isLoading: eventAddsIsLoading,
   } = useGetEventAddQuery(adds, {
-    skip: adds.length < 4,
+    skip: adds.length === 0,
   });
   const {
     data: fetchedAdds,
@@ -32,11 +32,12 @@ const Hero = () => {
       console.error("Error  fetchedAddsH:", addsError);
     } else if (fetchedAdds) {
       setAdds(
-        fetchedAdds.map((add: any, index: number) => {
-          return add.eventId;
-        })
+        fetchedAdds
+          .filter((ad: any) => ad.status === "running")
+          .map((add: any, index: number) => {
+            return add.eventId;
+          })
       );
-      console.log(" fetchedAdds:", fetchedAdds);
     }
   }, [fetchedAdds, addsError, addsIsLoading]);
   useEffect(() => {
@@ -50,19 +51,13 @@ const Hero = () => {
     }
   }, [fetchedEventAdds, eventAddsError, eventAddsIsLoading]);
 
-  const [images, setImages] = useState([
-    "/Event.png",
-    "/Event2.svg",
-    "/Event3.svg",
-    "/Event4.svg",
-  ]);
   const [currentImage, setCurrentImage] = useState(0);
   const [currentBar, setCurrentBar] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentBar((prev) => {
-        if (prev === images.length - 1) {
+        if (prev === adds.length - 1) {
           return 0;
         }
         return prev + 1;
@@ -73,7 +68,7 @@ const Hero = () => {
       });
     }, 3000); // Set interval to 3000 milliseconds (3 seconds)
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [adds.length]);
 
   const handleBarClick = (index: number) => {
     setCurrentBar(index);
@@ -89,7 +84,7 @@ const Hero = () => {
     >
       <div className="hero-overlay"></div>
       <div className=" z-30  mr-4">
-        {images.map((_, index) => (
+        {adds.map((_, index) => (
           <div
             key={index}
             className={`progress-bar w-[10px] h-[50px] bg-gray-300 mb-2 rounded-md cursor-pointer`}

@@ -1,0 +1,65 @@
+import React, { useEffect, useState } from "react";
+import { useGetSearchPageAddsQuery } from "@/store/features/api/apiSlice";
+import Progress from "../shared/Progress";
+function Ads() {
+  const { data, isLoading, error } = useGetSearchPageAddsQuery();
+  const [ads, setAds] = useState<any>([]);
+  useEffect(() => {
+    if (data) {
+      setAds(data.filter((ad: any) => ad.status === "running"));
+    }
+  }, [data]);
+
+  const [currentImage, setCurrentImage] = useState(0);
+  const [currentBar, setCurrentBar] = useState(0);
+  const handleBarClick = (index: number) => {
+    setCurrentBar(index);
+    setCurrentImage(index);
+  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBar((prev) => {
+        if (prev === ads?.length - 1) {
+          return 0;
+        }
+        return prev + 1;
+      });
+      setCurrentImage((prevImage) => {
+        if (prevImage === 3) return 0;
+        else return prevImage + 1;
+      });
+    }, 3000); // Set interval to 3000 milliseconds (3 seconds)
+    return () => clearInterval(interval);
+  }, [ads?.length]);
+  if (!ads) return null;
+  return (
+    <>
+      {ads?.length !== 0 && (
+        <div
+          className="relative  bg-cover bg-center  flex flex-row  items-center h-full w-full"
+          style={{
+            backgroundImage: `url(${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${ads[currentBar]?.picture})`,
+          }}
+        >
+          <div className="hero-overlay"></div>
+          <div className=" z-30  mr-4">
+            {ads.map((_: any, index: number) => (
+              <div
+                key={index}
+                className={`progress-bar w-[10px] h-[50px] bg-gray-300 mb-2 rounded-md cursor-pointer`}
+                onClick={() => handleBarClick(index)} // Wrap the function call in an anonymous function
+              >
+                {index <= currentBar && (
+                  <div className="fill-bar w-full h-full rounded-md bg-gray-700"></div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {isLoading && <Progress />}
+    </>
+  );
+}
+
+export default Ads;

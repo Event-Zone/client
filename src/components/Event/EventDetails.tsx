@@ -150,26 +150,13 @@ function EventDetails({
         <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
           <div className="flex items-center justify-between p-8">
             <div className="flex flex-row">
-              <img
-                alt="organizerImg"
-                className="max-w-[50px] max-h-[50px] mr-2"
-                src={user?.orgPicture || "https://via.placeholder.com/300"}
-              />
               <div className="text-gray-600">
                 <h3 className="poppins-medium">Organisateur</h3>
 
-                <p className="poppins-medium text-titles">{user?.orgName}</p>
+                <p className="poppins-medium text-titles">
+                  {fetchedSubscription?.company}
+                </p>
               </div>{" "}
-            </div>
-            <div className="flex justify-between items-center cursor-pointer bg-[#DAE6F4] rounded-md p-2">
-              <img
-                alt="icon"
-                src="/icons/calendar-edit.png"
-                className="md:w-[23px] md:h-[23px] h-[14px] w-[14px]"
-              />
-              <p className="text-mainBlue poppins-regular text-sm   ">
-                Other Events Hosted
-              </p>
             </div>
           </div>
         </div>

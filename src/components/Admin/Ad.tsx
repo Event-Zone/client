@@ -242,89 +242,177 @@ function Ad({
             </div>
 
             {showChoices && (
-              <div className="text-white absolute top-10 right-0 w-40 z-50 bg-[#001029] p-2 rounded-md shadow-md">
-                {(adds[index]?.status === "paused" ||
-                  adds[index]?.status === "ended") && (
-                  <div
-                    className="flex items-center justify-between py-1 px-2 cursor-pointer hover:bg-[#001022]"
-                    onClick={handleApprove}
-                  >
-                    <span>Run</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+              <>
+                {status === 0 ? (
+                  <div className="text-white absolute top-10 right-0 w-40 z-50 bg-[#001029] p-2 rounded-md shadow-md">
+                    {(adds[index]?.status === "paused" ||
+                      adds[index]?.status === "ended") && (
+                      <div
+                        className="flex items-center justify-between py-1 px-2 cursor-pointer hover:bg-[#001022]"
+                        onClick={handleApprove}
+                      >
+                        <span>Run</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                    {adds[index]?.status !== "ended" && (
+                      <div
+                        className="flex items-center justify-between py-1 px-2 cursor-pointer hover:bg-[#001022]"
+                        onClick={handleDecline}
+                      >
+                        <span>End Ad</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm10-10a1 1 0 00-1-1H7a1 1 0 100 2h6a1 1 0 000-2zm-7 9a1 1 0 011-1h5a1 1 0 110 2H9a1 1 0 01-1-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                    {adds[index]?.status === "running" && (
+                      <div
+                        className="flex items-center justify-between py-1 px-2 cursor-pointer hover:bg-[#001022]"
+                        onClick={handlePause}
+                      >
+                        <span>Pause Ad</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 9a1 1 0 000 2v4a1 1 0 11-2 0V9a1 1 0 012 0zm7-1a1 1 0 000 2v4a1 1 0 11-2 0V9a1 1 0 012 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                    {adds[index]?.status !== "ended" && (
+                      <div
+                        className="flex items-center justify-between py-1 px-2 cursor-pointer hover:bg-[#001022]"
+                        onClick={handleAddMonth}
+                      >
+                        <span>Add 1 Month</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H9V9h2v2h1zm-4-4a1 1 0 100 2v2H7V9h2v2H8zm2 4a1 1 0 100 2v2H9V9h2v2h1zm2-8a1 1 0 111 0v2h2V9h-2v2h-1zm4 0a1 1 0 111 0v2h2V9h-2v2h-1zM3 11a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm10-10a1 1 0 000 2v2h2V9h-2v2h-1zm-4-4a1 1 0 100 2v2H9V9h2v2h1zm-4-4a1 1 0 111 0v2H7V9h2v2H8zm2 4a1 1 0 100 2v2H9V9h2v2h1zm2-8a1 1 0 111 0v2h2V9h-2v2h-1zm4 0a1 1 0 111 0v2h2V9h-2v2h-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-white absolute top-10 right-0 w-40 z-50 bg-[#001029] p-2 rounded-md shadow-md">
+                    {(event?.status === "paused" ||
+                      event?.status === "ended") && (
+                      <div
+                        className="flex items-center justify-between py-1 px-2 cursor-pointer hover:bg-[#001022]"
+                        onClick={handleApprove}
+                      >
+                        <span>Run</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                    {event?.status !== "ended" && (
+                      <div
+                        className="flex items-center justify-between py-1 px-2 cursor-pointer hover:bg-[#001022]"
+                        onClick={handleDecline}
+                      >
+                        <span>End Ad</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm10-10a1 1 0 00-1-1H7a1 1 0 100 2h6a1 1 0 000-2zm-7 9a1 1 0 011-1h5a1 1 0 110 2H9a1 1 0 01-1-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                    {event?.status === "running" && (
+                      <div
+                        className="flex items-center justify-between py-1 px-2 cursor-pointer hover:bg-[#001022]"
+                        onClick={handlePause}
+                      >
+                        <span>Pause Ad</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 9a1 1 0 000 2v4a1 1 0 11-2 0V9a1 1 0 012 0zm7-1a1 1 0 000 2v4a1 1 0 11-2 0V9a1 1 0 012 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                    {event?.status !== "ended" && (
+                      <div
+                        className="flex items-center justify-between py-1 px-2 cursor-pointer hover:bg-[#001022]"
+                        onClick={handleAddMonth}
+                      >
+                        <span>Add 1 Month</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H9V9h2v2h1zm-4-4a1 1 0 100 2v2H7V9h2v2H8zm2 4a1 1 0 100 2v2H9V9h2v2h1zm2-8a1 1 0 111 0v2h2V9h-2v2h-1zm4 0a1 1 0 111 0v2h2V9h-2v2h-1zM3 11a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm10-10a1 1 0 000 2v2h2V9h-2v2h-1zm-4-4a1 1 0 100 2v2H9V9h2v2h1zm-4-4a1 1 0 111 0v2H7V9h2v2H8zm2 4a1 1 0 100 2v2H9V9h2v2h1zm2-8a1 1 0 111 0v2h2V9h-2v2h-1zm4 0a1 1 0 111 0v2h2V9h-2v2h-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
                   </div>
                 )}
-                {adds[index]?.status !== "ended" && (
-                  <div
-                    className="flex items-center justify-between py-1 px-2 cursor-pointer hover:bg-[#001022]"
-                    onClick={handleDecline}
-                  >
-                    <span>End Ad</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm10-10a1 1 0 00-1-1H7a1 1 0 100 2h6a1 1 0 000-2zm-7 9a1 1 0 011-1h5a1 1 0 110 2H9a1 1 0 01-1-1z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                )}
-                {adds[index]?.status === "running" && (
-                  <div
-                    className="flex items-center justify-between py-1 px-2 cursor-pointer hover:bg-[#001022]"
-                    onClick={handlePause}
-                  >
-                    <span>Pause Ad</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 9a1 1 0 000 2v4a1 1 0 11-2 0V9a1 1 0 012 0zm7-1a1 1 0 000 2v4a1 1 0 11-2 0V9a1 1 0 012 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                )}
-                {adds[index]?.status !== "ended" && (
-                  <div
-                    className="flex items-center justify-between py-1 px-2 cursor-pointer hover:bg-[#001022]"
-                    onClick={handleAddMonth}
-                  >
-                    <span>Add 1 Month</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H9V9h2v2h1zm-4-4a1 1 0 100 2v2H7V9h2v2H8zm2 4a1 1 0 100 2v2H9V9h2v2h1zm2-8a1 1 0 111 0v2h2V9h-2v2h-1zm4 0a1 1 0 111 0v2h2V9h-2v2h-1zM3 11a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm10-10a1 1 0 000 2v2h2V9h-2v2h-1zm-4-4a1 1 0 100 2v2H9V9h2v2h1zm-4-4a1 1 0 111 0v2H7V9h2v2H8zm2 4a1 1 0 100 2v2H9V9h2v2h1zm2-8a1 1 0 111 0v2h2V9h-2v2h-1zm4 0a1 1 0 111 0v2h2V9h-2v2h-1z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                )}
-              </div>
+              </>
             )}
           </div>
         </div>

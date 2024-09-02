@@ -1,8 +1,15 @@
-import { useGetSubscriptionQuery } from "@/store/features/api/apiSlice";
+import {
+  useGetSubscriptionQuery,
+  useGetUserQuery,
+  useSearchEventsByUserQuery,
+} from "@/store/features/api/apiSlice";
 import { selectUser } from "@/store/features/userSlice";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useUpdateEventMutation } from "@/store/features/api/apiSlice";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setSearchedEvents } from "@/store/features/eventSlice";
 function EventDetails({
   firstFormData,
   secondFormData,
@@ -10,6 +17,7 @@ function EventDetails({
   firstFormData: any;
   secondFormData: any;
 }) {
+  const router = useRouter();
   const getImageUrl = (image: File | string) => {
     if (image instanceof File) {
       return URL.createObjectURL(image);
@@ -17,6 +25,7 @@ function EventDetails({
     return `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${image}`;
   };
   const user = useSelector(selectUser);
+
   const [subscriptionData, setSubscriptionData] = useState<any>(null);
   const {
     data: fetchedSubscription,
@@ -156,26 +165,13 @@ function EventDetails({
         <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
           <div className="flex items-center justify-between p-8">
             <div className="flex flex-row">
-              <img
-                alt="organizerImg"
-                className="max-w-[50px] max-h-[50px] mr-2"
-                src={user?.orgPicture || "https://via.placeholder.com/300"}
-              />
               <div className="text-gray-600">
                 <h3 className="poppins-medium">Organisateur</h3>
 
-                <p className="poppins-medium text-titles">{user?.orgName}</p>
+                <p className="poppins-medium text-titles">
+                  {fetchedSubscription?.company}
+                </p>
               </div>{" "}
-            </div>
-            <div className="flex justify-between items-center cursor-pointer bg-[#DAE6F4] rounded-md p-2">
-              <img
-                alt="icon"
-                src="/icons/calendar-edit.png"
-                className="md:w-[23px] md:h-[23px] h-[14px] w-[14px]"
-              />
-              <p className="text-mainBlue poppins-regular text-sm   ">
-                Other Events Hosted
-              </p>
             </div>
           </div>
         </div>

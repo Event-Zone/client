@@ -112,6 +112,27 @@ function Navbar() {
   const handleStateClick = (e: any) => {
     setStateName(e.target.value);
   };
+  const [canAdd, setCanAdd] = useState(false);
+  useEffect(() => {
+    switch (fetchedSubscription?.pack) {
+      case "Business":
+        setCanAdd(false);
+        break;
+      case "Starter":
+        console.log("Starter");
+        if (user?.eventsIds?.length >= 1) {
+          setCanAdd(true);
+        } else setCanAdd(false);
+
+        break;
+      case "Student":
+        if (user?.eventsIds?.length >= 5) {
+          setCanAdd(true);
+        } else setCanAdd(false);
+
+        break;
+    }
+  }, [user, fetchedSubscription]);
   return (
     // check The responsiveness bug
     <div
@@ -207,15 +228,18 @@ function Navbar() {
       ) : (
         <div className="flex items-center flex-row">
           <button
-            onClick={() =>
-              router.replace(
-                `${
-                  fetchedSubscription?.pack
-                    ? `/events/create/${fetchedSubscription?.pack}`
-                    : "/tarification"
-                }`
-              )
-            }
+            onClick={() => {
+              if (canAdd) {
+                router.replace(`/profile/${user?._id}`);
+              } else
+                router.replace(
+                  `${
+                    fetchedSubscription?.pack
+                      ? `/events/create/${fetchedSubscription?.pack}`
+                      : "/tarification"
+                  }`
+                );
+            }}
             className=" mx-4 text-gray-500 poppins-medium text-center "
           >
             + Ajouter Evenement

@@ -35,7 +35,7 @@ function Users() {
     console.log("subss", fetchedSubscriptions);
   }, [fetchedSubscriptions]);
   useEffect(() => {
-    console.log("fetchedUsers", fetchedUsers);
+    console.log("fetchedUsers///////", fetchedUsers);
   }, [fetchedUsers]);
   const [mergedData, setMergedData] = useState<any>();
   useEffect(() => {
@@ -57,6 +57,7 @@ function Users() {
             ...user,
             userId: user._id,
             ...subscription,
+            eventsIds: user.eventsIds,
           };
         });
       setMergedData(mmdata);
@@ -86,7 +87,11 @@ function Users() {
               console.log(user);
               return user?.suspended === true;
             })
-            .map((user: any) => ({ ...user, userId: user._id }))
+            .map((user: any) => ({
+              ...user,
+              userId: user._id,
+              eventsIds: user.eventsIds,
+            }))
         );
         break;
       case "Visitors":
@@ -99,7 +104,11 @@ function Users() {
               console.log(user);
               return !user?.subscription;
             })
-            .map((user: any) => ({ ...user, userId: user._id }))
+            .map((user: any) => ({
+              ...user,
+              userId: user._id,
+              eventsIds: user.eventsIds,
+            }))
         );
         break;
 

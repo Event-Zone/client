@@ -4,7 +4,7 @@ import { RootState } from "@/store/store"; // Adjust the import path as necessar
 import { useEffect } from "react";
 import { selectToken } from "@/store/features/userSlice";
 
-const withAuth = (WrappedComponent: React.ComponentType) => {
+const withAuth = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
     const router = useRouter();
     const token = useSelector(selectToken);

@@ -8,7 +8,7 @@ import Message from "../shared/Message";
 
 function User({ user, setSelected }: { user: any; setSelected: Function }) {
   const [isChecked, setIsChecked] = useState(false);
-
+  console.log(user);
   const toggleCheckbox = () => {
     setIsChecked(!isChecked);
     if (isChecked) {

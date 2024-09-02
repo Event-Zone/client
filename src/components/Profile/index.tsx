@@ -122,6 +122,7 @@ const Profile = () => {
       setSubscriptionInputForm((prevForm) => ({ ...prevForm, [name]: value }));
     }
   };
+  const [eventsData, setEventsData] = useState([]);
   const {
     data: events,
     isError: eventsError,
@@ -134,6 +135,8 @@ const Profile = () => {
       console.error("Failed to fetch events data", eventsError);
     } else if (eventsLoading) {
       console.log("Loading events data...");
+    } else if (events) {
+      setEventsData(events.filter((event: any) => event.status === "approved"));
     }
   }, [events, eventsError, eventsLoading]);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -237,8 +240,8 @@ const Profile = () => {
     }
   }, [showMyEvents]);
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
+    <div className="min-h-screen bg-gray-100 flex flex-col  py-10">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full ">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-semibold">Bienvenue</h1>
@@ -317,6 +320,43 @@ const Profile = () => {
               <div className="flex-grow">
                 <h3 className="text-xl font-bold">Coordonnées</h3>
               </div>
+              {fetchedSubscription && (
+                <div
+                  onClick={() => router.replace("/changeSubscription")}
+                  className="flex justify-center items-center poppins-medium cursor-pointer"
+                >
+                  {fetchedSubscription.pack}{" "}
+                  <div>
+                    <img
+                      alt={fetchedSubscription._id}
+                      src={
+                        fetchedSubscription.pack === "Business"
+                          ? "/icons/businessIcon.png"
+                          : fetchedSubscription.pack === "Starter"
+                          ? "/icons/starterIcon.png"
+                          : "/icons/studentIcon.png"
+                      }
+                    />
+
+                    {userData && userData.eventsIds && (
+                      <>
+                        {userData.eventsIds.length > 0 &&
+                          fetchedSubscription.pack === "Starter" && (
+                            <p className="poppins-regular text-gray-600">
+                              Upgrade to the Business pack to add a new event
+                            </p>
+                          )}
+                        {userData.eventsIds.length > 4 &&
+                          fetchedSubscription.pack === "Student" && (
+                            <p className="poppins-regular text-gray-600">
+                              Upgrade to the Business pack to add a new event
+                            </p>
+                          )}
+                      </>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -439,13 +479,15 @@ const Profile = () => {
             </div>
           </>
         ) : (
-          <>
-            {events?.length > 0 ? (
-              events.map((event: any) => <EventCard event={event} />)
+          <div className="flex flex-wrap">
+            {eventsData?.length > 0 ? (
+              eventsData.map((event: any) => (
+                <EventCard refetchEvents={refetchEvents} event={event} />
+              ))
             ) : (
               <p>Aucun événement trouvé.</p>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>
