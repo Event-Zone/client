@@ -21,7 +21,7 @@ function Home() {
     error,
     isLoading,
     refetch,
-  } = useGetEventsQuery();
+  } = useGetEventsQuery("approved");
 
   useEffect(() => {
     if (isLoading) {

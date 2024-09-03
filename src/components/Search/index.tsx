@@ -16,6 +16,7 @@ import EventCard from "./EventCard";
 import Calendar from "../shared/Calendar";
 import {
   selectInitialEvents,
+  selectSearchedEvents,
   setSearchedEvents,
 } from "@/store/features/eventSlice";
 import { useDispatch } from "react-redux";
@@ -25,6 +26,8 @@ import Ads from "./Ads";
 
 function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   const allEvents = useSelector(selectInitialEvents);
+  const seachedEvents = useSelector(selectSearchedEvents);
+
   const [seelctedLocations, setSelectedLocations] = useState<string[] | null>(
     []
   );
@@ -45,10 +48,19 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
   const [events, setEvents] = useState<any[] | null>([]);
   useEffect(() => {
-    setEvents(initEvents);
+    if (!seachedEvents || seachedEvents?.length === 0) setEvents(initEvents);
   }, [initEvents]);
   useEffect(() => {
-    setEvents(allEvents);
+    setEvents(seachedEvents);
+  }, [seachedEvents]);
+  useEffect(() => {
+    if (
+      !seachedEvents ||
+      seachedEvents?.length === 0 ||
+      !initEvents ||
+      initEvents?.length === 0
+    )
+      setEvents(allEvents);
   }, [allEvents]);
 
   const [adds, setAdds] = useState<any[] | null>([]);
@@ -592,9 +604,11 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
       {/* Display Results */}
       <div className="flex">
         <div className="mt-4">
-          {events &&
-            events?.length > 0 &&
-            events.map((event) => <EventCard key={event._id} event={event} />)}
+          {events && events?.length > 0 ? (
+            events.map((event) => <EventCard key={event._id} event={event} />)
+          ) : (
+            <p className="poppins-medium">no events</p>
+          )}
 
           {eventsByMonth && (
             <div>Events by Month: {JSON.stringify(eventsByMonth)}</div>

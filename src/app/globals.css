@@ -239,3 +239,7 @@
 .bg-green-500 {
   background-color: #48bb78;
 }
+.element-with-scrollbar::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
