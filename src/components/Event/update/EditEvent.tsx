@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import EventForm from "./UEventForm";
 import ImagesForm from "./ImagesForm";
 import EventDetails from "./EventDetails";
-import PostPublish from "./Postpublish";
+import PostPublish from "./PostPublish";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/features/userSlice";
 import { useUpdateEventMutation } from "@/store/features/api/apiSlice";
 import { combineReducers } from "@reduxjs/toolkit";
+import { useRouter } from "next/navigation";
 function EditEvent({ event }: { event: any }) {
   const [isNext1, setIsNext1] = useState(false);
   const [isNext2, setIsNext2] = useState(false);
@@ -58,7 +59,7 @@ function EditEvent({ event }: { event: any }) {
     Categorie,
   });
   const [secondFormData, setSecondFormData] = useState(new FormData());
-
+  const router = useRouter();
   const handlePublier = async () => {
     console.log("Publier");
     const combinedFormData = new FormData();
@@ -95,7 +96,7 @@ function EditEvent({ event }: { event: any }) {
     // Append the event ID
     combinedFormData.append("_id", event._id);
     combinedFormData.forEach((value, key) => {
-      console.log(`${key}: ${value}`);
+      console.log(`LLL${key}: ${value}`);
     }); // Call the mutation
     await updateEvent(combinedFormData);
   };
@@ -104,6 +105,8 @@ function EditEvent({ event }: { event: any }) {
     if (updateEventResult.status === "fulfilled") {
       // setPage(3);
       console.log("Event updated successfully");
+      alert("Event updated successfully");
+      router.replace("/");
     } else if (updateEventResult.status === "rejected") {
       console.log(updateEventResult.error);
     } else if (updateEventResult.status === "pending") {

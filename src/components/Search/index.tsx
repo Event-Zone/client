@@ -28,10 +28,6 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   const allEvents = useSelector(selectInitialEvents);
   const seachedEvents = useSelector(selectSearchedEvents);
 
-  const [seelctedLocations, setSelectedLocations] = useState<string[] | null>(
-    []
-  );
-
   const dispatch = useDispatch();
   const [isTypeSelectorVisible, setTypeSelectorVisible] = useState(false);
   const [isCategorieSelectorVisible, setCategorieSelectorVisible] =
@@ -322,13 +318,13 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
           {/* Trigger for the date picker dialog */}
           <div
             onClick={toggleDialog}
-            className="p-3 cursor-pointer md:mr-3 poppins-regular px-2 bg-gray-200 text-gray-500 focus:outline-none rounded-3xl mb-2 md:mb-0 md:w-auto w-full"
+            className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
           >
             N'import quand
           </div>
           <div
             onClick={() => setIsLocationSelectorVisible(true)}
-            className="p-3 cursor-pointer md:mr-3 poppins-regular px-2 bg-gray-200 text-gray-500 focus:outline-none rounded-3xl mb-2 md:mb-0 md:w-auto w-full"
+            className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
           >
             N'import ou
           </div>

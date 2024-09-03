@@ -91,7 +91,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
       </div>
 
       {/* Horizontal scrollable events list */}
-      <div className="flex space-x-4 overflow-x-auto items-center justify-start w-full py-4 scrollbar-hide">
+      <div className="flex-col md:flex-row md:flex md:space-x-4 overflow-x-auto md:pl-0 pl-10 items-center justify-center w-full py-4 scrollbar-hide">
         {events.length !== 0 ? (
           events.map((event, index) => (
             <div

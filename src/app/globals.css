@@ -32,8 +32,11 @@
   animation: fill 3s linear forwards;
 }
 
-
-
+.fill-bar-horizontal {
+  @apply bg-mainBlue;
+  animation: fill 3s linear forwards;
+  
+}
 
 
 .poppins-thin {

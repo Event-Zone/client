@@ -1,6 +1,7 @@
 interface IEvent {
     createdAt?: any;
     _id?: any;
+    link: any;
     location: any;
     eventName: string;
     eventAcronym: string;

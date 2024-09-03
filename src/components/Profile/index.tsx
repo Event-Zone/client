@@ -16,11 +16,13 @@ import {
   updateUserData,
 } from "@/store/features/userSlice";
 import EventCard from "./EventCard";
+import ContactSection from "./ContactSection";
 
 const Profile = () => {
-  const [showMyEvents, setShowMyEvents] = useState(false);
+  const [page, setPage] = useState<number>(3);
 
   const authedUser = useSelector(selectUser);
+
   const dispatch = useDispatch();
   interface IUserForm {
     email?: string;
@@ -136,7 +138,7 @@ const Profile = () => {
     } else if (eventsLoading) {
       console.log("Loading events data...");
     } else if (events) {
-      setEventsData(events.filter((event: any) => event.status === "approved"));
+      setEventsData(events);
     }
   }, [events, eventsError, eventsLoading]);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -235,56 +237,75 @@ const Profile = () => {
     console.log(userInputForm, subscriptionInputForm);
   }, [userInputForm]);
   useEffect(() => {
-    if (showMyEvents) {
+    if (page === 1) {
       refetchEvents();
     }
-  }, [showMyEvents]);
+  }, [page]);
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col  py-10">
       <div className="bg-white p-8 rounded-lg shadow-md w-full ">
-        <div className="flex items-center justify-between">
+        <div className="flex md:flex-row flex-col items-center justify-between">
           <div>
             <h1 className="text-xl font-semibold">Bienvenue</h1>
             <h2 className="text-2xl font-bold text-gray-800">
               {user?.fullname}
             </h2>
           </div>
-          <nav className="flex space-x-8 text-blue-600">
+          <nav className="flex flex-wrap md:space-x-8  text-blue-600">
             <a
-              onClick={() => setShowMyEvents(false)}
+              onClick={() => setPage(0)}
               href="#"
-              className="font-semibold"
+              className={`font-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl ${
+                page === 0 && "bg-gray-300"
+              }`}
             >
               Mon Compte
             </a>
             <a
-              onClick={() => setShowMyEvents(false)}
+              onClick={() => {
+                setPage(2);
+              }}
               href="#"
-              className="font-semibold"
+              className={`font-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl ${
+                page === 2 && "bg-gray-300"
+              }`}
             >
               Support
             </a>
             <a
               href="#"
-              onClick={() => setShowMyEvents(!showMyEvents)}
-              className="font-semibold"
+              onClick={() => setPage(3)}
+              className={`font-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl ${
+                page === 3 && "bg-gray-300"
+              }`}
             >
               Mes Evenement
             </a>
-            <a href="/auth/login" className="font-semibold">
+            {user?.isAdmin && (
+              <a
+                href="/admin"
+                className={`font-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl`}
+              >
+                Admin
+              </a>
+            )}
+            <a
+              href="/auth/login"
+              className={`font-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl `}
+            >
               Déconnexion
             </a>
           </nav>
         </div>
 
-        {!showMyEvents ? (
+        {page === 0 ? (
           <>
             {" "}
             <div className="mt-8 flex items-center space-x-6">
               <div className="relative">
                 <div>
                   <img
-                    className="w-32 h-32 rounded-full object-cover"
+                    className="md:w-32 md:h-32 h-[60px] w-[60px] rounded-full object-cover"
                     src={
                       userInputForm.profilePicture instanceof File
                         ? URL.createObjectURL(userInputForm.profilePicture)
@@ -300,25 +321,11 @@ const Profile = () => {
                     onChange={handleFileChange}
                   />
                 </div>
-                <button className="absolute bottom-0 right-0 bg-blue-600 text-white rounded-full p-2">
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M15.232 5.232a3 3 0 011.768 1.768m-1.768-1.768L19 9m0 0l-4.768 4.768a2 2 0 11-2.828-2.828L16 6.999M5 11V7a2 2 0 012-2h4m-1 10h10m2 0a2 2 0 00-2-2h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2v-4z"
-                    ></path>
-                  </svg>
-                </button>
               </div>
               <div className="flex-grow">
-                <h3 className="text-xl font-bold">Coordonnées</h3>
+                <h3 className="md:text-xl hidden md:block font-bold">
+                  Coordonnées
+                </h3>
               </div>
               {fetchedSubscription && (
                 <div
@@ -328,6 +335,7 @@ const Profile = () => {
                   {fetchedSubscription.pack}{" "}
                   <div>
                     <img
+                      className="min-w-[40px] min-h-[40px]"
                       alt={fetchedSubscription._id}
                       src={
                         fetchedSubscription.pack === "Business"
@@ -478,7 +486,7 @@ const Profile = () => {
               </button>
             </div>
           </>
-        ) : (
+        ) : page === 3 ? (
           <div className="flex flex-wrap">
             {eventsData?.length > 0 ? (
               eventsData.map((event: any) => (
@@ -488,6 +496,8 @@ const Profile = () => {
               <p>Aucun événement trouvé.</p>
             )}
           </div>
+        ) : (
+          <ContactSection />
         )}
       </div>
     </div>

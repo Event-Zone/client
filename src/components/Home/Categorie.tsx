@@ -10,7 +10,7 @@ function Categorie() {
           Les Catégories les plus Populaires
         </h2>
       </div>
-      <div className="flex flex-row justify-around items-center w-full overflow-x-scroll">
+      <div className="flex flex-row justify-around items-center w-full element-with-scrollbar overflow-x-scroll">
         <div
           className="flex flex-col items-center px-4"
           onClick={() => router.replace("/search/business")}

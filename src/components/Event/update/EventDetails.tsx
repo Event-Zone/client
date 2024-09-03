@@ -6,7 +6,6 @@ import {
 import { selectUser } from "@/store/features/userSlice";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useUpdateEventMutation } from "@/store/features/api/apiSlice";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setSearchedEvents } from "@/store/features/eventSlice";

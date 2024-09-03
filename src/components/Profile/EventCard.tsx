@@ -32,7 +32,7 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
 
   const router = useRouter();
   return (
-    <div className="relative border border-purple-300 rounded-lg shadow-lg overflow-hidden max-w-[250px] max-h-fit">
+    <div className="relative border border-purple-300 rounded-lg shadow-lg overflow-hidden max-w-[250px] max-h-[250px]">
       {/* Status Badge */}
       <div className="absolute top-2 left-2 bg-green-500 text-white px-3 py-1 rounded-full">
         {event.status}
@@ -42,7 +42,7 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
       <img
         src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event?.eventImages[0]}`}
         alt={event.eventName}
-        className="w-full  object-cover"
+        className="w-full h-1/3  object-cover"
       />
 
       {/* Content */}
@@ -59,11 +59,11 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
             month: "short",
             year: "numeric",
           })}{" "}
-          at{" "}
-          {event.location &&
-            (event.location.address.commercial
+          {event.location
+            ? event.location.address.commercial
               ? event.location.address.commercial
-              : event.location.address.state)}
+              : event.location.address.state
+            : event?.link && <>Online</>}
         </p>
         <p
           className={`text-sm mt-2 ${
