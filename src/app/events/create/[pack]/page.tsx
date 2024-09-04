@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import Tarification from "@/components/Tarification";
 import Validation from "@/components/Subscription/Validation";
 
-function page() {
+function Page() {
   const user = useSelector(selectUser);
   const { pack } = useParams();
   const {
@@ -56,4 +56,4 @@ function page() {
   }
 }
 
-export default withAuth(page);
+export default withAuth(Page);

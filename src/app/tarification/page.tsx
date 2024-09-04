@@ -1,8 +1,8 @@
-import Tarification from "@/components/Tarification";
+import TarificationComponenet from "@/components/Tarification";
 import React from "react";
 
-function tarification() {
-  return <Tarification />;
+function Tarification() {
+  return <TarificationComponenet />;
 }
 
-export default tarification;
+export default Tarification;

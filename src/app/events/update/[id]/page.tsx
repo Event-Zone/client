@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { useGetEventQuery } from "@/store/features/api/apiSlice";
 import EditEvent from "@/components/Event/update/EditEvent";
 import Progress from "@/components/shared/Progress";
-function page() {
+function Page() {
   const { id } = useParams();
   const {
     data: fetchedEvent,
@@ -31,4 +31,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

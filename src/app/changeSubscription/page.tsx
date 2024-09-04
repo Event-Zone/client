@@ -1,12 +1,12 @@
-import ChangeSubscription from "@/components/Tarification/ChangeSubscription";
+import ChangeSubscriptionComponent from "@/components/Tarification/ChangeSubscription";
 import React from "react";
 
-function changeSubscription() {
+function ChangeSubscription() {
   return (
     <div>
-      <ChangeSubscription />
+      <ChangeSubscriptionComponent />
     </div>
   );
 }
 
-export default changeSubscription;
+export default ChangeSubscription;

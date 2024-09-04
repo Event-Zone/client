@@ -116,7 +116,9 @@ function Admin() {
             }`}
           >
             <img src="/icons/category.png" alt="icon" className="mr-3" />
-            <p className="poppins-medium text-blewishGrey">Dashboard</p>
+            <p className="poppins-medium text-blewishGrey hidden md:block">
+              Dashboard
+            </p>
           </div>
           <div
             onClick={() => setPage(1)}
@@ -125,7 +127,9 @@ function Admin() {
             }`}
           >
             <img src="/icons/document-normal.png" alt="icon" className="mr-3" />
-            <p className="poppins-medium text-blewishGrey">Events</p>
+            <p className="poppins-medium text-blewishGrey hidden md:block">
+              Events
+            </p>
           </div>
           <div
             onClick={() => setPage(2)}
@@ -134,7 +138,9 @@ function Admin() {
             }`}
           >
             <img src="/icons/video-octagon.png" alt="icon" className="mr-3" />
-            <p className="poppins-medium text-blewishGrey">Media & Ads</p>
+            <p className="poppins-medium text-blewishGrey hidden md:block">
+              Media & Ads
+            </p>
           </div>
           <div
             onClick={() => setPage(3)}
@@ -143,7 +149,9 @@ function Admin() {
             }`}
           >
             <img src="/icons/profile-2user.png" alt="icon" className="mr-3" />
-            <p className="poppins-medium text-blewishGrey">Users Management</p>
+            <p className="poppins-medium text-blewishGrey hidden md:block">
+              Users Management
+            </p>
           </div>
         </div>
       </div>

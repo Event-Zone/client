@@ -23,9 +23,9 @@ function Events() {
     }
   }, [eventsError]);
   return (
-    <div className="bg-[#1A202C] p-6 rounded-lg h-[400px] ">
+    <div className="bg-[#1A202C] md:p-6 rounded-lg h-[400px] max-w-[full] overflow-scroll">
       {/* Tabs */}
-      <div className="flex space-x-8 text-white text-lg mb-4">
+      <div className="flex md:space-x-8 text-white text-lg mb-4">
         <button
           onClick={() => setStatus("pending")}
           className={` border-blue-500 ${status === "pending" && "border-b-4"}`}
@@ -56,7 +56,7 @@ function Events() {
         </button>
       </div>
       {/* Events Header */}
-      <div className="grid grid-cols-6 text-[#94A3B8] py-3 border-b border-[#364153]">
+      <div className="grid grid-cols-6 w-full overflow-scroll text-[#94A3B8] py-3 border-b border-[#364153]">
         <div className="col-span-2">Events ({events?.length})</div>
         <div>Company</div>
         <div>Publish Date ⇵</div>

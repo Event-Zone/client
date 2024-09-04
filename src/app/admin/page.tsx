@@ -1,10 +1,10 @@
 "use client";
-import Admin from "@/components/Admin";
+import AdminComponent from "@/components/Admin";
 import withAuthAdmin from "@/components/shared/WithAuthAdmin";
 import React from "react";
 
-function admin() {
-  return <Admin />;
+function Admin() {
+  return <AdminComponent />;
 }
 
-export default withAuthAdmin(admin);
+export default withAuthAdmin(Admin);

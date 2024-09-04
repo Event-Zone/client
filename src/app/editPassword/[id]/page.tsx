@@ -4,9 +4,9 @@ import React from "react";
 import { useUpdateUserPasswordMutation } from "@/store/features/api/apiSlice";
 import EditPassword from "@/components/EditPassword";
 
-function editPassword() {
+function Page() {
   const { id } = useParams();
   return <EditPassword id={id as string} />;
 }
 
-export default editPassword;
+export default Page;

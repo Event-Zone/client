@@ -3,7 +3,7 @@ import EventPage from "@/components/Event/EventPage";
 import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useGetEventQuery } from "@/store/features/api/apiSlice";
-function page() {
+function Page() {
   const { id } = useParams();
   const {
     data: fetchedEvent,
@@ -30,4 +30,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

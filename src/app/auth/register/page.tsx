@@ -1,8 +1,8 @@
 import Register from "@/components/Auth/Register";
 import React from "react";
 
-function page() {
+function Page() {
   return <Register />;
 }
 
-export default page;
+export default Page;

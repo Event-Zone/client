@@ -32,9 +32,17 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
 
   const router = useRouter();
   return (
-    <div className="relative border border-purple-300 rounded-lg shadow-lg overflow-hidden max-w-[250px] max-h-[250px]">
+    <div className="relative border mr-2 mb-2 border-purple-300 rounded-lg shadow-lg overflow-hidden max-w-[250px] max-h-[200px]">
       {/* Status Badge */}
-      <div className="absolute top-2 left-2 bg-green-500 text-white px-3 py-1 rounded-full">
+      <div
+        className={`absolute top-2 left-2  text-white px-3 py-1 rounded-full ${
+          event.status === "approved"
+            ? "bg-green-500"
+            : event.status === "rejected"
+            ? "bg-red-500"
+            : "bg-yellow-500"
+        }`}
+      >
         {event.status}
       </div>
 
@@ -47,7 +55,7 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
 
       {/* Content */}
       <div className="p-4">
-        <h2 className="text-lg font-semibold">{event.eventName}</h2>
+        <h2 className="text-sm font-semibold">{event.eventName}</h2>
         <p className="text-sm text-gray-500 ">
           {new Date(event.startdate).toLocaleDateString("fr-FR", {
             day: "2-digit",

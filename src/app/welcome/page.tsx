@@ -1,9 +1,9 @@
 import Register from "@/components/Auth/Register";
-import Welcome from "@/components/Welcome";
+import WelcomeComponent from "@/components/Welcome";
 import React from "react";
 
-function welcome() {
-  return <Welcome />;
+function Welcome() {
+  return <WelcomeComponent />;
 }
 
-export default welcome;
+export default Welcome;

@@ -156,8 +156,6 @@ const Profile = () => {
     const subscriptionFormData = new FormData();
 
     if (originalUserForm) {
-      console.error("Original form data is not available");
-
       Object.entries(userInputForm).forEach(([key, value]) => {
         if (value !== originalUserForm[key as keyof IUserForm]) {
           console.log(key);
@@ -198,7 +196,9 @@ const Profile = () => {
           formData: subscriptionFormData,
         });
       }
-
+      userFormData.forEach((value, key) => {
+        console.log(`Key: ${key}, Value: ${value}`);
+      });
       alert("Profile updated successfully!");
     } catch (error) {
       console.error("Error updating profile:", error);

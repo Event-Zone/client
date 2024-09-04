@@ -5,7 +5,7 @@ import { selectSearchedEvents } from "@/store/features/eventSlice";
 import React from "react";
 import { useSelector } from "react-redux";
 
-function page() {
+function Page() {
   const initEvents = useSelector(selectSearchedEvents);
   return (
     <div className="flex md:flex-row  flex-col-reverse h-screen overflow-scroll">
@@ -19,4 +19,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

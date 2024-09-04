@@ -1,8 +1,8 @@
-import Explore from "@/components/Explore";
+import ExploreComponent from "@/components/Explore";
 import React from "react";
 
-function explore() {
-  return <Explore />;
+function Explore() {
+  return <ExploreComponent />;
 }
 
-export default explore;
+export default Explore;

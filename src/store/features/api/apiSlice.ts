@@ -1,9 +1,23 @@
 // src/features/apiSlice.ts
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { selectToken } from '../userSlice';
+import { RootState } from '@/store/store';
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.NEXT_PUBLIC_SERVER_URL,
+        prepareHeaders: (headers, { getState }) => {
+            const state = getState() as RootState; // Explicitly type the getState function
+
+            const token = selectToken(state); // Get the token from the Redux store
+            console.log(token);
+            if (token) {
+                headers.set('jwt', token);
+            }
+            return headers;
+        },
+        credentials: 'include'
+
     }),
 
     endpoints: (builder) => ({
@@ -174,11 +188,14 @@ export const apiSlice = createApi({
             })
         }),
         updateUser: builder.mutation<any, { _id: string, formData: FormData }>({
-            query: (data) => ({
-                url: `auth/${data._id}`,
-                method: 'PUT',
-                body: data.formData
-            })
+            query: (data) => {
+                console.log("apiSlice", data.formData.get("fullname"))
+                return ({
+                    url: `auth/${data._id}`,
+                    method: 'PUT',
+                    body: data.formData
+                })
+            }
         }),
         deleteUser: builder.mutation<any, string>({
             query: (selected) => ({
