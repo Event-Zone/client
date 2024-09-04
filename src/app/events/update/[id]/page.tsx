@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { useGetEventQuery } from "@/store/features/api/apiSlice";
 import EditEvent from "@/components/Event/update/EditEvent";
 import Progress from "@/components/shared/Progress";
+import withAuth from "@/components/shared/WithAuth";
 function Page() {
   const { id } = useParams();
   const {
@@ -31,4 +32,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default withAuth(Page);

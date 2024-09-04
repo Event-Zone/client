@@ -50,7 +50,6 @@ function Tarification() {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      {isLoading && <Progress />} {/* Conditionally render the spinner */}
       {message && <Message message={message} />}{" "}
       {/* Conditionally render the message dialog */}
       <h3 className="text-mainBlue font-extrabold font-poppins text-xl">
@@ -99,6 +98,7 @@ function Tarification() {
         </button>
       </div>
       <Questions />
+      {isLoading && <Progress />} {/* Conditionally render the spinner */}
     </div>
   );
 }

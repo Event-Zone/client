@@ -17,6 +17,7 @@ const withAuth = (WrappedComponent: any) => {
     }, [token]);
 
     if (!token) {
+      console.log("Redirecting to login page due to expired token"); // Log or display a
       return null; // Render nothing or a loading spinner while redirecting
     }
 

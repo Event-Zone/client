@@ -1,3 +1,6 @@
+"use client";
+
+import withAuth from "@/components/shared/WithAuth";
 import ChangeSubscriptionComponent from "@/components/Tarification/ChangeSubscription";
 import React from "react";
 
@@ -9,4 +12,4 @@ function ChangeSubscription() {
   );
 }
 
-export default ChangeSubscription;
+export default withAuth(ChangeSubscription);
