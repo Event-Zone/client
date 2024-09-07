@@ -49,18 +49,29 @@ function ImagesSection({
       </div>
       <div
         onClick={() => setIsEventImagesSubmitted(false)}
-        className=" relative rounded-md flex justify-center items-center  py-48 md:max-h-[500px] md:max-w-[800px] bg-cover"
+        className={`relative rounded-3xl flex justify-center items-center  py-48 md:max-h-[500px] md:max-w-full bg-cover ${
+          eventImages.length === 0 && "bg-[#0052B40D]"
+        }`}
         style={{
           backgroundImage: `url(${
             eventImages.length > 0
               ? !isEventImagesSubmitted
                 ? URL.createObjectURL(eventImages[0])
                 : URL.createObjectURL(eventImages[selectedImage])
-              : "/registerimg.jpeg"
+              : ""
           })`,
         }}
       >
-        {" "}
+        {eventImages.length !== 0 && selectedImage === 0 && (
+          <div className="bg-white w-fit  poppins-medium text-titles flex rounded-lg p-3 absolute top-3 right-3">
+            <img
+              alt="show"
+              src={`/icons/Show.png`}
+              className="w-[23px] h-[23px] bg-white rounded-full  m-r-1 "
+            />{" "}
+            Image de couverture{" "}
+          </div>
+        )}
         {isEventImagesSubmitted ? (
           <img
             alt="submittedicon"
@@ -69,12 +80,13 @@ function ImagesSection({
           />
         ) : null}
         {/* Label acting as a button for file input */}
-        {!isEventImagesSubmitted ? (
+        {!isEventImagesSubmitted && eventImages?.length === 0 ? (
           <label
             htmlFor="media"
             className="  md:p-8 bg-white  md:w-auto w-[200px]   flex flex-col  items-center cursor-pointer rounded-lg"
           >
             <input
+              multiple
               type="file"
               id="media"
               name="media"
@@ -124,17 +136,66 @@ function ImagesSection({
           ))}{" "}
         </div>
       ) : null}
+      {!isEventImagesSubmitted && (
+        <div className="flex items-center w-full justify-center space-x-6 text-xs text-gray-500 poppins-regular">
+          <span>• Taille d'image recommandée : 2160 x 1080px</span>
+          <span>• Taille maximale du fichier : 8 Mo</span>
+          <span>• Fichiers image pris en charge : JPEG ou PNG</span>
+        </div>
+      )}
+
       {!isEventImagesSubmitted ? (
         <>
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="eventImages" direction="horizontal">
               {(provided) => (
                 <div
-                  className="flex flex-wrap w-full mt-4"
+                  className="flex flex-wrap w-full mt-4 relative"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                   style={{ display: "flex", overflowX: "auto" }} // Ensure horizontal layout and scrolling
                 >
+                  {eventImages.length !== 0 && (
+                    <label
+                      htmlFor="media"
+                      className=" h-24 m-2 w-[140px] flex flex-col  items-center cursor-pointer rounded-lg bg-[#0052B40D]"
+                    >
+                      <input
+                        multiple
+                        type="file"
+                        id="media"
+                        name="media"
+                        accept=".jpg,.jpeg,.png,.svg"
+                        className="relative inset-0 opacity-0 cursor-pointer"
+                        onChange={(event) => {
+                          if (event.target.files) {
+                            const files = Array.from(
+                              event.target.files as FileList
+                            );
+                            const imageFiles = files.filter((file) =>
+                              [
+                                "image/jpeg",
+                                "image/png",
+                                "image/svg+xml",
+                              ].includes(file.type)
+                            );
+                            if (eventImages.length >= 4) {
+                              return alert("only 4 images are alowed");
+                            }
+                            setEventImages((prevImages: any) => [
+                              ...prevImages,
+                              ...imageFiles,
+                            ]);
+                          }
+                        }}
+                      />
+                      <img
+                        alt="uploadicon"
+                        src="/icons/ph_plus-bold.png"
+                        className="md:w-[24px] md:h-[24px] mb-[3px] "
+                      />
+                    </label>
+                  )}
                   {eventImages.map((image, index) => (
                     <Draggable
                       key={image.name + index} // Ensure unique ID
@@ -146,18 +207,35 @@ function ImagesSection({
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className={`relative w-24 h-24 m-2`}
+                          className="relative  h-24 m-2 w-[140px]" // Individual image container
                         >
-                          <img
-                            src={URL.createObjectURL(image)}
-                            alt={`event-${index}`}
-                            className={`w-full h-full object-cover rounded-lg ${
-                              index === 0 ? " border-8 border-gray-900" : ""
-                            }`}
-                          />
+                          {/* Image container with hover effect */}
+                          <div className="group relative w-full h-full">
+                            {index === 0 && (
+                              <img
+                                alt="show"
+                                src={`/icons/Show.png`}
+                                className="w-[23px] h-[23px] bg-white rounded-full  absolute right-1 top-1"
+                              />
+                            )}
+                            {/* Image */}
+                            <img
+                              src={URL.createObjectURL(image)}
+                              alt={`event-${index}`}
+                              className={`w-full h-full object-cover rounded-lg transition-all duration-300 ${
+                                index === 0 ? "border-8 border-gray-900" : ""
+                              } group-hover:blur-sm`} // Blur on hover
+                            />
+                            {/* Equals Sign (visible only on hover) */}
+                            <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              <span className="text-white text-4xl">=</span>
+                            </div>
+                          </div>
+
+                          {/* Delete Button */}
                           <button
                             onClick={() => handleDeleteImage(index)}
-                            className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                            className="absolute top-0 right-0  text-white rounded-full p-1"
                           >
                             X
                           </button>

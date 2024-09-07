@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ImagesSection from "./ImagesSection";
 import PropretiesSection from "./PropretiesSection";
 import SponsorsSection from "./SponsorsSection";
+import EventForm from "./EventForm";
 
 function ImagesForm({
   setIsNext,
@@ -28,17 +29,25 @@ function ImagesForm({
     }
   }, [formData, isFormValid]);
 
-  const [sponsorImages, setSponsorImages] = useState<File[]>([]);
+  const [sponsorImages, setSponsorImages] = useState<File[]>(
+    Array.from(formData.getAll("sponsorImages")).map((item) =>
+      typeof item === "string" ? new File([], item) : item
+    )
+  );
+  const [eventImages, setEventImages] = useState<File[]>(
+    Array.from(formData.getAll("eventImages")).map((item) =>
+      typeof item === "string" ? new File([], item) : item
+    )
+  );
 
   const [showEventProperties, setShowEventProperties] = useState(false);
-  const [eventImages, setEventImages] = useState<File[]>([]);
   const [isSponsorsSubmitted, setIsSponsorsSubmitted] = useState(false);
   const [isEventImagesSubmitted, setIsEventImagesSubmitted] = useState(false);
   const [formValues, setFormValues] = useState({
-    accessibilite: "",
-    portee: "",
-    public: "",
-    lieu: "",
+    accessibilite: formData.get("accessibilite"),
+    portee: formData.get("portee"),
+    public: formData.get("public"),
+    lieu: formData.get("lieu"),
   });
 
   const toggleEventProperties = () => {
@@ -68,6 +77,9 @@ function ImagesForm({
   useEffect(() => {
     console.log("eventImages", eventImages);
   }, [eventImages]);
+  useEffect(() => {
+    console.log("formData", formData);
+  }, [formData]);
 
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
 

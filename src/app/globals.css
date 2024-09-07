@@ -246,3 +246,18 @@
   width: 0;
   display: none;
 }
+.preview_container.without_icon {
+  opacity: 0;
+  width: 0;
+  padding-right: 30px;
+}
+.picker_container {
+    width: 260px;
+    height: 260px;
+    margin: 0 20px 20px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+  position: absolute !important;
+  top: -50px !important;
+  left: 0 !important;
+}

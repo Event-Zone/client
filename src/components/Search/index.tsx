@@ -182,7 +182,13 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   }, [eventsByCategorieIsLoading, eventsByCategorieIsError, eventsByCategorie]);
   // Handler functions
 
-  const toggleDialog = () => setShowDialog(!showDialog);
+  const toggleDialog = () => {
+    setShowDialog(!showDialog);
+
+    setIsLocationSelectorVisible(false);
+    setCategorieSelectorVisible(false);
+    setTypeSelectorVisible(false);
+  };
 
   const handleTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -220,17 +226,22 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
     console.log("selectedLocation: ", selectedLocation);
   }, [selectedLocation]);
   return (
-    <div className="relative p-1 md:p-20 ">
+    <div className="relative p-1 md:px-20 ">
       <div className="max-w-full h-fit">
-        <div className="flex flex-wrap justify-between w-fit">
+        <div className="flex flex-wrap justify-between w-full">
           <button
             className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
-            onClick={() => setTypeSelectorVisible(!isTypeSelectorVisible)}
+            onClick={() => {
+              setIsLocationSelectorVisible(false);
+              setShowDialog(false);
+              setCategorieSelectorVisible(false);
+              setTypeSelectorVisible(!isTypeSelectorVisible);
+            }}
           >
             Choose Type
           </button>
           {isTypeSelectorVisible && (
-            <div className="bg-white p-4 rounded-md shadow-md z-30 absolute">
+            <div className="bg-gray-50 p-4 rounded-md shadow-md z-30 absolute">
               <p className="font-semibold text-gray-700 mb-2">
                 Type d'événement
               </p>
@@ -291,6 +302,48 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
                   />
                   <span>Seminaires & Ateliers</span>
                 </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    value="webinaires"
+                    checked={(type as string[])?.includes("webinaires")}
+                    onChange={handleTypeChange}
+                    className="form-checkbox h-4 w-4 text-blue-600"
+                  />
+                  <span>Webinaires</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    value="convention"
+                    checked={(type as string[])?.includes("convention")}
+                    onChange={handleTypeChange}
+                    className="form-checkbox h-4 w-4 text-blue-600"
+                  />
+                  <span>Convention</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    value="competition"
+                    checked={(type as string[])?.includes("competition")}
+                    onChange={handleTypeChange}
+                    className="form-checkbox h-4 w-4 text-blue-600"
+                  />
+                  <span>Competition</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    value="evenement de resautage"
+                    checked={(type as string[])?.includes(
+                      "evenement de resautage"
+                    )}
+                    onChange={handleTypeChange}
+                    className="form-checkbox h-4 w-4 text-blue-600"
+                  />
+                  <span>Evenement De Resautage</span>
+                </label>
                 {/* Add more checkboxes as needed */}
               </div>
               {/* Add your filter and cancel buttons */}
@@ -323,7 +376,13 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             N'import quand
           </div>
           <div
-            onClick={() => setIsLocationSelectorVisible(true)}
+            onClick={() => {
+              setIsLocationSelectorVisible(true);
+              setShowDialog(false);
+
+              setCategorieSelectorVisible(false);
+              setTypeSelectorVisible(false);
+            }}
             className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
           >
             N'import ou
@@ -331,15 +390,19 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
           <div className="flex flex-wrap justify-between w-fit ">
             <button
               className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
-              onClick={() =>
-                setCategorieSelectorVisible(!isTypeSelectorVisible)
-              }
+              onClick={() => {
+                setIsLocationSelectorVisible(false);
+                setShowDialog(false);
+
+                setTypeSelectorVisible(false);
+                setCategorieSelectorVisible(!isTypeSelectorVisible);
+              }}
             >
               Choose Categorie
             </button>
             {isCategorieSelectorVisible && (
-              <div className="bg-white p-4 rounded-md shadow-md z-30 absolute ">
-                <div className="flex flex-col space-y-2 h-[400px] overflow-scroll">
+              <div className="p-4 rounded-md shadow-md z-30 absolute bg-gray-50 ">
+                <div className="flex flex-col space-y-2 h-[400px] overflow-scroll element-with-scrollbar ">
                   <label className="flex items-center space-x-2">
                     <input
                       type="checkbox"
@@ -604,16 +667,6 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             events.map((event) => <EventCard key={event._id} event={event} />)
           ) : (
             <p className="poppins-medium">no events</p>
-          )}
-
-          {eventsByMonth && (
-            <div>Events by Month: {JSON.stringify(eventsByMonth)}</div>
-          )}
-          {eventsByDateRange && (
-            <div>Events by Date Range: {JSON.stringify(eventsByDateRange)}</div>
-          )}
-          {eventsByType && (
-            <div>Events by Type: {JSON.stringify(eventsByType)}</div>
           )}
         </div>
       </div>

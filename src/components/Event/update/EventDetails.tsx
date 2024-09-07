@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setSearchedEvents } from "@/store/features/eventSlice";
+import { isArray } from "util";
 function EventDetails({
   firstFormData,
   secondFormData,
@@ -85,13 +86,21 @@ function EventDetails({
               ))}
           </div>
         </div>
-        <div className="flex mt-3">
+        <div className="flex mt-3 element-with-scrollbar max-w-full ">
           <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
             {firstFormData.type}
           </p>
-          <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
-            {firstFormData.Categorie}
-          </p>
+          {isArray(firstFormData?.Categorie) ? (
+            firstFormData?.Categorie?.map((categorie: any) => (
+              <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+                {categorie}
+              </p>
+            ))
+          ) : (
+            <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+              {firstFormData?.Categorie}
+            </p>
+          )}
         </div>
         <div className=" ">
           <p className="poppins-medium text-gray-600 rounded-lg px-4 py-2">
@@ -342,7 +351,7 @@ function EventDetails({
         </div>
         <div className="mt-4 poppins-meduim">
           <h3 className="poppins-semibold text-2xl text-titles mb-3">Tags</h3>
-          <div className="flex">
+          <div className="flex max-w-full overflow-scroll element-with-scrollbar">
             {firstFormData.tags.map((tag: string, index: number) => (
               <span
                 key={index}

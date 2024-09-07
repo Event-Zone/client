@@ -5,6 +5,7 @@ import {
   useGetEventAddQuery,
 } from "@/store/features/api/apiSlice";
 import { useRouter } from "next/navigation";
+import { isArray } from "util";
 const Hero = () => {
   const router = useRouter();
   const [adds, setAdds] = useState<string[]>([]);
@@ -102,9 +103,17 @@ const Hero = () => {
             <p className="poppins-regular text-sm text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-1 mr-3">
               {eventAdds[currentBar]?.type}
             </p>
-            <p className="poppins-regular text-sm text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-1 mr-3">
-              {eventAdds[currentBar]?.Categorie}
-            </p>
+            {isArray(eventAdds[currentBar]?.Categorie) ? (
+              eventAdds[currentBar]?.Categorie.map((categorie: any) => (
+                <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+                  {categorie}
+                </p>
+              ))
+            ) : (
+              <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+                {eventAdds[currentBar]?.Categorie}
+              </p>
+            )}
           </div>
         </div>
         <div className="hidden md:flex flex-col justify-between ">
@@ -163,9 +172,17 @@ const Hero = () => {
             <button className="mr-2 rounded-[30px] p-2 bg-transparent text-white text-center border border-white">
               {eventAdds[currentBar]?.type}
             </button>
-            <button className="rounded-[30px] p-2 bg-transparent text-white text-center border border-white">
-              {eventAdds[currentBar]?.Categorie}
-            </button>
+            {isArray(eventAdds[currentBar]?.Categorie) ? (
+              eventAdds[currentBar]?.Categorie.map((categorie: any) => (
+                <button className="rounded-[30px] p-2 bg-transparent text-white text-center border border-white">
+                  {categorie}
+                </button>
+              ))
+            ) : (
+              <button className="rounded-[30px] p-2 bg-transparent text-white text-center border border-white">
+                {eventAdds[currentBar]?.Categorie}
+              </button>
+            )}
           </div>
           <div className="relative z-10">
             <button

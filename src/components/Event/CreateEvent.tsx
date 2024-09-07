@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import EventForm from "./EventForm";
 import ImagesForm from "./ImagesForm";
 import EventDetails from "./EventDetails";
-import Categorie from "../Home/Categorie";
 import { useAddEventMutation } from "@/store/features/api/apiSlice";
 import PostPublish from "./Postpublish";
 import { useSelector } from "react-redux";
@@ -16,7 +15,7 @@ function CreateEvent() {
 
   const [addEvent, addEventResult] = useAddEventMutation();
   const user = useSelector(selectUser);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [firstFormData, setFirstFormData] = useState<any>({
     link: null,
     location: null,
@@ -32,7 +31,7 @@ function CreateEvent() {
     website: null,
     linkInscription: null,
     type: null,
-    Categorie: null,
+    Categorie: [],
   });
   const [secondFormData, setSecondFormData] = useState(new FormData());
 

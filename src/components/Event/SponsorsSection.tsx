@@ -58,6 +58,7 @@ function SponsorsSection({
           >
             <input
               type="file"
+              multiple
               id="sponsorMedia"
               name="sponsorMedia"
               accept=".jpg,.jpeg,.png"

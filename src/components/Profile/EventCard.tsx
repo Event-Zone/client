@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { IEvent } from "@/types/Event";
 import { useRouter } from "next/navigation";
 import { useDeleteEventMutation } from "@/store/features/api/apiSlice";
+import Progress from "../shared/Progress";
 
 interface EventCardProps {
   event: IEvent;
@@ -49,14 +50,18 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
       {/* Image */}
       <img
         src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event?.eventImages[0]}`}
+        onLoad={() => <div>Loading</div>}
         alt={event.eventName}
         className="w-full h-1/3  object-cover"
       />
 
       {/* Content */}
-      <div className="p-4">
-        <h2 className="text-sm font-semibold">{event.eventName}</h2>
-        <p className="text-sm text-gray-500 ">
+      <div className="p-4 ">
+        <h3 className="text-md  poppins-semibold mb-2 text-ellipsis line-clamp-1">
+          {event.eventName}
+        </h3>
+
+        <p className="text-sm text-gray-500 text-ellipsis line-clamp-2 ">
           {new Date(event.startdate).toLocaleDateString("fr-FR", {
             day: "2-digit",
             month: "short",

@@ -51,12 +51,12 @@ function EventCard({ event }: EventCardProps) {
   return (
     <div
       onClick={() => router.replace(`/events/details/${event._id}`)}
-      className="flex flex-col sm:flex-row items-start sm:items-center mb-4 border border-gray-300 rounded-lg overflow-hidden shadow-md"
+      className=" flex flex-col sm:flex-row items-start sm:items-center mb-4 border border-gray-300 rounded-lg overflow-hidden "
     >
       <img
         src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event?.eventImages[0]}`}
         alt={event.eventName}
-        className="w-full sm:w-[200px] md:w-[245px] h-auto"
+        className="w-full sm:w-[200px] md:w-[245px] "
       />
       <div className="p-4 w-full sm:w-2/3">
         <p className="text-gray-500 text-sm sm:text-base poppins-regular">
@@ -71,7 +71,7 @@ function EventCard({ event }: EventCardProps) {
             year: "numeric",
           })}
         </p>
-        <h3 className="text-lg sm:text-2xl poppins-semibold mb-2">
+        <h3 className="text-lg sm:text-2xl poppins-semibold mb-2 text-ellipsis line-clamp-2 ">
           {event.eventName}
         </h3>
         <p className="text-gray-500 text-sm sm:text-base poppins-medium mb-2 flex">
@@ -86,7 +86,7 @@ function EventCard({ event }: EventCardProps) {
               <img
                 alt="icon"
                 src="/icons/globalBlue.png"
-                className="w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]"
+                className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]"
               />
               <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-base">
                 Evenement {event.lieu}
@@ -98,7 +98,7 @@ function EventCard({ event }: EventCardProps) {
               <img
                 alt="icon"
                 src="/icons/Ticket.png"
-                className="w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]"
+                className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]"
               />
               <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-base">
                 {event.accessibilite}
@@ -110,7 +110,7 @@ function EventCard({ event }: EventCardProps) {
               <img
                 alt="icon"
                 src="/icons/ph_seal-check-fill (1).png"
-                className="w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]"
+                className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]"
               />
               <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-base">
                 Premium Organiser

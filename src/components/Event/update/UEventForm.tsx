@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays, format } from "date-fns";
 import SearchBox from "../../shared/SearchBox";
+import TimePickerUi from "@/components/shared/TimePickerUi";
 
 function EventForm({
   setIsNext,
@@ -15,11 +16,34 @@ function EventForm({
   formData: any;
   setFormData: Function;
 }) {
+  const [isCategorieSelectorVisible, setCategorieSelectorVisible] =
+    useState(false);
+  const handleCategorieChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value } = event.target;
+    let updatedCategorie = [...(formData?.Categorie as string[])];
+
+    if (updatedCategorie.includes(value)) {
+      updatedCategorie = updatedCategorie.filter((item) => item !== value);
+    } else {
+      updatedCategorie.push(value);
+    }
+    setFormData({
+      ...formData,
+      Categorie: updatedCategorie,
+    });
+  };
+
   const [newTag, setNewTag] = useState(""); // State for the new tag
   const [location, setLocation] = useState(0); // State for the new tag
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(addDays(new Date(), 1));
-
+  useEffect(() => {
+    if (formData.location && !formData.link) setLocation(0);
+    else if (!formData.location && formData.link) setLocation(1);
+    else setLocation(2);
+  }, []);
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({
@@ -36,7 +60,7 @@ function EventForm({
       formData.type &&
       formData.Categorie &&
       formData.type !== "" &&
-      formData.Categorie !== "" &&
+      formData.Categorie?.length !== 0 &&
       formData.eventDescription &&
       formData.eventDescription !== "" &&
       (formData.location !== "" || formData.location) &&
@@ -106,7 +130,7 @@ function EventForm({
   };
 
   const renderTags = () => {
-    return formData.tags.map((tag: any, index: number) => (
+    return formData?.tags?.map((tag: any, index: number) => (
       <span
         key={index}
         className="mr-2 bg-gray-200 rounded-md px-2 py-1 inline-flex  "
@@ -210,109 +234,262 @@ function EventForm({
             </option>
           </select>
 
-          <select
-            value={formData.Categorie}
-            onChange={handleInputChange}
-            name="Categorie"
-            className=" poppins-regular flex-1 border-gray-300 border-[1.3px] md:ml-2  p-2 pl-10 text-gray-500 focus:outline-none"
-          >
-            <option value="" disabled selected className="text-gray-500">
-              Catégorie
-            </option>
-            <option value="recrutement" className="text-gray-500">
-              Recrutement
-            </option>
-            <option value="securite" className="text-gray-500">
-              Sécurité
-            </option>
-            <option value="services evenementiels" className="text-gray-500">
-              Services Événementiels
-            </option>
-            <option value="energies renouvelables" className="text-gray-500">
-              Énergies Renouvelables
-            </option>
-            <option
-              value="startups et entrepreneuriat"
-              className="text-gray-500"
+          <div className="md:mr-4 pl-10 flex-1 poppins-regular text-gray-500 focus:outline-none border-gray-300 border-[1.3px] p-2">
+            {" "}
+            <div
+              onClick={() =>
+                setCategorieSelectorVisible(!isCategorieSelectorVisible)
+              }
             >
-              Startups et Entrepreneuriat
-            </option>
-            <option value="technologie" className="text-gray-500">
-              Technologie
-            </option>
-            <option value="telecommunications" className="text-gray-500">
-              Télécommunications
-            </option>
-            <option value="transport" className="text-gray-500">
-              Transport
-            </option>
-            <option value="travaux publics" className="text-gray-500">
-              Travaux publics
-            </option>
-            <option value="intelligence artificielle" className="text-gray-500">
-              Intelligence Artificielle (IA)
-            </option>
-            <option value="machines et outils" className="text-gray-500">
-              Machines et Outils
-            </option>
-            <option value="marketing et publicite" className="text-gray-500">
-              Marketing et Publicité
-            </option>
-            <option
-              value="mathematiques et statistiques"
-              className="text-gray-500"
-            >
-              Mathématiques et Statistiques
-            </option>
-            <option value="medecine esthetique" className="text-gray-500">
-              Médecine Esthétique
-            </option>
-            <option value="physique" className="text-gray-500">
-              Physique
-            </option>
-            <option value="sante et medecine" className="text-gray-500">
-              Santé et Médecine
-            </option>
-            <option value="sante mentale" className="text-gray-500">
-              Santé Mentale
-            </option>
-            <option
-              value="robotique et automatisation"
-              className="text-gray-500"
-            >
-              Robotique et Automatisation
-            </option>
-            <option value="electricite" className="text-gray-500">
-              Électricité
-            </option>
-            <option value="emballages" className="text-gray-500">
-              Emballages
-            </option>
-            <option value="energie" className="text-gray-500">
-              Énergie
-            </option>
-            <option value="enseignement superieur" className="text-gray-500">
-              Enseignement Supérieur
-            </option>
-            <option value="environnement" className="text-gray-500">
-              Environnement
-            </option>
-            <option value="expedition" className="text-gray-500">
-              Expédition
-            </option>
-            <option value="genie civil" className="text-gray-500">
-              Génie Civil
-            </option>
-            <option value="immobilier" className="text-gray-500">
-              Immobilier
-            </option>
-            <option
-              value="importation et exportation"
-              className="text-gray-500"
-            >
-              Importation et Exportation
-            </option>
-          </select>
+              Choose Categorie
+            </div>
+            {isCategorieSelectorVisible && (
+              <div className="bg-white p-4 rounded-md shadow-md z-30 absolute ">
+                <div className="flex flex-col space-y-2 h-[400px] overflow-scroll">
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="sécurité"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "sécurité"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Sécurité</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="services événementiels"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "services événementiels"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Services Événementiels</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="énergies renouvelables"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "énergies renouvelables"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Énergies Renouvelables</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="startups et entrepreneuriat"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "startups et entrepreneuriat"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Startups et Entrepreneuriat</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="technologie"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "technologie"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Technologie</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="télécommunications"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "télécommunications"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Télécommunications</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="transport"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "transport"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Transport</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="travaux publics"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "travaux publics"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Travaux Publics</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="intelligence artificielle (ia)"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "intelligence artificielle (ia)"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Intelligence Artificielle (IA)</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="machines et outils"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "machines et outils"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Machines et Outils</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="aéronautique"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "aéronautique"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Aéronautique</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="agriculture"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "agriculture"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Agriculture</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="environnement"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "environnement"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Environnement</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="industries chimiques"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "industries chimiques"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Industries Chimiques</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="métiers de la mer"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "métiers de la mer"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Métiers de la Mer</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="éducation"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "éducation"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Éducation</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="finance et comptabilité"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "finance et comptabilité"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Finance et Comptabilité</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="médical"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "médical"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Médical</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="logistique"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "logistique"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Logistique</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value="ressources humaines"
+                      checked={(formData?.Categorie as string[])?.includes(
+                        "ressources humaines"
+                      )}
+                      onChange={handleCategorieChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Ressources Humaines</span>
+                  </label>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
         <RishTextEditor setFormData={setFormData} formData={formData} />
         <h3 className="text-2xl poppins-semibold">Tags</h3>
@@ -373,7 +550,11 @@ function EventForm({
               En ligne
             </button>
             <button
-              onClick={() => setLocation(2)}
+              onClick={() => {
+                setFormData({ ...formData, location: null, link: null });
+
+                setLocation(2);
+              }}
               type="button"
               className={`mr-2  rounded-md py-1 px-4 poppins-medium  text-center ${
                 location === 2 ? "bg-mainBlue text-white" : "text-gray-500"
@@ -473,9 +654,8 @@ function EventForm({
               </div>
             </div>
           </div>
-          <div className="flex flex-col flex-1">
-            {" "}
-            <div className="border-gray-300 border-[1.3px] p-2 mb-2">
+          <div className="flex flex-col flex-1 flex-wrap">
+            <div className="border-gray-300 border-[1.3px] p-2 mb-2 sm:h-[62px]">
               <label
                 htmlFor="startHour"
                 className="block text-sm font-medium poppins-semibold text-gray-700"
@@ -488,17 +668,12 @@ function EventForm({
                   src="/icons/clock.png"
                   className="mr-1 w-[20px] h-[20px]"
                 />
-                <input
-                  type="time"
-                  id="startHour"
-                  value={formData.startHour}
-                  name="startHour"
-                  className=" poppins-regular shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  onChange={handleInputChange}
-                />
+                <p>{formData?.startHour}</p>
+
+                <TimePickerUi setFormData={setFormData} name="startHour" />
               </div>
             </div>
-            <div className="border-gray-300 border-[1.3px] p-2">
+            <div className="border-gray-300 border-[1.3px] p-2 sm:h-[62px]">
               <label
                 htmlFor="endHour"
                 className="block text-sm font-medium poppins-semibold text-gray-700"
@@ -511,14 +686,9 @@ function EventForm({
                   src="/icons/clock.png"
                   className="mr-1 w-[20px] h-[20px]"
                 />
-                <input
-                  value={formData.endHour}
-                  type="time"
-                  id="endHour"
-                  name="endHour"
-                  className="poppins-regular shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  onChange={handleInputChange}
-                />
+                <p>{formData?.endHour}</p>
+
+                <TimePickerUi setFormData={setFormData} name="endHour" />
               </div>
             </div>
           </div>
@@ -535,8 +705,8 @@ function EventForm({
           <input
             type="text"
             id="mobile"
-            name="mobile"
             value={formData.mobile}
+            name="mobile"
             className="poppins-regular ml-2 py- shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
             placeholder="06.00.00.00.00"
             onChange={handleInputChange}
@@ -548,9 +718,9 @@ function EventForm({
 
           <input
             type="text"
-            value={formData.website}
             id="website"
             name="website"
+            value={formData.website}
             className="poppins-regular ml-2 py- shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
             placeholder="www.exemple.com"
             onChange={handleInputChange}
@@ -562,9 +732,9 @@ function EventForm({
 
           <input
             type="text"
-            value={formData.linkInscription}
             id="linkInscription"
             name="linkInscription"
+            value={formData.linkInscription}
             className="poppins-regular ml-2 py- shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
             placeholder="www.exemple.com/inscription"
             onChange={handleInputChange}

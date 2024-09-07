@@ -7,6 +7,7 @@ import {
 import { useDispatch } from "react-redux";
 import { setSearchedEvents } from "@/store/features/eventSlice";
 import { useRouter } from "next/navigation";
+import { isArray } from "util";
 
 function EventPage({ data }: { data: any }) {
   // geting the organizer data
@@ -100,13 +101,21 @@ function EventPage({ data }: { data: any }) {
             ))}
           </div>
         </div>
-        <div className="flex mt-3">
+        <div className="flex mt-3 element-with-scrollbar w-full overflow-scroll">
           <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
             {data.type}
           </p>
-          <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
-            {data.Categorie}
-          </p>
+          {isArray(data?.Categorie) ? (
+            data?.Categorie.map((categorie: any) => (
+              <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+                {categorie}
+              </p>
+            ))
+          ) : (
+            <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+              {data?.Categorie}
+            </p>
+          )}
         </div>
         <div className=" ">
           <p className="poppins-medium text-gray-600 rounded-lg px-4 py-2">
@@ -363,17 +372,20 @@ function EventPage({ data }: { data: any }) {
             ))}
           </div>
         </div>
-        <div className="mt-4 poppins-meduim">
+        <div className="mt-4 poppins-meduim w-full overflow-scroll element-with-scrollbar">
           <h3 className="poppins-semibold text-2xl text-titles mb-3">Tags</h3>
           <div className="flex">
-            {data.tags[0].split(",").map((tag: string, index: number) => (
-              <span
-                key={index}
-                className="tag mr-4 poppins-meduim text-titles rounded-lg px-3 bg-gray-200"
-              >
-                {tag}
-              </span>
-            ))}
+            {data?.tags?.map((tag: string, index: number) => {
+              if (tag !== "")
+                return (
+                  <span
+                    key={index}
+                    className="tag mr-4 poppins-meduim text-titles rounded-lg px-3 bg-gray-200"
+                  >
+                    {tag}
+                  </span>
+                );
+            })}
           </div>
         </div>
       </div>
