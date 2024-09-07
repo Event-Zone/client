@@ -15,13 +15,14 @@ import {
   setInitialEvents,
   setSearchedEvents,
 } from "@/store/features/eventSlice";
+import Progress from "./Progress";
 
 function Navbar() {
   const allInitEvents = useSelector(selectInitialEvents);
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [locations, setLocations] = useState<any[] | null>([]);
-  const [stateName, setStateName] = useState<string>("");
+  const [stateName, setStateName] = useState<string | undefined>(undefined);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [searchOpen, setSearchOpen] = useState<boolean>(false);
 
@@ -41,11 +42,20 @@ function Navbar() {
     data: searchedEvents,
     error: searchedEventsError,
     isLoading: searchedEventsLoading,
+    refetch: refetchSearch,
   } = useSearchEventsQuery(
     { searchTerm, stateName },
-    { skip: searchTerm === "" }
+    { skip: searchTerm?.length === 0 }
   );
-
+  useEffect(() => {
+    if (searchTerm === "") dispatch(setSearchedEvents(allInitEvents));
+    else if (searchedEvents) refetchSearch();
+    console.log(searchTerm);
+  }, [searchTerm]);
+  useEffect(() => {
+    console.log("searchedEvents", searchedEvents);
+    dispatch(setSearchedEvents(searchedEvents));
+  }, [searchedEvents]);
   const {
     data: allEvents,
     error: allEventsError,
@@ -69,11 +79,15 @@ function Navbar() {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-    if (searchedEvents) dispatch(setSearchedEvents(searchedEvents));
+    if (searchedEvents) {
+      console.log("searched ");
+      dispatch(setSearchedEvents(searchedEvents));
+    }
   };
 
   const handleStateClick = (e: any) => {
-    setStateName(e.target.value);
+    if (e.target.value !== "n'import ou") setStateName(e.target.value);
+    else setStateName(undefined);
   };
 
   const handlSearchClick = () => {
@@ -108,6 +122,7 @@ function Navbar() {
         isV1 ? "border-b-gray-500 border-[1.5px]" : ""
       }`}
     >
+      {searchedEventsLoading && <Progress />}
       {/* Logo */}
       {!searchOpen && (
         <div
@@ -180,16 +195,9 @@ function Navbar() {
       {/* Desktop Search and Menu */}
       <div
         onClick={() => router.push("/search")}
-        className="hidden lg:flex flex-grow items-center mx-14 rounded-[10px] border-gray-500 border overflow-hidden"
+        className="overFlow-hidden hidden lg:flex flex-grow items-center max-w-[550px] rounded-[10px] border-gray-500 border overflow-hidden"
       >
         <div className="relative flex-grow">
-          <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-            <img
-              src="/icons/Search.svg"
-              alt="Search Icon"
-              className="h-5 w-5 text-gray-500"
-            />
-          </span>
           <input
             value={searchTerm}
             onChange={handleSearch}
@@ -211,6 +219,14 @@ function Navbar() {
             onChange={handleStateClick}
             className="p-2 pl-10 text-gray-500 focus:outline-none"
           >
+            <option
+              key="n'import ou"
+              defaultChecked
+              value="n'import ou"
+              className="text-gray-500"
+            >
+              n'import ou
+            </option>
             {locations?.map((state) => (
               <option key={state} value={state} className="text-gray-500">
                 {state}
@@ -218,6 +234,13 @@ function Navbar() {
             ))}
           </select>
         </div>
+        <span className="h-[40px] flex items-center pl-2 pr-2 bg-mainBlue">
+          <img
+            src="/icons/Search.svg"
+            alt="Search Icon"
+            className="h-5 w-5 text-gray-500"
+          />
+        </span>
       </div>
 
       {/* Language and Authentication/Profile for Desktop */}

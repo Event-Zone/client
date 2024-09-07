@@ -10,7 +10,6 @@ export const apiSlice = createApi({
             const state = getState() as RootState; // Explicitly type the getState function
 
             const token = selectToken(state); // Get the token from the Redux store
-            console.log(token);
             if (token) {
                 headers.set('jwt', token);
             }
