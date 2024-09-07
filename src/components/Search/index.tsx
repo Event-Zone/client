@@ -40,8 +40,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   const [selectedLocation, setSelectedLocation] = useState<
     string | undefined | 0
   >();
-  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
-  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
+
   const [events, setEvents] = useState<any[] | null>([]);
   useEffect(() => {
     if (!seachedEvents || seachedEvents?.length === 0) setEvents(initEvents);
