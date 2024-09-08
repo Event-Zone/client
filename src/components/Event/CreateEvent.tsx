@@ -15,7 +15,7 @@ function CreateEvent() {
 
   const [addEvent, addEventResult] = useAddEventMutation();
   const user = useSelector(selectUser);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [firstFormData, setFirstFormData] = useState<any>({
     link: null,
     location: null,

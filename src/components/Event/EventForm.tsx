@@ -610,7 +610,7 @@ function EventForm({
         </p>
         <div className="flex flex-row w-full">
           <div className="flex flex-col flex-1 mr-2">
-            <div className="border-gray-300 border-[1.3px] p-2 mb-2">
+            <div className="border-gray-300 border-[1.3px] p-2 mb-[5px] md:h-[56px] rounded-[4px]">
               <label
                 htmlFor="startdate"
                 className="block text-sm font-medium poppins-semibold text-gray-700"
@@ -633,7 +633,7 @@ function EventForm({
                 />{" "}
               </div>
             </div>
-            <div className="border-gray-300 border-[1.3px] p-2">
+            <div className="border-gray-300 border-[1.3px] p-2 mb-[5px] md:h-[56px] rounded-[4px]">
               <label
                 htmlFor="enddate"
                 className="block text-sm font-medium poppins-semibold text-gray-700"
@@ -657,42 +657,35 @@ function EventForm({
               </div>
             </div>
           </div>
+
           <div className="flex flex-col flex-1 flex-wrap">
-            <div className="border-gray-300 border-[1.3px] p-2 mb-2 sm:h-[62px]">
+            <div id="startHour" className="flex flex-col mb-[5px]">
+              {" "}
               <label
                 htmlFor="startHour"
-                className="block text-sm font-medium poppins-semibold text-gray-700"
+                className="block text-sm font-medium poppins-semibold text-gray-700 absolute ml-2"
               >
-                Heure de début
+                Heure de debut
               </label>
-              <div className="flex flex-row">
-                <img
-                  alt="calendar"
-                  src="/icons/clock.png"
-                  className="mr-1 w-[20px] h-[20px]"
-                />
-                <p>{formData?.startHour}</p>
-
-                <TimePickerUi setFormData={setFormData} name="startHour" />
-              </div>
+              <TimePickerUi
+                initTime={formData?.startHour}
+                setFormData={setFormData}
+                name="startHour"
+              />
             </div>
-            <div className="border-gray-300 border-[1.3px] p-2 sm:h-[62px]">
+
+            <div id="endHour" className="flex flex-col ">
               <label
                 htmlFor="endHour"
-                className="block text-sm font-medium poppins-semibold text-gray-700"
+                className="block text-sm font-medium poppins-semibold text-gray-700  absolute ml-2 "
               >
                 Heure de fin
               </label>
-              <div className="flex flex-row">
-                <img
-                  alt="calendar"
-                  src="/icons/clock.png"
-                  className="mr-1 w-[20px] h-[20px]"
-                />
-                <p>{formData?.endHour}</p>
-
-                <TimePickerUi setFormData={setFormData} name="endHour" />
-              </div>
+              <TimePickerUi
+                initTime={formData?.endHour}
+                setFormData={setFormData}
+                name="endHour"
+              />
             </div>
           </div>
         </div>

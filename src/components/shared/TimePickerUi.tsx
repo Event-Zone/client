@@ -1,40 +1,59 @@
-import React, { useEffect, useState } from "react";
-import TimePicker from "react-times";
-import "react-times/css/material/default.css"; // Material theme
+import React, { useState } from "react";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { TextField } from "@mui/material";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
+import {
+  LocalizationProvider,
+  renderTimeViewClock,
+  StaticTimePicker,
+} from "@mui/x-date-pickers";
+import { parse } from "date-fns";
 
 interface TimePickerUiProps {
   setFormData: Function;
   name: string;
+  initTime?: string;
 }
 
-function TimePickerUi({ setFormData, name }: TimePickerUiProps) {
-  const [time, setTime] = useState({ hour: "00", minute: "00" });
-  const onTimeChange = ({ hour, minute }: { hour: string; minute: string }) => {
-    setTime({ hour, minute });
-    // Update the parent form data with the selected time
-    setFormData((prev: any) => ({
-      ...prev,
-      [name]: `${hour}:${minute}`,
-    }));
+function TimePickerUi({ setFormData, name, initTime }: TimePickerUiProps) {
+  console.log(initTime);
+  const INITTIME = initTime
+    ? parse(initTime, "HH:mm", new Date()) // Parse "HH:mm" string into Date
+    : new Date(); // Fallback to current date
+  console.log(INITTIME);
+  const [time, setTime] = useState<Date | null | undefined>(INITTIME);
+
+  const handleTimeChange = (newValue: Date | null) => {
+    setTime(newValue);
+    if (newValue) {
+      const hours = newValue.getHours().toString().padStart(2, "0");
+      const minutes = newValue.getMinutes().toString().padStart(2, "0");
+      // Update the parent form data with the selected time
+      setFormData((prev: any) => ({
+        ...prev,
+        [name]: `${hours}:${minutes}`,
+      }));
+    }
   };
 
   return (
-    <div className=" flex items-center space-x-2 relative w-full h-full">
-      {" "}
-      <div>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <div className="w-full">
+        {" "}
+        {/* Ensure the div takes full width */}
         <TimePicker
-          time={`${time.hour}:${time.minute}`} // Set initial time based on state
-          onTimeChange={onTimeChange} // Trigger the callback when time changes
-          showTimezone // Show the timezone (optional)
-          focused={false} // Controls whether the time picker is open on render
-          withoutIcon // Whether to hide the time icon on button
-          colorPalette="dark" // Color theme
-          theme="material" // Material theme (can switch to classic)
-          timeMode="24" // 12-hour or 24-hour mode
-          timezone="America/New_York" // Optional timezone
-        />{" "}
+          sx={{ width: "100%" }} // Make the TimePicker take full width
+          onChange={handleTimeChange}
+          value={time}
+          viewRenderers={{
+            hours: renderTimeViewClock,
+            minutes: renderTimeViewClock,
+            seconds: renderTimeViewClock,
+          }}
+        />
       </div>
-    </div>
+    </LocalizationProvider>
   );
 }
+
 export default TimePickerUi;
