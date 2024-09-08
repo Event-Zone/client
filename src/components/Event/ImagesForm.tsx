@@ -95,7 +95,7 @@ function ImagesForm({
       updatedFormData.append("videoUrl", videoUrl);
     }
     (Object.keys(formValues) as (keyof typeof formValues)[]).forEach((key) => {
-      updatedFormData.append(key, formValues[key]);
+      updatedFormData.append(key, formValues[key]!);
     });
     let rep = Object.values(formValues).every((value) => value !== "");
     setIsFormValid(rep);
