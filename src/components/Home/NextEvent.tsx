@@ -66,15 +66,15 @@ function NextEvent({ events }: { events: IEvent[] }) {
   }, [eventsByCategoryIsLoading, eventsByCategoryIsError, eventsByCategory]);
 
   return (
-    <div className="w-full p-4">
-      <div className="w-[90%] ml-14 my-3">
-        <h2 className="nd:text-3xl text-xl font-extrabold text-titles mb-4">
+    <div className="w-full py-4">
+      <div className="w-[90%] ml-1 my-3">
+        <h2 className=" text-titles mb-4 poppins-semibold md:text-[24px]">
           Prochains événements
         </h2>
       </div>
 
       {/* Horizontal scrollable category list */}
-      <div className="flex space-x-4 w-[90%] overflow-x-auto element-with-scrollbar mb-4 md:ml-10">
+      <div className="flex space-x-4 w-[90%] overflow-x-auto element-with-scrollbar mb-4 md:ml-1">
         {categories.map((category) => (
           <label
             key={category}
@@ -91,7 +91,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
       </div>
 
       {/* Horizontal scrollable events list */}
-      <div className="flex-col md:flex-row md:flex md:space-x-4 overflow-x-auto md:pl-0 pl-10 items-center justify-center w-full py-4 scrollbar-hide">
+      <div className="flex-col md:flex-row md:flex md:space-x-4 overflow-x-auto md:pl-0 pl-10 items-center justify-between w-full py-4 scrollbar-hide">
         {events.length !== 0 ? (
           events.map((event, index) => (
             <div
@@ -109,7 +109,20 @@ function NextEvent({ events }: { events: IEvent[] }) {
                 }
               />
               <div className="p-4">
-                <h3 className="text-xl font-semibold">{event.eventName}</h3>
+                <h3 className="text-xl poppins-semibold text-ellipsis line-clamp-3">
+                  <>
+                    {
+                      <>
+                        {event?.eventAcronym && (
+                          <>
+                            {event?.eventAcronym} {" - "}
+                          </>
+                        )}
+                      </>
+                    }{" "}
+                    {event?.eventName}
+                  </>
+                </h3>
                 <p className="text-gray-600 flex flex-row items-center">
                   <img alt="location-icon" src="/icons/LocationGray.png" />
                   {event.location?.address?.commercial
@@ -133,7 +146,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
       <div className="w-full flex justify-center items-center">
         <button
           onClick={() => router.replace("/search")}
-          className="mr-2 rounded-[10px] px-6 py-3 bg-mainBlue text-white text-center"
+          className="mr-2 rounded-[10px] px-10 py-3 bg-mainBlue text-white text-center"
         >
           Voir plus
         </button>

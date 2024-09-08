@@ -42,21 +42,10 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   >();
 
   const [events, setEvents] = useState<any[] | null>([]);
-  useEffect(() => {
-    if (!seachedEvents || seachedEvents?.length === 0) setEvents(initEvents);
-  }, [initEvents]);
+
   useEffect(() => {
     setEvents(seachedEvents);
   }, [seachedEvents]);
-  useEffect(() => {
-    if (
-      !seachedEvents ||
-      seachedEvents?.length === 0 ||
-      !initEvents ||
-      initEvents?.length === 0
-    )
-      setEvents(allEvents);
-  }, [allEvents]);
 
   const [adds, setAdds] = useState<any[] | null>([]);
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -241,7 +230,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
           </button>
           {isTypeSelectorVisible && (
             <div className="bg-gray-50 p-4 rounded-md shadow-md z-30 absolute">
-              <p className="font-semibold text-gray-700 mb-2">
+              <p className="poppins-semibold text-gray-700 mb-2">
                 Type d'événement
               </p>
               <div className="flex flex-col space-y-2">

@@ -137,7 +137,7 @@ function Explore() {
             <div className="mb-4 rounded-lg p-2">
               <label
                 htmlFor="entreprise"
-                className="mb-4 block text-sm font-medium poppins-semibold text-gray-700"
+                className="mb-4 block text-sm poppins-medium poppins-semibold text-gray-700"
               >
                 Votre Entreprise
               </label>
@@ -154,7 +154,7 @@ function Explore() {
             <div className="mb-4 rounded-sm p-2">
               <label
                 htmlFor="profession"
-                className="mb-4 block text-sm font-medium poppins-semibold text-gray-700"
+                className="mb-4 block text-sm poppins-medium poppins-semibold text-gray-700"
               >
                 Votre Profession
               </label>
@@ -171,14 +171,14 @@ function Explore() {
             <div className="mb-4 rounded-lg p-2">
               <label
                 htmlFor="tags"
-                className="mb-4 block text-sm font-medium poppins-semibold text-gray-700"
+                className="mb-4 block text-sm poppins-medium poppins-semibold text-gray-700"
               >
                 Tags qui vous interesse{" "}
               </label>
               <div className="mb-4 p-2">
                 <label
                   htmlFor="tags"
-                  className="block text-sm font-medium poppins-semibold text-gray-700"
+                  className="block text-sm poppins-medium poppins-semibold text-gray-700"
                 >
                   Appuyez sur Entrée pour ajouter un tag
                 </label>

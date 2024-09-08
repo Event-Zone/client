@@ -151,7 +151,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
           onClick={() => handleDayClick(day)}
           className={`w-10 h-10 flex items-center justify-center rounded-full cursor-pointer 
         ${isSelected ? "bg-blue-500 text-white" : "text-gray-700"}
-        ${isStartOrEndDate ? "font-bold" : ""}
+        ${isStartOrEndDate ? "poppins-bold" : ""}
         hover:bg-blue-300 
       `}
         >
@@ -230,7 +230,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
               >
                 &lt;
               </button>
-              <h3 className="text-center font-semibold">
+              <h3 className="text-center poppins-semibold">
                 {format(currentMonth, "MMMM yyyy")}
               </h3>
               <button
@@ -250,7 +250,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
               >
                 &lt;
               </button>
-              <h3 className="text-center font-semibold">
+              <h3 className="text-center poppins-semibold">
                 {format(addMonths(currentMonth, 1), "MMMM yyyy")}
               </h3>
               <button

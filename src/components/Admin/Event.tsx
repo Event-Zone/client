@@ -84,7 +84,7 @@ function Event({
             className="h-14 w-14 rounded-lg mr-4"
           />
           <div>
-            <p className="text-white font-bold">{event.eventName}</p>
+            <p className="text-white poppins-bold">{event.eventName}</p>
             <p className="text-[#94A3B8]">{event.eventAcronym}</p>
           </div>
         </div>

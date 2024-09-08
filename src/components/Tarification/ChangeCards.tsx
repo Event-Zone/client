@@ -75,7 +75,7 @@ function Changecards({ price }: { price: number }) {
           <div className="flex mb-4">
             <img alt={`${card.title}-icon`} src={card.icon} />
           </div>
-          <h3 className="text-titles font-poppins text-3xl">{card.title}</h3>
+          <h3 className="text-titles poppins-regular text-3xl">{card.title}</h3>
           <p className="text-sm mb-3 text-gray-600 poppins-semibold">
             {card.title === "Starter"
               ? "Le plan idéal pour commencer. Publiez un événement gratuitement, mais avec des fonctionnalités de base."
@@ -83,15 +83,15 @@ function Changecards({ price }: { price: number }) {
               ? "Maximisez la visibilité de vos événements avec un accès complet aux fonctionnalités premium pour les entreprises."
               : "Le plan idéal pour commencer. Publiez un événement gratuitement, mais avec des fonctionnalités de base."}
           </p>
-          <h3 className="text-titles font-poppins text-3xl font-bold">
+          <h3 className="text-titles  text-3xl poppins-bold">
             {index === 1 ? price : "Gratuit"}
             {index === 1 ? (
               price === 4000 ? (
-                <span className="ml-2 text-sm mb-3 text-gray-600 font-poppins">
+                <span className="ml-2 text-sm mb-3 text-gray-600 poppins-regular">
                   DA/mois
                 </span>
               ) : (
-                <span className="ml-2 text-sm mb-3 text-gray-600 font-poppins">
+                <span className="ml-2 text-sm mb-3 text-gray-600 poppins-regular">
                   DA/1 ans
                 </span>
               )
@@ -101,7 +101,7 @@ function Changecards({ price }: { price: number }) {
           {card.features.map((feature, idx) => (
             <p
               key={idx}
-              className="text-sm mb-3 text-gray-600 font-poppins flex"
+              className="text-sm mb-3 text-gray-600 poppins-regular flex"
             >
               <img
                 alt={feature.checked ? "check" : "uncheck"}

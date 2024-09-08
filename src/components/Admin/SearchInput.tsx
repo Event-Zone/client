@@ -31,7 +31,7 @@ const SearchInput = ({
       <input
         type="text"
         placeholder="Search..."
-        className="rounded-md border border-gray-300 bg-[#2c2f38] text-sm font-medium text-white py-2 pl-4 pr-10 w-full"
+        className="rounded-md border border-gray-300 bg-[#2c2f38] text-sm poppins-medium text-white py-2 pl-4 pr-10 w-full"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

@@ -39,8 +39,8 @@ function ImagesSection({
   };
   return (
     <>
-      <div className="  mb-3 ">
-        <div>
+      <div className="  mb-3  ">
+        <div className="mx-3">
           <h3 className="text-2xl poppins-semibold">Images </h3>
           <p className="text-gray-600 poppins-regular">
             Ajouter des photos pour montrer le sujet de votre evenement{" "}
@@ -49,7 +49,7 @@ function ImagesSection({
       </div>
       <div
         onClick={() => setIsEventImagesSubmitted(false)}
-        className={`relative rounded-3xl flex justify-center items-center  py-48 md:max-h-[500px] md:max-w-full bg-cover ${
+        className={`relative rounded-3xl flex justify-center items-center  py-48 md:max-h-[500px] md:max-w-full bg-cover mx-4 ${
           eventImages.length === 0 && "bg-[#0052B40D]"
         }`}
         style={{
@@ -137,7 +137,7 @@ function ImagesSection({
         </div>
       ) : null}
       {!isEventImagesSubmitted && (
-        <div className="flex items-center w-full justify-center space-x-6 text-xs text-gray-500 poppins-regular">
+        <div className="flex items-center w-full justify-center space-x-6 text-[13px] mt-4 text-gray-500 poppins-regular">
           <span>• Taille d'image recommandée : 2160 x 1080px</span>
           <span>• Taille maximale du fichier : 8 Mo</span>
           <span>• Fichiers image pris en charge : JPEG ou PNG</span>
@@ -249,13 +249,18 @@ function ImagesSection({
             </Droppable>
           </DragDropContext>
           {/* Here */}
-          <div className="mb-4 w-full  border-gray-300 border-[1.3px] p-2">
+          <div className="mx-4 mt-[30px]">
             <label
               htmlFor="videoUrl"
-              className="block text-sm font-medium poppins-semibold text-gray-700"
+              className="poppins-semibold text-titles mb-4"
             >
               Video
             </label>
+            <p className="text-gray-600 poppins-regular mb-2">
+              Ajoutez un lien vidéo de Youtube pour montrer votre événement
+            </p>
+          </div>
+          <div className="ml-3 mb-4 w-[96%]  border-gray-300 border-[1.3px] p-1">
             <div className="flex justify-between items-center ">
               <img
                 alt="runicon"

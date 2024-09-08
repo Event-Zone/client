@@ -85,7 +85,7 @@ const Dropdown = ({
       <div>
         <button
           type="button"
-          className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-[#2c2f38] text-sm font-medium text-white"
+          className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-[#2c2f38] text-sm poppins-medium text-white"
           onClick={() => setIsOpen(!isOpen)}
         >
           {label}

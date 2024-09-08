@@ -4,7 +4,7 @@ import React from "react";
 const ContactSection = () => {
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 md:p-12">
-      <h2 className="text-xl font-bold mb-4 md:text-2xl">Contactez nous</h2>
+      <h2 className="text-xl poppins-bold mb-4 md:text-2xl">Contactez nous</h2>
       <p className="text-gray-600 mb-6 md:text-lg">
         Que vous ayez des questions techniques, besoin de conseils promotionnels
         ou que vous ayez besoin d'une aide au dépannage, nous sommes là pour

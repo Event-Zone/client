@@ -26,7 +26,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`flex min-h-screen flex-col ${inter.className}`}>
+      <body
+        style={{ fontFamily: "Poppins , sans-serif" }}
+        className={`flex min-h-screen flex-col  ${inter.className}`}
+      >
         <StoreProvider>
           <Navbar />
           <main className="flex-grow flex flex-col">{children}</main>

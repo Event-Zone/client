@@ -4,15 +4,15 @@ import React from "react";
 function Categorie() {
   const router = useRouter();
   return (
-    <div className="w-full">
+    <div className="w-full mr-[50px]">
       <div className="">
-        <h2 className="text-titles ml-14 mb-4 font-extrabold md:text-[30px] ">
+        <h2 className="text-titles ml-2 mb-4 poppins-semibold md:md:text-[24px] ">
           Les Catégories les plus Populaires
         </h2>
       </div>
-      <div className="flex flex-row justify-around items-center w-full element-with-scrollbar overflow-x-scroll">
+      <div className="flex flex-row justify-between items-center w-full element-with-scrollbar overflow-x-scroll">
         <div
-          className="flex flex-col items-center px-4"
+          className="flex flex-col items-center px-4 bg-mainBlue bg-opacity-5"
           onClick={() => router.replace("/search/business")}
         >
           <img

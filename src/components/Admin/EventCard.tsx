@@ -31,7 +31,9 @@ function EventCard({
         alt={event.eventName}
         className="w-full h-[200px] object-cover rounded-t-lg"
       />
-      <h2 className="text-white text-xl font-bold mt-4">{event.eventName}</h2>
+      <h2 className="text-white text-xl poppins-bold mt-4">
+        {event.eventName}
+      </h2>
       <p className="text-gray-400 text-center mt-2">{event.eventAcronym}</p>
       <div className="flex mt-4 w-full justify-around">
         <button

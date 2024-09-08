@@ -20,7 +20,7 @@ function Welcome() {
           <div>
             <img alt="plus-icon" src="/icons/ion_search.png" />
           </div>
-          <h2 className="text-titles md:ml-14 mb-4 font-extrabold md:text-[30px]">
+          <h2 className="text-titles md:ml-14 mb-4 poppins-extrabold md:text-[30px]">
             Explorer des événements{" "}
           </h2>
 
@@ -35,7 +35,7 @@ function Welcome() {
           <div>
             <img alt="plus-icon" src="/icons/ph_plus-bold.png" />
           </div>
-          <h2 className="text-titles md:ml-14 mb-4 font-extrabold md:text-[30px]">
+          <h2 className="text-titles md:ml-14 mb-4 poppins-extrabold md:text-[30px]">
             Organiser des événements{" "}
           </h2>
 

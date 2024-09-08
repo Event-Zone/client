@@ -175,7 +175,7 @@ function ImagesSection({
           <div className="mb-4 w-full border-gray-300 border-[1.3px] p-2">
             <label
               htmlFor="videoUrl"
-              className="block text-sm font-medium poppins-semibold text-gray-700"
+              className="block text-sm poppins-medium poppins-semibold text-gray-700"
             >
               Video
             </label>

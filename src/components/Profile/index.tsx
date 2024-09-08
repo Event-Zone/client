@@ -246,8 +246,8 @@ const Profile = () => {
       <div className="bg-white p-8 rounded-lg shadow-md w-full ">
         <div className="flex md:flex-row flex-col items-center justify-between">
           <div>
-            <h1 className="text-xl font-semibold">Bienvenue</h1>
-            <h2 className="text-2xl font-bold text-gray-800">
+            <h1 className="text-xl poppins-semibold">Bienvenue</h1>
+            <h2 className="text-2xl poppins-bold text-gray-800">
               {user?.fullname}
             </h2>
           </div>
@@ -255,7 +255,7 @@ const Profile = () => {
             <a
               onClick={() => setPage(0)}
               href="#"
-              className={`font-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl ${
+              className={`poppins-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl ${
                 page === 0 && "bg-gray-300"
               }`}
             >
@@ -266,7 +266,7 @@ const Profile = () => {
                 setPage(2);
               }}
               href="#"
-              className={`font-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl ${
+              className={`poppins-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl ${
                 page === 2 && "bg-gray-300"
               }`}
             >
@@ -275,7 +275,7 @@ const Profile = () => {
             <a
               href="#"
               onClick={() => setPage(3)}
-              className={`font-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl ${
+              className={`poppins-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl ${
                 page === 3 && "bg-gray-300"
               }`}
             >
@@ -284,14 +284,14 @@ const Profile = () => {
             {user?.isAdmin && (
               <a
                 href="/admin"
-                className={`font-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl`}
+                className={`poppins-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl`}
               >
                 Admin
               </a>
             )}
             <a
               href="/auth/login"
-              className={`font-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl `}
+              className={`poppins-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl `}
             >
               Déconnexion
             </a>
@@ -323,7 +323,7 @@ const Profile = () => {
                 </div>
               </div>
               <div className="flex-grow">
-                <h3 className="md:text-xl hidden md:block font-bold">
+                <h3 className="md:text-xl hidden md:block poppins-bold">
                   Coordonnées
                 </h3>
               </div>
@@ -368,7 +368,7 @@ const Profile = () => {
             </div>
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm poppins-medium text-gray-700">
                   Nom complet
                 </label>
                 <input
@@ -380,7 +380,7 @@ const Profile = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm poppins-medium text-gray-700">
                   Nom d'utilisateur
                 </label>
                 <input
@@ -392,7 +392,7 @@ const Profile = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm poppins-medium text-gray-700">
                   Email
                 </label>
                 <input
@@ -405,7 +405,7 @@ const Profile = () => {
               {fetchedSubscription && (
                 <>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm poppins-medium text-gray-700">
                       Mobile
                     </label>
                     <input
@@ -417,7 +417,7 @@ const Profile = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm poppins-medium text-gray-700">
                       Votre Profession
                     </label>
                     <input
@@ -429,7 +429,7 @@ const Profile = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm poppins-medium text-gray-700">
                       Entreprise / Organisation
                     </label>
                     <input
@@ -441,7 +441,7 @@ const Profile = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm poppins-medium text-gray-700">
                       Adresse du travail
                     </label>
                     <input
@@ -453,7 +453,7 @@ const Profile = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm poppins-medium text-gray-700">
                       Site web
                     </label>
                     <input

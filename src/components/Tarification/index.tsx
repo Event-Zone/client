@@ -52,13 +52,11 @@ function Tarification() {
     <div className="flex flex-col justify-center items-center">
       {message && <Message message={message} />}{" "}
       {/* Conditionally render the message dialog */}
-      <h3 className="text-mainBlue font-extrabold font-poppins text-xl">
-        Forfaits
-      </h3>
-      <h3 className="text-titles font-poppins text-[40px] font-normal leading-[60px] text-center">
+      <h3 className="text-mainBlue poppins-extrabold  text-xl">Forfaits</h3>
+      <h3 className="text-titles poppins-regular text-[40px] poppins-normal leading-[60px] text-center">
         Tarification Simple et Transparente
       </h3>
-      <p className="text-sm text-gray-600 font-poppins ">
+      <p className="text-sm text-gray-600 poppins-regular ">
         Des prix qui suivent la croissance de votre événement, vous ne paierez
         donc jamais plus que ce dont vous avez besoin, et entièrement gratuits
         pour les étudiants.

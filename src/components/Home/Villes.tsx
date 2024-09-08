@@ -32,8 +32,8 @@ function Villes() {
   }, [eventByLocationIsLoading, eventByLocationIsError, eventsByLocation]);
 
   return (
-    <div className="w-full p-4">
-      <h2 className="text-titles ml-14 mb-4 font-extrabold md:text-[30px]">
+    <div className="w-full py-4">
+      <h2 className="text-titles ml-1 mb-4 poppins-semibold md:text-[24px]">
         Villes populaires à <span className="text-mainBlue">EventZone</span>
       </h2>
 

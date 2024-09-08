@@ -14,7 +14,7 @@ function Collaborer() {
   return (
     <div>
       <div className="w-[90%] ml-14 my-3">
-        <h2 className="text-titles ml-14 mb-4 font-extrabold text-[30px]">
+        <h2 className="text-titles ml-14 mb-4 poppins-extrabold text-[30px]">
           Collaborez avec
           <span className="text-mainBlue"> EventZone</span>
         </h2>
@@ -25,7 +25,7 @@ function Collaborer() {
             <img alt="search-icon" src="/icons/ion_search.png" />
           </div>
           <div>
-            <h2 className="text-titles ml-9 mb-4 font-extrabold text-[30px]">
+            <h2 className="text-titles ml-9 mb-4 poppins-extrabold text-[30px]">
               Découvrez des événements
             </h2>
             <p className="text-titles">
@@ -44,7 +44,7 @@ function Collaborer() {
             <img alt="plus-icon" src="/icons/ph_plus-bold.png" />
           </div>
           <div>
-            <h2 className="text-titles ml-14 mb-4 font-extrabold text-[30px]">
+            <h2 className="text-titles ml-14 mb-4 poppins-extrabold text-[30px]">
               Ajoutez votre événement{" "}
             </h2>
             <p className="text-titles">

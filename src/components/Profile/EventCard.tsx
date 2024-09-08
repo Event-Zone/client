@@ -58,7 +58,18 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
       {/* Content */}
       <div className="p-4 ">
         <h3 className="text-md  poppins-semibold mb-2 text-ellipsis line-clamp-1">
-          {event.eventName}
+          <>
+            {
+              <>
+                {event?.eventAcronym && (
+                  <>
+                    {event?.eventAcronym} {" - "}
+                  </>
+                )}
+              </>
+            }{" "}
+            {event?.eventName}
+          </>
         </h3>
 
         <p className="text-sm text-gray-500 text-ellipsis line-clamp-2 ">
@@ -118,7 +129,7 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
               onClick={() => {
                 router.replace(`/events/update/${event._id}`);
               }}
-              className="block w-full text-left px-4 py-2 text-blue-700 bg-blue-100 font-semibold rounded-t-lg hover:bg-blue-200"
+              className="block w-full text-left px-4 py-2 text-blue-700 bg-blue-100 poppins-semibold rounded-t-lg hover:bg-blue-200"
             >
               Modifier
             </button>

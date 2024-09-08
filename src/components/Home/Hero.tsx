@@ -6,6 +6,7 @@ import {
 } from "@/store/features/api/apiSlice";
 import { useRouter } from "next/navigation";
 import { isArray } from "util";
+import Progress from "../shared/Progress";
 const Hero = () => {
   const router = useRouter();
   const [adds, setAdds] = useState<string[]>([]);
@@ -67,7 +68,7 @@ const Hero = () => {
         if (prevImage === 3) return 0;
         else return prevImage + 1;
       });
-    }, 3000); // Set interval to 3000 milliseconds (3 seconds)
+    }, 7000); // Set interval to 3000 milliseconds (3 seconds)
     return () => clearInterval(interval);
   }, [adds.length]);
 
@@ -79,17 +80,17 @@ const Hero = () => {
   return (
     <div className="flex flex-col">
       <div
-        className="relative  bg-cover bg-center md:px-44 md:py-20 flex flex-row  items-center"
+        className="relative  bg-cover bg-center md:px-44 md:py-20 flex flex-row   items-center"
         style={{
           backgroundImage: `url(${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${eventAdds[currentBar]?.eventImages[0]})`,
         }}
       >
         <div className="hero-overlay"></div>
-        <div className="md:opacity-100 opacity-0  z-30  mr-4">
+        <div className="md:opacity-100 opacity-0  z-30  mr-[6%]">
           {adds.map((_, index) => (
             <div
               key={index}
-              className={`progress-bar w-[10px] h-[50px] bg-gray-300 mb-2 rounded-md cursor-pointer`}
+              className={`progress-bar w-[10px] md:h-[65px] bg-gray-300 mb-2 rounded-md cursor-pointer`}
               onClick={() => handleBarClick(index)} // Wrap the function call in an anonymous function
             >
               {index <= currentBar && (
@@ -99,13 +100,13 @@ const Hero = () => {
           ))}
         </div>
         <div className="z-30 absolute bottom-1 left-3 md:hidden flex">
-          <div className="flex mt-3">
-            <p className="poppins-regular text-sm text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-1 mr-3">
+          <div className="flex mt-3 ">
+            <p className="poppins-regular text-sm  text-mainBlue bg-[#E9F1FC]  rounded-lg px-10 py-4 mr-3">
               {eventAdds[currentBar]?.type}
             </p>
             {isArray(eventAdds[currentBar]?.Categorie) ? (
               eventAdds[currentBar]?.Categorie.map((categorie: any) => (
-                <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+                <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg p-8 ">
                   {categorie}
                 </p>
               ))
@@ -119,8 +120,22 @@ const Hero = () => {
         <div className="hidden md:flex flex-col justify-between ">
           <div className="flex flex-row relative z-10">
             <div>
-              <h2 className="mb-10 text-white font-poppins md:text-[30px] font-semibold text-left">
-                {eventAdds.length > 0 && eventAdds[currentBar]?.eventName}
+              <h2 className="mb-1 text-white  md:text-[48px] poppins-semibold text-left">
+                {eventAdds.length > 0 && (
+                  <>
+                    {
+                      <>
+                        {eventAdds[currentBar]?.eventAcronym && (
+                          <>
+                            {eventAdds[currentBar]?.eventAcronym}
+                            {" - "}
+                          </>
+                        )}
+                      </>
+                    }{" "}
+                    {eventAdds[currentBar]?.eventName}
+                  </>
+                )}
               </h2>
             </div>
           </div>
@@ -168,18 +183,18 @@ const Hero = () => {
               )}
             </p>
           </div>
-          <div className="mb-2 flex flex-row justify-between w-fit relative z-10">
-            <button className="mr-2 rounded-[30px] p-2 bg-transparent text-white text-center border border-white">
+          <div className="mb-8 flex flex-row justify-between w-fit relative z-10">
+            <button className="mr-2 rounded-[30px] px-6 py-2 bg-transparent text-white text-center border border-white">
               {eventAdds[currentBar]?.type}
             </button>
             {isArray(eventAdds[currentBar]?.Categorie) ? (
               eventAdds[currentBar]?.Categorie.map((categorie: any) => (
-                <button className="rounded-[30px] p-2 bg-transparent text-white text-center border border-white">
+                <button className="rounded-[30px] px-6 py-2 bg-transparent text-white text-center border border-white">
                   {categorie}
                 </button>
               ))
             ) : (
-              <button className="rounded-[30px] p-2 bg-transparent text-white text-center border border-white">
+              <button className="rounded-[30px] px-6 py-2 bg-transparent text-white text-center border border-white">
                 {eventAdds[currentBar]?.Categorie}
               </button>
             )}
@@ -189,7 +204,7 @@ const Hero = () => {
               onClick={() =>
                 router.replace(`/events/details/${eventAdds[currentBar]?._id}`)
               }
-              className="mr-2 rounded-[10px] px-6 py-3 bg-mainBlue text-white text-center"
+              className="mr-2 rounded-[10px] px-10 py-3 bg-mainBlue text-white text-center"
             >
               Voir plus
             </button>
@@ -200,7 +215,7 @@ const Hero = () => {
       <div className=" mx-1 md:hidden   flex flex-col justify-between ">
         <div className="flex flex-row relative z-10">
           <div>
-            <h2 className="mb-10 text-titles poppins-medium font-poppins md:text-[30px] font-semibold text-left">
+            <h2 className="mb-10 text-titles poppins-medium poppins-poppins md:text-[30px] poppins-semibold text-left">
               {eventAdds.length > 0 && eventAdds[currentBar]?.eventName}
             </h2>
           </div>
@@ -276,6 +291,7 @@ const Hero = () => {
           ))}
         </div>
       </div>
+      {(addsIsLoading || eventAddsIsLoading) && <Progress />}
     </div>
   );
 };

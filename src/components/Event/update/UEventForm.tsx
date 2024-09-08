@@ -165,7 +165,7 @@ function EventForm({
         <div className="mb-4  border-gray-300 border-[1.3px] md:p-2">
           <label
             htmlFor="eventName"
-            className="block text-sm font-medium poppins-semibold text-gray-700"
+            className="block text-sm poppins-medium poppins-semibold text-gray-700"
           >
             Nom de l'événement
           </label>
@@ -182,7 +182,7 @@ function EventForm({
         <div className="mb-4 border-gray-300 border-[1.3px] p-2">
           <label
             htmlFor="eventAcronym"
-            className="block text-sm font-medium poppins-semibold text-gray-700"
+            className="block text-sm poppins-medium poppins-semibold text-gray-700"
           >
             Acronym de nom de l'événement
           </label>
@@ -500,7 +500,7 @@ function EventForm({
         <div className="mb-4 border-gray-300 border-[1.3px] p-2">
           <label
             htmlFor="tags"
-            className="block text-sm font-medium poppins-semibold text-gray-700"
+            className="block text-sm poppins-medium poppins-semibold text-gray-700"
           >
             Appuyez sur Entrée pour ajouter un tag
           </label>
@@ -610,7 +610,7 @@ function EventForm({
             <div className="border-gray-300 border-[1.3px] p-2 mb-2">
               <label
                 htmlFor="startdate"
-                className="block text-sm font-medium poppins-semibold text-gray-700"
+                className="block text-sm poppins-medium poppins-semibold text-gray-700"
               >
                 Date de début
               </label>
@@ -633,7 +633,7 @@ function EventForm({
             <div className="border-gray-300 border-[1.3px] p-2">
               <label
                 htmlFor="enddate"
-                className="block text-sm font-medium poppins-semibold text-gray-700"
+                className="block text-sm poppins-medium poppins-semibold text-gray-700"
               >
                 Date de fin
               </label>
@@ -658,7 +658,7 @@ function EventForm({
             <div className="border-gray-300 border-[1.3px] p-2 mb-2 sm:h-[62px]">
               <label
                 htmlFor="startHour"
-                className="block text-sm font-medium poppins-semibold text-gray-700"
+                className="block text-sm poppins-medium poppins-semibold text-gray-700"
               >
                 Heure de début
               </label>
@@ -676,7 +676,7 @@ function EventForm({
             <div className="border-gray-300 border-[1.3px] p-2 sm:h-[62px]">
               <label
                 htmlFor="endHour"
-                className="block text-sm font-medium poppins-semibold text-gray-700"
+                className="block text-sm poppins-medium poppins-semibold text-gray-700"
               >
                 Heure de fin
               </label>

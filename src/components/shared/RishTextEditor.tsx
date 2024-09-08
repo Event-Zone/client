@@ -40,7 +40,7 @@ function RishTextEditor({
     <div className="mb-4 border-gray-300 border-[1.3px] p-2">
       <label
         htmlFor="eventDescription"
-        className="block text-sm font-medium poppins-semibold text-gray-700"
+        className="block text-sm poppins-medium poppins-semibold text-gray-700"
       >
         Description de l'événement
       </label>

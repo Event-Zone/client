@@ -11,6 +11,7 @@ import {
 import { useSelector } from "react-redux";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { selectUser } from "@/store/features/userSlice";
+import Progress from "../shared/Progress";
 
 function Home() {
   const [events, setEvents] = useState([]);
@@ -35,12 +36,15 @@ function Home() {
   }, [fetchedEvents, error, isLoading]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen  ">
       <Hero />
-      <Categorie />
-      <Villes />
-      <NextEvent events={events.slice(0, 4)} />
+      <div className="md:px-28 md:mt-[-220px]">
+        <Categorie />
+        <Villes />
+        <NextEvent events={events.slice(0, 4)} />{" "}
+      </div>
       {user ? null : <Collaborer />}
+      {isLoading && <Progress />}
     </div>
   );
 }

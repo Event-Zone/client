@@ -55,6 +55,7 @@ function Navbar() {
   useEffect(() => {
     console.log("searchedEvents", searchedEvents);
     dispatch(setSearchedEvents(searchedEvents));
+    if (searchedEvents) router.push("/search");
   }, [searchedEvents]);
   const {
     data: allEvents,
@@ -162,7 +163,11 @@ function Navbar() {
               className="p-2 pl-10 text-gray-500 focus:outline-none"
             >
               {locations?.map((state) => (
-                <option key={state} value={state} className="text-gray-500">
+                <option
+                  key={state}
+                  value={state}
+                  className="text-gray-500 pippins-regular"
+                >
                   {state}
                 </option>
               ))}
@@ -194,19 +199,24 @@ function Navbar() {
 
       {/* Desktop Search and Menu */}
       <div
-        onClick={() => router.push("/search")}
+        onClick={() => {}}
         className="overFlow-hidden hidden lg:flex flex-grow items-center max-w-[550px] rounded-[10px] border-gray-500 border overflow-hidden"
       >
-        <div className="relative flex-grow">
-          <input
-            value={searchTerm}
-            onChange={handleSearch}
-            type="text"
-            placeholder="Search"
-            className="p-2 pl-10 w-full text-gray-700 outline-none focus:outline-none border-0"
-          />
+        <div className="ml-2 relative flex-grow">
+          <div className="flex items-center ">
+            {" "}
+            <img src={"icons/Search.svg"} className="w-[20px] h-[20px] ml-2" />
+            <input
+              value={searchTerm}
+              onChange={handleSearch}
+              type="text"
+              placeholder="Rechercher des événements"
+              className="p-2 pl-4 w-full text-gray-700 poppins-regular outline-none focus:outline-none border-0"
+            />
+          </div>
         </div>
-        <div className="border-l border-gray-500"></div>
+        <div className="border-l border-[.1] h-[28px] border-gray-700 rounded-3xl"></div>
+
         <div className="relative">
           <span className="absolute inset-y-0 left-0 flex items-center pl-2">
             <img
@@ -234,7 +244,7 @@ function Navbar() {
             ))}
           </select>
         </div>
-        <span className="h-[40px] flex items-center pl-2 pr-2 bg-mainBlue">
+        <span className="h-[50px] flex items-center pl-2 pr-2 bg-mainBlue">
           <img
             src="/icons/Search.svg"
             alt="Search Icon"
@@ -408,6 +418,7 @@ function Navbar() {
           </ul>
         </div>
       )}
+      {searchedEventsLoading && <Progress />}
     </div>
   );
 }

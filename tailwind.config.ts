@@ -18,7 +18,7 @@ const config: Config = {
         'slide-up': 'slide-up 0.5s ease-out',
       },
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
+        sans: ['Poppins', 'sans-serif'],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

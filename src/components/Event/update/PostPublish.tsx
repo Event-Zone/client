@@ -27,13 +27,13 @@ function PostPublish() {
       <div className="flex items-center justify-center">
         <button
           onClick={() => router.replace("/myEvents")}
-          className="border-[1.4px] mr-4 border-gray-500  hover:bg-mainBlue-dark text-gray-500 font-medium text-sm rounded-md py-2 px-10"
+          className="border-[1.4px] mr-4 border-gray-500  hover:bg-mainBlue-dark text-gray-500 poppins-medium text-sm rounded-md py-2 px-10"
         >
           Mes evenement{" "}
         </button>
         <button
           onClick={() => router.replace("/")}
-          className="bg-mainBlue hover:bg-mainBlue-dark text-white font-medium text-sm rounded-md py-2 px-10"
+          className="bg-mainBlue hover:bg-mainBlue-dark text-white poppins-medium text-sm rounded-md py-2 px-10"
         >
           page d'accueil
         </button>

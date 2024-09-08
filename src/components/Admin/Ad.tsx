@@ -134,7 +134,7 @@ function Ad({
           />
           {status === 0 && (
             <div>
-              <p className="text-white font-bold">{event.eventName}</p>
+              <p className="text-white poppins-bold">{event.eventName}</p>
               <p className="text-[#94A3B8]">{event.eventAcronym}</p>
             </div>
           )}

@@ -38,7 +38,7 @@ function User({ user, setSelected }: { user: any; setSelected: Function }) {
           className="h-14 w-14 rounded-full mr-1"
         />
         <div className="overflow-hidden">
-          <p className="text-white whitespace-normal font-bold">
+          <p className="text-white whitespace-normal poppins-bold">
             {user.fullname}
           </p>
           <p className="text-[#94A3B8] text-xs whitespace-normal ">

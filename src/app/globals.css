@@ -8,6 +8,14 @@
     text-wrap: balance;
   }
 }
+body {
+  @apply font-sans;
+}
+
+
+*{
+  outline: none;
+}
 
 .hero-overlay {
   position: absolute;
@@ -29,12 +37,12 @@
 
 .fill-bar {
   @apply bg-white;
-  animation: fill 3s linear forwards;
+  animation: fill 6s linear forwards;
 }
 
 .fill-bar-horizontal {
   @apply bg-mainBlue;
-  animation: fill 3s linear forwards;
+  animation: fill 6s linear forwards;
   
 }
 
