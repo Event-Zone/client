@@ -73,7 +73,23 @@ function EventPage({ data }: { data: any }) {
       router.push(`/search`);
     }
   };
-
+  const getYouTubeId = (url: string) => {
+    const urlParams = new URL(url).searchParams;
+    return urlParams.get("v");
+  };
+  const [videoId, setVideoId] = useState<string | null>(null);
+  useEffect(() => {
+    if (data.videoUrl) {
+      const pp = getYouTubeId(data.videoUrl);
+      if (pp) {
+        setCurrentBar(-1);
+        setVideoId(pp);
+      }
+    }
+  }, [data?.videoUrl]);
+  useEffect(() => {
+    console.log(currentBar);
+  }, [currentBar]);
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col w-full px-4 md:px-20 lg:px-44  py-16">
@@ -88,17 +104,28 @@ function EventPage({ data }: { data: any }) {
             }
           />
           <div className="absolute bottom-3 flex flex-row z-30 justify-center items-center w-full p-4">
-            {data.eventImages.map((_: any, index: number) => (
-              <div
-                key={index}
-                className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
-                onClick={() => handleBarClick(index)}
-              >
-                {index === currentBar && (
-                  <div className=" w-full h-full rounded-md bg-gray-300  "></div>
-                )}
-              </div>
-            ))}
+            <>
+              {data?.videoUrl && videoId && (
+                <>
+                  <div
+                    key={0}
+                    className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
+                    onClick={() => handleBarClick(-1)}
+                  ></div>
+                </>
+              )}
+              {data.eventImages.map((_: any, index: number) => (
+                <div
+                  key={index}
+                  className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
+                  onClick={() => handleBarClick(index)}
+                >
+                  {index === currentBar && (
+                    <div className=" w-full h-full rounded-md bg-gray-300  "></div>
+                  )}
+                </div>
+              ))}{" "}
+            </>
           </div>
         </div>
         <div className="flex mt-3 element-with-scrollbar w-full overflow-scroll">

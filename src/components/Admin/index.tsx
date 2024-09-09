@@ -222,7 +222,7 @@ function Admin() {
           <>dashboard</>
         )}
       </div>
-      {fetchedEventsLoading && <Progress />}
+      {(fetchedEventsLoading || newAdResult.isLoading) && <Progress />}
       {fetchedEventsError && (
         <Message
           message={{ type: 0, content: "Error while fetching events" }}

@@ -1,10 +1,14 @@
 import { useSearchEventsByCategorieQuery } from "@/store/features/api/apiSlice";
-import { setSearchedEvents } from "@/store/features/eventSlice";
+import {
+  selectInitialEvents,
+  setSearchedEvents,
+} from "@/store/features/eventSlice";
 import { IEvent } from "@/types/Event";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Progress from "../shared/Progress";
+import Image from "next/image";
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -37,6 +41,7 @@ const categories = [
 
 function NextEvent({ events }: { events: IEvent[] }) {
   const [selectedCategory, setCategory] = useState<string[] | null>(null);
+  const initialEvents = useSelector(selectInitialEvents);
   useEffect(() => {
     console.log(selectedCategory);
   }, [selectedCategory]);
@@ -145,7 +150,10 @@ function NextEvent({ events }: { events: IEvent[] }) {
 
       <div className="w-full flex justify-center items-center">
         <button
-          onClick={() => router.replace("/search")}
+          onClick={() => {
+            dispatch(setSearchedEvents(initialEvents));
+            router.push("/search");
+          }}
           className="mr-2 rounded-[10px] px-10 py-3 bg-mainBlue text-white text-center"
         >
           Voir plus
