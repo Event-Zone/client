@@ -91,6 +91,21 @@ function EventPage({ data }: { data: any }) {
   useEffect(() => {
     console.log(currentBar);
   }, [currentBar]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBar((prev) => {
+        if (prev === data?.eventImages?.length - 1) {
+          return 0;
+        }
+        return prev + 1;
+      });
+      setCurrentImage((prevImage) => {
+        if (prevImage === 3) return 0;
+        else return prevImage + 1;
+      });
+    }, 7000); // Set interval to 3000 milliseconds (3 seconds)
+    return () => clearInterval(interval);
+  }, [data?.eventImages?.length]);
   return (
     <div className="flex flex-col w-full md:px-16">
       <div className="flex flex-col w-full px-4 md:px-20 lg:px-44  py-16">
@@ -145,7 +160,7 @@ function EventPage({ data }: { data: any }) {
                     <div className=" w-full h-full rounded-md bg-gray-300  "></div>
                   )}
                 </div>
-              ))}{" "}
+              ))}
             </>
           </div>
         </div>

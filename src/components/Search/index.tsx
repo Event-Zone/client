@@ -45,6 +45,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
 
   useEffect(() => {
     setEvents(seachedEvents);
+    console.log("seachedEvents", seachedEvents);
   }, [seachedEvents]);
 
   const [adds, setAdds] = useState<any[] | null>([]);

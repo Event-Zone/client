@@ -282,9 +282,9 @@ const Hero = () => {
 
         <div className="relative z-10">
           <button
-            onClick={() =>
-              router.replace(`/events/details/${eventAdds[currentBar]?._id}`)
-            }
+            onClick={() => {
+              router.replace(`/events/details/${eventAdds[currentBar]?._id}`);
+            }}
             className="mr-2 rounded-[10px] px-4 py-1 bg-mainBlue text-titles poppins-medium text-center"
           >
             Voir plus

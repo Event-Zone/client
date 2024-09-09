@@ -11,14 +11,20 @@ const userPersistConfig = {
     storage,
     whitelist: ["user", 'token'],
 };
+const eventsPersistConfig = {
+    key: "events",
+    storage,
+    whitelist: ['searchedEvents', 'initialEvents'],
+};
 
 const persistedReducer = persistReducer(userPersistConfig, userReducer);
+const persistedEventsReducer = persistReducer(eventsPersistConfig, eventsReducer);
 
 export const store = configureStore({
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer,
         auth: persistedReducer,
-        events: eventsReducer
+        events: persistedEventsReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
