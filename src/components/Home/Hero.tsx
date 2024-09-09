@@ -81,7 +81,7 @@ const Hero = () => {
   return (
     <div className="flex flex-col">
       <div
-        className="relative w-full  bg-cover bg-center  md:py-20 flex flex-row   items-center"
+        className="relative w-full h-[400px]  bg-cover bg-center  md:py-20 flex flex-row   items-center"
         // style={{
         //   backgroundImage: `url(${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${eventAdds[currentBar]?.eventImages[0]})`,
         // }}
@@ -130,7 +130,7 @@ const Hero = () => {
         <div className="hidden md:flex flex-col justify-between ">
           <div className="flex flex-row relative z-10">
             <div>
-              <h2 className="mb-1 text-white  md:text-[48px] poppins-semibold text-left">
+              <h2 className="mb-1 text-ellipsis line-clamp-2 text-white  md:text-[48px] poppins-semibold text-left">
                 {eventAdds.length > 0 && (
                   <>
                     {
