@@ -7,6 +7,7 @@ import {
 import { useRouter } from "next/navigation";
 import { isArray } from "util";
 import Progress from "../shared/Progress";
+import Image from "next/image";
 const Hero = () => {
   const router = useRouter();
   const [adds, setAdds] = useState<string[]>([]);
@@ -80,13 +81,22 @@ const Hero = () => {
   return (
     <div className="flex flex-col">
       <div
-        className="relative  bg-cover bg-center md:px-44 md:py-20 flex flex-row   items-center"
-        style={{
-          backgroundImage: `url(${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${eventAdds[currentBar]?.eventImages[0]})`,
-        }}
+        className="relative w-full  bg-cover bg-center  md:py-20 flex flex-row   items-center"
+        // style={{
+        //   backgroundImage: `url(${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${eventAdds[currentBar]?.eventImages[0]})`,
+        // }}
       >
+        <Image
+          src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${eventAdds[currentBar]?.eventImages[0]}`}
+          alt="eventHeroImage"
+          width={500} // Specify width
+          height={300} // Specify height
+          quality={75} // Adjust quality to improve performance (default is 75)
+          // placeholder="blur" // Optionally use a low-quality placeholder
+          className="md:absolute  w-full h-full object-cover" // Added CSS classes
+        />
         <div className="hero-overlay"></div>
-        <div className="md:opacity-100 opacity-0  z-30  mr-[6%]">
+        <div className="md:opacity-100 opacity-0 md:ml-16 z-30  mr-[6%]">
           {adds.map((_, index) => (
             <div
               key={index}
@@ -101,17 +111,17 @@ const Hero = () => {
         </div>
         <div className="z-30 absolute bottom-1 left-3 md:hidden flex">
           <div className="flex mt-3 ">
-            <p className="poppins-regular text-sm  text-mainBlue bg-[#E9F1FC]  rounded-lg px-10 py-4 mr-3">
+            <p className="poppins-regular text-sm text-center  text-mainBlue bg-[#E9F1FC]  rounded-lg md:px-10 md:py-4 px-[5px] py-[10px] mr-3">
               {eventAdds[currentBar]?.type}
             </p>
             {isArray(eventAdds[currentBar]?.Categorie) ? (
               eventAdds[currentBar]?.Categorie.map((categorie: any) => (
-                <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg p-8 ">
+                <p className="poppins-medium text-center text-mainBlue bg-[#E9F1FC]  px-[10px] py-[5px] rounded-lg md:p-8 ">
                   {categorie}
                 </p>
               ))
             ) : (
-              <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+              <p className="poppins-medium text-center text-mainBlue bg-[#E9F1FC]  rounded-lg md:px-4 md:py-2 px-[5px] mr-3">
                 {eventAdds[currentBar]?.Categorie}
               </p>
             )}
