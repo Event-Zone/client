@@ -38,7 +38,7 @@ function Home() {
   return (
     <div className="min-h-screen  ">
       <Hero />
-      <div className="md:px-28 md:mt-[-220px]">
+      <div className="md:px-28 ">
         <Categorie />
         <Villes />
         <NextEvent events={events.slice(0, 4)} />{" "}
