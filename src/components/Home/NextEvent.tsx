@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Progress from "../shared/Progress";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
