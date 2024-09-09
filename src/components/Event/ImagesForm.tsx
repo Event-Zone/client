@@ -15,7 +15,7 @@ function ImagesForm({
 }) {
   const [isFormValid, setIsFormValid] = useState(false);
   useEffect(() => {
-    if (formData.getAll("eventImages").length > 0 && isFormValid) {
+    if (formData.getAll("eventImages").length > 0) {
       console.log("all fields are filled");
       setIsNext(true);
     } else {

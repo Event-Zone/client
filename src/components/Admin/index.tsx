@@ -12,6 +12,7 @@ import Message from "../shared/Message";
 import EventCard from "./EventCard";
 import { IEvent } from "@/types/Event";
 import Users from "./Users";
+import Image from "next/image";
 
 function Admin() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -85,10 +86,14 @@ function Admin() {
             <div className="bg-transparent flex flex-grow w-full rounded-[10px] border-gray-500 border overflow-hidden">
               <div className="relative w-full flex-grow">
                 <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                  <img
+                  <Image
                     src="/icons/Search.svg"
                     alt="Search Icon"
                     className="h-5 w-5 text-gray-500"
+                    width={500} // Specify width
+                    height={300} // Specify height
+                    quality={75} // Adjust quality to improve performance (default is 75)
+                    // placeholder="blur" // Optionally use a low-quality placeholder
                   />
                 </span>
                 <input

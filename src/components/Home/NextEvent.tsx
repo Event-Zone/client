@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Progress from "../shared/Progress";
+import Image from "next/image";
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -99,7 +100,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
               key={index}
               className="w-[300px] h-[300px] flex-shrink-0 bg-white shadow-md rounded-lg overflow-hidden"
             >
-              <img
+              <Image
                 alt="event-img"
                 className="h-1/3 w-full object-cover"
                 src={
@@ -107,7 +108,12 @@ function NextEvent({ events }: { events: IEvent[] }) {
                     ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event.eventImages[0]}`
                     : "https://via.placeholder.com/300x200"
                 }
+                width={500} // Specify width
+                height={300} // Specify height
+                quality={75} // Adjust quality to improve performance (default is 75)
+                // placeholder="blur" // Optionally use a low-quality placeholder
               />
+
               <div className="p-4">
                 <h3 className="text-xl poppins-semibold text-ellipsis line-clamp-3">
                   <>

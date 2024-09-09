@@ -11,6 +11,7 @@ import Progress from "../shared/Progress";
 import Message from "../shared/Message";
 import { useRouter } from "next/navigation";
 import { useUpdateAdStatusMutation } from "@/store/features/api/apiSlice";
+import Image from "next/image";
 
 function Ad({
   setStatus,
@@ -125,11 +126,15 @@ function Ad({
         className="grid grid-cols-6 items-center py-3 border-b border-[#364153]"
       >
         <div className="flex col-span-2 items-center">
-          <img
+          <Image
             src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${
               status === 0 ? event.eventImages[0] : event.picture
             }`}
             alt={event.eventName}
+            width={500} // Specify width
+            height={300} // Specify height
+            quality={75} // Adjust quality to improve performance (default is 75)
+            // placeholder="blur" // Optionally use a low-quality placeholder
             className="h-14 w-14 rounded-lg mr-4"
           />
           {status === 0 && (

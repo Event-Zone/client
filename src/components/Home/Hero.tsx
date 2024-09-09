@@ -88,7 +88,7 @@ const Hero = () => {
       >
         <Image
           src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${eventAdds[currentBar]?.eventImages[0]}`}
-          alt="eventHeroImage"
+          alt={`eventHeroImage${currentBar}`}
           width={500} // Specify width
           height={300} // Specify height
           quality={75} // Adjust quality to improve performance (default is 75)
@@ -109,7 +109,7 @@ const Hero = () => {
             </div>
           ))}
         </div>
-        <div className="z-30 absolute bottom-1 left-3 md:hidden flex">
+        <div className="z-30 absolute w-full overflow-scroll element-with-scrollbar bottom-1 left-3 md:hidden flex">
           <div className="flex mt-3 ">
             <p className="poppins-regular text-sm text-center  text-mainBlue bg-[#E9F1FC]  rounded-lg md:px-10 md:py-4 px-[5px] py-[10px] mr-3">
               {eventAdds[currentBar]?.type}
@@ -193,16 +193,21 @@ const Hero = () => {
               )}
             </p>
           </div>
-          <div className="mb-8 flex flex-row justify-between w-fit relative z-10">
+          <div className="mb-8 flex flex-row w-[200px] md:w-[700px] overflow-scroll element-with-scrollbar    relative z-10">
             <button className="mr-2 rounded-[30px] px-6 py-2 bg-transparent text-white text-center border border-white">
               {eventAdds[currentBar]?.type}
             </button>
             {isArray(eventAdds[currentBar]?.Categorie) ? (
-              eventAdds[currentBar]?.Categorie.map((categorie: any) => (
-                <button className="rounded-[30px] px-6 py-2 bg-transparent text-white text-center border border-white">
-                  {categorie}
-                </button>
-              ))
+              eventAdds[currentBar]?.Categorie.map(
+                (categorie: any, index: number) => {
+                  if (index <= 2)
+                    return (
+                      <button className=" rounded-[30px] px-6 py-2 bg-transparent text-white text-center border border-white">
+                        {categorie}
+                      </button>
+                    );
+                }
+              )
             ) : (
               <button className="rounded-[30px] px-6 py-2 bg-transparent text-white text-center border border-white">
                 {eventAdds[currentBar]?.Categorie}

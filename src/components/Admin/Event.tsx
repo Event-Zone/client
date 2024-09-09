@@ -8,6 +8,7 @@ import {
 import Progress from "../shared/Progress";
 import Message from "../shared/Message";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 function Event({
   status,
@@ -78,9 +79,13 @@ function Event({
         className="grid grid-cols-6 items-center py-3 border-b border-[#364153]"
       >
         <div className="flex col-span-2 items-center">
-          <img
+          <Image
             src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event.eventImages[0]}`}
             alt={event.eventName}
+            width={500} // Specify width
+            height={300} // Specify height
+            quality={75} // Adjust quality to improve performance (default is 75)
+            // placeholder="blur" // Optionally use a low-quality placeholder
             className="h-14 w-14 rounded-lg mr-4"
           />
           <div>
@@ -112,10 +117,14 @@ function Event({
               onClick={handleApprove}
               className="w-fit h-fit rounded-full"
             >
-              <img
+              <Image
                 src="/icons/Frame 1229.png"
-                className="w-[40px] h-[40px]"
                 alt="approve"
+                width={500} // Specify width
+                height={300} // Specify height
+                quality={75} // Adjust quality to improve performance (default is 75)
+                // placeholder="blur" // Optionally use a low-quality placeholder
+                className="w-[40px] h-[40px]"
               />
             </button>
           )}
@@ -124,22 +133,42 @@ function Event({
               onClick={handleDecline}
               className="w-fit h-fit rounded-full"
             >
-              <img src="/icons/Frame 1230.png" alt="reject" />
+              <Image
+                src="/icons/Frame 1230.png"
+                alt="reject"
+                width={500} // Specify width
+                height={300} // Specify height
+                quality={75} // Adjust quality to improve performance (default is 75)
+                // placeholder="blur" // Optionally use a low-quality placeholder
+                className="w-[40px] h-[40px]"
+              />
             </button>
           ) : null}
           {status === "approved" ? (
             <button onClick={handlePause} className="w-fit h-fit rounded-full">
-              <img src="/icons/Frame 1229 (1).png" alt="reject" />
+              <Image
+                src="/icons/Frame 1229 (1).png"
+                alt="reject"
+                width={500} // Specify width
+                height={300} // Specify height
+                quality={75} // Adjust quality to improve performance (default is 75)
+                // placeholder="blur" // Optionally use a low-quality placeholder
+                className="w-[40px] h-[40px]"
+              />
             </button>
           ) : null}
           <button
             onClick={() => router.push(`/events/details/${event._id}`)}
             className="w-fit h-fit rounded-full"
           >
-            <img
+            <Image
               src="/icons/Frame 1303.png"
               className="w-[40px] h-[40px]"
               alt="view"
+              width={500} // Specify width
+              height={300} // Specify height
+              quality={75} // Adjust quality to improve performance (default is 75)
+              // placeholder="blur" // Optionally use a low-quality placeholder
             />
           </button>
         </div>

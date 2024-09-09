@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { setSearchedEvents } from "@/store/features/eventSlice";
 import { useRouter } from "next/navigation";
 import { isArray } from "util";
+import Image from "next/image";
 
 function EventPage({ data }: { data: any }) {
   // geting the organizer data
@@ -73,32 +74,79 @@ function EventPage({ data }: { data: any }) {
       router.push(`/search`);
     }
   };
-
+  const getYouTubeId = (url: string) => {
+    const urlParams = new URL(url).searchParams;
+    return urlParams.get("v");
+  };
+  const [videoId, setVideoId] = useState<string | null>(null);
+  useEffect(() => {
+    if (data.videoUrl) {
+      const pp = getYouTubeId(data.videoUrl);
+      if (pp) {
+        setCurrentBar(-1);
+        setVideoId(pp);
+      }
+    }
+  }, [data?.videoUrl]);
+  useEffect(() => {
+    console.log(currentBar);
+  }, [currentBar]);
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full md:px-16">
       <div className="flex flex-col w-full px-4 md:px-20 lg:px-44  py-16">
         <div className="relative flex items-center justify-center rounded-xl overflow-hidden h-[460px] w-full ">
-          <img
-            alt="coverImg"
-            className="h-full w-full"
-            src={
-              data.eventImages
-                ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${data.eventImages[currentImage]}`
-                : "https://via.placeholder.com/300"
-            }
-          />
+          {data?.videoUrl && videoId && currentBar === -1 ? (
+            <div className="absolute w-full h-full z-20">
+              <iframe
+                id="yt-video"
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&showinfo=0&controls=1&mute=1`}
+                title="YouTube video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          ) : (
+            <Image
+              alt="coverImg"
+              className="h-full w-full"
+              src={
+                data.eventImages
+                  ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${data.eventImages[currentBar]}`
+                  : "https://via.placeholder.com/300"
+              }
+              width={500} // Specify width
+              height={300} // Specify height
+              quality={75} // Adjust quality to improve performance (default is 75)
+              // placeholder="blur" // Optionally use a low-quality placeholder
+            />
+          )}
+
           <div className="absolute bottom-3 flex flex-row z-30 justify-center items-center w-full p-4">
-            {data.eventImages.map((_: any, index: number) => (
-              <div
-                key={index}
-                className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
-                onClick={() => handleBarClick(index)}
-              >
-                {index === currentBar && (
-                  <div className=" w-full h-full rounded-md bg-gray-300  "></div>
-                )}
-              </div>
-            ))}
+            <>
+              {data?.videoUrl && videoId && (
+                <>
+                  <div
+                    key={0}
+                    className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
+                    onClick={() => handleBarClick(-1)}
+                  ></div>
+                </>
+              )}
+              {data.eventImages.map((_: any, index: number) => (
+                <div
+                  key={index}
+                  className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
+                  onClick={() => handleBarClick(index)}
+                >
+                  {index === currentBar && (
+                    <div className=" w-full h-full rounded-md bg-gray-300  "></div>
+                  )}
+                </div>
+              ))}{" "}
+            </>
           </div>
         </div>
         <div className="flex mt-3 element-with-scrollbar w-full overflow-scroll">
@@ -359,7 +407,7 @@ function EventPage({ data }: { data: any }) {
           <h3 className="text-2xl mb-3">Sponsors</h3>
           <div className="flex  ">
             {data?.sponsorImages.map((img: any, index: number) => (
-              <img
+              <Image
                 className="rounded-lg w-[100px] h-[100px] mr-3"
                 key={index}
                 alt={`sponsor-${index}`}
@@ -368,6 +416,10 @@ function EventPage({ data }: { data: any }) {
                     ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${img}`
                     : "https://via.placeholder.com/300"
                 }
+                width={500} // Specify width
+                height={300} // Specify height
+                quality={75} // Adjust quality to improve performance (default is 75)
+                // placeholder="blur" // Optionally use a low-quality placeholder
               />
             ))}
           </div>
@@ -375,17 +427,14 @@ function EventPage({ data }: { data: any }) {
         <div className="mt-4 poppins-meduim w-full overflow-scroll element-with-scrollbar">
           <h3 className="poppins-semibold text-2xl text-titles mb-3">Tags</h3>
           <div className="flex">
-            {data?.tags?.map((tag: string, index: number) => {
-              if (tag !== "")
-                return (
-                  <span
-                    key={index}
-                    className="tag mr-4 poppins-meduim text-titles rounded-lg px-3 bg-gray-200"
-                  >
-                    {tag}
-                  </span>
-                );
-            })}
+            {data?.tags?.map((tag: string, index: number) => (
+              <span
+                key={index}
+                className="tag mr-4 poppins-meduim text-titles rounded-lg px-3 bg-gray-200"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
       </div>

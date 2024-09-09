@@ -3,6 +3,7 @@ import { IEvent } from "@/types/Event";
 import { useRouter } from "next/navigation";
 import { useDeleteEventMutation } from "@/store/features/api/apiSlice";
 import Progress from "../shared/Progress";
+import Image from "next/image";
 
 interface EventCardProps {
   event: IEvent;
@@ -48,11 +49,14 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
       </div>
 
       {/* Image */}
-      <img
+      <Image
         src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event?.eventImages[0]}`}
-        onLoad={() => <div>Loading</div>}
         alt={event.eventName}
         className="w-full h-1/3  object-cover"
+        width={500} // Specify width
+        height={300} // Specify height
+        quality={75} // Adjust quality to improve performance (default is 75)
+        // placeholder="blur" // Optionally use a low-quality placeholder
       />
 
       {/* Content */}

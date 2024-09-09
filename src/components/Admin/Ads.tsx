@@ -116,7 +116,7 @@ function Ads({ status, setStatus }: { status: number; setStatus: Function }) {
         </div>
 
         {/* Events List */}
-        <div className="overflow-y-scroll h-[90%]">
+        <div className="overflow-y-scroll h-[420px] p-4">
           {status === 0
             ? fetchedEventAdds &&
               fetchedEventAdds?.map((event: any, index: number) => (
@@ -145,7 +145,9 @@ function Ads({ status, setStatus }: { status: number; setStatus: Function }) {
                 />
               ))}
         </div>
-        {(searchAdsLoading || heroAdsLoading) && <Progress />}
+        {(searchAdsLoading || heroAdsLoading || eventAddsIsLoading) && (
+          <Progress />
+        )}
         {message && <Message message={message} />}
       </div>
 

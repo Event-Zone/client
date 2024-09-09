@@ -1,5 +1,6 @@
 import { useGetSubscriptionQuery } from "@/store/features/api/apiSlice";
 import { selectUser } from "@/store/features/userSlice";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { isArray } from "util";
@@ -45,7 +46,7 @@ function EventDetails({
     <div className="flex flex-col w-full">
       <div className="flex flex-col w-full px-4    py-16">
         <div className="relative flex items-center justify-center rounded-xl overflow-hidden h-[460px] w-full ">
-          <img
+          <Image
             alt="coverImg"
             className="h-full w-full"
             src={
@@ -55,6 +56,10 @@ function EventDetails({
                   )
                 : "https://via.placeholder.com/300"
             }
+            width={500} // Specify width
+            height={300} // Specify height
+            quality={75} // Adjust quality to improve performance (default is 75)
+            // placeholder="blur" // Optionally use a low-quality placeholder
           />
           <div className="absolute bottom-3 flex flex-row z-30 justify-center items-center w-full p-4">
             {secondFormData
@@ -72,7 +77,7 @@ function EventDetails({
               ))}
           </div>
         </div>
-        <div className="flex mt-3">
+        <div className="flex mt-3 w-full overflow-scroll element-with-scrollbar">
           <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
             {firstFormData.type}
           </p>

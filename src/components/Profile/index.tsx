@@ -17,6 +17,7 @@ import {
 } from "@/store/features/userSlice";
 import EventCard from "./EventCard";
 import ContactSection from "./ContactSection";
+import Progress from "../shared/Progress";
 
 const Profile = () => {
   const [page, setPage] = useState<number>(3);
@@ -500,6 +501,7 @@ const Profile = () => {
           <ContactSection />
         )}
       </div>
+      {(eventsLoading || subIsLoading || userIsLoading) && <Progress />}
     </div>
   );
 };
