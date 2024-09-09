@@ -41,40 +41,82 @@ function EventDetails({
     setCurrentBar(index);
     setCurrentImage(index);
   };
+  const getYouTubeId = (url: string) => {
+    const urlParams = new URL(url).searchParams;
+    return urlParams.get("v");
+  };
+  const [videoId, setVideoId] = useState<string | null>(null);
+  useEffect(() => {
+    console.log(secondFormData?.get("videoUrl"));
+    if (secondFormData?.get("videoUrl")) {
+      const pp = getYouTubeId(secondFormData?.get("videoUrl"));
+      if (pp) {
+        setCurrentBar(-1);
+        setVideoId(pp);
+      }
+    }
+  }, [secondFormData]);
 
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col w-full px-4    py-16">
         <div className="relative flex items-center justify-center rounded-xl overflow-hidden h-[460px] w-full ">
-          <Image
-            alt="coverImg"
-            className="h-full w-full"
-            src={
-              secondFormData.get("eventImages")
-                ? URL.createObjectURL(
-                    secondFormData.getAll("eventImages")[currentImage]
-                  )
-                : "https://via.placeholder.com/300"
-            }
-            width={500} // Specify width
-            height={300} // Specify height
-            quality={75} // Adjust quality to improve performance (default is 75)
-            // placeholder="blur" // Optionally use a low-quality placeholder
-          />
+          {secondFormData?.get("videoUrl") && videoId && currentBar === -1 ? (
+            <div className="absolute w-full h-full z-20">
+              <iframe
+                id="yt-video"
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&showinfo=0&controls=1&mute=1`}
+                title="YouTube video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          ) : (
+            <Image
+              alt="coverImg"
+              className="h-full w-full"
+              src={
+                secondFormData.get("eventImages")
+                  ? URL.createObjectURL(
+                      secondFormData.getAll("eventImages")[currentImage]
+                    )
+                  : "https://via.placeholder.com/300"
+              }
+              width={500} // Specify width
+              height={300} // Specify height
+              quality={75} // Adjust quality to improve performance (default is 75)
+              // placeholder="blur" // Optionally use a low-quality placeholder
+            />
+          )}
+
           <div className="absolute bottom-3 flex flex-row z-30 justify-center items-center w-full p-4">
-            {secondFormData
-              .getAll("eventImages")
-              .map((_: any, index: number) => (
-                <div
-                  key={index}
-                  className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
-                  onClick={() => handleBarClick(index)}
-                >
-                  {index === currentBar && (
-                    <div className=" w-full h-full rounded-md bg-gray-300  "></div>
-                  )}
-                </div>
-              ))}
+            <>
+              {secondFormData?.get("videoUrl") && videoId && (
+                <>
+                  <div
+                    key={0}
+                    className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
+                    onClick={() => handleBarClick(-1)}
+                  ></div>
+                </>
+              )}
+              {secondFormData
+                .getAll("eventImages")
+                .map((_: any, index: number) => (
+                  <div
+                    key={index}
+                    className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
+                    onClick={() => handleBarClick(index)}
+                  >
+                    {index === currentBar && (
+                      <div className=" w-full h-full rounded-md bg-gray-300  "></div>
+                    )}
+                  </div>
+                ))}{" "}
+            </>
           </div>
         </div>
         <div className="flex mt-3 w-full overflow-scroll element-with-scrollbar">

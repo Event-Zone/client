@@ -22,7 +22,7 @@ function CreateEvent() {
     eventName: null,
     eventAcronym: null,
     eventDescription: null,
-    tags: [null],
+    tags: [],
     startdate: null,
     enddate: null,
     startHour: null,

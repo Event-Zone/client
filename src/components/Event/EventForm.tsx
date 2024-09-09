@@ -131,7 +131,7 @@ function EventForm({
 
   const renderTags = () => {
     return formData.tags.map((tag: any, index: number) => {
-      if (tag !== "")
+      if (tag !== " ")
         return (
           <span
             key={index}
