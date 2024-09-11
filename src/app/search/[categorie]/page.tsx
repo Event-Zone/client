@@ -1,5 +1,6 @@
 "use client";
 import Search from "@/components/Search";
+import Ads from "@/components/Search/Ads";
 import {
   useSearchEventsByCategorieQuery,
   useSearchEventsByTypeQuery,
@@ -30,8 +31,13 @@ function Page() {
     }
   }, [eventsByCategorieIsLoading, eventsByCategorieIsError, eventsByCategorie]);
   return (
-    <div>
-      <Search initEvents={initEvents} />
+    <div className="flex  xl:flex-row  flex-col-reverse h-screen overflow-scroll element-with-scrollbar">
+      <div>
+        <Search initEvents={initEvents} />
+      </div>
+      <div className="flex-shrink-0 w-full xl:w-[450px] h-full xl:sticky top-1 right-1 overflow-y-auto">
+        <Ads />
+      </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import {
   useGetUserQuery,
 } from "@/store/features/api/apiSlice";
 import { IEvent } from "@/types/Event";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -53,10 +54,14 @@ function EventCard({ event }: EventCardProps) {
       onClick={() => router.replace(`/events/details/${event._id}`)}
       className=" flex flex-col sm:flex-row items-start sm:items-center mb-4 border border-gray-300 rounded-lg overflow-hidden "
     >
-      <img
+      <Image
         src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event?.eventImages[0]}`}
         alt={event.eventName}
         className="w-full sm:w-[200px] md:w-[245px] "
+        width={500} // Specify width
+        height={300} // Specify height
+        quality={75} // Adjust quality to improve performance (default is 75)
+        // placeholder="blur" // Optionally use a low-quality placeholder
       />
       <div className="p-4 w-full sm:w-2/3">
         <p className="text-gray-500 text-sm sm:text-base poppins-regular">
@@ -72,6 +77,12 @@ function EventCard({ event }: EventCardProps) {
           })}
         </p>
         <h3 className="text-lg sm:text-2xl poppins-semibold mb-2 text-ellipsis line-clamp-2 ">
+          {event.eventAcronym && (
+            <>
+              {event.eventAcronym}
+              {" - "}
+            </>
+          )}
           {event.eventName}
         </h3>
         <p className="text-gray-500 text-sm sm:text-base poppins-medium mb-2 flex">

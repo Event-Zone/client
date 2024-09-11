@@ -269,3 +269,30 @@ body {
   top: -50px !important;
   left: 0 !important;
 }
+
+
+
+.ville-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ville-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #001029; /* Dark blue */
+  color: white;
+  text-align: start;
+  padding: 8px;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border-radius: 0 0 8px 8px;
+}
+
+.ville-container:hover .ville-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -47,6 +47,7 @@ function Navbar() {
     { searchTerm, stateName },
     { skip: searchTerm?.length === 0 }
   );
+
   useEffect(() => {
     if (searchTerm === "") dispatch(setSearchedEvents(allInitEvents));
     else if (searchedEvents) refetchSearch();
@@ -85,11 +86,21 @@ function Navbar() {
       dispatch(setSearchedEvents(searchedEvents));
     }
   };
-
-  const handleStateClick = (e: any) => {
-    if (e.target.value !== "n'import ou") setStateName(e.target.value);
-    else setStateName(undefined);
+  const [inputLocation, setInputocation] = useState("");
+  const [matchingLocations, setMatchingLocations] = useState<any>([]);
+  const [showSearch, setShowSearch] = useState<boolean>(false);
+  const handleStateSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputocation(e.target.value);
   };
+  useEffect(() => {
+    const matchingLocations = locations?.filter((location) =>
+      location.toLowerCase().includes(inputLocation.toLowerCase())
+    );
+    setMatchingLocations(matchingLocations);
+
+    // Do something with matchingLocations, such as setting state
+    console.log(matchingLocations);
+  }, [inputLocation, locations]); // Add 'locations' to the dependency array
 
   const handlSearchClick = () => {
     setSearchOpen((prev) => !prev);
@@ -116,7 +127,9 @@ function Navbar() {
         break;
     }
   }, [user, fetchedSubscription]);
-
+  useEffect(() => {
+    console.log(matchingLocations);
+  }, [matchingLocations]);
   return (
     <div
       className={`flex items-center justify-between p-4 text-white max-w-full sticky top-0 bg-white z-50 ${
@@ -130,7 +143,11 @@ function Navbar() {
           className="flex items-center cursor-pointer"
           onClick={() => router.push("/")}
         >
-          <img src="/NavbarLogo.svg" alt="Navbar Logo" />
+          <img
+            src="/footerLogo.png"
+            alt="Navbar Logo"
+            className="max-w-[160px]"
+          />
         </div>
       )}
 
@@ -138,7 +155,7 @@ function Navbar() {
       {searchOpen && (
         <div
           onClick={() => router.push("/search")}
-          className="flex items-center w-[90%] mx-auto"
+          className="lg:hidden flex  items-center w-[90%] mx-auto"
         >
           <div className="relative flex-grow">
             <input
@@ -150,28 +167,44 @@ function Navbar() {
             />
           </div>
           <div className="border-l border-gray-500"></div>
-          <div className="relative">
+          <div className="relative w-fit">
             <span className="absolute inset-y-0 left-0 flex items-center pl-2">
               <img
                 src="/icons/Location.svg"
                 alt="Location Icon"
-                className="h-5 w-5 text-gray-500"
+                className="h-[10px] w-[10px] text-gray-500"
               />
             </span>
-            <select
-              onChange={handleStateClick}
-              className="p-2 pl-10 text-gray-500 focus:outline-none"
-            >
-              {locations?.map((state) => (
-                <option
-                  key={state}
-                  value={state}
-                  className="text-gray-500 pippins-regular"
-                >
-                  {state}
-                </option>
-              ))}
-            </select>
+            <div className="flex">
+              <input
+                onClick={() => {
+                  setStateName("");
+                  setShowSearch(!showSearch);
+                }}
+                onChange={handleStateSearch}
+                className=" flex-1  pl-10 p-2 text-gray-500 focus:outline-none"
+                value={stateName !== "" ? stateName : inputLocation}
+              />
+
+              <div className="absolute w-fit top-14   bg-white">
+                <div className="relative w-fit z-50">
+                  {matchingLocations &&
+                    showSearch &&
+                    matchingLocations.map((state: string) => (
+                      <div
+                        key={state}
+                        onClick={() => {
+                          setStateName(state);
+                          setShowSearch(false);
+                        }}
+                        className="text-gray-500   pippins-regular px-4 py-1 hover:bg-mainBlue bg-opacity-5"
+                      >
+                        {state}
+                      </div>
+                    ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -199,13 +232,16 @@ function Navbar() {
 
       {/* Desktop Search and Menu */}
       <div
-        onClick={() => {}}
-        className="overFlow-hidden hidden lg:flex flex-grow items-center max-w-[550px] rounded-[10px] border-gray-500 border overflow-hidden"
+        onClick={() => router.push("/search")}
+        className=" element-with-scrollbar  hidden lg:flex flex-grow items-center max-w-[550px] rounded-[10px] border-gray-500 border "
       >
         <div className="ml-2 relative flex-grow">
           <div className="flex items-center ">
             {" "}
-            <img src={"icons/Search.svg"} className="w-[20px] h-[20px] ml-2" />
+            <img
+              src={"icons/Search.svg"}
+              className="w-[20px] h-[20px] ml-2 mr-2"
+            />
             <input
               value={searchTerm}
               onChange={handleSearch}
@@ -217,7 +253,7 @@ function Navbar() {
         </div>
         <div className="border-l border-[.1] h-[28px] border-gray-700 rounded-3xl"></div>
 
-        <div className="relative">
+        <div className="relative w-1/4 z-10">
           <span className="absolute inset-y-0 left-0 flex items-center pl-2">
             <img
               src="/icons/Location.svg"
@@ -225,26 +261,35 @@ function Navbar() {
               className="h-5 w-5 text-gray-500"
             />
           </span>
-          <select
-            onChange={handleStateClick}
+          <input
+            onClick={() => {
+              setStateName("");
+              setShowSearch(!showSearch);
+            }}
+            onChange={handleStateSearch}
             className="p-2 pl-10 text-gray-500 focus:outline-none"
-          >
-            <option
-              key="n'import ou"
-              defaultChecked
-              value="n'import ou"
-              className="text-gray-500"
-            >
-              n'import ou
-            </option>
-            {locations?.map((state) => (
-              <option key={state} value={state} className="text-gray-500">
-                {state}
-              </option>
-            ))}
-          </select>
+            value={stateName !== "" ? stateName : inputLocation}
+          />
+          <div className="absolute  z-50 bg-white">
+            <div className="relative w-fit">
+              {matchingLocations &&
+                showSearch &&
+                matchingLocations.map((state: string) => (
+                  <div
+                    key={state}
+                    onClick={() => {
+                      setStateName(state);
+                      setShowSearch(false);
+                    }}
+                    className="text-gray-500   pippins-regular px-4 py-1 hover:bg-mainBlue bg-opacity-5"
+                  >
+                    {state}
+                  </div>
+                ))}{" "}
+            </div>
+          </div>
         </div>
-        <span className="h-[50px] flex items-center pl-2 pr-2 bg-mainBlue">
+        <span className="z-50 h-[40px] rounded-r-lg overflow-hidden flex items-center pl-2 pr-2 bg-mainBlue">
           <img
             src="/icons/Search.svg"
             alt="Search Icon"

@@ -1,15 +1,16 @@
-import { useSearchEventsByCategorieQuery } from "@/store/features/api/apiSlice";
-import {
-  selectInitialEvents,
-  setSearchedEvents,
-} from "@/store/features/eventSlice";
-import { IEvent } from "@/types/Event";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import Progress from "../shared/Progress";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Progress from "../shared/Progress";
 import { useSelector } from "react-redux";
+import {
+  useGetCategoriesQuery,
+  useGetTypesQuery,
+  useSearchEventsByCategorieQuery,
+  useSearchEventsByTypeQuery,
+} from "@/store/features/api/apiSlice";
+import { selectInitialEvents } from "@/store/features/eventSlice";
+import { IEvent } from "@/types/Event";
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -17,128 +18,163 @@ function formatDate(dateString: string): string {
   return new Intl.DateTimeFormat("en-US", options).format(date);
 }
 
-const categories = [
-  "securite",
-  "services evenementiels",
-  "energies renouvelables",
-  "startups et entrepreneuriat",
-  "technologie",
-  "telecommunications",
-  "transport",
-  "travaux publics",
-  "intelligence artificielle ",
-  "machines et outils",
-  "aeronautique",
-  "agriculture",
-  "environnement",
-  "industries chimiques",
-  "metiers de la Mer",
-  "education",
-  "finance et comptabilite",
-  "medical",
-  "logistique",
-  "ressources humaines",
-];
-
 function NextEvent({ events }: { events: IEvent[] }) {
-  const [selectedCategory, setCategory] = useState<string[] | null>(null);
+  const {
+    data: Categories,
+    isLoading: CategoriesLoading,
+    error: CategoriesError,
+  } = useGetCategoriesQuery();
+  const {
+    data: Types,
+    isLoading: TypesLoading,
+    error: TypesError,
+  } = useGetTypesQuery();
+
+  const [selectedCategory, setCategory] = useState<string[] | null>(["Tout"]);
+  const [searchedEvents, setSearchedEvents] = useState<any[]>([]);
+  const [visibleEventsCount, setVisibleEventsCount] = useState<number>(4);
+  const [selectedType, setType] = useState<string[] | null>(null);
   const initialEvents = useSelector(selectInitialEvents);
-  useEffect(() => {
-    console.log(selectedCategory);
-  }, [selectedCategory]);
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (selectedCategory?.includes("Tout")) {
+      setSearchedEvents(initialEvents);
+    }
+  }, [initialEvents, selectedCategory]);
+
   const {
     data: eventsByCategory,
     isLoading: eventsByCategoryIsLoading,
     isError: eventsByCategoryIsError,
   } = useSearchEventsByCategorieQuery(selectedCategory as string[], {
-    skip: !selectedCategory,
+    skip: !selectedCategory || selectedCategory.includes("Tout"),
   });
 
-  const dispatch = useDispatch();
+  const {
+    data: eventsByType,
+    isLoading: eventsByTypeIsLoading,
+    isError: eventsByTypeIsError,
+  } = useSearchEventsByTypeQuery(selectedType as string[], {
+    skip: !selectedType,
+  });
 
   useEffect(() => {
-    if (eventsByCategoryIsLoading) {
-      console.log("Loading events by category...");
-    } else if (eventsByCategoryIsError) {
-      alert("Error fetching events by category: " + eventsByCategoryIsError);
-    } else if (eventsByCategory) {
-      console.log("Fetched events by category:", eventsByCategory);
-      setCategory(null);
-      dispatch(setSearchedEvents(eventsByCategory));
-      router.push("/search");
+    if (eventsByCategory) {
+      setSearchedEvents(eventsByCategory);
     }
-  }, [eventsByCategoryIsLoading, eventsByCategoryIsError, eventsByCategory]);
+  }, [eventsByCategory]);
+
+  useEffect(() => {
+    if (eventsByType) {
+      setSearchedEvents(eventsByType);
+    }
+  }, [eventsByType]);
+
+  const handleShowMore = () => {
+    setVisibleEventsCount((prevCount) => prevCount + 8);
+  };
 
   return (
     <div className="w-full py-4">
       <div className="w-[90%] ml-1 my-3">
-        <h2 className=" text-titles mb-4 poppins-semibold md:text-[24px]">
+        <h2 className="text-titles mb-4 poppins-semibold md:text-[24px]">
           Prochains événements
         </h2>
       </div>
 
       {/* Horizontal scrollable category list */}
-      <div className="flex space-x-4 w-[90%] overflow-x-auto element-with-scrollbar mb-4 md:ml-1">
-        {categories.map((category) => (
+      <div className="flex space-x-4 w-full overflow-x-auto element-with-scrollbar mb-4 md:ml-1">
+        <label
+          key={"Tout"}
+          className={`px-4 text-gray-500 text-center cursor-pointer whitespace-nowrap ${
+            selectedCategory && selectedCategory[0] === "Tout"
+              ? "border-b-2 border-b-mainBlue"
+              : ""
+          }`}
+          onClick={() => setCategory(["Tout"])}
+        >
+          <span>Tout</span>
+        </label>
+
+        {Categories?.map((category: any) => (
           <label
-            key={category}
-            className={`px-4 py-2 text-gray-500 rounded text-center cursor-pointer ${
-              selectedCategory && selectedCategory[0] === category
-                ? "bg-blue-200"
+            key={category.name}
+            className={`px-4 text-gray-500 text-center cursor-pointer whitespace-nowrap ${
+              selectedCategory && selectedCategory[0] === category.name
+                ? "border-b-2 border-b-mainBlue"
                 : ""
             }`}
-            onClick={() => setCategory([category])}
+            onClick={() => setCategory([category.name])}
           >
-            <span>{category}</span>
+            <span>{category.name}</span>
+          </label>
+        ))}
+
+        {Types?.map((type: any) => (
+          <label
+            key={type.name}
+            className={`px-4 text-gray-500 text-center cursor-pointer whitespace-nowrap ${
+              selectedType && selectedType[0] === type.name
+                ? "border-b-2 border-b-mainBlue"
+                : ""
+            }`}
+            onClick={() => setType([type.name])}
+          >
+            <span>{type.name}</span>
           </label>
         ))}
       </div>
 
       {/* Horizontal scrollable events list */}
-      <div className="flex-col md:flex-row md:flex md:space-x-4 overflow-x-auto md:pl-0 pl-10 items-center justify-between w-full py-4 scrollbar-hide">
-        {events.length !== 0 ? (
-          events.map((event, index) => (
+      <div className="flex-col  md:flex-row flex-wrap  md:flex overflow-x-auto md:pl-0 pl-10 items-center justify-between w-full py-4 element-with-scrollbar">
+        {searchedEvents && searchedEvents.length !== 0 ? (
+          searchedEvents.slice(0, visibleEventsCount).map((event, index) => (
             <div
               onClick={() => router.push(`events/details/${event._id}`)}
               key={index}
-              className="w-[300px] h-[300px] flex-shrink-0 bg-white shadow-md rounded-lg overflow-hidden"
+              className="md:m-0 ml-20 lg:w-[23%] w-[270px]  h-[400px] flex-shrink-0 bg-white rounded-lg overflow-hidden"
             >
               <Image
                 alt="event-img"
-                className="h-1/3 w-full object-cover"
+                className="lg:w-full  md:h-[187px] md:w-full max-h-[187px] w-[270px] object-cover"
                 src={
                   event.eventImages
                     ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event.eventImages[0]}`
                     : "https://via.placeholder.com/300x200"
                 }
-                width={500} // Specify width
-                height={300} // Specify height
-                quality={75} // Adjust quality to improve performance (default is 75)
-                // placeholder="blur" // Optionally use a low-quality placeholder
+                width={500}
+                height={300}
+                quality={75}
               />
-
-              <div className="p-4">
-                <h3 className="text-xl poppins-semibold text-ellipsis line-clamp-3">
-                  <>
-                    {
-                      <>
-                        {event?.eventAcronym && (
-                          <>
-                            {event?.eventAcronym} {" - "}
-                          </>
-                        )}
-                      </>
-                    }{" "}
-                    {event?.eventName}
-                  </>
+              <div className="py-4">
+                <div className="flex w-full overflow-scroll element-with-scrollbar">
+                  <p className="whitespace-nowrap bg-[#206FDF1A] rounded-2xl text-mainBlue poppins-medium text-[12px] py-2 px-2">
+                    {event?.Categorie[0]}
+                  </p>
+                </div>
+                <h3 className="text-xl poppins-semibold text-ellipsis text-[16px] line-clamp-3 text-titles">
+                  {event?.eventAcronym && <>{event.eventAcronym} - </>}
+                  {event?.eventName}
                 </h3>
                 <p className="text-gray-600 flex flex-row items-center">
-                  <img alt="location-icon" src="/icons/LocationGray.png" />
-                  {event.location?.address?.commercial
-                    ? event.location?.address?.commercial
-                    : event.location?.address?.state}
+                  {event.location?.address?.commercial ? (
+                    <>
+                      <img alt="location-icon" src="/icons/LocationGray.png" />
+                      {event.location?.address?.commercial}
+                    </>
+                  ) : (
+                    event.location?.address?.state && (
+                      <>
+                        <img
+                          alt="location-icon"
+                          src="/icons/LocationGray.png"
+                        />
+                        {event.location?.address?.state}
+                      </>
+                    )
+                  )}
                 </p>
                 <p className="text-gray-600 flex flex-row items-center">
                   <img alt="calendar-icon" src="/icons/CalendarGray.png" />
@@ -150,23 +186,24 @@ function NextEvent({ events }: { events: IEvent[] }) {
             </div>
           ))
         ) : (
-          <div className="w-full p-4">Aucun événement à afficher</div>
+          <div className="w-full p-4 text-gray-400 poppins-regular">
+            Aucun événement à afficher
+          </div>
         )}
       </div>
 
-      <div className="w-full flex justify-center items-center">
-        <button
-          onClick={() => {
-            dispatch(setSearchedEvents(initialEvents));
-            router.push("/search");
-          }}
-          className="mr-2 rounded-[10px] px-10 py-3 bg-mainBlue text-white text-center"
-        >
-          Voir plus
-        </button>
-      </div>
+      {searchedEvents.length > visibleEventsCount && (
+        <div className="w-full flex justify-center items-center">
+          <button
+            onClick={handleShowMore}
+            className="mr-2 rounded-[10px] px-10 py-3 bg-mainBlue text-white text-center"
+          >
+            Voir plus
+          </button>
+        </div>
+      )}
 
-      {eventsByCategoryIsLoading && <Progress />}
+      {(eventsByCategoryIsLoading || eventsByTypeIsLoading) && <Progress />}
     </div>
   );
 }

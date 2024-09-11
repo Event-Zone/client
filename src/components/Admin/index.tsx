@@ -13,6 +13,7 @@ import EventCard from "./EventCard";
 import { IEvent } from "@/types/Event";
 import Users from "./Users";
 import Image from "next/image";
+import Category from "./Category";
 
 function Admin() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -158,6 +159,16 @@ function Admin() {
               Users Management
             </p>
           </div>
+          <div
+            onClick={() => setPage(4)}
+            className={`flex w-full rounded-xl hover:bg-[#203F6F] p-3 ${
+              page === 4 && "bg-[#203F6F]"
+            }`}
+          >
+            <p className="poppins-medium text-blewishGrey hidden md:block">
+              Categories
+            </p>
+          </div>
         </div>
       </div>
       <div className="w-full h-screen py-4">
@@ -223,8 +234,16 @@ function Admin() {
               <Users />
             </div>
           </div>
-        ) : (
+        ) : page === 0 ? (
           <>dashboard</>
+        ) : (
+          <>
+            <div className="mb-10">
+              <div className="bg-[#2D3748] rounded-lg">
+                <Category />
+              </div>
+            </div>
+          </>
         )}
       </div>
       {(fetchedEventsLoading || newAdResult.isLoading) && <Progress />}

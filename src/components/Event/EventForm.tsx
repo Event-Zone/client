@@ -6,6 +6,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { addDays, format } from "date-fns";
 import SearchBox from "../shared/SearchBox";
 import TimePickerUi from "../shared/TimePickerUi";
+import {
+  useGetCategoriesQuery,
+  useGetTypesQuery,
+} from "@/store/features/api/apiSlice";
+import Progress from "../shared/Progress";
 
 function EventForm({
   setIsNext,
@@ -16,6 +21,17 @@ function EventForm({
   formData: any;
   setFormData: Function;
 }) {
+  const {
+    data: Categories,
+    isLoading: CategoriesLoading,
+    error: CategoriesError,
+  } = useGetCategoriesQuery();
+  const {
+    data: Types,
+    isLoading: TypesLoading,
+    error: TypesError,
+  } = useGetTypesQuery();
+
   const [newTag, setNewTag] = useState(""); // State for the new tag
   const [location, setLocation] = useState(0); // State for the new tag
   const [startDate, setStartDate] = useState(new Date());
@@ -208,33 +224,15 @@ function EventForm({
             <option value="" disabled selected className="text-gray-500">
               Type
             </option>
-            <option value="salons & exposition" className="text-gray-500">
-              Salons & Exposition
-            </option>
-            <option value="conference & exposition" className="text-gray-500">
-              Conference & Exposition
-            </option>
-            <option value="conference" className="text-gray-500">
-              Conference
-            </option>
-            <option value="workshop" className="text-gray-500">
-              Workshop
-            </option>
-            <option value="seminaires & ateliers" className="text-gray-500">
-              Seminaires & Ateliers
-            </option>
-            <option value="webinaires" className="text-gray-500">
-              Webinaires
-            </option>
-            <option value="convention" className="text-gray-500">
-              Convention
-            </option>
-            <option value="competition" className="text-gray-500">
-              Competition
-            </option>
-            <option value="evenement de resautage" className="text-gray-500">
-              evenement de resautage
-            </option>
+            {Types?.map((type: any) => (
+              <option
+                key={type._id}
+                value={type.name}
+                className="text-gray-500"
+              >
+                {type.name}
+              </option>
+            ))}
           </select>
 
           <div className="md:mr-4 pl-10 flex-1 poppins-regular text-gray-500 focus:outline-none border-gray-300 border-[1.3px] p-2">
@@ -249,246 +247,23 @@ function EventForm({
             {isCategorieSelectorVisible && (
               <div className="bg-white p-4 rounded-md shadow-md z-30 absolute ">
                 <div className="flex flex-col space-y-2 h-[400px] overflow-scroll">
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="sécurité"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "sécurité"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Sécurité</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="services événementiels"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "services événementiels"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Services Événementiels</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="énergies renouvelables"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "énergies renouvelables"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Énergies Renouvelables</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="startups et entrepreneuriat"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "startups et entrepreneuriat"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Startups et Entrepreneuriat</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="technologie"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "technologie"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Technologie</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="télécommunications"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "télécommunications"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Télécommunications</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="transport"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "transport"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Transport</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="travaux publics"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "travaux publics"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Travaux Publics</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="intelligence artificielle (ia)"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "intelligence artificielle (ia)"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Intelligence Artificielle (IA)</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="machines et outils"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "machines et outils"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Machines et Outils</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="aéronautique"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "aéronautique"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Aéronautique</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="agriculture"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "agriculture"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Agriculture</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="environnement"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "environnement"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Environnement</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="industries chimiques"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "industries chimiques"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Industries Chimiques</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="métiers de la mer"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "métiers de la mer"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Métiers de la Mer</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="éducation"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "éducation"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Éducation</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="finance et comptabilité"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "finance et comptabilité"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Finance et Comptabilité</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="médical"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "médical"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Médical</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="logistique"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "logistique"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Logistique</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      value="ressources humaines"
-                      checked={(formData?.Categorie as string[])?.includes(
-                        "ressources humaines"
-                      )}
-                      onChange={handleCategorieChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span>Ressources Humaines</span>
-                  </label>
+                  {Categories?.map((category: any) => (
+                    <label
+                      key={category._id}
+                      className="flex items-center space-x-2"
+                    >
+                      <input
+                        type="checkbox"
+                        value={category.name}
+                        checked={(formData?.Categorie as string[])?.includes(
+                          category.name
+                        )}
+                        onChange={handleCategorieChange}
+                        className="form-checkbox h-4 w-4 text-blue-600"
+                      />
+                      <span>{category.name}</span>
+                    </label>
+                  ))}
                 </div>
               </div>
             )}
@@ -737,6 +512,7 @@ function EventForm({
           />
         </div>
       </form>
+      {(CategoriesLoading || TypesLoading) && <Progress />}
     </div>
   );
 }

@@ -38,12 +38,12 @@ function Home() {
   return (
     <div className="min-h-screen  ">
       <Hero />
-      <div className="md:px-28 md:mt-[-100px]">
+      <div className="md:px-28 ">
         <Categorie />
         <Villes />
-        <NextEvent events={events.slice(0, 4)} />{" "}
+        <NextEvent events={events.slice(0, 4)} />
       </div>
-      {user ? null : <Collaborer />}
+      <Collaborer />
       {isLoading && <Progress />}
     </div>
   );

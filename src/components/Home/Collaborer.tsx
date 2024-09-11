@@ -12,48 +12,56 @@ function Collaborer() {
   };
 
   return (
-    <div>
+    <div className="">
       <div className="w-[90%] ml-14 my-3">
-        <h2 className="text-titles ml-14 mb-4 poppins-extrabold text-[30px]">
+        <h2 className="text-titles ml-14 mb-4 poppins-extrabold text-[24px]">
           Collaborez avec
           <span className="text-mainBlue"> EventZone</span>
         </h2>
       </div>
-      <div className="flex flex-row justify-around">
-        <div className="p-10 m-5 flex flex-row bg-mainBlue bg-opacity-[.3] rounded-lg">
+      <div className="flex md:flex-row flex-col justify-around md:mx-20">
+        <div
+          className="p-10 m-5 flex flex-row bg-[#0052B408] rounded-3xl cursor-pointer"
+          onClick={() => router.push("/search")}
+        >
           <div>
             <img alt="search-icon" src="/icons/ion_search.png" />
           </div>
           <div>
-            <h2 className="text-titles ml-9 mb-4 poppins-extrabold text-[30px]">
-              Découvrez des événements
-            </h2>
-            <p className="text-titles">
-              Découvrez qui organise des événements dans vos domaines d'intérêt.
-            </p>
-            <Link href="#" className="text-mainBlue">
-              Rechercher des événements
-            </Link>
+            <div className="md:pl-8 pl-2 flex items-start flex-col">
+              <h2 className="text-titles mb-4 poppins-semibold md:text-[24px]">
+                Découvrez des événements{" "}
+              </h2>
+              <p className="text-gray-500 poppins-regular">
+                Découvrez qui organise des événements dans vos domaines
+                d'intérêt.
+              </p>{" "}
+              <button className="text-mainBlue poppins-medium md:text-[16px]">
+                Rechercher des événements{" "}
+              </button>
+            </div>
           </div>
         </div>
         <div
-          className="p-10 m-5 flex flex-row bg-mainBlue bg-opacity-[.3] rounded-lg cursor-pointer"
+          className="p-10 m-5 flex flex-row bg-[#0052B408] rounded-3xl cursor-pointer"
           onClick={handleAddEventClick}
         >
           <div>
             <img alt="plus-icon" src="/icons/ph_plus-bold.png" />
           </div>
           <div>
-            <h2 className="text-titles ml-14 mb-4 poppins-extrabold text-[30px]">
-              Ajoutez votre événement{" "}
-            </h2>
-            <p className="text-titles">
-              Contribuez à l'Excellence Événementielle et Ajoutez Votre
-              Événement avec EventZone.{" "}
-            </p>
-            <button className="text-mainBlue underline">
-              Ajoutez votre événement{" "}
-            </button>
+            <div className="pl-8 flex items-start flex-col">
+              <h2 className="text-titles mb-4 poppins-semibold md:text-[24px]">
+                Ajoutez votre événement{" "}
+              </h2>
+              <p className="text-gray-500 poppins-regular">
+                Contribuez à l'Excellence Événementielle et Ajoutez Votre
+                Événement avec EventZone.{" "}
+              </p>{" "}
+              <button className="text-mainBlue poppins-medium md:text-[16px]">
+                Ajoutez votre événement{" "}
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -15,7 +15,6 @@ function Ads() {
   const [currentBar, setCurrentBar] = useState(0);
   const handleBarClick = (index: number) => {
     setCurrentBar(index);
-    setCurrentImage(index);
   };
   useEffect(() => {
     console.log(ads?.length);
@@ -27,11 +26,7 @@ function Ads() {
           }
           return prev + 1;
         });
-        setCurrentImage((prevImage) => {
-          if (prevImage === 3) return 0;
-          else return prevImage + 1;
-        });
-      }, 3000); // Set interval to 3000 milliseconds (3 seconds)
+      }, 7000); // Set interval to 3000 milliseconds (3 seconds)
       return () => clearInterval(interval);
     }
   }, [ads?.length]);

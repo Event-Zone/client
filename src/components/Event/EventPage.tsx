@@ -27,6 +27,7 @@ function EventPage({ data }: { data: any }) {
   } = useGetSubscriptionQuery(fetchedOrganizer?.subscription, {
     skip: !fetchedOrganizer,
   });
+  const [videoId, setVideoId] = useState<string | null>(null);
   const [subscritionData, setSubscriptionData] = useState<any>(null);
   useEffect(() => {
     if (subscriptionIsLoading) {
@@ -52,11 +53,9 @@ function EventPage({ data }: { data: any }) {
     }
   }, [fetchedOrganizer, fetchedOrganizerError, fetchedOrganizerIsLoading]);
 
-  const [currentImage, setCurrentImage] = useState(0);
-  const [currentBar, setCurrentBar] = useState(0);
+  const [currentBar, setCurrentBar] = useState(() => (videoId ? -1 : 0));
   const handleBarClick = (index: number) => {
     setCurrentBar(index);
-    setCurrentImage(index);
   };
   const dispatch = useDispatch();
   const router = useRouter();
@@ -78,7 +77,7 @@ function EventPage({ data }: { data: any }) {
     const urlParams = new URL(url).searchParams;
     return urlParams.get("v");
   };
-  const [videoId, setVideoId] = useState<string | null>(null);
+
   useEffect(() => {
     if (data.videoUrl) {
       const pp = getYouTubeId(data.videoUrl);
@@ -92,20 +91,19 @@ function EventPage({ data }: { data: any }) {
     console.log(currentBar);
   }, [currentBar]);
   useEffect(() => {
+    if (!data.eventImages?.length) return; // Check if images exist
+
     const interval = setInterval(() => {
-      setCurrentBar((prev) => {
-        if (prev === data?.eventImages?.length - 1) {
-          return 0;
-        }
-        return prev + 1;
-      });
-      setCurrentImage((prevImage) => {
-        if (prevImage === 3) return 0;
-        else return prevImage + 1;
-      });
-    }, 7000); // Set interval to 3000 milliseconds (3 seconds)
+      if (currentBar >= 0) {
+        setCurrentBar((prev) =>
+          prev === data.eventImages.length - 1 ? 0 : prev + 1
+        );
+      }
+    }, 7000);
+
     return () => clearInterval(interval);
-  }, [data?.eventImages?.length]);
+  }, [data.eventImages, currentBar]);
+
   return (
     <div className="flex flex-col w-full md:px-16">
       <div className="flex flex-col w-full px-4 md:px-20 lg:px-44  py-16">
@@ -145,7 +143,9 @@ function EventPage({ data }: { data: any }) {
                 <>
                   <div
                     key={0}
-                    className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
+                    className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer ${
+                      currentBar === -1 && "bg-white"
+                    }`}
                     onClick={() => handleBarClick(-1)}
                   ></div>
                 </>
@@ -420,22 +420,20 @@ function EventPage({ data }: { data: any }) {
         </div>
         <div className="mt-4 poppins-semibold text-titles mb-t">
           <h3 className="text-2xl mb-3">Sponsors</h3>
-          <div className="flex  ">
+          <div className="flex w-full flex-wrap element-with-scrollbar ">
             {data?.sponsorImages.map((img: any, index: number) => (
-              <Image
-                className="rounded-lg w-[100px] h-[100px] mr-3"
-                key={index}
-                alt={`sponsor-${index}`}
-                src={
-                  img
-                    ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${img}`
-                    : "https://via.placeholder.com/300"
-                }
-                width={500} // Specify width
-                height={300} // Specify height
-                quality={75} // Adjust quality to improve performance (default is 75)
-                // placeholder="blur" // Optionally use a low-quality placeholder
-              />
+              <div className=" flex items-center justify-center md:w-[128px]  md:h-[128px] w-[100px] h-[100px] rounded-lg border-[1.3px] mr-3 border-gray-300 p-[12px]">
+                <img
+                  className="max-h-[90px] "
+                  key={index}
+                  alt={`sponsor-${index}`}
+                  src={
+                    img
+                      ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${img}`
+                      : "https://via.placeholder.com/300"
+                  }
+                />
+              </div>
             ))}
           </div>
         </div>

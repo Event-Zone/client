@@ -100,7 +100,7 @@ function Explore() {
     return formData?.tags?.map((tag: any, index: number) => (
       <span
         key={index}
-        className="mr-2 bg-gray-200 rounded-sm px-2 py-1 inline-flex"
+        className="mr-2 bg-gray-100 rounded-md px-2 py-1 inline-flex"
       >
         {tag}
         <button
@@ -123,14 +123,15 @@ function Explore() {
         <Image
           src="/Frame 1063.png" // Update with your image path
           alt="Static Image"
-          layout="fill"
+          width={600}
+          height={600}
           objectFit="cover"
-          className="fixed inset-0 w-1/3 h-full"
+          className="fixed  w-1/3 h-[90%]"
         />
       </div>
 
       {/* Right Section - Scrollable Content */}
-      <div className="flex-1 h-screen overflow-y-scroll p-8 bg-white">
+      <div className="flex-1 h-screen overflow-y-scroll element-with-scrollbar p-8 bg-white">
         <div className="max-w-2xl mx-auto space-y-8">
           {/* Content Blocks */}
           <section className="space-y-6">
@@ -145,13 +146,13 @@ function Explore() {
                 type="text"
                 id="entreprise"
                 name="entreprise"
-                className="rounded-sm border-gray-300 border-[1.3px] shadow-sm p-3 poppins-regular focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm"
+                className="rounded-sm text-[#6F7287] border-[1.3px] shadow-sm p-3 poppins-regular focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm"
                 placeholder="Tapez-la ici"
                 onChange={handleInputChange}
                 value={formData?.entreprise}
               />
             </div>
-            <div className="mb-4 rounded-sm p-2">
+            <div className="mb-4 rounded-md p-2">
               <label
                 htmlFor="profession"
                 className="mb-4 block text-sm poppins-medium poppins-semibold text-gray-700"
@@ -162,7 +163,7 @@ function Explore() {
                 type="text"
                 id="profession"
                 name="profession"
-                className="rounded-sm border-gray-300 border-[1.3px] shadow-sm p-3 poppins-regular focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm"
+                className="rounded-sm text-[#6F7287] border-[1.3px] shadow-sm p-3 poppins-regular focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm"
                 placeholder="Tapez-la ici"
                 onChange={handleInputChange}
                 value={formData?.profession}
@@ -188,7 +189,7 @@ function Explore() {
                     type="text"
                     id="tags"
                     name="tags" // Not actually used for input, but can follow naming conventions
-                    className="poppins-regular shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-sm p-4"
+                    className="poppins-regular shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm text-[#6F7287] rounded-md p-4"
                     placeholder="Rechercher des tags"
                     value={newTag} // Controlled input for the new tag
                     onChange={(e) => setNewTag(e.target.value)}
@@ -198,10 +199,10 @@ function Explore() {
                 {renderTags()} {/* Display existing tags */}
                 <hr className="mx-3" />
               </div>
-              <div className="mb-4 rounded-sm p-2 border-gray-300 border-[1.3px]">
+              <div className="mb-4 rounded-md p-2 text-[#6F7287] border-[1.3px]">
                 <label
                   htmlFor="IT"
-                  className="mb-4 block text-xl poppins-semibold text-titles"
+                  className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
                   Technologie et IT
                 </label>
@@ -219,10 +220,10 @@ function Explore() {
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 cursor-pointer ${
+                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 px-6 cursor-pointer ${
                         selectedItTags.includes(tag)
-                          ? "bg-mainBlue bg-opacity-50"
-                          : "bg-gray-200"
+                          ? "bg-mainBlue  text-white"
+                          : "bg-gray-100 text-[#6F7287]"
                       }`}
                       onClick={() => handleSelectedTag(tag, setSelectedItTags)}
                     >
@@ -231,10 +232,10 @@ function Explore() {
                   ))}
                 </div>
               </div>
-              <div className="mb-4 rounded-sm p-2 border-gray-300 border-[1.3px]">
+              <div className="mb-4 rounded-md p-2 text-[#6F7287] border-[1.3px]">
                 <label
                   htmlFor="affaire"
-                  className="mb-4 block text-xl poppins-semibold text-titles"
+                  className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
                   Affaire et Entrepreneuriat
                 </label>
@@ -258,10 +259,10 @@ function Explore() {
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 cursor-pointer ${
+                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 px-6 cursor-pointer ${
                         selectedEntrepriseTags.includes(tag)
-                          ? "bg-mainBlue bg-opacity-50"
-                          : "bg-gray-200"
+                          ? "bg-mainBlue  text-white"
+                          : "bg-gray-100 text-[#6F7287]"
                       }`}
                       onClick={() =>
                         handleSelectedTag(tag, setSelectedEntrepriseTags)
@@ -272,10 +273,10 @@ function Explore() {
                   ))}
                 </div>
               </div>
-              <div className="mb-4 rounded-sm p-2 border-gray-300 border-[1.3px]">
+              <div className="mb-4 rounded-md p-2 text-[#6F7287] border-[1.3px]">
                 <label
                   htmlFor="sante"
-                  className="mb-4 block text-xl poppins-semibold text-titles"
+                  className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
                   Affaire et Entrepreneuriat
                 </label>
@@ -291,10 +292,10 @@ function Explore() {
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 cursor-pointer ${
+                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 px-6 cursor-pointer ${
                         selectedSanteTags.includes(tag)
-                          ? "bg-mainBlue bg-opacity-50"
-                          : "bg-gray-200"
+                          ? "bg-mainBlue  text-white"
+                          : "bg-gray-100 text-[#6F7287]"
                       }`}
                       onClick={() =>
                         handleSelectedTag(tag, setSelectedSanteTags)
@@ -305,10 +306,10 @@ function Explore() {
                   ))}
                 </div>
               </div>
-              <div className="mb-4 rounded-sm p-2 border-gray-300 border-[1.3px]">
+              <div className="mb-4 rounded-md p-2 text-[#6F7287] border-[1.3px]">
                 <label
                   htmlFor="science"
-                  className="mb-4 block text-xl poppins-semibold text-titles"
+                  className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
                   Design et Crétivité
                 </label>
@@ -323,10 +324,10 @@ function Explore() {
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 cursor-pointer ${
+                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 px-6 cursor-pointer ${
                         selectedDesignTags.includes(tag)
-                          ? "bg-mainBlue bg-opacity-50"
-                          : "bg-gray-200"
+                          ? "bg-mainBlue  text-white"
+                          : "bg-gray-100 text-[#6F7287]"
                       }`}
                       onClick={() =>
                         handleSelectedTag(tag, setSelectedDesignTags)
@@ -337,10 +338,10 @@ function Explore() {
                   ))}
                 </div>
               </div>
-              <div className="mb-4 rounded-sm p-2 border-gray-300 border-[1.3px]">
+              <div className="mb-4 rounded-md p-2 text-[#6F7287] border-[1.3px]">
                 <label
                   htmlFor="science"
-                  className="mb-4 block text-xl poppins-semibold text-titles"
+                  className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
                   Science et Recherche
                 </label>
@@ -360,10 +361,10 @@ function Explore() {
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 cursor-pointer ${
+                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 px-6 cursor-pointer ${
                         selectedScienceTags.includes(tag)
-                          ? "bg-mainBlue bg-opacity-50"
-                          : "bg-gray-200"
+                          ? "bg-mainBlue  text-white"
+                          : "bg-gray-100 text-[#6F7287]"
                       }`}
                       onClick={() =>
                         handleSelectedTag(tag, setSelectedScienceTags)
@@ -374,10 +375,10 @@ function Explore() {
                   ))}
                 </div>
               </div>
-              <div className="mb-4 rounded-sm p-2 border-gray-300 border-[1.3px]">
+              <div className="mb-4 rounded-md p-2 text-[#6F7287] border-[1.3px]">
                 <label
                   htmlFor="science"
-                  className="mb-4 block text-xl poppins-semibold text-titles"
+                  className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
                   éducation et apprentissage{" "}
                 </label>
@@ -392,10 +393,10 @@ function Explore() {
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 cursor-pointer ${
+                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 px-6 cursor-pointer ${
                         selectedEducationTags.includes(tag)
-                          ? "bg-mainBlue bg-opacity-50"
-                          : "bg-gray-200"
+                          ? "bg-mainBlue  text-white"
+                          : "bg-gray-100 text-[#6F7287]"
                       }`}
                       onClick={() =>
                         handleSelectedTag(tag, setSelectedEducationTags)
@@ -406,10 +407,10 @@ function Explore() {
                   ))}
                 </div>
               </div>
-              <div className="mb-4 rounded-sm p-2 border-gray-300 border-[1.3px]">
+              <div className="mb-4 rounded-md p-2 text-[#6F7287] border-[1.3px]">
                 <label
                   htmlFor="science"
-                  className="mb-4 block text-xl poppins-semibold text-titles"
+                  className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
                   Finance et Investissement
                 </label>
@@ -423,10 +424,10 @@ function Explore() {
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 cursor-pointer ${
+                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 px-6 cursor-pointer ${
                         selectedFinanceTags.includes(tag)
-                          ? "bg-mainBlue bg-opacity-50"
-                          : "bg-gray-200"
+                          ? "bg-mainBlue  text-white"
+                          : "bg-gray-100 text-[#6F7287]"
                       }`}
                       onClick={() =>
                         handleSelectedTag(tag, setSelectedFinanceTags)
@@ -437,10 +438,10 @@ function Explore() {
                   ))}
                 </div>
               </div>
-              <div className="mb-4 rounded-sm p-2 border-gray-300 border-[1.3px]">
+              <div className="mb-4 rounded-md p-2 text-[#6F7287] border-[1.3px]">
                 <label
                   htmlFor="science"
-                  className="mb-4 block text-xl poppins-semibold text-titles"
+                  className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
                   Environnement et Durabilité{" "}
                 </label>
@@ -455,10 +456,10 @@ function Explore() {
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 cursor-pointer ${
+                      className={`poppins-medium mx-3 my-3  rounded-3xl p-3 px-6 cursor-pointer ${
                         selectedEnvironnementTags.includes(tag)
-                          ? "bg-mainBlue bg-opacity-50"
-                          : "bg-gray-200"
+                          ? "bg-mainBlue  text-white"
+                          : "bg-gray-100 text-[#6F7287]"
                       }`}
                       onClick={() =>
                         handleSelectedTag(tag, setSelectedEnvironnementTags)
@@ -469,10 +470,10 @@ function Explore() {
                   ))}
                 </div>
               </div>
-              <div className="mb-4 rounded-sm p-2 border-gray-300 border-[1.3px]">
+              <div className="mb-4 rounded-md p-2 text-[#6F7287] border-[1.3px]">
                 <label
                   htmlFor="science"
-                  className="mb-4 block text-xl poppins-semibold text-titles"
+                  className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
                   Ingénierie et Architecture{" "}
                 </label>
@@ -485,10 +486,10 @@ function Explore() {
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 cursor-pointer ${
+                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 px-6 cursor-pointer ${
                         selectedIngenierieTags.includes(tag)
-                          ? "bg-mainBlue bg-opacity-50"
-                          : "bg-gray-200"
+                          ? "bg-mainBlue  text-white"
+                          : "bg-gray-100 text-[#6F7287]"
                       }`}
                       onClick={() =>
                         handleSelectedTag(tag, setSelectedIngenierieTags)
@@ -499,10 +500,10 @@ function Explore() {
                   ))}
                 </div>
               </div>
-              <div className="mb-4 rounded-sm p-2 border-gray-300 border-[1.3px]">
+              <div className="mb-[100px] h-[330px] rounded-md p-2 text-[#6F7287] border-[1.3px]">
                 <label
                   htmlFor="science"
-                  className="mb-4 block text-xl poppins-semibold text-titles"
+                  className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
                   Ressources humaines et Développement professionnel{" "}
                 </label>
@@ -519,10 +520,10 @@ function Explore() {
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 cursor-pointer ${
+                      className={`poppins-medium mx-3 my-3 text-gray-600 rounded-3xl p-3 px-6 cursor-pointer ${
                         selectedRessourceTags.includes(tag)
-                          ? "bg-mainBlue bg-opacity-50"
-                          : "bg-gray-200"
+                          ? "bg-mainBlue  text-white"
+                          : "bg-gray-100 text-[#6F7287]"
                       }`}
                       onClick={() =>
                         handleSelectedTag(tag, setSelectedRessourceTags)
@@ -533,15 +534,14 @@ function Explore() {
                   ))}
                 </div>
               </div>
-            </div>
-            <div>
-              {" "}
-              <button
-                onClick={handleSuivant}
-                className="px-6 py-2 bg-mainBlue text-white poppins-regular rounded-xl"
-              >
-                Suivant
-              </button>
+              <div className=" absolute bottom-[-10px] right-0  p-4 w-2/3 bg-white ">
+                <button
+                  onClick={handleSuivant}
+                  className="px-6 py-2 bg-mainBlue text-white poppins-regular rounded-xl float-end"
+                >
+                  Suivant
+                </button>
+              </div>
             </div>
           </section>
         </div>

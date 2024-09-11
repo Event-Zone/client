@@ -371,16 +371,18 @@ function EventDetails({
             {secondFormData
               ?.getAll("sponsorImages")
               .map((img: any, index: number) => (
-                <img
-                  className="rounded-lg w-[100px] h-[100px] mr-3"
-                  key={index}
-                  alt={`sponsor-${index}`}
-                  src={
-                    img
-                      ? URL.createObjectURL(img)
-                      : "https://via.placeholder.com/300"
-                  }
-                />
+                <div className=" flex items-center justify-center md:w-[128px]  md:h-[128px] w-[100px] h-[100px] rounded-lg border-[1.3px] mr-3 border-gray-300 p-[12px]">
+                  <img
+                    className="max-h-[90px] "
+                    key={index}
+                    alt={`sponsor-${index}`}
+                    src={
+                      img
+                        ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${img}`
+                        : "https://via.placeholder.com/300"
+                    }
+                  />
+                </div>
               ))}
           </div>
         </div>

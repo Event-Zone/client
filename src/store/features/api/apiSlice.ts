@@ -349,12 +349,58 @@ export const apiSlice = createApi({
                 body: data
             })
         }),
+        getCategories: builder.query<any, void>({
+            query: () => ({
+                url: `category`,
+                method: 'GET',
+            })
+        }),
+        deleteCategory: builder.mutation<any, any>({
+            query: (selected) => ({
+                url: `category`,
+                method: 'DELETE',
+                body: { ids: selected }
+            })
+        }),
+        addCategory: builder.mutation<any, string>({
+            query: (name) => ({
+                url: `category`,
+                method: 'POST',
+                body: { name }
+            })
+        }),
+        getTypes: builder.query<any, void>({
+            query: () => ({
+                url: `type`,
+                method: 'GET',
+            })
+        }),
+        deleteTypes: builder.mutation<any, any>({
+            query: (selected) => ({
+                url: `type`,
+                method: 'DELETE',
+                body: { ids: selected }
+            })
+        }),
+        addType: builder.mutation<any, string>({
+            query: (name) => ({
+                url: `type`,
+                method: 'POST',
+                body: { name }
+            })
+        }),
 
     }),
 });
 
 export const {
     useGetEventsQuery,
+    useGetCategoriesQuery,
+    useGetTypesQuery,
+    useDeleteTypesMutation,
+    useAddTypeMutation,
+    useAddCategoryMutation,
+    useDeleteCategoryMutation,
     useCreateEventMutation,
     useDeleteEventMutation,
     useGetEventQuery,

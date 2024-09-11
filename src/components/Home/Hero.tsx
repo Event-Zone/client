@@ -81,7 +81,7 @@ const Hero = () => {
   return (
     <div className="flex flex-col">
       <div
-        className="relative w-full h-[400px]  bg-cover bg-center  md:py-20 flex flex-row   items-center"
+        className="relative w-full h-[450px]  bg-cover bg-center  md:py-20 flex flex-row   items-center"
         // style={{
         //   backgroundImage: `url(${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${eventAdds[currentBar]?.eventImages[0]})`,
         // }}
@@ -116,12 +116,12 @@ const Hero = () => {
             </p>
             {isArray(eventAdds[currentBar]?.Categorie) ? (
               eventAdds[currentBar]?.Categorie.map((categorie: any) => (
-                <p className="poppins-medium text-center text-mainBlue bg-[#E9F1FC]  px-[10px] py-[5px] rounded-lg md:p-8 ">
+                <p className="poppins-medium text-center max-h-[45px] overflow-hidden text-mainBlue bg-[#E9F1FC]  px-[10px] py-[5px] rounded-lg md:p-8 ">
                   {categorie}
                 </p>
               ))
             ) : (
-              <p className="poppins-medium text-center text-mainBlue bg-[#E9F1FC]  rounded-lg md:px-4 md:py-2 px-[5px] mr-3">
+              <p className="poppins-medium text-center max-h-[45px] text-mainBlue bg-[#E9F1FC]  rounded-lg md:px-4 md:py-2 px-[5px] mr-3">
                 {eventAdds[currentBar]?.Categorie}
               </p>
             )}
@@ -130,7 +130,7 @@ const Hero = () => {
         <div className="hidden md:flex flex-col justify-between ">
           <div className="flex flex-row relative z-10">
             <div>
-              <h2 className="mb-1 text-ellipsis line-clamp-2 text-white  md:text-[48px] poppins-semibold text-left">
+              <h2 className="mb-1 text-ellipsis line-clamp-2 text-white md:text-[48px] poppins-semibold text-left leading-[65px]">
                 {eventAdds.length > 0 && (
                   <>
                     {
@@ -193,7 +193,7 @@ const Hero = () => {
               )}
             </p>
           </div>
-          <div className="mb-8 flex flex-row w-[200px] md:w-[700px] overflow-scroll element-with-scrollbar    relative z-10">
+          <div className="mb-8 flex flex-row w-[200px]  md:w-full overflow-scroll element-with-scrollbar    relative z-10">
             <button className="mr-2 rounded-[30px] px-6 py-2 bg-transparent text-white text-center border border-white">
               {eventAdds[currentBar]?.type}
             </button>
@@ -202,14 +202,17 @@ const Hero = () => {
                 (categorie: any, index: number) => {
                   if (index <= 2)
                     return (
-                      <button className=" rounded-[30px] px-6 py-2 bg-transparent text-white text-center border border-white">
+                      <button
+                        key={index}
+                        className="mr-2 inline-block rounded-[30px] px-6 max-h-[41px] py-2 bg-transparent text-white text-center border border-white whitespace-nowrap box-border"
+                      >
                         {categorie}
                       </button>
                     );
                 }
               )
             ) : (
-              <button className="rounded-[30px] px-6 py-2 bg-transparent text-white text-center border border-white">
+              <button className="inline-block rounded-[30px] max-h-[40px] px-6 py-2 bg-transparent text-white text-center border border-white whitespace-nowrap box-border">
                 {eventAdds[currentBar]?.Categorie}
               </button>
             )}
@@ -292,7 +295,7 @@ const Hero = () => {
         </div>
       </div>
       <div className="md:opacity-0 opacity-100 flex  z-30  mr-4 transform rotate-[-90deg]">
-        <div className="flex flex-col z-30 justify-center items-center w-full p-4">
+        <div className="md:hidden flex flex-col z-30 justify-center items-center w-full p-4">
           {adds.map((_, index) => (
             <div
               key={index}

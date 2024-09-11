@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 function Page() {
   const initEvents = useSelector(selectSearchedEvents);
   return (
-    <div className="flex  xl:flex-row  flex-col-reverse h-screen overflow-scroll">
+    <div className="flex  xl:flex-row  flex-col-reverse h-screen overflow-scroll element-with-scrollbar">
       <div className="flex-grow">
         <Search initEvents={initEvents} />
       </div>
