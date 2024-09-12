@@ -33,80 +33,83 @@ function Villes() {
   }, [eventByLocationIsLoading, eventByLocationIsError, eventsByLocation]);
 
   return (
-    <div className="w-full py-4 ">
+    <div className="w-full py-4">
       <h2 className="text-titles ml-1 mb-4 poppins-semibold md:text-[24px]">
         Villes populaires à <span className="text-mainBlue">EventZone</span>
       </h2>
-      <div className="flex flex-row justify-start items-center w-full overflow-x-auto element-with-scrollbar space-x-4">
+
+      {/* Add horizontal scrolling for the container */}
+      <div className="flex flex-row space-x-4 overflow-x-auto element-with-scrollbar">
         <div
           onClick={() => setSelectedLocations(["Alger"])}
-          className="flex-shrink-0 md:px-4 ville-container"
+          className="flex-shrink-0 w-[150px] md:w-[33%] ville-container"
         >
-          <div className="relative">
+          <div className="relative w-full">
             <img
               alt="event-img"
-              className="object-cover w-[150px] h-[150px] md:w-full md:h-48 md:rounded-md rounded-full"
+              className="object-cover w-full h-[150px] md:h-48 md:rounded-md rounded-full"
               src="/Frame 920.png"
             />
             <div className="ville-overlay">
-              <div className="flex justify-between ">
+              <div className="flex justify-between">
                 <p>Alger</p>
                 <p>{"→"}</p>
               </div>
             </div>
           </div>
         </div>
+
         <div
           onClick={() => setSelectedLocations(["Oran"])}
-          className="flex-shrink-0 md:px-4 ville-container"
+          className="flex-shrink-0 w-[150px] md:w-[33%] ville-container"
         >
-          <div className="relative">
+          <div className="relative w-full">
             <img
               alt="event-img"
-              className="object-cover w-[150px] h-[150px] md:w-full md:h-48 md:rounded-md rounded-full"
+              className="object-cover w-full h-[150px] md:h-48 md:rounded-md rounded-full"
               src="/Frame 643.png"
             />
             <div className="ville-overlay">
-              <div className="flex justify-between ">
-                <p> Oran</p>
+              <div className="flex justify-between">
+                <p>Oran</p>
                 <p>{"→"}</p>
               </div>
             </div>
           </div>
         </div>
+
         <div
           onClick={() => setSelectedLocations(["Annaba"])}
-          className="flex-shrink-0 md:px-4 ville-container"
+          className="flex-shrink-0 w-[150px] md:w-[33%] ville-container"
         >
-          <div className="relative">
+          <div className="relative w-full">
             <img
               alt="event-img"
-              className="object-cover w-[150px] h-[150px] md:w-full md:h-48 md:rounded-md rounded-full"
+              className="object-cover w-full h-[150px] md:h-48 md:rounded-md rounded-full"
               src="/Frame 921.png"
             />
-
             <div className="ville-overlay">
-              <div className="flex justify-between ">
-                <p> Annaba</p>
+              <div className="flex justify-between">
+                <p>Annaba</p>
                 <p>{"→"}</p>
               </div>
             </div>
           </div>
         </div>
+
         <div
           onClick={() => setSelectedLocations(["Constantine"])}
-          className="flex-shrink-0 md:px-4 ville-container"
+          className="flex-shrink-0 w-[150px] md:w-[33%] ville-container"
         >
-          <div className="relative">
+          <div className="relative w-full">
             <img
               alt="event-img"
-              className="object-cover w-[150px] h-[150px] md:w-full md:h-48 md:rounded-md rounded-full"
+              className="object-cover w-full h-[150px] md:h-48 md:rounded-md rounded-full"
               src="/Frame 922.png"
             />
             <div className="ville-overlay">
-              {" "}
-              <div className="flex justify-between ">
-                <p> Constantine</p>
+              <div className="flex justify-between">
+                <p>Constantine</p>
                 <p>{"→"}</p>
               </div>
             </div>
