@@ -197,16 +197,14 @@ function NextEvent({ events }: { events: IEvent[] }) {
         )}
       </div>
 
-      {searchedEvents.length > visibleEventsCount && (
-        <div className="w-full flex justify-center items-center">
-          <button
-            onClick={handleShowMore}
-            className="mr-2 rounded-[10px] px-10 py-3 bg-mainBlue text-white text-center"
-          >
-            Voir plus
-          </button>
-        </div>
-      )}
+      <div className="w-full flex justify-center items-center">
+        <button
+          onClick={handleShowMore}
+          className="mr-2 rounded-[10px] px-10 py-3 bg-mainBlue text-white text-center"
+        >
+          Voir plus
+        </button>
+      </div>
 
       {(eventsByCategoryIsLoading || eventsByTypeIsLoading) && <Progress />}
     </div>
