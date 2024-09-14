@@ -18,6 +18,7 @@ import {
 import Progress from "./Progress";
 
 function Navbar() {
+  const [showSearchs, setShowSearchs] = useState<boolean>(false);
   const allInitEvents = useSelector(selectInitialEvents);
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -50,13 +51,12 @@ function Navbar() {
 
   useEffect(() => {
     if (searchTerm === "") dispatch(setSearchedEvents(allInitEvents));
-    else if (searchedEvents) refetchSearch();
-    console.log(searchTerm);
   }, [searchTerm]);
   useEffect(() => {
     console.log("searchedEvents", searchedEvents);
     dispatch(setSearchedEvents(searchedEvents));
-    if (searchedEvents) router.push("/search");
+    setShowSearchs(true);
+    // if (searchedEvents) router.push("/search");
   }, [searchedEvents]);
   const {
     data: allEvents,
@@ -154,9 +154,19 @@ function Navbar() {
       {/* Search Input for Small Screens */}
       {searchOpen && (
         <div
-          onClick={() => router.push("/search")}
-          className="lg:hidden flex  items-center w-[90%] mx-auto"
+          onClick={() => setShowSearchs((prev) => !prev)}
+          className="lg:hidden flex  items-center w-[50%] "
         >
+          <div
+            className="lg:hidden flex w-[1px] h-[14px] mb-2"
+            onClick={handlSearchClick}
+          >
+            <img
+              src="/icons/Search.svg"
+              alt="Search"
+              className="mr-2 w-full h-full"
+            />
+          </div>
           <div className="relative flex-grow">
             <input
               value={searchTerm}
@@ -216,7 +226,6 @@ function Navbar() {
           onClick={handlSearchClick}
         >
           <img src="/icons/Search.svg" alt="Search" className="mr-2" />
-          <span>Search</span>
         </div>
       }
 
@@ -232,7 +241,7 @@ function Navbar() {
 
       {/* Desktop Search and Menu */}
       <div
-        onClick={() => router.push("/search")}
+        onClick={() => setShowSearchs((prev) => !prev)}
         className=" element-with-scrollbar  hidden lg:flex flex-grow items-center max-w-[550px] rounded-[10px] border-gray-500 border "
       >
         <div className="ml-2 relative flex-grow">
@@ -249,6 +258,25 @@ function Navbar() {
               placeholder="Rechercher des événements"
               className="p-2 pl-4 w-full text-gray-700 poppins-regular outline-none focus:outline-none border-0"
             />
+            <div className="absolute w-fit top-14   bg-white">
+              <div className="relative w-fit z-50">
+                {searchedEvents &&
+                  showSearchs &&
+                  searchedEvents.map((event: any) => (
+                    <div
+                      key={event?._id}
+                      onClick={() => {
+                        router.push("/search");
+                      }}
+                      className="text-gray-500   pippins-regular px-4 py-1 hover:bg-mainBlue bg-opacity-5"
+                    >
+                      {event.eventAcronym}
+                      {" - "}
+                      {event.eventName}
+                    </div>
+                  ))}
+              </div>
+            </div>{" "}
           </div>
         </div>
         <div className="border-l border-[.1] h-[28px] border-gray-700 rounded-3xl"></div>

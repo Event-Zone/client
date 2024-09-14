@@ -108,12 +108,12 @@ const Hero = () => {
         </div>
         <div className="z-30 absolute w-full overflow-scroll element-with-scrollbar bottom-1 left-3 md:hidden flex">
           <div className="flex mt-3 ">
-            <p className="poppins-regular text-sm text-center  text-mainBlue bg-[#E9F1FC]  rounded-lg md:px-10 md:py-4 px-[5px] py-[10px] mr-3">
+            <p className="mr-2 inline-block rounded-[30px] px-6 max-h-[41px] py-2 bg-transparent text-white text-center border border-white whitespace-nowrap box-border">
               {eventAdds[currentBar]?.type}
             </p>
             {isArray(eventAdds[currentBar]?.Categorie) ? (
               eventAdds[currentBar]?.Categorie.map((categorie: any) => (
-                <p className="poppins-medium text-center max-h-[45px] overflow-hidden text-mainBlue bg-[#E9F1FC]  px-[10px] py-[5px] rounded-lg md:p-8 ">
+                <p className="mr-2 inline-block rounded-[30px] px-6 max-h-[41px] py-2 bg-transparent text-white text-center border border-white whitespace-nowrap box-border">
                   {categorie}
                 </p>
               ))
@@ -285,7 +285,7 @@ const Hero = () => {
             onClick={() => {
               router.replace(`/events/details/${eventAdds[currentBar]?._id}`);
             }}
-            className="mr-2 rounded-[10px] px-4 py-1 bg-mainBlue text-titles poppins-medium text-center"
+            className="mr-2 rounded-[10px] px-4 py-1 bg-mainBlue text-white poppins-medium text-center"
           >
             Voir plus
           </button>
@@ -293,7 +293,7 @@ const Hero = () => {
       </div>
       <div className="md:opacity-0 opacity-100 flex  z-30  mr-4 transform rotate-[-90deg]">
         <div className="md:hidden flex flex-col z-30 justify-center items-center w-full p-4">
-          {adds.map((_, index) => (
+          {eventAdds.map((_, index) => (
             <div
               key={index}
               className={`progress-bar w-[10px] h-[50px] bg-gray-300 mb-2 rounded-md cursor-pointer`}
