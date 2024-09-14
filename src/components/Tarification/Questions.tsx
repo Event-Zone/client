@@ -38,7 +38,7 @@ function Questions() {
   };
 
   return (
-    <div className="flex flex-row mt-8 bg-[#F0F6FD] w-full px-24 py-8 justify-around">
+    <div className="flex lg:flex-row flex-col mt-8 bg-[#F0F6FD] w-full px-3 md:px-24 py-8 justify-around">
       <div className="flex flex-col  justify-start items-start p-8 ">
         <h3 className="poppins-semibold bg-mainBlue text-white rounded-2xl text-center  px-4">
           Packs
@@ -66,8 +66,8 @@ function Questions() {
                 <img
                   src={` ${
                     openQuestion !== index
-                      ? "/ArrowDownCircle.png"
-                      : "/ArrowUpCircle.png"
+                      ? "/icons/ArrowDownCircle.png"
+                      : "/icons/ArrowUpCircle.png"
                   }`}
                   alt="Arrow Icon"
                   className={`w-[24px] h-[24px] mr-2 transition-transform duration-300 ${

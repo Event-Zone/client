@@ -16,7 +16,7 @@ const cardData = [
       { text: "Pages vitrine personnalisée pour vous", checked: false },
       { text: "Nombre d'événements : 1", checked: true },
     ],
-    icon: "/starterIcon.png",
+    icon: "/icons/starterIcon.png",
     borderColor: "border-gray-400",
   },
   {
@@ -33,7 +33,7 @@ const cardData = [
       { text: "Badge d'organisateur premium", checked: true },
       { text: "Support Prioritaire", checked: true },
     ],
-    icon: "/businessIcon.png",
+    icon: "/icons/F-Verified Check.png",
     borderColor: "border-mainBlue",
   },
   {
@@ -51,7 +51,7 @@ const cardData = [
 
       { text: "Support Prioritaire", checked: false },
     ],
-    icon: "/studentIcon.png",
+    icon: "/icons/studentIcon.png",
     borderColor: "border-gray-400",
   },
 ];
@@ -62,26 +62,28 @@ function Cards({ price }: { price: number }) {
   return (
     <div
       key={`${price}`}
-      className="flex flex-row mt-4 px-20 transition-transform duration-800 hover:transform animate-slide-up"
+      className="flex lg:flex-row flex-col mt-4 px-[10px] sm:px-20 transition-transform duration-800 hover:transform animate-slide-up"
     >
       {cardData.map((card, index) => (
         <div
           onClick={() => router.push(`/events/create/${card.title}`)}
           key={index}
-          className={`mr-3 flex flex-col ${card.borderColor} border-[1.5px] rounded-[30px] p-4 transition-transform duration-800 hover:transform hover:-translate-y-3`}
+          className={`sm:mb-1 mb-4 mr-3 flex flex-col ${card.borderColor} border-[1.5px] rounded-[30px] p-4 transition-transform duration-800 hover:transform hover:-translate-y-3`}
         >
           <div className="flex mb-4">
             <img alt={`${card.title}-icon`} src={card.icon} />
           </div>
-          <h3 className="text-titles poppins-medium text-3xl">{card.title}</h3>
-          <p className="text-sm mb-3 text-gray-600 poppins-semibold">
+          <h3 className="text-titles poppins-medium text-[24px]">
+            {card.title}
+          </h3>
+          <p className="text-sm mb-3 text-gray-600 poppins-regular">
             {card.title === "Starter"
               ? "Le plan idéal pour commencer. Publiez un événement gratuitement, mais avec des fonctionnalités de base."
               : card.title === "Business"
               ? "Maximisez la visibilité de vos événements avec un accès complet aux fonctionnalités premium pour les entreprises."
               : "Le plan idéal pour commencer. Publiez un événement gratuitement, mais avec des fonctionnalités de base."}
           </p>
-          <h3 className="text-titles  text-3xl poppins-bold">
+          <h3 className="text-titles  text-[32px] poppins-semibold">
             {index === 1 ? price : "Gratuit"}
             {index === 1 ? (
               price === 4000 ? (
@@ -103,7 +105,9 @@ function Cards({ price }: { price: number }) {
             >
               <img
                 alt={feature.checked ? "check" : "uncheck"}
-                src={feature.checked ? "/check.png" : "/uncheck.png"}
+                src={
+                  feature.checked ? "/icons/check.png" : "/icons/uncheck.png"
+                }
                 className="mr-2 w-[20px] h-[20px]"
               />
               {feature.text}
