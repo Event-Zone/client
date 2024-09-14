@@ -60,24 +60,21 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentBar((prev) => {
-        if (prev === adds.length - 1) {
+        if (prev === eventAdds?.length - 1) {
           return 0;
         }
         return prev + 1;
       });
-      setCurrentImage((prevImage) => {
-        if (prevImage === 3) return 0;
-        else return prevImage + 1;
-      });
     }, 7000); // Set interval to 3000 milliseconds (3 seconds)
     return () => clearInterval(interval);
-  }, [adds.length]);
+  }, [eventAdds.length]);
 
   const handleBarClick = (index: number) => {
     setCurrentBar(index);
-    setCurrentImage(index);
   };
-
+  useEffect(() => {
+    console.log(eventAdds.length);
+  }, [eventAdds]);
   return (
     <div className="flex flex-col">
       <div
@@ -97,7 +94,7 @@ const Hero = () => {
         />
         <div className="hero-overlay"></div>
         <div className="md:opacity-100 opacity-0 md:ml-16 z-30  mr-[6%]">
-          {adds.map((_, index) => (
+          {eventAdds.map((_, index) => (
             <div
               key={index}
               className={`progress-bar w-[10px] md:h-[65px] bg-gray-300 mb-2 rounded-md cursor-pointer`}
