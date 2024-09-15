@@ -1,4 +1,6 @@
-import { useRouter } from "next/navigation";
+"use client";
+import { useRouter } from "@/navigation";
+import { useTranslations } from "next-intl";
 import React, { useEffect } from "react";
 
 const cardData = [
@@ -55,8 +57,9 @@ const cardData = [
     borderColor: "border-gray-400",
   },
 ];
-
 function Cards({ price }: { price: number }) {
+  const t = useTranslations("tarification");
+
   const router = useRouter();
   console.log(price);
   return (
@@ -77,22 +80,24 @@ function Cards({ price }: { price: number }) {
             {card.title}
           </h3>
           <p className="text-sm mb-3 text-gray-600 poppins-regular">
-            {card.title === "Starter"
-              ? "Le plan idéal pour commencer. Publiez un événement gratuitement, mais avec des fonctionnalités de base."
-              : card.title === "Business"
-              ? "Maximisez la visibilité de vos événements avec un accès complet aux fonctionnalités premium pour les entreprises."
-              : "Le plan idéal pour commencer. Publiez un événement gratuitement, mais avec des fonctionnalités de base."}
+            {card.title === "Starter" ? (
+              <>{t("planIdeal")}</>
+            ) : card.title === "Business" ? (
+              <>{t("maximize")}</>
+            ) : (
+              <>{t("planIdeal")}</>
+            )}
           </p>
           <h3 className="text-titles  text-[32px] poppins-semibold">
-            {index === 1 ? price : "Gratuit"}
+            {index === 1 ? price : t("free")}
             {index === 1 ? (
               price === 4000 ? (
                 <span className="ml-2 text-sm mb-3 text-gray-600 poppins-poppins">
-                  DA/mois
+                  DA/{t("monthh")}
                 </span>
               ) : (
                 <span className="ml-2 text-sm mb-3 text-gray-600 poppins-poppins">
-                  DA/1 ans
+                  DA/1 {t("year")}
                 </span>
               )
             ) : null}
@@ -110,12 +115,12 @@ function Cards({ price }: { price: number }) {
                 }
                 className="mr-2 w-[20px] h-[20px]"
               />
-              {feature.text}
+              {t(`${card.title}${idx}`)}
             </p>
           ))}
           <div className="flex justify-center items-center my-5">
             <button className="hover:text-white hover:bg-mainBlue text-mainBlue py-2 text-xl border-[1.2px] w-full border-mainBlue rounded-md">
-              Commencer aujourd'hui
+              {t("startToday")}
             </button>
           </div>
         </div>

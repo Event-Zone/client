@@ -1,7 +1,8 @@
 "use client";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import React, { useEffect, useState } from "react";
 import { useUpdateUserPasswordMutation } from "@/store/features/api/apiSlice";
+import { useTranslations } from "next-intl";
 
 function EditPassword({ id }: { id: string }) {
   const router = useRouter();
@@ -44,11 +45,12 @@ function EditPassword({ id }: { id: string }) {
       setDisabled(true);
     }
   }, [oldPassword, newPassword, confirmNewPassword]);
+  const t = useTranslations("Login");
   return (
     <div>
       <form className="p-20" onSubmit={handleSubmit}>
         <div>
-          <label>Old Password:</label>
+          <label>{t("password")}:</label>
           <input
             type="password"
             value={oldPassword}
@@ -64,7 +66,7 @@ function EditPassword({ id }: { id: string }) {
           />
         </div>
         <div>
-          <label>New Password:</label>
+          <label> {t("newpassword")}: </label>
           <input
             type="password"
             value={newPassword}
@@ -80,7 +82,7 @@ function EditPassword({ id }: { id: string }) {
           />
         </div>
         <div>
-          <label>Confirm New Password:</label>
+          <label> {t("comfirmnewpassword")}:</label>
           <input
             type="password"
             value={confirmNewPassword}
@@ -109,7 +111,7 @@ function EditPassword({ id }: { id: string }) {
             cursor: "pointer",
           }}
         >
-          {isLoading ? "Updating..." : "Update Password"}
+          {isLoading ? "Updating..." : <>{t("a2fsubmit")}</>}
         </button>
         {isError && <p>Error updating password</p>}
         {isSuccess && <p>Password updated successfully</p>}

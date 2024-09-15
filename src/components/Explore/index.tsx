@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useAddVisitoreMutation } from "@/store/features/api/apiSlice";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/features/userSlice";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 function Explore() {
   const [addVisitore, addVisitoreResult] = useAddVisitoreMutation();
@@ -116,12 +117,12 @@ function Explore() {
   useEffect(() => {
     console.log("FormData", formData);
   }, [formData]);
-
+  const t = useTranslations("Explor");
   return (
     <div className="flex overflow-hidden ">
       <div className="md:block hidden relative w-1/3 h-screen overflow-hidden">
         <Image
-          src="/Frame 1063.png" // Update with your image path
+          src="/images/Frame 1063.png" // Update with your image path
           alt="Static Image"
           width={600}
           height={600}
@@ -140,7 +141,7 @@ function Explore() {
                 htmlFor="entreprise"
                 className="mb-4 block text-sm poppins-medium poppins-semibold text-gray-700"
               >
-                Votre Entreprise
+                {t("VotreEntreprise")}
               </label>
               <input
                 type="text"
@@ -157,7 +158,7 @@ function Explore() {
                 htmlFor="profession"
                 className="mb-4 block text-sm poppins-medium poppins-semibold text-gray-700"
               >
-                Votre Profession
+                {t("VotreProfession")}{" "}
               </label>
               <input
                 type="text"
@@ -174,14 +175,14 @@ function Explore() {
                 htmlFor="tags"
                 className="mb-4 block text-sm poppins-medium poppins-semibold text-gray-700"
               >
-                Tags qui vous interesse{" "}
+                {t("tags")}{" "}
               </label>
               <div className="mb-4 p-2">
                 <label
                   htmlFor="tags"
                   className="block text-sm poppins-medium poppins-semibold text-gray-700"
                 >
-                  Appuyez sur Entrée pour ajouter un tag
+                  {t("addTags")}{" "}
                 </label>
                 <div className="flex flex-row mb-1">
                   <img alt="searchicon" src="/icons/Search.svg" />{" "}
@@ -190,7 +191,7 @@ function Explore() {
                     id="tags"
                     name="tags" // Not actually used for input, but can follow naming conventions
                     className="poppins-regular shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm text-[#6F7287] rounded-md p-4"
-                    placeholder="Rechercher des tags"
+                    placeholder={t("Rechercher des tags")}
                     value={newTag} // Controlled input for the new tag
                     onChange={(e) => setNewTag(e.target.value)}
                     onKeyDown={handleAddTag} // Handle Enter key press
@@ -204,7 +205,7 @@ function Explore() {
                   htmlFor="IT"
                   className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
-                  Technologie et IT
+                  {t("Technologie et IT")}{" "}
                 </label>
                 <div className="flex flex-wrap">
                   {[
@@ -237,7 +238,7 @@ function Explore() {
                   htmlFor="affaire"
                   className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
-                  Affaire et Entrepreneuriat
+                  {t("Affaire et Entrepreneuriat")}
                 </label>
                 <div className="flex flex-wrap">
                   {[
@@ -278,7 +279,7 @@ function Explore() {
                   htmlFor="sante"
                   className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
-                  Affaire et Entrepreneuriat
+                  {t("Affaire et Entrepreneuriat")}
                 </label>
                 <div className="flex flex-wrap">
                   {[
@@ -311,7 +312,7 @@ function Explore() {
                   htmlFor="science"
                   className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
-                  Design et Crétivité
+                  {t("Design et Crétivité")}
                 </label>
                 <div className="flex flex-wrap">
                   {[
@@ -343,7 +344,7 @@ function Explore() {
                   htmlFor="science"
                   className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
-                  Science et Recherche
+                  {t("Science et Recherche")}
                 </label>
                 <div className="flex flex-wrap">
                   {[
@@ -380,7 +381,7 @@ function Explore() {
                   htmlFor="science"
                   className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
-                  éducation et apprentissage{" "}
+                  {t("éducation et apprentissage")}{" "}
                 </label>
                 <div className="flex flex-wrap">
                   {[
@@ -412,7 +413,7 @@ function Explore() {
                   htmlFor="science"
                   className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
-                  Finance et Investissement
+                  {t("Finance et Investissement")}
                 </label>
                 <div className="flex flex-wrap">
                   {[
@@ -443,7 +444,7 @@ function Explore() {
                   htmlFor="science"
                   className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
-                  Environnement et Durabilité{" "}
+                  {t("Environnement et Durabilité")}{" "}
                 </label>
                 <div className="flex flex-wrap">
                   {[
@@ -475,7 +476,7 @@ function Explore() {
                   htmlFor="science"
                   className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
-                  Ingénierie et Architecture{" "}
+                  {t("Ingénierie et Architecture")}{" "}
                 </label>
                 <div className="flex flex-wrap">
                   {[
@@ -505,7 +506,7 @@ function Explore() {
                   htmlFor="science"
                   className="mt-4 mb-4 ml-5 block text-xl poppins-semibold text-titles"
                 >
-                  Ressources humaines et Développement professionnel{" "}
+                  {t("Ressources humaines et Développement professionnel")}{" "}
                 </label>
                 <div className="flex flex-wrap">
                   {[

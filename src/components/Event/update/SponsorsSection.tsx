@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 function SponsorsSection({
@@ -10,6 +11,7 @@ function SponsorsSection({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSponsorsCompleted, setIsSponsorsCompleted] = useState(false);
   const [showSponsorUpload, setShowSponsorUpload] = useState(false);
+  const t = useTranslations("Event");
 
   // const handleSponsorImageChange = (
   //   event: React.ChangeEvent<HTMLInputElement>
@@ -41,7 +43,7 @@ function SponsorsSection({
   return (
     <div className="relative flex flex-col justify-center items-center w-full mt-8">
       <div className="flex justify-between items-center w-full p-4 bg-gray-200 rounded-lg">
-        <h3 className="text-lg poppins-semibold">Sponsor de l'événement</h3>
+        <h3 className="text-lg poppins-semibold">{t("Sponsordelévénement")}</h3>
         {isSponsorsCompleted ? (
           <img
             alt="submittedicon"

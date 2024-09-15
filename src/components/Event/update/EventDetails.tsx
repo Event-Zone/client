@@ -6,10 +6,11 @@ import {
 import { selectUser } from "@/store/features/userSlice";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { useDispatch } from "react-redux";
 import { setSearchedEvents } from "@/store/features/eventSlice";
 import { isArray } from "util";
+import { useTranslations } from "next-intl";
 function EventDetails({
   firstFormData,
   secondFormData,
@@ -54,6 +55,7 @@ function EventDetails({
     setCurrentBar(index);
     setCurrentImage(index);
   };
+  const t = useTranslations("Event");
 
   return (
     <div className="flex flex-col w-full">
@@ -135,7 +137,7 @@ function EventDetails({
                 className="max-w-[30px] max-h-[30px]"
               />{" "}
               <button className="rounded-xl ml-2 poppins-regular  ">
-                Participer{" "}
+                {t("Participer")}
               </button>
             </div>
           ) : null}
@@ -146,7 +148,7 @@ function EventDetails({
               className="max-w-[30px] max-h-[30px]"
             />{" "}
             <button className="rounded-xl ml-2 poppins-regular  ">
-              Site Web
+              Web site
             </button>
           </div>
           <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center ">
@@ -166,7 +168,7 @@ function EventDetails({
               className="max-w-[30px] max-h-[30px]"
             />{" "}
             <button className="rounded-xl ml-2 poppins-regular  ">
-              Voir sur la carte{" "}
+              {t("seeMaps")}{" "}
             </button>
           </div>
         </div>
@@ -174,7 +176,7 @@ function EventDetails({
           <div className="flex items-center justify-between p-8">
             <div className="flex flex-row">
               <div className="text-gray-600">
-                <h3 className="poppins-medium">Organisateur</h3>
+                <h3 className="poppins-medium">{t("Organisateur")}</h3>
 
                 <p className="poppins-medium text-titles">
                   {fetchedSubscription?.company}
@@ -184,7 +186,7 @@ function EventDetails({
           </div>
         </div>
         <div className="mt-4 poppins-semibold text-titles">
-          <h3 className="text-2xl">Date et Horaires</h3>
+          <h3 className="text-2xl">{t("DateTitle")}</h3>
           <div className="flex items-center mt-3">
             <img
               alt="icon"
@@ -192,12 +194,12 @@ function EventDetails({
               className="w-[15px] h-[15px] mr-2"
             />{" "}
             <p className="poppins-regular text-gray-600 rounded-lg px-4 py-2">
-              Du{" "}
+              {" "}
               {new Date(firstFormData.startdate).toLocaleDateString("fr-FR", {
                 day: "2-digit",
                 month: "short",
               })}{" "}
-              au{" "}
+              -{" "}
               {new Date(firstFormData.enddate).toLocaleDateString("fr-FR", {
                 day: "2-digit",
                 month: "short",
@@ -236,7 +238,7 @@ function EventDetails({
               )}`}
               className="poppins-regular text-sm text-mainBlue"
             >
-              ajouter au calendrie google{" "}
+              {t("addGoogle")}
             </a>{" "}
           </div>
         </div>
@@ -263,10 +265,10 @@ function EventDetails({
                   href={firstFormData.link}
                   className="text-mainBlue cursor-pointer poppins-regular"
                 >
-                  Online
+                  {t("enLign")}
                 </a>
               ) : (
-                <>Online</>
+                <> {t("enLign")}</>
               )}
             </p>
           </div>
@@ -282,14 +284,14 @@ function EventDetails({
                 href={`https://www.google.com/maps/place/${firstFormData?.location?.lat},${firstFormData?.location?.lon}`}
                 className="poppins-regular text-sm text-mainBlue"
               >
-                voir sur la carte{" "}
+                {t("seeMaps")}
               </a>{" "}
             </div>
           ) : null}
         </div>
         <div className="mt-4">
           <h3 className="mt-4 poppins-semibold text-titles text-2xl">
-            A propos de cet événement
+            {t("About")}{" "}
           </h3>
           <div className="flex mb-4 mt-3 ">
             {secondFormData.get("lieu") ? (
@@ -299,9 +301,7 @@ function EventDetails({
                   src="/icons/globalBlue.png"
                   className="max-w-[30px] max-h-[30px]"
                 />
-                <p className="poppins-medium">
-                  Evenement {secondFormData.get("lieu")}
-                </p>
+                <p className="poppins-medium">{secondFormData.get("lieu")}</p>
               </div>
             ) : null}
             {secondFormData.get("accessibilite") ? (

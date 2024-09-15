@@ -9,7 +9,7 @@ import {
 } from "@/store/features/api/apiSlice";
 import Progress from "../shared/Progress";
 import Message from "../shared/Message";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { useUpdateAdStatusMutation } from "@/store/features/api/apiSlice";
 import Image from "next/image";
 

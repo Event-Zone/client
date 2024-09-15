@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 function Collaborer() {
   const router = useRouter();
@@ -10,13 +11,14 @@ function Collaborer() {
   const handleAddEventClick = () => {
     router.push("/tarification");
   };
-
+  const t = useTranslations("Collaborer");
   return (
     <div className="">
       <div className="w-[90%] ml-14 my-3">
         <h2 className="text-titles ml-14 mb-4 poppins-extrabold text-[24px]">
-          Collaborez avec
-          <span className="text-mainBlue"> EventZone</span>
+          {t.rich("description", {
+            span: (chunks) => <span className="text-mainBlue">{chunks}</span>,
+          })}
         </h2>
       </div>
       <div className="flex md:flex-row flex-col justify-around md:mx-20">
@@ -30,14 +32,13 @@ function Collaborer() {
           <div>
             <div className="md:pl-8 pl-2 flex items-start flex-col">
               <h2 className="text-titles mb-4 poppins-semibold md:text-[24px]">
-                Découvrez des événements{" "}
+                {t("discover")}
               </h2>
               <p className="text-gray-500 poppins-regular">
-                Découvrez qui organise des événements dans vos domaines
-                d'intérêt.
+                {t("discoverDescription")}
               </p>{" "}
               <button className="text-mainBlue poppins-medium md:text-[16px]">
-                Rechercher des événements{" "}
+                {t("rechercherEvenement")}
               </button>
             </div>
           </div>
@@ -52,14 +53,13 @@ function Collaborer() {
           <div>
             <div className="pl-8 flex items-start flex-col">
               <h2 className="text-titles mb-4 poppins-semibold md:text-[24px]">
-                Ajoutez votre événement{" "}
+                {t("add")}
               </h2>
               <p className="text-gray-500 poppins-regular">
-                Contribuez à l'Excellence Événementielle et Ajoutez Votre
-                Événement avec EventZone.{" "}
+                {t("addDescription")}
               </p>{" "}
               <button className="text-mainBlue poppins-medium md:text-[16px]">
-                Ajoutez votre événement{" "}
+                {t("ajoutEvenement")}
               </button>
             </div>
           </div>

@@ -7,7 +7,7 @@ import {
   useUpdateSubscriptionMutation,
   useSearchEventsByUserQuery,
 } from "@/store/features/api/apiSlice";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
@@ -18,8 +18,9 @@ import {
 import EventCard from "./EventCard";
 import ContactSection from "./ContactSection";
 import Progress from "../shared/Progress";
+import { useTranslations } from "next-intl";
 
-const Profile = () => {
+const Profile = ({ params: { userId } }: { params: { userId: string } }) => {
   const [page, setPage] = useState<number>(3);
 
   const authedUser = useSelector(selectUser);
@@ -62,7 +63,6 @@ const Profile = () => {
       company: undefined,
     });
 
-  const { userId } = useParams();
   const {
     data: userData,
     isLoading: userIsLoading,
@@ -242,12 +242,13 @@ const Profile = () => {
       refetchEvents();
     }
   }, [page]);
+  const t = useTranslations("ProfilePage");
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col  py-10">
       <div className="bg-white p-8 rounded-lg shadow-md w-full ">
         <div className="flex md:flex-row flex-col items-center justify-between">
           <div>
-            <h1 className="text-xl poppins-semibold">Bienvenue</h1>
+            <h1 className="text-xl poppins-semibold">{t("Welcome")}</h1>
             <h2 className="text-2xl poppins-bold text-gray-800">
               {user?.fullname}
             </h2>
@@ -260,7 +261,7 @@ const Profile = () => {
                 page === 0 && "bg-gray-300"
               }`}
             >
-              Mon Compte
+              {t("MyAccount")}
             </a>
             <a
               onClick={() => {
@@ -271,7 +272,7 @@ const Profile = () => {
                 page === 2 && "bg-gray-300"
               }`}
             >
-              Support
+              {t("Support")}
             </a>
             <a
               href="#"
@@ -280,21 +281,23 @@ const Profile = () => {
                 page === 3 && "bg-gray-300"
               }`}
             >
-              Mes Evenement
+              {t("MyEvents")}{" "}
             </a>
             {user?.isAdmin && (
               <a
-                href="/admin"
+                href="#"
+                onClick={() => router.push("/admin")}
                 className={`poppins-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl`}
               >
                 Admin
               </a>
             )}
             <a
-              href="/auth/login"
+              href="#"
+              onClick={() => router.push("/auth/login")}
               className={`poppins-semibold mr-2 hover:bg-gray-300 p-2 rounded-xl `}
             >
-              Déconnexion
+              {t("Logout")}{" "}
             </a>
           </nav>
         </div>
@@ -325,7 +328,7 @@ const Profile = () => {
               </div>
               <div className="flex-grow">
                 <h3 className="md:text-xl hidden md:block poppins-bold">
-                  Coordonnées
+                  {t("Cord")}{" "}
                 </h3>
               </div>
               {fetchedSubscription && (
@@ -352,13 +355,13 @@ const Profile = () => {
                         {userData.eventsIds.length > 0 &&
                           fetchedSubscription.pack === "Starter" && (
                             <p className="poppins-regular text-gray-600">
-                              Upgrade to the Business pack to add a new event
+                              {t("UpgradeToBusinessPack")}{" "}
                             </p>
                           )}
                         {userData.eventsIds.length > 4 &&
                           fetchedSubscription.pack === "Student" && (
                             <p className="poppins-regular text-gray-600">
-                              Upgrade to the Business pack to add a new event
+                              {t("UpgradeToBusinessPack")}{" "}
                             </p>
                           )}
                       </>
@@ -370,7 +373,7 @@ const Profile = () => {
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm poppins-medium text-gray-700">
-                  Nom complet
+                  {t("Fullname")}{" "}
                 </label>
                 <input
                   name="fullname"
@@ -380,18 +383,6 @@ const Profile = () => {
                   className="mt-1 p-2 border border-gray-300 rounded-md w-full"
                 />
               </div>
-              <div>
-                <label className="block text-sm poppins-medium text-gray-700">
-                  Nom d'utilisateur
-                </label>
-                <input
-                  type="text"
-                  disabled
-                  value={user?.username}
-                  className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-                />
-              </div>
-
               <div>
                 <label className="block text-sm poppins-medium text-gray-700">
                   Email
@@ -419,7 +410,7 @@ const Profile = () => {
                   </div>
                   <div>
                     <label className="block text-sm poppins-medium text-gray-700">
-                      Votre Profession
+                      {t("YourProfession")}{" "}
                     </label>
                     <input
                       type="text"
@@ -431,7 +422,7 @@ const Profile = () => {
                   </div>
                   <div>
                     <label className="block text-sm poppins-medium text-gray-700">
-                      Entreprise / Organisation
+                      {t("Company")}{" "}
                     </label>
                     <input
                       type="text"
@@ -443,7 +434,7 @@ const Profile = () => {
                   </div>
                   <div>
                     <label className="block text-sm poppins-medium text-gray-700">
-                      Adresse du travail
+                      {t("WorkAddress")}{" "}
                     </label>
                     <input
                       type="text"
@@ -455,7 +446,7 @@ const Profile = () => {
                   </div>
                   <div>
                     <label className="block text-sm poppins-medium text-gray-700">
-                      Site web
+                      {t("Website")}{" "}
                     </label>
                     <input
                       type="text"
@@ -465,14 +456,15 @@ const Profile = () => {
                       className="mt-1 p-2 border border-gray-300 rounded-md w-full"
                     />
                   </div>
-                  <a
-                    href={`/editPassword/${authedUser?._id}`}
-                    className="text-mainBlue poppins-regular"
-                  >
-                    Modifier le mot de passe
-                  </a>
                 </>
-              )}
+              )}{" "}
+              <a
+                onClick={() => router.push(`/editPassword/${authedUser?._id}`)}
+                href="#"
+                className="text-mainBlue poppins-regular"
+              >
+                {t("ChangePassword")}{" "}
+              </a>
             </div>
             <div className="mt-8 flex justify-center">
               <button
@@ -483,7 +475,7 @@ const Profile = () => {
                 onClick={handleSubmit}
                 disabled={!isFormChanged}
               >
-                Sauvegarder
+                {t("Save")}{" "}
               </button>
             </div>
           </>
@@ -494,7 +486,7 @@ const Profile = () => {
                 <EventCard refetchEvents={refetchEvents} event={event} />
               ))
             ) : (
-              <p>Aucun événement trouvé.</p>
+              <p> {t("NoEventsFound")} .</p>
             )}
           </div>
         ) : (

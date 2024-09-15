@@ -1,8 +1,9 @@
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 function Questions() {
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);
-
+  const t = useTranslations("Questions");
   const questions = [
     {
       question:
@@ -36,19 +37,14 @@ function Questions() {
   const toggleQuestion = (index: number) => {
     setOpenQuestion(openQuestion === index ? null : index);
   };
-
   return (
     <div className="flex lg:flex-row flex-col mt-8 bg-[#F0F6FD] w-full px-3 md:px-24 py-8 justify-around">
       <div className="flex flex-col  justify-start items-start p-8 ">
         <h3 className="poppins-semibold bg-mainBlue text-white rounded-2xl text-center  px-4">
           Packs
         </h3>
-        <h3 className="poppins-bold text-titles text-[48px]">
-          Questions Fréquement Posées
-        </h3>
-        <p className="text-sm text-gray-600 poppins-regular">
-          Nous sommes là pour répondre aux questions fréquemment posées.
-        </p>
+        <h3 className="poppins-bold text-titles text-[48px]">{t("title")}</h3>
+        <p className="text-sm text-gray-600 poppins-regular">{t("des")} </p>
       </div>
       <div className="flex flex-col w-[80%] ml-8">
         {questions.map((item, index) => (
@@ -61,7 +57,7 @@ function Questions() {
                 } `}
               >
                 <h4 className={`cursor-pointer poppins-medium `}>
-                  {item.question}
+                  {t(`question${index}`)}
                 </h4>
                 <img
                   src={` ${
@@ -78,7 +74,7 @@ function Questions() {
               </div>
               {openQuestion === index && (
                 <p className="poppins-regular  poppins-regular mt-2 bg-white rounded-md text-titles">
-                  {item.answer}
+                  {t(`answer${index}`)}
                 </p>
               )}
             </div>

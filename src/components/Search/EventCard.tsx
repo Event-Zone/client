@@ -4,7 +4,7 @@ import {
 } from "@/store/features/api/apiSlice";
 import { IEvent } from "@/types/Event";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import React, { useEffect, useState } from "react";
 
 interface EventCardProps {

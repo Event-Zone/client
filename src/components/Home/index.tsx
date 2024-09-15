@@ -4,12 +4,8 @@ import Categorie from "./Categorie";
 import Villes from "./Villes";
 import NextEvent from "./NextEvent";
 import Collaborer from "./Collaborer";
-import {
-  useGetEventsQuery,
-  useGetSubscriptionQuery,
-} from "@/store/features/api/apiSlice";
+import { useGetEventsQuery } from "@/store/features/api/apiSlice";
 import { useSelector } from "react-redux";
-import { useSelectedLayoutSegment } from "next/navigation";
 import { selectUser } from "@/store/features/userSlice";
 import Progress from "../shared/Progress";
 

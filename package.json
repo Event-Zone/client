@@ -29,6 +29,8 @@
     "mapbox-gl": "^3.5.2",
     "maplibre-gl": "^4.5.1",
     "next": "14.2.5",
+    "next-i18next": "^15.3.1",
+    "next-intl": "^3.19.1",
     "react": "^18.3.1",
     "react-beautiful-dnd": "^13.1.1",
     "react-bootstrap-typeahead": "^6.0.0",
@@ -44,7 +46,7 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/react": "^18.3.5",
     "@types/react-beautiful-dnd": "^13.1.8",
     "@types/redux-persist": "^4.3.1",
     "eslint": "^8",

@@ -4,12 +4,13 @@ import {
   useSendA2FMutation,
 } from "@/store/features/api/apiSlice";
 import { resetUserData, setUserData } from "@/store/features/userSlice";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import GoogleLoginButton from "../shared/GoogleLoginButton";
 import Spinner from "@/components/shared/Progress";
 import MessageDialog from "@/components/shared/Message";
+import { useTranslations } from "next-intl";
 
 function RegisterForm() {
   const [showFormCode, setShowFormCode] = useState(false);
@@ -88,7 +89,7 @@ function RegisterForm() {
       console.log("Loading...");
     }
   }, [sendA2FResult]);
-
+  const t = useTranslations("Register");
   return (
     <>
       {showFormCode ? (
@@ -96,9 +97,7 @@ function RegisterForm() {
           className="flex flex-col items-center md:p-6 md:mx-24"
           onSubmit={handleA2fSubmit}
         >
-          <label htmlFor="a2fCode">
-            Enter the code that was sent to your email:
-          </label>
+          <label htmlFor="a2fCode">{t("a2fCode")}</label>
           <input
             type="text"
             id="a2fCode"
@@ -114,7 +113,7 @@ function RegisterForm() {
               a2fCode.length === 6 && "bg-mainBlue"
             }`}
           >
-            Envoyer
+            {t("a2fsubmit")}
           </button>
         </form>
       ) : (
@@ -124,7 +123,7 @@ function RegisterForm() {
         >
           <div className="flex flex-col justify-center items-center ">
             <img src="/icons/Union.png" alt="Logo" className="mb-1" />
-            <img src="/Logo.png" alt="Logo" className="mb-6" />
+            <img src="/images/Logo.png" alt="Logo" className="mb-6" />
           </div>
           <div className="w-full mb-4">
             <input
@@ -140,27 +139,27 @@ function RegisterForm() {
             <div className="w-1/2 pr-2">
               <input
                 type="text"
-                name="fullname"
+                name={"fullname"}
                 placeholder="Nom"
                 value={formData.fullname}
                 onChange={handleChange}
                 className="w-full p-2 border border-gray-300 rounded"
               />
-              <input
+              {/* <input
                 type="text"
                 name="username"
                 placeholder="nom d'utilisateur"
                 value={formData.username}
                 onChange={handleChange}
                 className="w-full p-2 border border-gray-300 rounded"
-              />
+              /> */}
             </div>
           </div>
           <div className="w-full mb-4">
             <input
               type="password"
               name="password"
-              placeholder="Mot de passe"
+              placeholder={t("password")}
               value={formData.password}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
@@ -170,7 +169,7 @@ function RegisterForm() {
             <input
               type="password"
               name="confirmPassword"
-              placeholder="Confirmer votre mot de passe"
+              placeholder={t("confirmPassword")}
               value={formData.confirmPassword}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
@@ -180,13 +179,9 @@ function RegisterForm() {
             type="submit"
             className="w-full p-2 mb-4 bg-mainBlue text-white rounded"
           >
-            Créer un compte
+            {t("submit")}
           </button>
           <div className="flex flex-row w-full">
-            {/* <button className="flex items-center justify-between w-full px-3 bg-blue-700 text-white rounded mr-2 text-[14px]">
-              <img src="/path14.png" alt="Facebook" className=" " />
-              Continuer avec Facebook
-            </button> */}
             <button className="flex items-center justify-center w-full p-2 text-titles rounded ">
               <GoogleLoginButton />
             </button>

@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 function PropretiesSection({
@@ -55,14 +56,14 @@ function PropretiesSection({
     setShowEventProperties(false);
     setIsSubmitted(true);
   };
-
+  const t = useTranslations("Event");
   return (
     <div className="relative flex flex-col justify-center items-center w-full mt-8">
       <div className="flex justify-between items-center w-full p-4 border-[2px] border-gray-200 rounded-lg">
         <div>
-          <h3 className="text-lg poppins-semibold">Propriété de l'événement</h3>
+          <h3 className="text-lg poppins-semibold">{t("EventProprities")}</h3>
           <p className="text-gray-500 poppins-regular">
-            Personnalisez chaque aspect de votre evenement
+            {t("EventPropritiesDes")}
           </p>
         </div>
         <button
@@ -84,7 +85,9 @@ function PropretiesSection({
         <div className="w-full p-4 border-[2px] border-gray-200 rounded-lg mt-2">
           <div className="flex flex-col space-y-2">
             <div>
-              <h4 className="poppins-medium text-gray-700">Accessibilite</h4>
+              <h4 className="poppins-medium text-gray-700">
+                {t("Accessibilite")}
+              </h4>
               <div className="flex space-x-2 flex-col text-gray-500 poppins-regular">
                 <label>
                   <input
@@ -97,7 +100,7 @@ function PropretiesSection({
                     }
                     onChange={handleRadioChange}
                   />
-                  Gratuit pour les visiteurs
+                  {t("Gratuitpourlesvisiteurs")}
                 </label>
                 <label>
                   <input
@@ -108,7 +111,7 @@ function PropretiesSection({
                     checked={selectedAccessibilite === "evenement payant"}
                     onChange={handleRadioChange}
                   />
-                  Evenement payant
+                  {t("Evenementpayant")}
                 </label>
                 <label>
                   <input
@@ -119,7 +122,7 @@ function PropretiesSection({
                     checked={selectedAccessibilite === "invitation seulement"}
                     onChange={handleRadioChange}
                   />
-                  Invitation seulement
+                  {t("Invitationseulement")}
                 </label>
                 <label>
                   <input
@@ -130,7 +133,7 @@ function PropretiesSection({
                     checked={selectedAccessibilite === "accesrestreint"}
                     onChange={handleRadioChange}
                   />
-                  Acces restreint
+                  {t("Accesrestreint")}
                 </label>
               </div>
             </div>
@@ -146,7 +149,7 @@ function PropretiesSection({
                     checked={selectedPortee === "evenementinternation"}
                     onChange={handleRadioChange}
                   />
-                  Evenement internation
+                  {t("Evenementinternation")}
                 </label>
                 <label>
                   <input
@@ -157,7 +160,7 @@ function PropretiesSection({
                     checked={selectedPortee === "evenementnational"}
                     onChange={handleRadioChange}
                   />
-                  Evenement national
+                  {t("Evenementnational")}
                 </label>
                 <label>
                   <input
@@ -168,7 +171,7 @@ function PropretiesSection({
                     checked={selectedPortee === "evenementuniversaire"}
                     onChange={handleRadioChange}
                   />
-                  Evenement universaire
+                  {t("Evenementuniversaire")}
                 </label>
                 <label>
                   <input
@@ -179,7 +182,7 @@ function PropretiesSection({
                     checked={selectedPortee === "evenementregional"}
                     onChange={handleRadioChange}
                   />
-                  Evenement regional
+                  {t("Evenementregional")}
                 </label>
                 <label>
                   <input
@@ -190,7 +193,7 @@ function PropretiesSection({
                     checked={selectedPortee === "evenementlocal"}
                     onChange={handleRadioChange}
                   />
-                  Evenement local
+                  {t("Evenementlocal")}
                 </label>
               </div>
             </div>
@@ -206,7 +209,7 @@ function PropretiesSection({
                     checked={selectedPublic === "professionnels"}
                     onChange={handleRadioChange}
                   />
-                  Professionnels
+                  {t("Professionnels")}
                 </label>
                 <label>
                   <input
@@ -217,7 +220,7 @@ function PropretiesSection({
                     checked={selectedPublic === "etudiant"}
                     onChange={handleRadioChange}
                   />
-                  Etudiant
+                  {t("Etudiant")}
                 </label>
                 <label>
                   <input
@@ -228,7 +231,7 @@ function PropretiesSection({
                     checked={selectedPublic === "grandpublic"}
                     onChange={handleRadioChange}
                   />
-                  Grand public
+                  {t("Grandpublic")}
                 </label>
                 <label>
                   <input
@@ -239,7 +242,7 @@ function PropretiesSection({
                     checked={selectedPublic === "specifiquealindustrie"}
                     onChange={handleRadioChange}
                   />
-                  Specifique a l'industrie
+                  {t("Specifiquealindustrie")}
                 </label>
               </div>
             </div>
@@ -255,7 +258,7 @@ function PropretiesSection({
                     checked={selectedLieu === "interieur"}
                     onChange={handleRadioChange}
                   />
-                  Interieur
+                  {t("Interieur")}
                 </label>
                 <label>
                   <input
@@ -266,7 +269,7 @@ function PropretiesSection({
                     checked={selectedLieu === "exterieur"}
                     onChange={handleRadioChange}
                   />
-                  Exterieur
+                  {t("Exterieur")}
                 </label>
                 <label>
                   <input
@@ -277,7 +280,7 @@ function PropretiesSection({
                     checked={selectedLieu === "exterieureinterieur"}
                     onChange={handleRadioChange}
                   />
-                  Exterieur et Interieur
+                  {t("ExterieuretInterieur")}
                 </label>
               </div>
             </div>
@@ -289,7 +292,7 @@ function PropretiesSection({
                 disabled={!isFormComplete}
                 onClick={handleSubmit}
               >
-                Valider
+                {t("Valider")}
               </button>
             </div>
           </div>

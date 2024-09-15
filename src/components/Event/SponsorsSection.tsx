@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 function SponsorsSection({
@@ -33,11 +34,11 @@ function SponsorsSection({
     const updatedImages = sponsorImages.filter((_, i) => i !== index);
     setSponsorImages(updatedImages);
   };
-
+  const t = useTranslations("Event");
   return (
     <div className="relative flex flex-col justify-center items-center w-full mt-8">
       <div className="flex justify-between items-center w-full p-4 bg-gray-200 rounded-lg">
-        <h3 className="text-lg poppins-semibold">Sponsor de l'événement</h3>
+        <h3 className="text-lg poppins-semibold">{t("Sponsordelévénement")}</h3>
         {isSponsorsCompleted ? (
           <img
             alt="submittedicon"
@@ -74,7 +75,7 @@ function SponsorsSection({
               className="w-16 h-16"
             />
             <h3 className="text-mainBlue poppins-medium mt-2">
-              Téléchargez des images
+              {t("Téléchargezdesimages")}
             </h3>
           </label>
           <div className="flex flex-wrap mt-4">

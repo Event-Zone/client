@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "@/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { selectToken, selectUser } from "@/store/features/userSlice";
 import {
@@ -16,6 +16,7 @@ import {
   setSearchedEvents,
 } from "@/store/features/eventSlice";
 import Progress from "./Progress";
+import { useTranslation } from "@/hooks/useTranslation";
 
 function Navbar() {
   const [showSearchs, setShowSearchs] = useState<boolean>(false);
@@ -70,6 +71,7 @@ function Navbar() {
     isLoading: locationsIsLoading,
     isError: locationsIsError,
   } = useSearchEventsLocationsQuery();
+  const { t, changeLanguage } = useTranslation();
 
   useEffect(() => {
     if (allEvents) dispatch(setInitialEvents(allEvents));
@@ -144,7 +146,7 @@ function Navbar() {
           onClick={() => router.push("/")}
         >
           <img
-            src="/footerLogo.png"
+            src="/images/footerLogo.png"
             alt="Navbar Logo"
             className="max-w-[160px]"
           />
@@ -248,7 +250,7 @@ function Navbar() {
           <div className="flex items-center ">
             {" "}
             <img
-              src={"icons/Search.svg"}
+              src={"/icons/Search.svg"}
               className="w-[20px] h-[20px] ml-2 mr-2"
             />
             <input
@@ -331,14 +333,20 @@ function Navbar() {
         <div className="border-gray-500 mx-5">
           <div className="relative">
             <select className="p-2 pl-10 text-gray-500 focus:outline-none">
-              <option value="en" className="text-gray-500" defaultChecked>
+              <option
+                onClick={() => changeLanguage("en")}
+                value="en"
+                className="text-gray-500"
+                defaultChecked
+              >
                 English
               </option>
-              <option value="fr" className="text-gray-500">
+              <option
+                onClick={() => changeLanguage("fr")}
+                value="fr"
+                className="text-gray-500"
+              >
                 French
-              </option>
-              <option value="ar" className="text-gray-500">
-                Arabic
               </option>
             </select>
           </div>

@@ -1,7 +1,9 @@
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
 
 function Footer() {
+  const t = useTranslations("Footer");
   return (
     <footer className="flex justify-center items-center w-full bg-[#0a1a35] text-white py-8 md:h-[300px] ">
       <div className="container mx-auto flex justify-between items-center">
@@ -22,16 +24,19 @@ function Footer() {
           </div>
           <div className="text-sm space-y-2">
             <p className="poppins-regular text-gray-500">
-              Collaborez avec Eventzone
+              {t("Collaborez Avec Eventzone")}
             </p>
             <ul>
-              <li className="mb-[2px]">Découvrez Nos événements</li>
-              <li className="mb-[2px]">Ajoutez votre événement</li>
+              <li className="mb-[2px]"> {t("Decouvrez Nos Evenements")}</li>
+              <li className="mb-[2px]"> {t("Ajoutez Votre Evenement")}</li>
             </ul>
           </div>
         </div>
         <div className="text-sm space-y-2">
-          <p className="poppins-regular text-gray-500">Contactez-nous</p>
+          <p className="poppins-regular text-gray-500">
+            {" "}
+            {t("Contactez Nous")}
+          </p>
           <ul>
             <li className="mb-[2px]">Contact@eventzone.pro</li>
             <li>+(213) 781 45 75 11</li>
@@ -39,11 +44,10 @@ function Footer() {
         </div>
         {/* Middle Section - Language Selection */}
         <div className="text-sm flex flex-col space-y-2">
-          <p className="poppins-regular text-gray-500 mt-2">Langue</p>
+          <p className="poppins-regular text-gray-500 mt-2">{t("Langue")}</p>
           <ul className="flex text-center flex-col items-start justify-center ">
-            <li className="m-0">Français</li>
-            <li className="m-0">Anglais</li>
-            <li className="m-0">Arabe</li>
+            <li className="m-0">{t("Français")}</li>
+            <li className="m-0">{t("Anglais")}</li>
           </ul>
         </div>
 
@@ -54,13 +58,13 @@ function Footer() {
               width={200}
               height={30}
               alt="logoEvenZone"
-              src={"/footerLogo.png"}
+              src={"/images/footerLogo.png"}
               className="md:w-[200px] md:h-[30px] "
             />
           </div>
           <p className="text-center ">
-            Eventzone Algérie - votre guide expert
-            <br /> des événements professionnels
+            {t("FooterDescription")}
+            <br /> {t("FooterDes2")}
           </p>
           <div className="flex items-center justify-center space-x-4 ">
             {/* Social media icons as placeholders */}

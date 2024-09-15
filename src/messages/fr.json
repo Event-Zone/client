@@ -1,0 +1,271 @@
+{ 
+    "Hero": {"button":"Voir Plus"},
+    "Categorie":{
+        "description":"Les Catégories les plus Populaires"
+    },
+    "Villes":{
+        "description":"Villes populaires à <span>EventZone</span>"
+
+    },
+    "NextEvents":{
+        "description":"Prochains événements",
+        "button":"Voir Plus"
+    },
+    "Collaborer":{
+        "description":"Collaborez avec <span >EventZone</span>",
+        "discover":"Découvrez des événements",
+        "add":"Ajoutez votre événement",
+        "addDescription":"Contribuez à l'Excellence Événementielle et Ajoutez Votre Événement avec EventZone.",
+        "discoverDescription":"Découvrez qui organise des événements dans vos domaines d'intérêt..",
+        "ajoutEvenement":"ajoutez votre événement",
+        "rechercherEvenement":"rechercher des événements"
+    },
+    "Register":{
+        "a2fCode":"Entrer le code envoyer a votre Email",
+         "a2fsubmit":"Envoyer",
+        "password":"Mot de passe",
+        "confirmPassword":"Confirmez le mot de passe",
+        "email":"Email",
+        "fullname":"nom complet",
+        "submit":"Créer un compte"
+    },
+    "Login":{
+        "a2fCode":"Entrer le code envoyer a votre Email",
+        "a2fsubmit":"Envoyer",
+        "newpassword":"nouveau Mot de passe",
+        "comfirmnewpassword":"Confirmez nouveau Mot de passe",
+        "password":"Mot de passe",
+        "submit":"Se Connecter",
+        "submitResetLink":"Envoyer le code de renitialisation",
+        "forgotpassword":"mot de passe oublier"
+    },
+    "Event":{
+        "Info":"Informations principales",
+        "Apercu":"Aperçu de l'événement",
+        "Publier":"Publier",
+        "Precedent":"Precedent",
+        "Suivant":"Suivant",
+        "infoDeBase":"Informations de base",
+        "Nommez":"Nommez votre événement et expliquez aux participants pourquoi ils devraient y participer. Ajoutez des détails mettant en avant ce qui le rend unique.",
+        "Nom":"Nom de l'événement",
+        "Acronym":"Acronym de nom de l'événement",
+        "Category":"Choisir Categorie",
+        "Tags":"Améliorez la visibilité de votre événement en ajoutant des balises pertinentes au sujet."
+,"addTag":"Appuyez sur Entrée pour ajouter un tag",
+"Emplacement":"Emplacement",
+"EmplacementDescription":"Aidez les gens à découvrir votre événement et indiquez aux participants où se présenter."
+,"Lieuphysique":"Lieu physique",
+"Enligne":"Enligne",
+"aPlustard":"À annoncer plus tard",
+"DateTitle":"Dates & Horaires",
+"DateDesc":"Dites aux participants quand ils doivent se rendre.",
+"startDate":"Date de début",
+"endDate":"Date de fin",
+"startHour":"Heure de debut",
+"endHour":"Heure de fin",
+"contacts":"Aidez les participants à vous contacter et à voir vos informations, pour les aider à vous joindre"
+,"imagesDes":"Ajouter des photos pour montrer le sujet de votre evenement"
+,"ImgCouverture":" Image de couverture",
+"telecharger":"Téléchargez des photos",
+"recomanded":"<span>• Taille d'image recommandée : 2160 x 1080px</span> <span>• Taille maximale du fichier : 8 Mo</span> <span>• Fichiers image pris en charge : JPEG ou PNG</span>"
+,"addLink":"Ajoutez un lien vidéo de Youtube pour montrer votre événement",
+"terminer":"Terminer",
+"EventProprities":"Propriété de l'événement",
+"EventPropritiesDes":"Personnalisez chaque aspect de votre evenement",
+"Accessibilite":"Accessibilite",
+"Gratuitpourlesvisiteurs":"Gratuit pour les visiteurs",
+"Evenementpayant":"Evenement payant",
+"Invitationseulement":"Invitation seulement",
+"Accesrestreint":"Acces restreint",
+"Evenementinternation":"Evenement internation",
+"Evenementnational":"Evenement national",
+"Evenementuniversaire":"Evenement universaire"
+,"Evenementregional":" Evenement regional",
+"Evenementlocal":"Evenement local",
+"Professionnels":"Professionnels",
+"Etudiant":"Etudiant",
+"Grandpublic":"Grand public",
+"Specifiquealindustrie":"Specifique a l'industrie",
+"Interieur":"Interieur",
+"Exterieur":"Exterieur",
+"ExterieuretInterieur":"Exterieur et Interieur",
+"Valider":"Valider",
+"Sponsordelévénement":"Sponsor de l'événement",
+"Téléchargezdesimages":"Téléchargez des images",
+"AutreEvents":"Autre Evenement",
+"Participer":"Participer",
+"Organisateur":"Organisateur",
+"addGoogle":"ajouter au calendrie google",
+"enLign":"en Lign",
+"seeMaps":"voir sur la carte",
+"About":"A propos de cet événement"
+    },
+    "Explor":{
+       
+  "VotreEntreprise": "Votre entreprise",
+  "VotreProfession": "Votre profession",
+  "tags": "Tags",
+  "addTags": "Ajouter des tags",
+  "Rechercher des tags": "Rechercher des tags",
+  "Technologie et IT": "Technologie et IT",
+  "Affaire et Entrepreneuriat": "Affaire et Entrepreneuriat",
+  "Design et Crétivité": "Design et Créativité",
+  "Science et Recherche": "Science et Recherche",
+  "éducation et apprentissage": "Éducation et apprentissage",
+  "Finance et Investissement": "Finance et Investissement",
+  "Environnement et Durabilité": "Environnement et Durabilité",
+  "Ingénierie et Architecture": "Ingénierie et Architecture",
+  "Ressources humaines et Développement professionnel": "Ressources humaines et Développement professionnel"
+,"suivant":"suivant"
+
+    },
+    "Footer":{
+  "Collaborez Avec Eventzone": "Collaborez avec Eventzone",
+  "Decouvrez Nos Evenements": "Découvrez Nos événements",
+  "Ajoutez Votre Evenement": "Ajoutez votre événement",
+  "Contactez Nous": "Contactez-nous",
+  "Email": "Contact@eventzone.pro",
+  "Telephone": "+(213) 781 45 75 11",
+  "Langue": "Langue",
+  "Francais": "Français",
+  "Anglais": "Anglais",
+  "FooterDescription": "Eventzone Algérie - votre guide expert ",
+"FooterDes2":"des événements professionnels"
+},
+
+  "ProfilePage": {
+    "Welcome": "Bienvenue",
+    "Fullname": "Nom complet",
+    "Username": "Nom d'utilisateur",
+    "Email": "Email",
+    "Mobile": "Mobile",
+    "YourProfession": "Votre Profession",
+    "Company": "Entreprise / Organisation",
+    "WorkAddress": "Adresse du travail",
+    "Website": "Site web",
+    "ChangePassword": "Modifier le mot de passe",
+    "Save": "Sauvegarder",
+    "NoEventsFound": "Aucun événement trouvé.",
+    "CollaborateWithEventzone": "Collaborez avec Eventzone",
+    "DiscoverOurEvents": "Découvrez Nos événements",
+    "AddYourEvent": "Ajoutez votre événement",
+    "ContactUs": "Contactez-nous",
+    "EmailContact": "Contact@eventzone.pro",
+    "PhoneContact": "+(213) 781 45 75 11",
+    "Language": "Langue",
+    "French": "Français",
+    "English": "Anglais",
+    "UpgradeToBusinessPack": "Upgrade to the Business pack to add a new event",
+    "MyAccount": "Mon Compte",
+    "Support": "Support",
+    "MyEvents": "Mes Événements",
+    "Admin": "Admin",
+    "Logout": "Déconnexion",
+    "Cord":"Coordonnées",
+    "ContactDes":"Que vous ayez des questions techniques, besoin de conseils promotionnels ou que vous ayez besoin d'une aide au dépannage, nous sommes là pour vous soutenir."
+  },
+  "Search":{
+    "type":"choisir type",
+    "date":"n'import qunad",
+    "category":"Choisir Categorie",
+    "place":"N'import ou",
+    "annuler":"Annuler",
+    "Filtrer":"Filtrer",
+    "noEvents":"pas d'evenement"
+  },
+  "subscriptions":{
+    "accept":"J'accepte",
+    "acceptTerms":"les termes et conditions",
+    "Inscription":"Inscription"
+
+  },
+  "tarification":{
+    "year":"an",
+    "month":"mois",
+    "Simple":"Tarification Simple",
+    "Simple2":"et Transparente",
+    "des":" Des prix qui suivent la croissance de votre événement, vous ne paierez donc jamais plus que ce dont vous avez besoin, et entièrement gratuits pour les étudiants."
+  ,"Mensuel":"Mensuel",
+  "Annuel":"Annuel",
+  "Contacter le service commercial":"Contacter le service commercial",
+         
+        "Starter0": "Nombre d'événements : 1", 
+         "Starter1": "Support Prioritaire", 
+         "Starter2": "Badge d'organisateur premium", 
+         "Starter3": "Liste des Sponsors", 
+         "Starter4": "Plusieurs photos et vidéos", 
+         "Starter5": "Promotion sur les réseaux sociaux", 
+         "Starter6": "Lien d'inscription", 
+         "Starter7": "Site web et localisation", 
+         "Starter8": "Pages vitrine personnalisée pour vous", 
+
+
+         "Business0": "Nombre d'événements illimités", 
+         "Business1": "Pages vitrine personnalisée pour vous", 
+         "Business2": "Mobile, Email, site web et localisation", 
+         "Business3": "Lien d'inscription", 
+         "Business4": "Promotion sur les réseaux sociaux", 
+         "Business5": "Plusieurs photos et vidéos", 
+         "Business6": "Liste des Sponsors", 
+         "Business7": "Badge d'organisateur premium", 
+         "Business8": "Support Prioritaire", 
+      
+    
+    
+         "Student0": "Nombre d'événements: 5", 
+         "Student1": "Pages vitrine personnalisée pour vous", 
+         "Student2": "Mobile, Email, site web et localisation", 
+         "Student3": "Lien d'inscription", 
+         "Student4": "Promotion sur les réseaux sociaux", 
+         "Student5": "Plusieurs photos et vidéos", 
+         "Student6": "Liste des Sponsors", 
+         "Student7": "Badge d'organisateur premium", 
+         "Student8": "Support Prioritaire",
+         "free":"Gratuit",
+      
+
+    
+  
+  "planIdeal":"Le plan idéal pour commencer. Publiez un événement gratuitement, mais avec des fonctionnalités de base.",
+  "maximize":"Maximisez la visibilité de vos événements avec un accès complet aux fonctionnalités premium pour les entreprises."
+,"startToday":"Commencer aujourd'hui"
+  
+  
+  }
+,"Questions":{
+   
+      "question0": "Comment puis-je passer à un pack payant depuis la version gratuite?",
+      "answer0": "Vous pouvez passer à un pack payant à tout moment en accédant à la section Paramètres de votre compte et en sélectionnant le plan qui convient le mieux à vos besoins."
+    ,
+    
+      "question1": "Y a-t-il des frais cachés en plus du prix du pack?",
+      "answer1": "Non, nos tarifs sont transparents. Le prix que vous voyez pour chaque pack est le coût total, sans frais cachés supplémentaires."
+    ,
+    
+      "question2": "Comment fonctionne la promotion sur les réseaux sociaux ?",
+      "answer2": "Les promotions sur les réseaux sociaux incluent la mise en avant de vos événements sur nos pages sociales. Nous utiliserons nos canaux pour augmenter la visibilité de vos événements."
+    ,
+    
+      "question3": "Puis-je modifier mon pack en cours de route si mes besoins changent?",
+      "answer3": "Absolument, vous pouvez mettre à niveau ou rétrograder votre pack à tout moment pour vous assurer que votre abonnement correspond à l'évolution de vos besoins en événements."
+    ,
+    
+      "question4": "Quels sont les moyens de paiement?",
+      "answer4": "Pour le paiement, vous pouvez vous rendre dans notre Agence qui se trouve à Hussein Dey, Alger. Sinon, les paiements par CCP ou banque sont acceptés."
+    ,"title":"Questions Fréquement Posées",
+    "des":"Nous sommes là pour répondre aux questions fréquemment posées."
+},
+"welcome":{
+  "Ajoutez vos événements":"Ajoutez vos événements",
+"Organiser des événements":"Organiser des événements",
+"Découvrez Nos événements":"Découvrez nos événements",
+"Explorer des événements":"Explorer des événements",
+"Bienvenue sur EventZone!":"Bienvenue sur EventZone!",
+"salutation":"Salutations ! Comment pouvons-nous vous soutenir dans votre parcours avec nous ?"
+}
+
+}
+
+
+    
+    

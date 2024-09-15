@@ -112,7 +112,7 @@ function Admin() {
           </div>
         )}
         <div className="flex justify-center items-center">
-          <img src="/Frame 1 (1).png" alt="logo" />
+          <img src="/image/Frame 1 (1).png" alt="logo" />
         </div>
         <div className="bg-[#001029] px-3 flex flex-col items-center min-h-[300px] justify-around">
           <div

@@ -4,9 +4,10 @@ import {
   useGetUserQuery,
 } from "@/store/features/api/apiSlice";
 import { selectUser, updateUserData } from "@/store/features/userSlice";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslations } from "next-intl";
 
 function Subscription({ pack }: { pack: string }) {
   const router = useRouter();
@@ -71,7 +72,7 @@ function Subscription({ pack }: { pack: string }) {
       // Show loading spinner or progress bar
     }
   }, [addSubscriptionResult.status, refetchUser, dispatch, router]);
-
+  const t = useTranslations("subscriptions");
   return (
     <div className="flex-grow p-8 bg-white rounded-lg shadow-md justify-center items-center">
       <div className="border-[1.4px] border-gray-400 rounded-lg p-12 mx-32 my-16">
@@ -186,9 +187,9 @@ function Subscription({ pack }: { pack: string }) {
               required
             />
             <label htmlFor="terms" className="text-gray-500 poppins-regular">
-              J'accepte
+              {t("accept")}
               <span className="text-mainBlue cursor-pointer ml-1">
-                les termes et conditions
+                {t("acceptTerms")}
               </span>
             </label>
           </div>
@@ -197,7 +198,7 @@ function Subscription({ pack }: { pack: string }) {
               type="submit"
               className="text-white py-2 rounded-md bg-mainBlue w-full poppins-medium"
             >
-              Inscription
+              {t("Inscription")}
             </button>
           </div>
         </form>

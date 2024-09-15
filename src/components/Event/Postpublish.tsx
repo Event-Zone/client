@@ -1,5 +1,5 @@
 import { selectUser } from "@/store/features/userSlice";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -17,7 +17,7 @@ function PostPublish() {
               src="/icons/ph_seal-check.png"
               className="w-[100px] h-[100px] rounded-3xl"
             />
-            <img alt="logo" src="/icons/Logo.png" className="" />
+            <img alt="logo" src="/images/Logo.png" className="" />
           </div>
           <div>
             <h3 className="mb-8 text-center text-3xl poppins-semibold text-titles">

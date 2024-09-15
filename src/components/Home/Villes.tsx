@@ -3,9 +3,11 @@ import { setSearchedEvents } from "@/store/features/eventSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Progress from "../shared/Progress";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 function Villes() {
+  const t = useTranslations("Villes");
   const router = useRouter();
   const dispatch = useDispatch();
   const [selectedLocations, setSelectedLocations] = useState<string[] | null>(
@@ -35,7 +37,9 @@ function Villes() {
   return (
     <div className="w-full py-4">
       <h2 className="text-titles ml-1 mb-4 poppins-semibold md:text-[24px]">
-        Villes populaires à <span className="text-mainBlue">EventZone</span>
+        {t.rich("description", {
+          span: (chunks) => <span className="text-mainBlue">{chunks}</span>,
+        })}
       </h2>
 
       {/* Add horizontal scrolling for the container */}
@@ -48,7 +52,7 @@ function Villes() {
             <img
               alt="event-img"
               className="object-cover w-full h-[150px] md:h-48 md:rounded-md rounded-full"
-              src="/Frame 920.png"
+              src="/images/Frame 920.png"
             />
             <div className="ville-overlay">
               <div className="flex justify-between">
@@ -67,7 +71,7 @@ function Villes() {
             <img
               alt="event-img"
               className="object-cover w-full h-[150px] md:h-48 md:rounded-md rounded-full"
-              src="/Frame 643.png"
+              src="/images/Frame 643.png"
             />
             <div className="ville-overlay">
               <div className="flex justify-between">
@@ -86,7 +90,7 @@ function Villes() {
             <img
               alt="event-img"
               className="object-cover w-full h-[150px] md:h-48 md:rounded-md rounded-full"
-              src="/Frame 921.png"
+              src="/images/Frame 921.png"
             />
             <div className="ville-overlay">
               <div className="flex justify-between">
@@ -105,7 +109,7 @@ function Villes() {
             <img
               alt="event-img"
               className="object-cover w-full h-[150px] md:h-48 md:rounded-md rounded-full"
-              src="/Frame 922.png"
+              src="/images/Frame 922.png"
             />
             <div className="ville-overlay">
               <div className="flex justify-between">

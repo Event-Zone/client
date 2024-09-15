@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { useTranslations } from "next-intl";
 
 function ImagesSection({
   setVideoUrl,
@@ -37,14 +38,13 @@ function ImagesSection({
     const updatedImages = eventImages.filter((_, i) => i !== index);
     setEventImages(updatedImages);
   };
+  const t = useTranslations("Event");
   return (
     <>
       <div className="  mb-3  ">
         <div className="mx-3">
           <h3 className="text-2xl poppins-semibold">Images </h3>
-          <p className="text-gray-600 poppins-regular">
-            Ajouter des photos pour montrer le sujet de votre evenement{" "}
-          </p>{" "}
+          <p className="text-gray-600 poppins-regular">{t("imagesDes")}</p>{" "}
         </div>
       </div>
       <div
@@ -69,7 +69,7 @@ function ImagesSection({
               src={`/icons/Show.png`}
               className="w-[23px] h-[23px] bg-white rounded-full  m-r-1 "
             />{" "}
-            Image de couverture{" "}
+            {t("ImgCouverture")}
           </div>
         )}
         {isEventImagesSubmitted ? (
@@ -116,7 +116,7 @@ function ImagesSection({
               className="md:w-16 md:h-16  "
             />
             <h3 className="text-mainBlue poppins-medium mt-2">
-              Téléchargez des photos
+              {t("telecharger")}
             </h3>
           </label>
         ) : null}

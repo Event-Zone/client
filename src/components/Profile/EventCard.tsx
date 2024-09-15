@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { IEvent } from "@/types/Event";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { useDeleteEventMutation } from "@/store/features/api/apiSlice";
 import Progress from "../shared/Progress";
 import Image from "next/image";

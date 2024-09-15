@@ -6,9 +6,10 @@ import {
 } from "@/store/features/api/apiSlice";
 import { useDispatch } from "react-redux";
 import { setSearchedEvents } from "@/store/features/eventSlice";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { isArray } from "util";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 function EventPage({ data }: { data: any }) {
   // geting the organizer data
@@ -103,7 +104,7 @@ function EventPage({ data }: { data: any }) {
 
     return () => clearInterval(interval);
   }, [data.eventImages, currentBar]);
-
+  const t = useTranslations();
   return (
     <div className="flex flex-col w-full md:px-16">
       <div className="flex flex-col w-full px-4 md:px-20 lg:px-44  py-16">
@@ -213,7 +214,7 @@ function EventPage({ data }: { data: any }) {
                 className="max-w-[30px] max-h-[30px]"
               />{" "}
               <button className="rounded-xl ml-2 poppins-regular  ">
-                Participer{" "}
+                {t("Participer")}
               </button>
             </div>
           ) : null}
@@ -224,7 +225,7 @@ function EventPage({ data }: { data: any }) {
               className="max-w-[30px] max-h-[30px]"
             />{" "}
             <button className="rounded-xl ml-2 poppins-regular  ">
-              Site Web
+              Web Site
             </button>
           </div>
           <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center ">
@@ -243,9 +244,7 @@ function EventPage({ data }: { data: any }) {
               src="/icons/gps.png"
               className="max-w-[30px] max-h-[30px]"
             />{" "}
-            <button className="rounded-xl ml-2 poppins-regular  ">
-              Voir sur la carte{" "}
-            </button>
+            <button className="rounded-xl ml-2 poppins-regular  ">Maps</button>
           </div>
         </div>
         {fetchedOrganizer && (
@@ -253,7 +252,7 @@ function EventPage({ data }: { data: any }) {
             <div className="flex items-center justify-between p-8">
               <div className="flex flex-row">
                 <div className="text-gray-600">
-                  <h3 className="poppins-medium">Organisateur</h3>
+                  <h3 className="poppins-medium">{t("Organisateur")}</h3>
 
                   <p className="poppins-medium text-titles">
                     {fetchedSubscription?.company}
@@ -265,14 +264,14 @@ function EventPage({ data }: { data: any }) {
                 className="flex justify-between items-center cursor-pointer bg-[#DAE6F4] rounded-md p-2"
               >
                 <p className="text-mainBlue poppins-regular text-sm   ">
-                  Other Events Hosted
+                  {t("AutreEvents")}
                 </p>
               </div>
             </div>
           </div>
         )}
         <div className="mt-4 poppins-semibold text-titles">
-          <h3 className="text-2xl">Date et Horaires</h3>
+          <h3 className="text-2xl">{t("DateTitle")}</h3>
           <div className="flex items-center mt-3">
             <img
               alt="icon"
@@ -280,12 +279,12 @@ function EventPage({ data }: { data: any }) {
               className="w-[15px] h-[15px] mr-2"
             />{" "}
             <p className="poppins-regular text-gray-600 rounded-lg px-4 py-2">
-              Du{" "}
+              {" "}
               {new Date(data.startdate).toLocaleDateString("fr-FR", {
                 day: "2-digit",
                 month: "short",
               })}{" "}
-              au{" "}
+              -{" "}
               {new Date(data.enddate).toLocaleDateString("fr-FR", {
                 day: "2-digit",
                 month: "short",
@@ -324,7 +323,7 @@ function EventPage({ data }: { data: any }) {
               )}`}
               className="poppins-regular text-sm text-mainBlue"
             >
-              ajouter au calendrie google{" "}
+              {t("addGoogle")}
             </a>{" "}
           </div>
         </div>
@@ -353,10 +352,10 @@ function EventPage({ data }: { data: any }) {
                   href={data.link}
                   className="text-mainBlue cursor-pointer poppins-regular"
                 >
-                  Online
+                  {t("enLign")}
                 </a>
               ) : (
-                <>Online</>
+                <> {t("enLign")}</>
               )}
             </p>
           </div>
@@ -372,14 +371,14 @@ function EventPage({ data }: { data: any }) {
                 href={`https://www.google.com/maps/place/${data?.location?.lat},${data?.location?.lon}`}
                 className="poppins-regular text-sm text-mainBlue"
               >
-                voir sur la carte{" "}
+                {t("seeMaps")}
               </a>{" "}
             </div>
           ) : null}
         </div>
         <div className="mt-4">
           <h3 className="mt-4 poppins-semibold text-titles text-2xl">
-            A propos de cet événement
+            {t("About")}
           </h3>
           <div className="flex mb-4 mt-3 ">
             {data.lieu ? (
@@ -389,7 +388,7 @@ function EventPage({ data }: { data: any }) {
                   src="/icons/globalBlue.png"
                   className="max-w-[30px] max-h-[30px]"
                 />
-                <p className="poppins-medium">Evenement {data.lieu}</p>
+                <p className="poppins-medium">{data.lieu}</p>
               </div>
             ) : null}
             {data.accessibilite ? (

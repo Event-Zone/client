@@ -4,10 +4,11 @@ import Cards from "./Card";
 import Questions from "./Questions";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/features/userSlice";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { useGetSubscriptionQuery } from "@/store/features/api/apiSlice";
 import Progress from "@/components/shared/Progress"; // Import the Progress component
 import Message from "@/components/shared/Message"; // Import the Message component
+import { useTranslations } from "next-intl";
 
 function Tarification() {
   const user = useSelector(selectUser);
@@ -47,21 +48,17 @@ function Tarification() {
       router.push(`/events/create/${fetchedSubscription.pack}`);
     }
   }, [fetchedSubscription]);
-
+  const t = useTranslations("tarification");
   return (
     <div className="flex flex-col justify-center items-center">
       {message && <Message message={message} />}{" "}
       {/* Conditionally render the message dialog */}
       <h3 className="text-mainBlue poppins-semibold  text-[18px]">Packs</h3>
       <h3 className="text-titles poppins-regular text-[40px]  leading-[60px] text-center">
-        Tarification Simple
-        <br /> et Transparente
+        {t("Simple")}
+        <br /> {t("Simple2")}
       </h3>
-      <p className="text-sm text-gray-600 poppins-regular ">
-        Des prix qui suivent la croissance de votre événement, vous ne paierez
-        donc jamais plus que ce dont vous avez besoin, et entièrement gratuits
-        pour les étudiants.
-      </p>
+      <p className="text-sm text-gray-600 poppins-regular ">{t("des")}</p>
       <div className="rounded-[20px] flex mt-4 overflow-hidden p-2 shadow-[0_0_10px_0_rgba(0,0,0,0.4)]">
         <button
           className={`rounded-[20px] p-5 flex-1 py-2 text-center transition-colors duration-700 ease-in-out ${
@@ -74,7 +71,7 @@ function Tarification() {
             setSelectedPrice(4000);
           }}
         >
-          Mensuel
+          {t("Mensuel")}
         </button>
         <button
           className={`flex-1 py-2 rounded-[20px] p-5  text-center transition-colors duration-700 ease-in-out ${
@@ -87,13 +84,13 @@ function Tarification() {
             setSelectedPrice(48000);
           }}
         >
-          Annuel
+          {t("Annuel")}
         </button>
       </div>
       <Cards price={selectedPrice} />
       <div className="mt-8 flex justify-center items-center overflow-hidden bg-mainBlue rounded-md">
         <button className="poppins-medium px-8 py-4 text-center text-white">
-          Contacter le service commercial
+          {t("Contacter le service commercial")}
         </button>
       </div>
       <Questions />

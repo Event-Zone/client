@@ -11,6 +11,7 @@ import {
   useGetTypesQuery,
 } from "@/store/features/api/apiSlice";
 import Progress from "../shared/Progress";
+import { useTranslations } from "next-intl";
 
 function EventForm({
   setIsNext,
@@ -144,7 +145,6 @@ function EventForm({
       setNewTag(""); // Clear the new tag input
     }
   };
-
   const renderTags = () => {
     return formData.tags.map((tag: any, index: number) => {
       if (tag !== " ")
@@ -171,22 +171,18 @@ function EventForm({
     updatedTags.splice(index, 1); // Remove the tag at the specified index
     setFormData({ ...formData, tags: updatedTags });
   };
-
+  const t = useTranslations("Event");
   return (
     <div>
-      <h3 className="text-2xl poppins-semibold">Informations de base</h3>
-      <p className="text-gray-600 poppins-regular">
-        Nommez votre événement et expliquez aux participants pourquoi ils
-        devraient y participer. Ajoutez des détails mettant en avant ce qui le
-        rend unique.
-      </p>
+      <h3 className="text-2xl poppins-semibold">{t("infoDeBase")}</h3>
+      <p className="text-gray-600 poppins-regular">{t("Nommez")}</p>
       <form className="mt-8">
         <div className="mb-4  border-gray-300 border-[1.3px] md:p-2">
           <label
             htmlFor="eventName"
             className="block text-sm poppins-medium poppins-semibold text-gray-700"
           >
-            Nom de l'événement
+            {t("Nom")}
           </label>
           <input
             type="text"
@@ -203,7 +199,7 @@ function EventForm({
             htmlFor="eventAcronym"
             className="block text-sm poppins-medium poppins-semibold text-gray-700"
           >
-            Acronym de nom de l'événement
+            {t("Acronym")}
           </label>
           <input
             value={formData.eventAcronym}
@@ -242,7 +238,7 @@ function EventForm({
                 setCategorieSelectorVisible(!isCategorieSelectorVisible)
               }
             >
-              Choose Categorie
+              {t("Category")}
             </div>
             {isCategorieSelectorVisible && (
               <div className="bg-white p-4 rounded-md shadow-md z-30 absolute ">
@@ -271,16 +267,13 @@ function EventForm({
         </div>
         <RishTextEditor setFormData={setFormData} formData={formData} />
         <h3 className="text-2xl poppins-semibold">Tags</h3>
-        <p className="text-gray-600 poppins-regular">
-          Améliorez la visibilité de votre événement en ajoutant des balises
-          pertinentes au sujet.
-        </p>
+        <p className="text-gray-600 poppins-regular">{t("Tags")}</p>
         <div className="mb-4 border-gray-300 border-[1.3px] p-2">
           <label
             htmlFor="tags"
             className="block text-sm poppins-medium poppins-semibold text-gray-700"
           >
-            Appuyez sur Entrée pour ajouter un tag
+            {t("addTag")}
           </label>
           <div className="flex flex-row mb-1">
             <input
@@ -297,10 +290,9 @@ function EventForm({
           {renderTags()} {/* Display existing tags */}
         </div>
         <div className="mb-4 p-2">
-          <h3 className="text-2xl poppins-semibold">Emplacement</h3>
+          <h3 className="text-2xl poppins-semibold"> {t("Emplacement")}</h3>
           <p className="text-gray-600 poppins-regular">
-            Aidez les gens à découvrir votre événement et indiquez aux
-            participants où se présenter.
+            {t("EmplacementDescription")}
           </p>
           <div className="flex flex-row">
             <button
@@ -313,7 +305,7 @@ function EventForm({
                 location === 0 ? "bg-mainBlue text-white" : "text-gray-500"
               } `}
             >
-              Lieu physique
+              {t("Lieuphysique")}
             </button>
             <button
               onClick={() => {
@@ -325,7 +317,7 @@ function EventForm({
                 location === 1 ? "bg-mainBlue text-white" : "text-gray-500"
               } `}
             >
-              En ligne
+              {t("Enligne")}
             </button>
             <button
               onClick={() => {
@@ -338,7 +330,7 @@ function EventForm({
                 location === 2 ? "bg-mainBlue text-white" : "text-gray-500"
               } `}
             >
-              À annoncer plus tard
+              {t("aPlustard")}
             </button>
           </div>
           {location !== 2 ? (
@@ -379,10 +371,8 @@ function EventForm({
             </div>
           ) : null}
         </div>
-        <h3 className="text-2xl poppins-semibold">Dates & Horaires</h3>
-        <p className="text-gray-600 poppins-regular">
-          Dites aux participants quand ils doivent se rendre.
-        </p>
+        <h3 className="text-2xl poppins-semibold">{t("DateTitle")}</h3>
+        <p className="text-gray-600 poppins-regular">{t("DateDesc")}</p>
         <div className="flex flex-row w-full">
           <div className="flex flex-col flex-1 mr-2">
             <div className="border-gray-300 border-[1.3px] p-2 mb-[5px] md:h-[56px] rounded-[4px]">
@@ -390,7 +380,7 @@ function EventForm({
                 htmlFor="startdate"
                 className="block text-sm poppins-medium poppins-semibold text-gray-700"
               >
-                Date de début
+                {t("startDate")}
               </label>
               <div className="flex flex-row">
                 <img
@@ -413,7 +403,7 @@ function EventForm({
                 htmlFor="enddate"
                 className="block text-sm poppins-medium poppins-semibold text-gray-700"
               >
-                Date de fin
+                {t("endDate")}
               </label>
               <div className="flex flex-row">
                 <img
@@ -440,7 +430,7 @@ function EventForm({
                 htmlFor="startHour"
                 className="block text-sm poppins-medium poppins-semibold text-gray-700 absolute ml-2"
               >
-                Heure de debut
+                {t("startHour")}
               </label>
               <TimePickerUi
                 initTime={formData?.startHour}
@@ -454,7 +444,7 @@ function EventForm({
                 htmlFor="endHour"
                 className="block text-sm poppins-medium poppins-semibold text-gray-700  absolute ml-2 "
               >
-                Heure de fin
+                {t("endHour")}
               </label>
               <TimePickerUi
                 initTime={formData?.endHour}
@@ -465,11 +455,8 @@ function EventForm({
           </div>
         </div>
 
-        <h3 className="text-2xl poppins-semibold">Liens</h3>
-        <p className="text-gray-600 poppins-regular">
-          Aidez les participants à vous contacter et à voir vos informations,
-          pour les aider à vous joindre{" "}
-        </p>
+        <h3 className="text-2xl poppins-semibold">Links</h3>
+        <p className="text-gray-600 poppins-regular">{t("contacts")}</p>
 
         <div className="mb-2 border-gray-300 border-[1.3px] p-2 flex flex-row">
           <img alt="mobile" src={"/icons/mobile.png"} />

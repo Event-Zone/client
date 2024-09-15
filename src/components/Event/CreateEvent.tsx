@@ -8,6 +8,7 @@ import PostPublish from "./Postpublish";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/features/userSlice";
 import Progress from "../shared/Progress";
+import { useTranslations } from "next-intl";
 
 function CreateEvent() {
   const [isNext1, setIsNext1] = useState(false);
@@ -60,7 +61,7 @@ function CreateEvent() {
       console.log("pending");
     }
   }, [addEventResult]);
-
+  const t = useTranslations("Event");
   return (
     <div className="flex md:justify-center md:items-center flex-col px-1 md:px-20 lg:px-44 py-10 md:py-20">
       {page !== 3 ? (
@@ -74,7 +75,7 @@ function CreateEvent() {
               }`}
             />
             <p className="md:block hidden text-sm md:text-md text-titles poppins-medium">
-              Informations principales
+              {t("Info")}
             </p>
           </div>
           <div className="w-[70px] md:w-[100px] h-[2px] md:h-[3px] bg-gray-500 rounded-3xl"></div>
@@ -91,7 +92,7 @@ function CreateEvent() {
               }`}
             />
             <p className="md:block hidden text-sm md:text-md text-titles poppins-medium">
-              Aperçu de l'événement
+              {t("Apercu")}
             </p>
           </div>
           <div className="w-[70px] md:w-[100px] h-[2px] md:h-[3px] bg-gray-500 rounded-3xl"></div>
@@ -106,7 +107,7 @@ function CreateEvent() {
               }`}
             />
             <p className=" md:block hidden text-sm md:text-md text-titles poppins-medium">
-              Publier
+              {t("Publier")}
             </p>
           </div>
         </div>
@@ -140,7 +141,8 @@ function CreateEvent() {
                 className="w-full rounded-md py-1 px-2 md:px-4 text-gray-500 poppins-medium text-sm md:text-md text-center"
                 type="button"
               >
-                Precedent
+                {" "}
+                {t("Precedent")}
               </button>
             ) : null}
             {page !== 3 ? (
@@ -157,7 +159,7 @@ function CreateEvent() {
                 }`}
                 type="button"
               >
-                Suivant
+                {t("Suivant")}
               </button>
             ) : null}
           </div>
@@ -168,14 +170,14 @@ function CreateEvent() {
               className="w-full rounded-md py-1 px-2 md:px-4 text-gray-500 poppins-medium text-sm md:text-md text-center"
               type="button"
             >
-              Precedent
+              {t("Precedent")}
             </button>
             <button
               onClick={handlePublier}
               className="w-full bg-mainBlue rounded-md py-1 px-2 md:px-4 text-white poppins-medium text-sm md:text-md text-center"
               type="button"
             >
-              Publier
+              {t("Publier")}
             </button>
           </div>
         )

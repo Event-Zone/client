@@ -1,6 +1,6 @@
 "use client";
 import { selectUser } from "@/store/features/userSlice";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -9,7 +9,7 @@ function Validation() {
   const user = useSelector(selectUser);
   return (
     <div className="flex flex-col justify-around items-center flex-1">
-      <img alt="eventzone-logo" src="/Logo.png" />
+      <img alt="eventzone-logo" src="/images/Logo.png" />
       <h3 className="text-titles poppins-semibold text-4xl ">
         Bienvenue sur EventZone!
       </h3>

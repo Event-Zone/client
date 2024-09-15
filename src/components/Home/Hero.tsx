@@ -4,10 +4,11 @@ import {
   useGetHeroAddsQuery,
   useGetEventAddQuery,
 } from "@/store/features/api/apiSlice";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { isArray } from "util";
 import Progress from "../shared/Progress";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 const Hero = () => {
   const router = useRouter();
   const [adds, setAdds] = useState<string[]>([]);
@@ -75,6 +76,8 @@ const Hero = () => {
   useEffect(() => {
     console.log(eventAdds.length);
   }, [eventAdds]);
+
+  const t = useTranslations("Hero");
   return (
     <div className="flex flex-col">
       <div
@@ -221,7 +224,7 @@ const Hero = () => {
               }
               className="mr-2 rounded-[10px] px-10 py-3 bg-mainBlue text-white text-center"
             >
-              Voir plus
+              {t("button")}
             </button>
           </div>
         </div>

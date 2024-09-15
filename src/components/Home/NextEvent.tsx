@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import Image from "next/image";
 import Progress from "../shared/Progress";
 import { useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import {
 } from "@/store/features/api/apiSlice";
 import { selectInitialEvents } from "@/store/features/eventSlice";
 import { IEvent } from "@/types/Event";
+import { useTranslations } from "next-intl";
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -75,12 +76,12 @@ function NextEvent({ events }: { events: IEvent[] }) {
   const handleShowMore = () => {
     setVisibleEventsCount((prevCount) => prevCount + 8);
   };
-
+  const t = useTranslations("NextEvents");
   return (
     <div className="w-full py-4">
       <div className="w-[90%] ml-1 my-3">
         <h2 className="text-titles mb-4 poppins-semibold md:text-[24px]">
-          Prochains événements
+          {t("description")}
         </h2>
       </div>
 
@@ -134,7 +135,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
             .slice(0, visibleEventsCount)
             .map((event: any, index: number) => (
               <div
-                onClick={() => router.push(`events/details/${event._id}`)}
+                onClick={() => router.push(`/events/details/${event._id}`)}
                 key={index}
                 className="md:m-0 ml-20 lg:w-[23%] w-[270px]  h-[400px] flex-shrink-0 bg-white rounded-lg overflow-hidden"
               >
@@ -202,7 +203,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
           onClick={handleShowMore}
           className="mr-2 rounded-[10px] px-10 py-3 bg-mainBlue text-white text-center"
         >
-          Voir plus
+          {t("button")}
         </button>
       </div>
 

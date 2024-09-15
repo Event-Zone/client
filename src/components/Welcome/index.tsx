@@ -1,17 +1,17 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 function Welcome() {
   const router = useRouter();
+  const t = useTranslations("welcome");
+
   return (
     <div className="flex flex-col justify-around items-center flex-1">
-      <img alt="eventzone-logo" src="/Logo.png" />
-      <h3 className="text-titles text-3xl ">Bienvenue sur EventZone!</h3>
-      <p className="text-sm text-gray-600">
-        Salutations ! Comment pouvons-nous vous soutenir dans votre parcours
-        avec nous ?
-      </p>
+      <img alt="eventzone-logo" src="/images/Logo.png" />
+      <h3 className="text-titles text-3xl ">{t("Bienvenue sur EventZone!")}</h3>
+      <p className="text-sm text-gray-600">{t("salutation")}</p>
       <div className=" flex flex-col md:flex-row items-center justify-between">
         <div
           onClick={() => router.push("/explore")}
@@ -21,11 +21,11 @@ function Welcome() {
             <img alt="plus-icon" src="/icons/ion_search.png" />
           </div>
           <h2 className="text-titles md:ml-14 mb-4 poppins-extrabold md:text-[30px]">
-            Explorer des événements{" "}
+            {t("Explorer des événements")}{" "}
           </h2>
 
           <button className="hover:bg-mainBlue hover:text-white border-gray-600 border-2 rounded-md px-5 py-2">
-            Découvrez Nos événements{" "}
+            {t("Découvrez Nos événements")}{" "}
           </button>
         </div>
         <div
@@ -36,11 +36,11 @@ function Welcome() {
             <img alt="plus-icon" src="/icons/ph_plus-bold.png" />
           </div>
           <h2 className="text-titles md:ml-14 mb-4 poppins-extrabold md:text-[30px]">
-            Organiser des événements{" "}
+            {t("Organiser des événements")}{" "}
           </h2>
 
           <button className="hover:bg-mainBlue hover:text-white border-gray-600 border-2 rounded-md px-5 py-2">
-            Ajoutez vos événements{" "}
+            {t("Ajoutez vos événements")}{" "}
           </button>
         </div>
       </div>

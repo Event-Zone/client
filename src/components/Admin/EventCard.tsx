@@ -1,5 +1,5 @@
 import { IEvent } from "@/types/Event";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import React, { useEffect } from "react";
 import { useNewAdMutation } from "@/store/features/api/apiSlice";
 import Progress from "../shared/Progress";

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import {
   useLoginUserMutation,
   useForgotPasswordMutation,
@@ -11,6 +11,7 @@ import { resetUserData, setUserData } from "@/store/features/userSlice";
 import GoogleLoginButton from "../shared/GoogleLoginButton";
 import Spinner from "@/components/shared/Progress";
 import MessageDialog from "@/components/shared/Message";
+import { useTranslations } from "next-intl";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -77,7 +78,7 @@ function LoginForm() {
       setMessage({ type: 0, content: "Error sending password reset link" });
     }
   };
-
+  const t = useTranslations("Login");
   const handleA2fSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("A2F Code:", a2fCode, newPassword);
@@ -153,14 +154,12 @@ function LoginForm() {
       >
         <div className="flex flex-col justify-center items-center ">
           <img src="/icons/Union.png" alt="Logo" className="mb-1" />
-          <img src="/Logo.png" alt="Logo" className="mb-6" />
+          <img src="/images/Logo.png" alt="Logo" className="mb-6" />
         </div>
 
         {showA2FForm ? (
           <>
-            <label htmlFor="a2fCode">
-              Enter the code that was sent to your email:
-            </label>
+            <label htmlFor="a2fCode">{t("a2fCode")}</label>
             <input
               type="text"
               id="a2fCode"
@@ -171,7 +170,7 @@ function LoginForm() {
               className="border border-gray-300 rounded p-4"
             />
             <div>
-              <label>New Password:</label>
+              <label> {t("newpassword")}</label>
               <input
                 type="password"
                 value={newPassword}
@@ -187,7 +186,7 @@ function LoginForm() {
               />
             </div>
             <div>
-              <label>Confirm New Password:</label>
+              <label> {t("comfirmnewpassword")}</label>
               <input
                 type="password"
                 value={confirmNewPassword}
@@ -210,7 +209,7 @@ function LoginForm() {
                 !disabled && "bg-mainBlue"
               }`}
             >
-              Envoyer
+              {t("a2fsubmit")}
             </button>
           </>
         ) : !showForgotPassword ? (
@@ -229,7 +228,7 @@ function LoginForm() {
               <input
                 type="password"
                 name="password"
-                placeholder="Mot de passe"
+                placeholder={t("password")}
                 value={formData.password}
                 onChange={handleChange}
                 className="w-full p-2 border border-gray-300 rounded"
@@ -239,7 +238,7 @@ function LoginForm() {
               type="submit"
               className="w-full p-2 mb-4 bg-mainBlue text-white rounded"
             >
-              Se connecter
+              {t("submit")}
             </button>
           </>
         ) : (
@@ -248,7 +247,7 @@ function LoginForm() {
               <input
                 type="email"
                 name="email"
-                placeholder="Enter your  email"
+                placeholder="email"
                 value={backupEmail}
                 onChange={handleForgotPasswordChange}
                 className="w-full p-2 border border-gray-300 rounded"
@@ -258,7 +257,7 @@ function LoginForm() {
               type="submit"
               className="w-full p-2 mb-4 bg-mainBlue text-white rounded"
             >
-              Send Reset Link
+              {t("submitResetLink")}
             </button>
           </>
         )}
@@ -272,7 +271,7 @@ function LoginForm() {
             className="text-mainBlue poppins-regular cursor-pointer"
             onClick={() => setShowForgotPassword(true)}
           >
-            mot de passe oublier
+            {t("forgotpassword")}
           </p>
         </div>
       </form>

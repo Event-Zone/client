@@ -25,6 +25,7 @@ import { useSelector } from "react-redux";
 import Locations from "../shared/Locations";
 import Ads from "./Ads";
 import Progress from "../shared/Progress";
+import { useTranslations } from "next-intl";
 
 function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   const {
@@ -226,6 +227,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   useEffect(() => {
     console.log("selectedLocation: ", selectedLocation);
   }, [selectedLocation]);
+  const t = useTranslations("Search");
   return (
     <div className="relative p-1 md:px-20 ">
       <div className="max-w-full h-fit">
@@ -239,13 +241,11 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
               setTypeSelectorVisible(!isTypeSelectorVisible);
             }}
           >
-            Choose Type
+            {t("type")}
           </button>
           {isTypeSelectorVisible && (
             <div className="bg-gray-50 p-4 rounded-md shadow-md z-30 absolute">
-              <p className="poppins-semibold text-gray-700 mb-2">
-                Type d'événement
-              </p>
+              <p className="poppins-semibold text-gray-700 mb-2">{t("type")}</p>
               <div className="flex flex-col space-y-2">
                 <label className="flex items-center space-x-2">
                   <input
@@ -355,7 +355,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
                   }}
                   className="text-red-500"
                 >
-                  Annuler
+                  {t("Annuler")}
                 </button>
                 <button
                   onClick={() => {
@@ -363,7 +363,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
                   }}
                   className="bg-blue-500 text-white px-4 py-2 rounded-md"
                 >
-                  Filtrer
+                  {t("Filtrer")}
                 </button>
               </div>
             </div>
@@ -374,7 +374,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             onClick={toggleDialog}
             className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
           >
-            N'import quand
+            {t("date")}
           </div>
           <div
             onClick={() => {
@@ -386,7 +386,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             }}
             className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
           >
-            N'import ou
+            {t("place")}
           </div>
           <div className="flex flex-wrap justify-between w-fit ">
             <button
@@ -399,7 +399,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
                 setCategorieSelectorVisible(!isTypeSelectorVisible);
               }}
             >
-              Choose Categorie
+              {t("category")}
             </button>
             {isCategorieSelectorVisible && (
               <div className="p-4 rounded-md shadow-md z-30 absolute bg-gray-50 ">
@@ -426,7 +426,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
                     }}
                     className="text-red-500"
                   >
-                    Annuler
+                    {t("Annuler")}
                   </button>
                   <button
                     onClick={() => {
@@ -434,7 +434,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
                     }}
                     className="bg-blue-500 text-white px-4 py-2 rounded-md"
                   >
-                    Filtrer
+                    {t("Filtrer")}
                   </button>
                 </div>
               </div>
@@ -455,7 +455,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
           {events && events?.length > 0 ? (
             events.map((event) => <EventCard key={event._id} event={event} />)
           ) : (
-            <p className="poppins-medium">no events</p>
+            <p className="poppins-medium"> {t("noEvents")}</p>
           )}
         </div>
       </div>

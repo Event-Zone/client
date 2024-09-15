@@ -1,6 +1,6 @@
 "use client";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { RootState } from "@/store/store"; // Adjust the import path as necessary
 import { useEffect } from "react";
 import { selectToken, selectUser } from "@/store/features/userSlice";

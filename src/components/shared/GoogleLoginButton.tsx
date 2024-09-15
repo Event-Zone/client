@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { useGoogleLoginMutation as useGoogleAuthMutation } from "@/store/features/api/apiSlice";
 import { useDispatch } from "react-redux";
 import { setUserData } from "@/store/features/userSlice";

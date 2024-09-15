@@ -1,4 +1,5 @@
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useRouter } from "@/navigation";
 import React, { useState } from "react";
 
 function Categorie() {
@@ -42,14 +43,19 @@ function Categorie() {
       route: "/search/human resources",
     },
   ];
+  // const { t, changeLanguage } = useTranslation();
+
   const handleMouseEnter = (index: number) => setHovered(index);
   const handleMouseLeave = () => setHovered(null);
   const router = useRouter();
+  const t = useTranslations("Categorie");
   return (
     <div className="mb-8 mt-8 w-full mr-[50px]">
       <div className="">
         <h2 className="text-titles ml-2 mb-4 poppins-semibold md:md:text-[24px] ">
-          Les Catégories les plus Populaires
+          {t.rich("description", {
+            code: (chunks) => <code>{chunks}</code>,
+          })}
         </h2>
       </div>
       <div className="flex flex-row justify-between items-center w-full element-with-scrollbar overflow-x-scroll">

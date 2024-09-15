@@ -67,7 +67,7 @@ function ImagesSection({
               ? !isEventImagesSubmitted
                 ? getImageUrl(eventImages[0])
                 : getImageUrl(eventImages[selectedImage])
-              : "/registerimg.jpeg"
+              : "/images/registerimg.jpeg"
           })`,
         }}
       >
