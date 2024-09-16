@@ -18,6 +18,8 @@ function EventDetails({
   firstFormData: any;
   secondFormData: any;
 }) {
+  const [showMobile, setShowMobile] = useState<boolean>(false);
+
   const router = useRouter();
   const getImageUrl = (image: File | string) => {
     if (image instanceof File) {
@@ -162,18 +164,18 @@ function EventDetails({
             </div>
           )}
           {firstFormData?.mobile && (
-            <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center">
+            <div
+              onClick={() => setShowMobile((prev) => !prev)}
+              className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
+            >
               <img
                 alt="icon"
                 src="/icons/mingcute_phone-line.png"
                 className="max-w-[30px] max-h-[30px]"
               />
-              <Link
-                href={`tel:${firstFormData.mobile}`} // Use the `tel:` URI to initiate the call
-                className="rounded-xl ml-2 poppins-regular"
-              >
-                Mobile
-              </Link>
+              <button className="rounded-xl ml-2 poppins-regular">
+                {showMobile ? firstFormData?.mobile : <>Mobile</>}
+              </button>
             </div>
           )}
 

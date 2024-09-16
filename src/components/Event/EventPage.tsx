@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 function EventPage({ data }: { data: any }) {
+  const [showMobile, setShowMobile] = useState<boolean>(false);
   // geting the organizer data
   const {
     data: fetchedOrganizer,
@@ -239,18 +240,18 @@ function EventPage({ data }: { data: any }) {
             </div>
           )}
           {data?.mobile && (
-            <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center">
+            <div
+              onClick={() => setShowMobile((prev) => !prev)}
+              className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
+            >
               <img
                 alt="icon"
                 src="/icons/mingcute_phone-line.png"
                 className="max-w-[30px] max-h-[30px]"
               />
-              <Link
-                href={`tel:${data.mobile}`} // Use the `tel:` URI to initiate the call
-                className="rounded-xl ml-2 poppins-regular"
-              >
-                Mobile
-              </Link>
+              <button className="rounded-xl ml-2 poppins-regular">
+                {showMobile ? data?.mobile : <>Mobile</>}
+              </button>
             </div>
           )}
 
