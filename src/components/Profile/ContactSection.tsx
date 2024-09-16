@@ -6,20 +6,22 @@ const ContactSection = () => {
   const t = useTranslations("ProfilePage");
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 md:p-12">
-      <h2 className="text-xl poppins-bold mb-4 md:text-2xl">
+      <h2 className="text-[24px] poppins-semibold text-titles mb-4 md:text-2xl">
         {t("ContactUs")}
       </h2>
-      <p className="text-gray-600 mb-6 md:text-lg">{t("ContactDes")}</p>
+      <p className="text-gray-600 poppins-regular mb-6 text-md">
+        {t("ContactDes")}
+      </p>
       <div className="flex sm:flex-row flex-col w-full ">
         <a
           href="tel:+213781457511"
           className="mb-2 flex items-center text-[10px] md:text-[15px] justify-center bg-mainBlue text-white py-3  md:py-4 md:px-8 rounded-full shadow-md hover:bg-blue-700 transition-colors md:text-sm"
         >
           <Image
-            width={25}
-            height={25}
+            width={24}
+            height={24}
             alt="phoneicon"
-            src={"/icons/mingcute_phone-line.png"}
+            src={"/icons/call.png"}
             className="mr-2"
           />
           +213 781 45 75 11
@@ -29,10 +31,10 @@ const ContactSection = () => {
           className="ml-0 sm:ml-2  mb-2 flex items-center text-[10px] md:text-[15px] justify-center bg-mainBlue text-white py-3  md:py-4 md:px-8 rounded-full shadow-md hover:bg-blue-700 transition-colors md:text-sm"
         >
           <Image
-            width={25}
-            height={25}
+            width={24}
+            height={24}
             alt="emailicon"
-            src={"/icons/ic_outline-email.png"}
+            src={"/icons/sms.png"}
             className="mr-2"
           />{" "}
           support@eventzone.pro

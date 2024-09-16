@@ -204,6 +204,15 @@ function EventDetails({
                   {fetchedSubscription?.company}
                 </p>
               </div>{" "}
+              {fetchedSubscription?.pack === "Business" ? (
+                <div className="flex ">
+                  <img
+                    alt="icon"
+                    src="/icons/ph_seal-check-fill (1).png"
+                    className="max-w-[20px] max-h-[20px]"
+                  />
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -321,7 +330,7 @@ function EventDetails({
                 <img
                   alt="icon"
                   src="/icons/globalBlue.png"
-                  className="max-w-[30px] max-h-[30px]"
+                  className="max-w-[20px] max-h-[20px]"
                 />
                 <p className="poppins-medium">{secondFormData.get("lieu")}</p>
               </div>
@@ -331,7 +340,7 @@ function EventDetails({
                 <img
                   alt="icon"
                   src="/icons/Ticket.png"
-                  className="max-w-[30px] max-h-[30px]"
+                  className="max-w-[20px] max-h-[20px]"
                 />
                 <p className="poppins-medium">
                   {secondFormData.get("accessibilite")}
@@ -343,7 +352,7 @@ function EventDetails({
                 <img
                   alt="icon"
                   src="/icons/ph_seal-check-fill (1).png"
-                  className="max-w-[30px] max-h-[30px]"
+                  className="max-w-[20px] max-h-[20px]"
                 />
                 <p className="poppins-medium">Premium Organiser</p>
               </div>

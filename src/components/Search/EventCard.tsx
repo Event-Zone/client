@@ -124,7 +124,7 @@ function EventCard({ event }: EventCardProps) {
                 className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]"
               />
               <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-base">
-                Premium Organiser
+                {subscritionData?.company}
               </p>
             </div>
           ) : null}

@@ -282,6 +282,15 @@ function EventPage({ data }: { data: any }) {
                     {fetchedSubscription?.company}
                   </p>
                 </div>{" "}
+                {subscritionData?.pack === "Business" ? (
+                  <div className="flex ">
+                    <img
+                      alt="icon"
+                      src="/icons/ph_seal-check-fill (1).png"
+                      className="max-w-[20px] max-h-[20px]"
+                    />
+                  </div>
+                ) : null}
               </div>
               <div
                 onClick={handleSearch}
@@ -410,7 +419,7 @@ function EventPage({ data }: { data: any }) {
                 <img
                   alt="icon"
                   src="/icons/globalBlue.png"
-                  className="max-w-[30px] max-h-[30px]"
+                  className="max-w-[20px] max-h-[20px]"
                 />
                 <p className="poppins-medium">{data.lieu}</p>
               </div>
@@ -420,7 +429,7 @@ function EventPage({ data }: { data: any }) {
                 <img
                   alt="icon"
                   src="/icons/Ticket.png"
-                  className="max-w-[30px] max-h-[30px]"
+                  className="max-w-[20px] max-h-[20px]"
                 />
                 <p className="poppins-medium">{data.accessibilite}</p>
               </div>
@@ -430,7 +439,7 @@ function EventPage({ data }: { data: any }) {
                 <img
                   alt="icon"
                   src="/icons/ph_seal-check-fill (1).png"
-                  className="max-w-[30px] max-h-[30px]"
+                  className="max-w-[20px] max-h-[20px]"
                 />
                 <p className="poppins-medium">Premium Organiser</p>
               </div>

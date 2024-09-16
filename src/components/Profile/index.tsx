@@ -21,7 +21,7 @@ import Progress from "../shared/Progress";
 import { useTranslations } from "next-intl";
 
 const Profile = ({ params: { userId } }: { params: { userId: string } }) => {
-  const [page, setPage] = useState<number>(3);
+  const [page, setPage] = useState<number>(0);
 
   const authedUser = useSelector(selectUser);
 
@@ -248,8 +248,10 @@ const Profile = ({ params: { userId } }: { params: { userId: string } }) => {
       <div className="bg-white p-8 rounded-lg shadow-md w-full ">
         <div className="flex md:flex-row flex-col items-center justify-between">
           <div>
-            <h1 className="text-xl poppins-semibold">{t("Welcome")}</h1>
-            <h2 className="text-2xl poppins-bold text-gray-800">
+            <h1 className="text-xl poppins-regular text-gray-500">
+              {t("Welcome")}
+            </h1>
+            <h2 className="text-[32px] poppins-semibold text-titles">
               {user?.fullname}
             </h2>
           </div>

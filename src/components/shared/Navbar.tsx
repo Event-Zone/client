@@ -195,7 +195,7 @@ function Navbar() {
                   setShowSearch(!showSearch);
                 }}
                 onChange={handleStateSearch}
-                className=" flex-1  pl-10 p-2 text-gray-500 focus:outline-none"
+                className=" flex-1  pl-10 pr-2 p-2 text-gray-500 focus:outline-none"
                 value={stateName !== "" ? stateName : inputLocation}
               />
 
@@ -298,7 +298,7 @@ function Navbar() {
               setShowSearch(!showSearch);
             }}
             onChange={handleStateSearch}
-            className="p-2 pl-10 text-gray-500 focus:outline-none"
+            className="p-2 pl-8 text-gray-500 focus:outline-none"
             value={stateName !== "" ? stateName : inputLocation}
           />
           <div className="absolute  z-50 bg-white">
