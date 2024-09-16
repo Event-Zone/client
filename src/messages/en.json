@@ -219,7 +219,8 @@
     "planIdeal": "The perfect plan to get started. Publish one event for free, but with basic features.",
     "maximize": "Maximize your event visibility with full access to premium features for businesses.",
     "startToday": "Start today",
-             "free":"Free",    "year":"year",
+      "free":"Free",
+      "year":"year",
     "month":"month"
 
   },
@@ -249,6 +250,10 @@
     "Explorer des événements": "Explore events",
     "Bienvenue sur EventZone!": "Welcome to EventZone!",
     "salutation": "Greetings! How can we support you on your journey with us?"
-  }
+  },"localswitcher":{
+  "label":"changer Langue",
+  "locale":"{locale , select , fr {French} en {English} other {unknown}}"
+}
+
 
 }

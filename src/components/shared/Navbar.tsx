@@ -17,6 +17,7 @@ import {
 } from "@/store/features/eventSlice";
 import Progress from "./Progress";
 import { useTranslation } from "@/hooks/useTranslation";
+import LocalSwitcher from "../LocalSwitcher";
 
 function Navbar() {
   const [showSearchs, setShowSearchs] = useState<boolean>(false);
@@ -332,23 +333,7 @@ function Navbar() {
       <div className="hidden lg:flex items-center">
         <div className="border-gray-500 mx-5">
           <div className="relative">
-            <select className="p-2 pl-10 text-gray-500 focus:outline-none">
-              <option
-                onClick={() => changeLanguage("en")}
-                value="en"
-                className="text-gray-500"
-                defaultChecked
-              >
-                English
-              </option>
-              <option
-                onClick={() => changeLanguage("fr")}
-                value="fr"
-                className="text-gray-500"
-              >
-                French
-              </option>
-            </select>
+            <LocalSwitcher />
           </div>
         </div>
 

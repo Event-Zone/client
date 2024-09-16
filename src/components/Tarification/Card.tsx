@@ -93,7 +93,7 @@ function Cards({ price }: { price: number }) {
             {index === 1 ? (
               price === 4000 ? (
                 <span className="ml-2 text-sm mb-3 text-gray-600 poppins-poppins">
-                  DA/{t("monthh")}
+                  DA/{t("month")}
                 </span>
               ) : (
                 <span className="ml-2 text-sm mb-3 text-gray-600 poppins-poppins">

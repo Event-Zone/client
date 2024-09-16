@@ -262,7 +262,12 @@
 "Explorer des événements":"Explorer des événements",
 "Bienvenue sur EventZone!":"Bienvenue sur EventZone!",
 "salutation":"Salutations ! Comment pouvons-nous vous soutenir dans votre parcours avec nous ?"
+},
+"localswitcher":{
+  "label":"changer Langue",
+  "locale":"{locale , select , fr {'/images/fr.png'} en {English} other {unknown}}"
 }
+
 
 }
 
