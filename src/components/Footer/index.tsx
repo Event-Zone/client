@@ -1,3 +1,4 @@
+"use client";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
@@ -101,8 +102,8 @@ function Footer() {
             >
               <Image
                 alt="facebookIcon"
-                width={25}
-                height={25}
+                width={26}
+                height={26}
                 src={"/icons/ic_baseline-facebook.png"}
               />
             </a>
