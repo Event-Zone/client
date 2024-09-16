@@ -12,6 +12,7 @@ import {
   useSearchEventsLocationsQuery,
   useSearchEventsByCategorieQuery,
   useGetCategoriesQuery,
+  useGetTypesQuery,
 } from "@/store/features/api/apiSlice";
 import EventCard from "./EventCard";
 import Calendar from "../shared/Calendar";
@@ -227,6 +228,12 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   useEffect(() => {
     console.log("selectedLocation: ", selectedLocation);
   }, [selectedLocation]);
+  const {
+    data: types,
+    isLoading: typesLoading,
+    error: typesError,
+    refetch: refetchTypes,
+  } = useGetTypesQuery();
   const t = useTranslations("Search");
   return (
     <div className="relative p-1 md:px-20 ">
@@ -242,110 +249,27 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             }}
           >
             {t("type")}
+            <select
+              disabled
+              className="bg-transparent border-0 outline-none"
+            ></select>
           </button>
           {isTypeSelectorVisible && (
             <div className="bg-gray-50 p-4 rounded-md shadow-md z-30 absolute">
               <p className="poppins-semibold text-gray-700 mb-2">{t("type")}</p>
               <div className="flex flex-col space-y-2">
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    value="salons & exposition"
-                    checked={(type as string[])?.includes(
-                      "salons & exposition"
-                    )}
-                    onChange={handleTypeChange}
-                    className="form-checkbox h-4 w-4 text-blue-600"
-                  />
-                  <span>Salons & Exposition</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    value="conference & exposition"
-                    checked={(type as string[])?.includes(
-                      "conference & exposition"
-                    )}
-                    onChange={handleTypeChange}
-                    className="form-checkbox h-4 w-4 text-blue-600"
-                  />
-                  <span>Conference & Exposition</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    value="conference"
-                    checked={(type as string[])?.includes("conference")}
-                    onChange={handleTypeChange}
-                    className="form-checkbox h-4 w-4 text-blue-600"
-                  />
-                  <span>Conference</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    value="workshop"
-                    checked={(type as string[])?.includes("workshop")}
-                    onChange={handleTypeChange}
-                    className="form-checkbox h-4 w-4 text-blue-600"
-                  />
-                  <span>Workshop</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    value="seminaires & ateliers"
-                    checked={(type as string[])?.includes(
-                      "seminaires & ateliers"
-                    )}
-                    onChange={handleTypeChange}
-                    className="form-checkbox h-4 w-4 text-blue-600"
-                  />
-                  <span>Seminaires & Ateliers</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    value="webinaires"
-                    checked={(type as string[])?.includes("webinaires")}
-                    onChange={handleTypeChange}
-                    className="form-checkbox h-4 w-4 text-blue-600"
-                  />
-                  <span>Webinaires</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    value="convention"
-                    checked={(type as string[])?.includes("convention")}
-                    onChange={handleTypeChange}
-                    className="form-checkbox h-4 w-4 text-blue-600"
-                  />
-                  <span>Convention</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    value="competition"
-                    checked={(type as string[])?.includes("competition")}
-                    onChange={handleTypeChange}
-                    className="form-checkbox h-4 w-4 text-blue-600"
-                  />
-                  <span>Competition</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    value="evenement de resautage"
-                    checked={(type as string[])?.includes(
-                      "evenement de resautage"
-                    )}
-                    onChange={handleTypeChange}
-                    className="form-checkbox h-4 w-4 text-blue-600"
-                  />
-                  <span>Evenement De Resautage</span>
-                </label>
-                {/* Add more checkboxes as needed */}
+                {types?.map((Type: any) => (
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value={Type?.name}
+                      checked={(type as string[])?.includes(Type?.name)}
+                      onChange={handleTypeChange}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>{Type?.name}</span>
+                  </label>
+                ))}
               </div>
               {/* Add your filter and cancel buttons */}
               <div className="flex justify-between mt-4">
@@ -355,6 +279,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
                   }}
                   className="text-red-500"
                 >
+                  {" "}
                   {t("Annuler")}
                 </button>
                 <button
@@ -374,7 +299,12 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             onClick={toggleDialog}
             className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
           >
+            {" "}
             {t("date")}
+            <select
+              disabled
+              className="bg-transparent border-0 outline-none"
+            ></select>
           </div>
           <div
             onClick={() => {
@@ -386,7 +316,11 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             }}
             className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
           >
-            {t("place")}
+            {t("place")}{" "}
+            <select
+              disabled
+              className="bg-transparent border-0 outline-none"
+            ></select>
           </div>
           <div className="flex flex-wrap justify-between w-fit ">
             <button
@@ -399,7 +333,11 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
                 setCategorieSelectorVisible(!isTypeSelectorVisible);
               }}
             >
-              {t("category")}
+              {t("category")}{" "}
+              <select
+                disabled
+                className="bg-transparent border-0 outline-none"
+              ></select>
             </button>
             {isCategorieSelectorVisible && (
               <div className="p-4 rounded-md shadow-md z-30 absolute bg-gray-50 ">
@@ -426,6 +364,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
                     }}
                     className="text-red-500"
                   >
+                    {" "}
                     {t("Annuler")}
                   </button>
                   <button
@@ -459,7 +398,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
           )}
         </div>
       </div>
-      {CategoriesLoading && <Progress />}
+      {(CategoriesLoading || typesLoading) && <Progress />}
     </div>
   );
 }

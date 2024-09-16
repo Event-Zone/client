@@ -14,8 +14,10 @@ import {
 import { useSearchEventsByDateRangeQuery } from "@/store/features/api/apiSlice";
 import { useDispatch } from "react-redux";
 import { setSearchedEvents } from "@/store/features/eventSlice";
-
+import { useTranslations } from "next-intl";
 const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
+  const t = useTranslations("Search");
+
   const dispatch = useDispatch();
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
@@ -150,8 +152,10 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
           key={i}
           onClick={() => handleDayClick(day)}
           className={`w-10 h-10 flex items-center justify-center rounded-full cursor-pointer 
-        ${isSelected ? "bg-blue-500 text-white" : "text-gray-700"}
+        ${isStartOrEndDate ? "bg-blue-500 text-white" : "text-gray-700"}
         ${isStartOrEndDate ? "poppins-bold" : ""}
+          ${isSelected && !isStartOrEndDate && "bg-blue-100 "}
+      
         hover:bg-blue-300 
       `}
         >
@@ -205,7 +209,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
       <div className="flex justify-between border-b border-gray-300">
         <div
           onClick={() => setViewMode("calendar")}
-          className={`cursor-pointer py-2 border-b-2 ${
+          className={`flex-1 cursor-pointer py-2 border-b-2 ${
             viewMode === "calendar" ? "border-blue-500" : "border-transparent"
           }`}
         >
@@ -213,7 +217,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
         </div>
         <div
           onClick={() => setViewMode("flexibles")}
-          className={`cursor-pointer py-2 border-b-2 ${
+          className={`flex-1 flex items-end justify-end px-2 cursor-pointer py-2 border-b-2 ${
             viewMode === "flexibles" ? "border-blue-500" : "border-transparent"
           }`}
         >
@@ -223,9 +227,22 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
 
       {viewMode === "calendar" ? (
         <div className="flex flex-col md:flex-row md:justify-between border-b border-gray-300">
-          <div className="flex-1">
+          <div className="flex-1 pr-5">
+            <p className="pt-4  flex justify-between poppins-medium text-titles">
+              {" "}
+              <p className="border-b-2 border-b-mainBlue">
+                {selectedStartDate &&
+                  new Date(selectedStartDate).toLocaleDateString("fr-FR", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}{" "}
+              </p>
+              {selectedStartDate && <p>&#8594;</p>}
+            </p>
             <div className="flex justify-between items-center mb-2">
               <button
+                className=""
                 onClick={() => setCurrentMonth(addMonths(currentMonth, -1))}
               >
                 &lt;
@@ -239,11 +256,21 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
                 &gt;
               </button>
             </div>
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid grid-cols-7 gap-2 ">
               {renderCalendarDays(currentMonth)}
             </div>
           </div>
-          <div className="flex-1 md:border-l-2 md:border-gray-300">
+          <div className="flex-1 pl-4 md:border-l-2 md:border-gray-300">
+            <p className="flex justify-between pt-4 poppins-medium text-titles">
+              <p className="border-b-2 border-b-mainBlue">
+                {selectedEndDate &&
+                  new Date(selectedEndDate).toLocaleDateString("fr-FR", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
+              </p>
+            </p>
             <div className="flex justify-between items-center mb-2">
               <button
                 onClick={() => setCurrentMonth(addMonths(currentMonth, -1))}
@@ -297,13 +324,13 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
           }}
           className="text-gray-500 poppins-regular"
         >
-          Annuler
+          {t("Annuler")}
         </button>
         <button
           onClick={handleFilterClick}
           className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center poppins-regular"
         >
-          Filtrer <span className="ml-2">✈️</span>
+          {t("Filtrer")} <span className="ml-2">✈️</span>
         </button>
       </div>
     </div>
