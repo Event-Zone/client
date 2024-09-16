@@ -84,41 +84,53 @@ function NextEvent({ events }: { events: IEvent[] }) {
       <div className="flex space-x-4 w-full overflow-x-auto element-with-scrollbar mb-4 md:ml-1">
         <label
           key={"Tout"}
-          className={`px-4 text-gray-500 text-center cursor-pointer whitespace-nowrap ${
-            selectedCategory && selectedCategory[0] === "Tout"
-              ? "border-b-2 border-b-mainBlue"
-              : ""
-          }`}
+          className={`px-4 py-2 text-gray-500 text-center cursor-pointer whitespace-nowrap`}
           onClick={() => setCategory(["Tout"])}
         >
-          <span>Tout</span>
+          <span
+            className={` ${
+              selectedCategory && selectedCategory[0] === "Tout"
+                ? "border-b-[2px] border-b-mainBlue"
+                : ""
+            }`}
+          >
+            Tout
+          </span>
         </label>
 
         {Categories?.map((category: any) => (
           <label
             key={category.name}
-            className={`px-4 text-gray-500 text-center cursor-pointer whitespace-nowrap ${
-              selectedCategory && selectedCategory[0] === category.name
-                ? "border-b-2 border-b-mainBlue"
-                : ""
-            }`}
+            className={`px-4 py-2 text-gray-500 text-center cursor-pointer whitespace-nowrap `}
             onClick={() => setCategory([category.name])}
           >
-            <span>{category.name}</span>
+            <span
+              className={`${
+                selectedCategory && selectedCategory[0] === category.name
+                  ? "border-b-[2px] border-b-mainBlue"
+                  : ""
+              }`}
+            >
+              {category.name}
+            </span>
           </label>
         ))}
 
         {Types?.map((type: any) => (
           <label
             key={type.name}
-            className={`px-4 text-gray-500 text-center cursor-pointer whitespace-nowrap ${
-              selectedType && selectedType[0] === type.name
-                ? "border-b-2 border-b-mainBlue"
-                : ""
-            }`}
+            className={`px-4 py-2 text-gray-500 text-center cursor-pointer whitespace-nowrap `}
             onClick={() => setType([type.name])}
           >
-            <span>{type.name}</span>
+            <span
+              className={`${
+                selectedType && selectedType[0] === type.name
+                  ? "border-b-[2px] border-b-mainBlue"
+                  : ""
+              }`}
+            >
+              {type.name}
+            </span>
           </label>
         ))}
       </div>

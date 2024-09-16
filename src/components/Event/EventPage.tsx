@@ -31,6 +31,9 @@ function EventPage({ data }: { data: any }) {
   });
   const [videoId, setVideoId] = useState<string | null>(null);
   const [subscritionData, setSubscriptionData] = useState<any>(null);
+  const [hovered, setHovered] = useState<number | null>(null);
+  const handleMouseEnter = (index: number | null) => setHovered(index);
+
   useEffect(() => {
     if (subscriptionIsLoading) {
       console.log("Loading subs...");
@@ -224,10 +227,16 @@ function EventPage({ data }: { data: any }) {
             </div>
           ) : null}
           {data?.website && (
-            <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center ">
+            <div
+              onMouseEnter={() => handleMouseEnter(0)}
+              onMouseLeave={() => handleMouseEnter(null)}
+              className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center "
+            >
               <img
                 alt="icon"
-                src="/icons/globalDark.png"
+                src={`${
+                  hovered === 0 ? "/icons/globalW.png" : "/icons/globalDark.png"
+                }`}
                 className="max-w-[30px] max-h-[30px]"
               />{" "}
               <Link
@@ -243,10 +252,14 @@ function EventPage({ data }: { data: any }) {
             <div
               onClick={() => setShowMobile((prev) => !prev)}
               className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
+              onMouseEnter={() => handleMouseEnter(1)}
+              onMouseLeave={() => handleMouseEnter(null)}
             >
               <img
                 alt="icon"
-                src="/icons/mingcute_phone-line.png"
+                src={`${
+                  hovered === 1 ? "/icons/mobileW.png" : "/icons/mobileB.png"
+                }`}
                 className="max-w-[30px] max-h-[30px]"
               />
               <button className="rounded-xl ml-2 poppins-regular">
@@ -256,10 +269,16 @@ function EventPage({ data }: { data: any }) {
           )}
 
           {data?.location && (
-            <div className="mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center ">
+            <div
+              onMouseEnter={() => handleMouseEnter(2)}
+              onMouseLeave={() => handleMouseEnter(null)}
+              className="mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center "
+            >
               <img
                 alt="icon"
-                src="/icons/gps.png"
+                src={`${
+                  hovered === 2 ? "/icons/gpsWhite.png" : "/icons/gps.png"
+                }`}
                 className="max-w-[30px] max-h-[30px]"
               />{" "}
               <a

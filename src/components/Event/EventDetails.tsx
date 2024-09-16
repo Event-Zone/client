@@ -14,6 +14,9 @@ function EventDetails({
   firstFormData: any;
   secondFormData: any;
 }) {
+  const [hovered, setHovered] = useState<number | null>(null);
+  const handleMouseEnter = (index: number | null) => setHovered(index);
+
   const [showMobile, setShowMobile] = useState<boolean>(false);
 
   const user = useSelector(selectUser);
@@ -181,10 +184,16 @@ function EventDetails({
             </div>
           ) : null}
           {firstFormData?.website && (
-            <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center ">
+            <div
+              onMouseEnter={() => handleMouseEnter(0)}
+              onMouseLeave={() => handleMouseEnter(null)}
+              className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center "
+            >
               <img
                 alt="icon"
-                src="/icons/globalDark.png"
+                src={`${
+                  hovered === 0 ? "/icons/globalW.png" : "/icons/globalDark.png"
+                }`}
                 className="max-w-[30px] max-h-[30px]"
               />{" "}
               <Link
@@ -198,12 +207,16 @@ function EventDetails({
           )}
           {firstFormData?.mobile && (
             <div
+              onMouseEnter={() => handleMouseEnter(1)}
+              onMouseLeave={() => handleMouseEnter(null)}
               onClick={() => setShowMobile((prev) => !prev)}
               className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
             >
               <img
                 alt="icon"
-                src="/icons/mingcute_phone-line.png"
+                src={`${
+                  hovered === 1 ? "/icons/mobileW.png" : "/icons/mobileB.png"
+                }`}
                 className="max-w-[30px] max-h-[30px]"
               />
               <button className="rounded-xl ml-2 poppins-regular">
@@ -213,10 +226,16 @@ function EventDetails({
           )}
 
           {firstFormData?.location && (
-            <div className="mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center ">
+            <div
+              onMouseEnter={() => handleMouseEnter(2)}
+              onMouseLeave={() => handleMouseEnter(null)}
+              className="mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center "
+            >
               <img
                 alt="icon"
-                src="/icons/gps.png"
+                src={`${
+                  hovered === 2 ? "/icons/gpsWhite.png" : "/icons/gps.png"
+                }`}
                 className="max-w-[30px] max-h-[30px]"
               />{" "}
               <a

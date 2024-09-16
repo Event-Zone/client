@@ -1,8 +1,24 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
+import { usePathname, useRouter } from "@/navigation";
+import { useParams } from "next/navigation";
+import { ChangeEvent, ReactNode, useTransition } from "react";
 
 function Footer() {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const pathname = usePathname();
+  const params = useParams();
+  function onSelectChange(nextLocale: string) {
+    startTransition(() => {
+      router.replace(
+        // @ts-ignore
+        { pathname, params },
+        { locale: nextLocale }
+      );
+    });
+  }
   const t = useTranslations("Footer");
   return (
     <footer className="flex justify-center items-center w-full bg-[#0a1a35] text-white py-8 md:h-[300px] ">
@@ -46,8 +62,18 @@ function Footer() {
         <div className="text-sm flex flex-col space-y-2">
           <p className="poppins-regular text-gray-500 mt-2">{t("Langue")}</p>
           <ul className="flex text-center flex-col items-start justify-center ">
-            <li className="m-0">{t("Francais")}</li>
-            <li className="m-0">{t("Anglais")}</li>
+            <li
+              onClick={() => onSelectChange("fr")}
+              className="m-0 cursor-pointer"
+            >
+              {t("Francais")}
+            </li>
+            <li
+              onClick={() => onSelectChange("en")}
+              className="m-0 cursor-pointer"
+            >
+              {t("Anglais")}
+            </li>
           </ul>
         </div>
 
@@ -68,30 +94,42 @@ function Footer() {
           </p>
           <div className="flex items-center justify-center space-x-4 ">
             {/* Social media icons as placeholders */}
-            <div className="w-6 h-6  rounded-full">
+            <a
+              target="_blank"
+              href="https://www.facebook.com/profile.php?id=61556005540322&mibextid=LQQJ4d"
+              className="w-6 h-6  rounded-full"
+            >
               <Image
                 alt="facebookIcon"
                 width={25}
                 height={25}
                 src={"/icons/ic_baseline-facebook.png"}
               />
-            </div>
-            <div className="w-6 h-6  rounded-full">
+            </a>
+            <a
+              target="_blank"
+              href="https://www.instagram.com/eventzone.pro/"
+              className="w-6 h-6  rounded-full"
+            >
               <Image
                 alt="instaIcon"
                 width={20}
                 height={20}
                 src={"/icons/Vector (1).png"}
               />
-            </div>
-            <div className="w-6 h-6  rounded-full">
+            </a>
+            <a
+              target="_blank"
+              href="https://www.linkedin.com/company/eurl-eventzone/posts/?feedView=all"
+              className="w-6 h-6  rounded-full"
+            >
               <Image
                 alt="linkedinIcon"
                 width={20}
                 height={20}
                 src={"/icons/Vector (2).png"}
               />
-            </div>
+            </a>
           </div>
         </div>
       </div>

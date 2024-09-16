@@ -43,10 +43,10 @@ function Villes() {
       </h2>
 
       {/* Add horizontal scrolling for the container */}
-      <div className="flex flex-row space-x-4 overflow-x-auto element-with-scrollbar">
+      <div className="flex flex-row  md:flex-wrap justify-between  overflow-hidden w-full">
         <div
           onClick={() => setSelectedLocations(["Alger"])}
-          className="flex-shrink-0 w-[150px] md:w-[33%] ville-container"
+          className="flex-shrink-0 w-auto ville-container "
         >
           <div className="relative w-full">
             <img
@@ -65,7 +65,7 @@ function Villes() {
 
         <div
           onClick={() => setSelectedLocations(["Oran"])}
-          className="flex-shrink-0 w-[150px] md:w-[33%] ville-container"
+          className="flex-shrink-0 w-auto ville-container"
         >
           <div className="relative w-full">
             <img
@@ -84,7 +84,7 @@ function Villes() {
 
         <div
           onClick={() => setSelectedLocations(["Annaba"])}
-          className="flex-shrink-0 w-[150px] md:w-[33%] ville-container"
+          className="flex-shrink-0 w-auto ville-container"
         >
           <div className="relative w-full">
             <img
@@ -103,7 +103,7 @@ function Villes() {
 
         <div
           onClick={() => setSelectedLocations(["Constantine"])}
-          className="flex-shrink-0 w-[150px] md:w-[33%] ville-container"
+          className="flex-shrink-0 w-auto ville-container"
         >
           <div className="relative w-full">
             <img
