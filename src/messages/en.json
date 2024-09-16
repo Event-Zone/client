@@ -121,17 +121,17 @@
 },
 
   "Footer": {
-    "CollaborateWithEventzone": "Collaborate with Eventzone",
-    "DiscoverOurEvents": "Discover Our Events",
-    "AddYourEvent": "Add Your Event",
-    "ContactUs": "Contact Us",
+    "Collaborez Avec Eventzone": "Collaborate with Eventzone",
+    "Decouvrez Nos Evenements": "Discover Our Events",
+    "Ajoutez Votre Evenement": "Add Your Event",
+    "Contactez Nous": "Contact Us",
     "Email": "Contact@eventzone.pro",
-    "Phone": "+(213) 781 45 75 11",
-    "Language": "Language",
-    "French": "French",
-    "English": "English",
+    "Telephone": "+(213) 781 45 75 11",
+    "Langue": "Language",
+    "Francais": "French",
+    "Anglais": "English",
     "FooterDescription": "Eventzone Algeria - your expert guide",
-    "FooterDescription2": "for professional events"
+    "FooterDes2": "for professional events"
   },
     "ProfilePage": {
     "Welcome": "Welcome",

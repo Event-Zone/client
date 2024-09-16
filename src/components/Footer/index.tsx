@@ -46,7 +46,7 @@ function Footer() {
         <div className="text-sm flex flex-col space-y-2">
           <p className="poppins-regular text-gray-500 mt-2">{t("Langue")}</p>
           <ul className="flex text-center flex-col items-start justify-center ">
-            <li className="m-0">{t("Français")}</li>
+            <li className="m-0">{t("Francais")}</li>
             <li className="m-0">{t("Anglais")}</li>
           </ul>
         </div>

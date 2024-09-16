@@ -12,12 +12,7 @@ import {
 import { selectInitialEvents } from "@/store/features/eventSlice";
 import { IEvent } from "@/types/Event";
 import { useTranslations } from "next-intl";
-
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  const options = { day: "numeric", month: "long", year: "numeric" } as const;
-  return new Intl.DateTimeFormat("en-US", options).format(date);
-}
+import NextEventCard from "./NextEventCard";
 
 function NextEvent({ events }: { events: IEvent[] }) {
   const {
@@ -137,58 +132,9 @@ function NextEvent({ events }: { events: IEvent[] }) {
               <div
                 onClick={() => router.push(`/events/details/${event._id}`)}
                 key={index}
-                className="md:m-0 ml-20 lg:w-[23%] w-[270px]  h-[400px] flex-shrink-0 bg-white rounded-lg overflow-hidden"
+                className="md:m-0 ml-20 lg:w-[23%] w-[270px]  h-[460px] flex-shrink-0 bg-white rounded-lg overflow-hidden"
               >
-                <Image
-                  alt="event-img"
-                  className="lg:w-full  md:h-[187px] md:w-full max-h-[187px] w-[270px] object-cover"
-                  src={
-                    event.eventImages
-                      ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event.eventImages[0]}`
-                      : "https://via.placeholder.com/300x200"
-                  }
-                  width={500}
-                  height={300}
-                  quality={75}
-                />
-                <div className="py-4">
-                  <div className="flex w-full overflow-scroll element-with-scrollbar">
-                    <p className="whitespace-nowrap bg-[#206FDF1A] rounded-2xl text-mainBlue poppins-medium text-[12px] py-2 px-2">
-                      {event?.Categorie[0]}
-                    </p>
-                  </div>
-                  <h3 className="text-xl poppins-semibold text-ellipsis text-[16px] line-clamp-3 text-titles">
-                    {event?.eventAcronym && <>{event.eventAcronym} - </>}
-                    {event?.eventName}
-                  </h3>
-                  <p className="text-gray-600 flex flex-row items-center">
-                    {event.location?.address?.commercial ? (
-                      <>
-                        <img
-                          alt="location-icon"
-                          src="/icons/LocationGray.png"
-                        />
-                        {event.location?.address?.commercial}
-                      </>
-                    ) : (
-                      event.location?.address?.state && (
-                        <>
-                          <img
-                            alt="location-icon"
-                            src="/icons/LocationGray.png"
-                          />
-                          {event.location?.address?.state}
-                        </>
-                      )
-                    )}
-                  </p>
-                  <p className="text-gray-600 flex flex-row items-center">
-                    <img alt="calendar-icon" src="/icons/CalendarGray.png" />
-                    {event.startdate
-                      ? formatDate(event.startdate as unknown as string)
-                      : null}
-                  </p>
-                </div>
+                <NextEventCard event={event} />
               </div>
             ))
         ) : (
