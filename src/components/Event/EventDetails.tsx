@@ -1,3 +1,4 @@
+import { Link } from "@/navigation";
 import { useGetSubscriptionQuery } from "@/store/features/api/apiSlice";
 import { selectUser } from "@/store/features/userSlice";
 import { useTranslations } from "next-intl";
@@ -161,48 +162,70 @@ function EventDetails({
         </div>
 
         <div className="flex justify-start mt-4 flex-wrap">
-          {firstFormData.linkInscription ? (
+          {firstFormData?.linkInscription ? (
             <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
               <img
                 alt="icon"
                 src="/icons/Edit Square.png"
                 className="max-w-[30px] max-h-[30px]"
               />{" "}
-              <button className="rounded-xl ml-2 poppins-regular  ">
+              <a
+                target="_blank"
+                href={firstFormData?.linkInscription}
+                className="rounded-xl ml-2 poppins-regular  "
+              >
                 {t("Participer")}
-              </button>
+              </a>
             </div>
           ) : null}
-          <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center ">
-            <img
-              alt="icon"
-              src="/icons/globalDark.png"
-              className="max-w-[30px] max-h-[30px]"
-            />{" "}
-            <button className="rounded-xl ml-2 poppins-regular  ">
-              Site Web
-            </button>
-          </div>
-          <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center ">
-            <img
-              alt="icon"
-              src="/icons/mingcute_phone-line.png"
-              className="max-w-[30px] max-h-[30px]"
-            />{" "}
-            <button className="rounded-xl ml-2 poppins-regular  ">
-              Mobile{" "}
-            </button>
-          </div>
-          <div className="mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center ">
-            <img
-              alt="icon"
-              src="/icons/gps.png"
-              className="max-w-[30px] max-h-[30px]"
-            />{" "}
-            <button className="rounded-xl ml-2 poppins-regular  ">
-              {t("seeMaps")}{" "}
-            </button>
-          </div>
+          {firstFormData?.website && (
+            <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center ">
+              <img
+                alt="icon"
+                src="/icons/globalDark.png"
+                className="max-w-[30px] max-h-[30px]"
+              />{" "}
+              <Link
+                target="_blank"
+                href={firstFormData?.website}
+                className="rounded-xl ml-2 poppins-regular  "
+              >
+                Web Site
+              </Link>
+            </div>
+          )}
+          {firstFormData?.mobile && (
+            <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center">
+              <img
+                alt="icon"
+                src="/icons/mingcute_phone-line.png"
+                className="max-w-[30px] max-h-[30px]"
+              />
+              <Link
+                href={`tel:${firstFormData.mobile}`} // Use the `tel:` URI to initiate the call
+                className="rounded-xl ml-2 poppins-regular"
+              >
+                Mobile
+              </Link>
+            </div>
+          )}
+
+          {firstFormData?.location && (
+            <div className="mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center ">
+              <img
+                alt="icon"
+                src="/icons/gps.png"
+                className="max-w-[30px] max-h-[30px]"
+              />{" "}
+              <a
+                target="_blank"
+                href={`https://www.google.com/maps/place/${firstFormData?.location?.lat},${firstFormData?.location?.lon}`}
+                className="rounded-xl ml-2 poppins-regular  "
+              >
+                Maps
+              </a>
+            </div>
+          )}
         </div>
         <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
           <div className="flex items-center justify-between p-8">

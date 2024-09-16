@@ -100,16 +100,6 @@ function Subscription({ pack }: { pack: string }) {
                 value={user?.fullname}
               />
             </div>
-            <div>
-              <input
-                type="text"
-                name="username"
-                disabled
-                className="w-full px-3 py-2 border rounded-lg"
-                placeholder="Nom d'utilisateur"
-                value={user?.username}
-              />
-            </div>
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>

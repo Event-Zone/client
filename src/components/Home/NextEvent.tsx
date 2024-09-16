@@ -198,7 +198,11 @@ function NextEvent({ events }: { events: IEvent[] }) {
         )}
       </div>
 
-      <div className="w-full flex justify-center items-center">
+      <div
+        className={`"w-full flex justify-center items-center" ${
+          searchedEvents?.length <= visibleEventsCount && "hidden"
+        }`}
+      >
         <button
           onClick={handleShowMore}
           className="mr-2 rounded-[10px] px-10 py-3 bg-mainBlue text-white text-center"

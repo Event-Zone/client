@@ -422,41 +422,33 @@ function EventForm({
             </div>
           </div>
           <div className="flex flex-col flex-1 flex-wrap">
-            <div className="border-gray-300 border-[1.3px] p-2 mb-2 sm:h-[62px]">
+            <div id="startHour" className="flex flex-col mb-[5px]">
+              {" "}
               <label
                 htmlFor="startHour"
-                className="block text-sm poppins-medium poppins-semibold text-gray-700"
+                className="block text-sm poppins-medium poppins-semibold text-gray-700 absolute ml-2"
               >
                 {t("startHour")}
               </label>
-              <div className="flex flex-row">
-                <img
-                  alt="calendar"
-                  src="/icons/clock.png"
-                  className="mr-1 w-[20px] h-[20px]"
-                />
-                <p>{formData?.startHour}</p>
-
-                <TimePickerUi setFormData={setFormData} name="startHour" />
-              </div>
+              <TimePickerUi
+                initTime={formData?.startHour}
+                setFormData={setFormData}
+                name="startHour"
+              />
             </div>
-            <div className="border-gray-300 border-[1.3px] p-2 sm:h-[62px]">
+
+            <div id="endHour" className="flex flex-col ">
               <label
                 htmlFor="endHour"
-                className="block text-sm poppins-medium poppins-semibold text-gray-700"
+                className="block text-sm poppins-medium poppins-semibold text-gray-700  absolute ml-2 "
               >
-                {t("endHour")}{" "}
+                {t("endHour")}
               </label>
-              <div className="flex flex-row">
-                <img
-                  alt="calendar"
-                  src="/icons/clock.png"
-                  className="mr-1 w-[20px] h-[20px]"
-                />
-                <p>{formData?.endHour}</p>
-
-                <TimePickerUi setFormData={setFormData} name="endHour" />
-              </div>
+              <TimePickerUi
+                initTime={formData?.endHour}
+                setFormData={setFormData}
+                name="endHour"
+              />
             </div>
           </div>
         </div>

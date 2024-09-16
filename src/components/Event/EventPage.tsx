@@ -6,7 +6,7 @@ import {
 } from "@/store/features/api/apiSlice";
 import { useDispatch } from "react-redux";
 import { setSearchedEvents } from "@/store/features/eventSlice";
-import { useRouter } from "@/navigation";
+import { Link, useRouter } from "@/navigation";
 import { isArray } from "util";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -104,7 +104,7 @@ function EventPage({ data }: { data: any }) {
 
     return () => clearInterval(interval);
   }, [data.eventImages, currentBar]);
-  const t = useTranslations();
+  const t = useTranslations("Event");
   return (
     <div className="flex flex-col w-full md:px-16">
       <div className="flex flex-col w-full px-4 md:px-20 lg:px-44  py-16">
@@ -206,46 +206,70 @@ function EventPage({ data }: { data: any }) {
         </div>
 
         <div className="flex justify-start mt-4 flex-wrap">
-          {data.linkInscription ? (
+          {data?.linkInscription ? (
             <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
               <img
                 alt="icon"
                 src="/icons/Edit Square.png"
                 className="max-w-[30px] max-h-[30px]"
               />{" "}
-              <button className="rounded-xl ml-2 poppins-regular  ">
+              <a
+                target="_blank"
+                href={data?.linkInscription}
+                className="rounded-xl ml-2 poppins-regular  "
+              >
                 {t("Participer")}
-              </button>
+              </a>
             </div>
           ) : null}
-          <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center ">
-            <img
-              alt="icon"
-              src="/icons/globalDark.png"
-              className="max-w-[30px] max-h-[30px]"
-            />{" "}
-            <button className="rounded-xl ml-2 poppins-regular  ">
-              Web Site
-            </button>
-          </div>
-          <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center ">
-            <img
-              alt="icon"
-              src="/icons/mingcute_phone-line.png"
-              className="max-w-[30px] max-h-[30px]"
-            />{" "}
-            <button className="rounded-xl ml-2 poppins-regular  ">
-              Mobile{" "}
-            </button>
-          </div>
-          <div className="mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center ">
-            <img
-              alt="icon"
-              src="/icons/gps.png"
-              className="max-w-[30px] max-h-[30px]"
-            />{" "}
-            <button className="rounded-xl ml-2 poppins-regular  ">Maps</button>
-          </div>
+          {data?.website && (
+            <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center ">
+              <img
+                alt="icon"
+                src="/icons/globalDark.png"
+                className="max-w-[30px] max-h-[30px]"
+              />{" "}
+              <Link
+                target="_blank"
+                href={data?.website}
+                className="rounded-xl ml-2 poppins-regular  "
+              >
+                Web Site
+              </Link>
+            </div>
+          )}
+          {data?.mobile && (
+            <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center">
+              <img
+                alt="icon"
+                src="/icons/mingcute_phone-line.png"
+                className="max-w-[30px] max-h-[30px]"
+              />
+              <Link
+                href={`tel:${data.mobile}`} // Use the `tel:` URI to initiate the call
+                className="rounded-xl ml-2 poppins-regular"
+              >
+                Mobile
+              </Link>
+            </div>
+          )}
+
+          {data?.location && (
+            <div className="mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center ">
+              <img
+                alt="icon"
+                src="/icons/gps.png"
+                className="max-w-[30px] max-h-[30px]"
+              />{" "}
+              <a
+                target="_blank"
+                href={`https://www.google.com/maps/place/${data?.location?.lat},${data?.location?.lon}`}
+                className="rounded-xl ml-2 poppins-regular  "
+              >
+                Maps
+              </a>
+            </div>
+          )}
         </div>
         {fetchedOrganizer && (
           <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
