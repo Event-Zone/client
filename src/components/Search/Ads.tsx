@@ -37,7 +37,7 @@ function Ads() {
         <div className="relative  bg-cover bg-center  flex flex-row  items-center h-full w-full ">
           <Image
             src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${ads[currentBar]?.picture}`}
-            className="w-full h-full"
+            className="w-full h-full "
             alt={`ad${currentBar}`}
             width={500} // Specify width
             height={300} // Specify height
