@@ -21,8 +21,12 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
   const dispatch = useDispatch();
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
-  const [currentMonth, setCurrentMonth] = useState(new Date(Date.now()));
+  const [selectedMonths, setSelectedMonths] = useState<Date[]>([]); // Array to store selected months
+
   const [isFilter, setIsFilter] = useState<boolean>(false);
+  const [thisWeek, setthisWeek] = useState<boolean>(false);
+  const [isMonth, setIsMonth] = useState<boolean>(false);
+  const [isNextMonth, setIsNextMonth] = useState<boolean>(false);
 
   const [isSelectingEndDate, setIsSelectingEndDate] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState<Date | null>();
@@ -99,6 +103,9 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
     setSelectedStartDate(start);
     setSelectedEndDate(end);
     setSelectedMonth(null);
+    setthisWeek(true);
+    setIsNextMonth(false);
+    setIsMonth(false);
   };
 
   const handleSelectThisMonth = () => {
@@ -107,7 +114,11 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
     setSelectedStartDate(start);
     setSelectedEndDate(end);
     setSelectedMonth(null);
+    setthisWeek(false);
+    setIsNextMonth(false);
+    setIsMonth(true);
   };
+  const [currentMonth, setCurrentMonth] = useState(new Date(Date.now()));
 
   const handleSelectNextMonth = () => {
     const nextMonth = addMonths(currentMonth, 1);
@@ -116,14 +127,53 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
     setSelectedMonth(null);
     setSelectedStartDate(start);
     setSelectedEndDate(end);
+    setthisWeek(false);
+    setIsNextMonth(true);
+    setIsMonth(false);
   };
 
   const handleMonthClick = (month: Date) => {
     const start = startOfMonth(month);
     const end = endOfMonth(month);
-    setSelectedMonth(month);
-    setSelectedStartDate(start);
-    setSelectedEndDate(end);
+
+    // Add or remove the month from the selected months array
+    setSelectedMonths((prevSelectedMonths) => {
+      const isAlreadySelected = prevSelectedMonths.some(
+        (selectedMonth) =>
+          format(selectedMonth, "yyyy-MM") === format(month, "yyyy-MM")
+      );
+
+      if (isAlreadySelected) {
+        // If the month is already selected, remove it
+        const newSelectedMonths = prevSelectedMonths.filter(
+          (selectedMonth) =>
+            format(selectedMonth, "yyyy-MM") !== format(month, "yyyy-MM")
+        );
+        if (newSelectedMonths.length === 0) {
+          setSelectedStartDate(null);
+          setSelectedEndDate(null);
+        } else {
+          // Set start and end date to the range of selected months
+          const newStart = startOfMonth(newSelectedMonths[0]);
+          const newEnd = endOfMonth(
+            newSelectedMonths[newSelectedMonths.length - 1]
+          );
+          setSelectedStartDate(newStart);
+          setSelectedEndDate(newEnd);
+        }
+        return newSelectedMonths;
+      } else {
+        // If not selected, add the new month and update the range
+        const newSelectedMonths = [...prevSelectedMonths, month].sort(
+          (a, b) => a.getTime() - b.getTime()
+        );
+        setSelectedStartDate(startOfMonth(newSelectedMonths[0]));
+        setSelectedEndDate(
+          endOfMonth(newSelectedMonths[newSelectedMonths.length - 1])
+        );
+        return newSelectedMonths;
+      }
+    });
   };
 
   const renderCalendarDays = (month: Date, isNextMonth = false) => {
@@ -170,26 +220,30 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
     const months = [];
     for (let i = 0; i < 12; i++) {
       const month = addMonths(currentMonth, i);
+      const isSelected = selectedMonths.some(
+        (selectedMonth) =>
+          format(selectedMonth, "yyyy-MM") === format(month, "yyyy-MM")
+      );
+
       months.push(
         <div
           key={i}
           onClick={() => handleMonthClick(month)}
           className={`w-24 h-24 mr-3 mb-3 flex-shrink-0 flex flex-col items-center justify-center border rounded-lg cursor-pointer
-          ${
-            selectedMonth &&
-            format(selectedMonth, "yyyy-MM") === format(month, "yyyy-MM")
-              ? "bg-blue-500 text-white border-blue-500"
-              : "text-gray-700 border-gray-300"
-          }
-          hover:bg-blue-300`}
+            ${
+              isSelected
+                ? "bg-blue-500 text-white border-blue-500"
+                : "text-gray-700 border-gray-300"
+            }
+            hover:bg-blue-300`}
         >
           <img
             alt={"monthIcon"}
             src="/icons/mdi_calendar.png"
             className="w-6 h-6 mb-1"
           />
-          <p className="poppins-medium text-base">{format(month, "MMMM ")}</p>
-          <p className="poppins-medium text-base">{format(month, " yyyy")}</p>
+          <p className="poppins-medium text-base">{format(month, "MMMM")}</p>
+          <p className="poppins-medium text-base">{format(month, "yyyy")}</p>
         </div>
       );
     }
@@ -205,7 +259,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
   };
 
   return (
-    <div className="z-30 bg-gray-50 shadow-md absolute w-full max-w-lg mx-auto p-4">
+    <div className="z-30 bg-white absolute w-full max-w-lg mx-auto p-4">
       <div className="flex justify-between border-b border-gray-300">
         <div
           onClick={() => setViewMode("calendar")}
@@ -296,19 +350,31 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
           <div className="flex justify-around mt-4 mb-4">
             <button
               onClick={handleSelectThisWeek}
-              className="border border-gray-300 px-4 py-2 rounded-full hover:bg-gray-200"
+              className={`${
+                thisWeek
+                  ? "bg-gray-200 border border-gray-300 px-4 py-2 rounded-full hover:bg-gray-200 "
+                  : "border border-gray-300 px-4 py-2 rounded-full hover:bg-gray-200 "
+              }`}
             >
               Cette semaine
             </button>
             <button
               onClick={handleSelectThisMonth}
-              className="border border-gray-300 px-4 py-2 rounded-full hover:bg-gray-200"
+              className={`${
+                isMonth
+                  ? "bg-gray-200 border border-gray-300 px-4 py-2 rounded-full hover:bg-gray-200 "
+                  : "border border-gray-300 px-4 py-2 rounded-full hover:bg-gray-200 "
+              }`}
             >
               Ce mois
             </button>
             <button
               onClick={handleSelectNextMonth}
-              className="border border-gray-300 px-4 py-2 rounded-full hover:bg-gray-200"
+              className={`${
+                isNextMonth
+                  ? "bg-gray-200 border border-gray-300 px-4 py-2 rounded-full hover:bg-gray-200 "
+                  : "border border-gray-300 px-4 py-2 rounded-full hover:bg-gray-200 "
+              }`}
             >
               Mois prochain
             </button>

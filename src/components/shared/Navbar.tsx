@@ -320,7 +320,10 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <span className="z-50 h-[40px] rounded-r-lg overflow-hidden flex items-center pl-2 pr-2 bg-mainBlue">
+        <span
+          onClick={() => router.push("/search")}
+          className="z-50 h-[40px] rounded-r-lg overflow-hidden flex items-center pl-2 pr-2 bg-mainBlue"
+        >
           <img
             src="/icons/Search.svg"
             alt="Search Icon"
