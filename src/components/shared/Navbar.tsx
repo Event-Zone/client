@@ -400,7 +400,10 @@ function Navbar() {
                 <>
                   <li>
                     <button
-                      onClick={() => router.push("/auth/login")}
+                      onClick={() => {
+                        setMenuOpen(false);
+                        router.push("/auth/login");
+                      }}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       Se connecter
@@ -408,7 +411,11 @@ function Navbar() {
                   </li>
                   <li>
                     <button
-                      onClick={() => router.push("/auth/register")}
+                      onClick={() => {
+                        setMenuOpen(false);
+
+                        router.push("/auth/register");
+                      }}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       S'inscrire

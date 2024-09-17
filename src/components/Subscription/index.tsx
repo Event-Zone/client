@@ -74,9 +74,9 @@ function Subscription({ pack }: { pack: string }) {
   }, [addSubscriptionResult.status, refetchUser, dispatch, router]);
   const t = useTranslations("subscriptions");
   return (
-    <div className="flex-grow p-8 bg-white rounded-lg shadow-md justify-center items-center">
-      <div className="border-[1.4px] border-gray-400 rounded-lg p-12 mx-32 my-16">
-        <div className="flex justify-between items-center">
+    <div className="flex-grow md:p-8 bg-white rounded-lg shadow-md justify-center items-center">
+      <div className="border-[1.4px] border-gray-400 rounded-lg p-12 md:mx-32 md:my-16">
+        <div className="flex md:flex-row flex-col justify-between items-center">
           <h3 className="poppins-regular text-[18px]">Inscription</h3>
           <p className="flex flex-row justify-between bg-mainBlue px-4 py-2 rounded-[24px] text-white poppins-medium">
             <img
@@ -101,7 +101,7 @@ function Subscription({ pack }: { pack: string }) {
               />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="flex flex-col md:grid grid-cols-2 gap-4 mb-4">
             <div>
               <input
                 type="email"

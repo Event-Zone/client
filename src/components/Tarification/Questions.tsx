@@ -43,7 +43,9 @@ function Questions() {
         <h3 className="poppins-semibold bg-mainBlue text-white rounded-2xl text-center  px-4">
           Packs
         </h3>
-        <h3 className="poppins-bold text-titles text-[48px]">{t("title")}</h3>
+        <h3 className="poppins-bold text-titles text-[30px]  md:text-[48px]">
+          {t("title")}
+        </h3>
         <p className="text-sm text-gray-600 poppins-regular">{t("des")} </p>
       </div>
       <div className="flex flex-col w-[80%] ml-8">
