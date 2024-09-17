@@ -79,21 +79,17 @@ const Hero = () => {
 
   const t = useTranslations("Hero");
   return (
-    <div className="flex flex-col">
+    <div className="w-full flex flex-col">
       <div
-        className="relative w-full h-[450px]  bg-cover bg-center  md:py-20 flex flex-row   items-center"
-        // style={{
-        //   backgroundImage: `url(${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${eventAdds[currentBar]?.eventImages[0]})`,
-        // }}
+        className="relative w-full h-[179px] sm:h-[450px] md:py-20 flex flex-row items-center overflow-hidden" // Added overflow-hidden
       >
         <Image
           src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${eventAdds[currentBar]?.eventImages[0]}`}
           alt={`eventHeroImage${currentBar}`}
-          width={500} // Specify width
-          height={300} // Specify height
-          quality={75} // Adjust quality to improve performance (default is 75)
-          // placeholder="blur" // Optionally use a low-quality placeholder
-          className="md:absolute  w-full h-full object-cover" // Added CSS classes
+          width={1920} // Specify a large width for better responsiveness
+          height={1080} // Specify a large height to maintain aspect ratio
+          quality={75}
+          className="absolute top-0 left-0 w-full h-full object-cover" // Ensure the image covers the container
         />
         <div className="hero-overlay"></div>
         <div className="md:opacity-100 opacity-0 md:ml-16 z-30  mr-[6%]">
@@ -109,19 +105,19 @@ const Hero = () => {
             </div>
           ))}
         </div>
-        <div className="z-30 absolute w-full overflow-scroll element-with-scrollbar bottom-1 left-3 md:hidden flex">
+        <div className="z-30 absolute w-[95%] mx-[2px] overflow-scroll element-with-scrollbar bottom-1 left-3 md:hidden flex">
           <div className="flex mt-3 ">
-            <p className="mr-2 inline-block rounded-[30px] px-6 max-h-[41px] py-2 bg-transparent text-white text-center border border-white whitespace-nowrap box-border">
+            <p className="mr-2 text-[12px] poppins-regular inline-block rounded-md  px-2 py-1 h-[28px]  bg-[#E9F1FC] text-mainBlue text-center border border-white whitespace-nowrap box-border">
               {eventAdds[currentBar]?.type}
             </p>
             {isArray(eventAdds[currentBar]?.Categorie) ? (
               eventAdds[currentBar]?.Categorie.map((categorie: any) => (
-                <p className="mr-2 inline-block rounded-[30px] px-6 max-h-[41px] py-2 bg-transparent text-white text-center border border-white whitespace-nowrap box-border">
+                <p className="mr-2 text-[12px] poppins-regular inline-block rounded-md  px-2 py-1 h-[28px]  bg-[#E9F1FC] text-mainBlue text-center border border-white whitespace-nowrap box-border">
                   {categorie}
                 </p>
               ))
             ) : (
-              <p className="poppins-medium text-center max-h-[45px] text-mainBlue bg-[#E9F1FC]  rounded-lg md:px-4 md:py-2 px-[5px] mr-3">
+              <p className="poppins-medium text-center h-[28px]  text-mainBlue bg-[#E9F1FC]  rounded-lg md:px-4 md:py-2 px-[5px] mr-3">
                 {eventAdds[currentBar]?.Categorie}
               </p>
             )}
@@ -130,7 +126,7 @@ const Hero = () => {
         <div className="hidden md:flex flex-col justify-between ">
           <div className="flex flex-row relative z-10">
             <div>
-              <h2 className="mb-1 text-ellipsis line-clamp-2 text-white md:text-[48px] poppins-semibold text-left leading-[65px]">
+              <h2 className="mb-1 text-ellipsis line-clamp-2 text-white text-[16px] md:text-[48px] poppins-semibold text-left leading-[65px]">
                 {eventAdds.length > 0 && (
                   <>
                     {
@@ -150,11 +146,11 @@ const Hero = () => {
             </div>
           </div>
           <div className="relative z-10 mb-6">
-            <p className="flex flex-row text-white items-center">
+            <p className="flex flex-row text-white poppins-regular text-[12px] items-center">
               <img
                 alt="location-icon"
                 src="/icons/LocationLight.png"
-                className="w-[18px] h-[18px] mr-2"
+                className="w-[20px] h-[20px] mr-2"
               />{" "}
               {eventAdds[currentBar]?.location ? (
                 eventAdds[currentBar]?.location.address.commercial ? (
@@ -169,11 +165,11 @@ const Hero = () => {
                 <>Online</>
               )}
             </p>
-            <p className="flex flex-row text-white items-center">
+            <p className="flex flex-row text-white poppins-regular text-[12px] items-center">
               <img
                 alt="location-icon"
                 src="/icons/Calendar.png"
-                className="w-[18px] h-[18px] mr-2"
+                className="w-[20px] h-[20px] mr-2"
               />{" "}
               {new Date(eventAdds[currentBar]?.startdate).toLocaleDateString(
                 "fr-FR",
@@ -230,10 +226,10 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className=" mx-1 md:hidden   flex flex-col justify-between ">
+      <div className="mx-1 md:hidden flex flex-col justify-between">
         <div className="flex flex-row relative z-10">
           <div>
-            <h2 className="mb-10 text-titles poppins-medium poppins-poppins md:text-[30px] poppins-semibold text-left">
+            <h2 className="mb-[10px] text-titles poppins-medium md:text-[30px] poppins-semibold text-left">
               {eventAdds.length > 0 && eventAdds[currentBar]?.eventName}
             </h2>
           </div>
@@ -244,7 +240,7 @@ const Hero = () => {
               alt="location-icon"
               src="/icons/LocationGray.png"
               className="w-[18px] h-[18px] mr-2"
-            />{" "}
+            />
             {eventAdds[currentBar]?.location ? (
               eventAdds[currentBar]?.location.address.commercial ? (
                 <>
@@ -260,10 +256,10 @@ const Hero = () => {
           </p>
           <p className="flex flex-row text-titles poppins-medium items-center">
             <img
-              alt="location-icon"
+              alt="calendar-icon"
               src="/icons/CalendarGray.png"
               className="w-[18px] h-[18px] mr-2"
-            />{" "}
+            />
             {new Date(eventAdds[currentBar]?.startdate).toLocaleDateString(
               "fr-FR",
               {
@@ -283,32 +279,49 @@ const Hero = () => {
           </p>
         </div>
 
-        <div className="relative z-10">
+        <div className="w-[90%] flex items-center relative z-10">
+          <a
+            target="_blank"
+            href={eventAdds[currentBar]?.website}
+            className="flex justify-center items-center mr-2 flex-1 rounded-[30px] px-4 py-1 bg-white h-[40px] text-titles border-titles border-[1.4px] poppins-medium text-[12px] text-center"
+          >
+            <img
+              alt="globe-icon"
+              src="/icons/globalDark.png"
+              className="w-[20px] h-[20px] mr-2"
+            />
+            Web Site
+          </a>
           <button
             onClick={() => {
               router.replace(`/events/details/${eventAdds[currentBar]?._id}`);
             }}
-            className="mr-2 rounded-[10px] px-4 py-1 bg-mainBlue text-white poppins-medium text-center"
+            className="mr-2 flex-1 rounded-[30px] px-4 py-1 bg-mainBlue text-white h-[40px] poppins-medium text-[12px] text-center"
           >
             Voir plus
           </button>
         </div>
-      </div>
-      <div className="md:opacity-0 opacity-100 flex  z-30  mr-4 transform rotate-[-90deg]">
-        <div className="md:hidden flex flex-col z-30 justify-center items-center w-full p-4">
-          {eventAdds.map((_, index) => (
-            <div
-              key={index}
-              className={`progress-bar w-[10px] h-[50px] bg-gray-300 mb-2 rounded-md cursor-pointer`}
-              onClick={() => handleBarClick(index)} // Wrap the function call in an anonymous function
-            >
-              {index <= currentBar && (
-                <div className="fill-bar-horizontal w-full h-full rounded-md bg-gray-700"></div>
-              )}
+
+        {/* Progress bars should be below the buttons */}
+        <div className=" flex items-center justify-center h-[50px]">
+          <div className="md:opacity-0 opacity-100 flex z-30  transform rotate-[-90deg]">
+            <div className="md:hidden flex flex-col z-30 justify-center items-end  w-full p-4">
+              {eventAdds.map((_, index) => (
+                <div
+                  key={index}
+                  className={`progress-bar w-[10px] h-[50px] bg-gray-300 mb-2 rounded-md cursor-pointer`}
+                  onClick={() => handleBarClick(index)}
+                >
+                  {index <= currentBar && (
+                    <div className="fill-bar-horizontal w-full h-full rounded-md bg-gray-700"></div>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
+
       {(addsIsLoading || eventAddsIsLoading) && <Progress />}
     </div>
   );

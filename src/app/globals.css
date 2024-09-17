@@ -8,11 +8,16 @@
     text-wrap: balance;
   }
 }
-body {
-  @apply font-sans;
+
+html {
+  @apply w-screen;
 }
 
+body {
+    @apply w-screen;
 
+  @apply font-sans;
+}
 *{
   outline: none;
 }

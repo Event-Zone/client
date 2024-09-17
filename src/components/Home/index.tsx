@@ -32,14 +32,15 @@ function Home() {
   }, [fetchedEvents, error, isLoading]);
 
   return (
-    <div className="min-h-screen  ">
+    <div className="min-w-screen md:px-[0px] px-[10px]">
       <Hero />
       <div className="md:px-28 ">
         <Categorie />
         <Villes />
         <NextEvent events={events.slice(0, 4)} />
+        <Collaborer />
       </div>
-      <Collaborer />
+
       {isLoading && <Progress />}
     </div>
   );

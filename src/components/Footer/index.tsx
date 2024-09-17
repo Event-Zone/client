@@ -30,20 +30,20 @@ function Footer() {
   }
   const t = useTranslations("Footer");
   return (
-    <footer className="flex justify-center items-center w-full bg-[#0a1a35] text-white py-8 md:h-[300px] ">
-      <div className="container mx-auto flex justify-between items-center">
+    <footer className="mt-8 text-center flex  justify-center items-center w-full bg-[#0a1a35] text-white py-8 md:h-[300px] ">
+      <div className="container   mx-2 flex md:flex-row flex-col-reverse justify-between items-center md:h-auto h-[500px]">
         {/* Left Section */}
-        <div className="flex items-center justify-center">
-          <div className="mr-8">
+        <div className="flex md:flex-row flex-col-reverse items-center justify-center">
+          <div className="md:mr-8">
             {/* Logo Placeholder */}
-            <div className=" h-8 w-full">
+            <div className=" md:h-8 md:w-full">
               {" "}
               <Image
                 width={200}
                 height={30}
                 alt="logoEvenZone"
                 src={"/icons/Union1.png"}
-                className="md:w-[45px] md:h-[45px] mt-[-20px]"
+                className=" md:w-[45px] md:h-[45px] w-[38px] h-[42px] md:mt-[-20px] mt-[20px]"
               />
             </div>
           </div>
@@ -74,13 +74,13 @@ function Footer() {
           </div>
         </div>
         <div className="text-sm space-y-2">
-          <p className="poppins-regular text-gray-500">
+          <p className="text-center poppins-regular text-gray-500">
             {" "}
             {t("Contactez Nous")}
           </p>
           <ul>
             <li className="mb-[2px]">Contact@eventzone.pro</li>
-            <li>+(213) 781 45 75 11</li>
+            <li className="text-center">+(213) 781 45 75 11</li>
           </ul>
         </div>
         {/* Middle Section - Language Selection */}
@@ -103,14 +103,14 @@ function Footer() {
         </div>
 
         {/* Right Section */}
-        <div className="  text-right w-1/3 text-sm space-y-10">
+        <div className="  text-right md:w-1/3 text-sm space-y-10">
           <div className="flex items-center justify-center font-bold text-blue-500 text-lg">
             <Image
               width={200}
               height={30}
               alt="logoEvenZone"
               src={"/images/footerLogo.png"}
-              className="md:w-[200px] md:h-[30px] "
+              className="md:w-[200px] md:h-[30px] w-[140px] h-[20px]  "
             />
           </div>
           <p className="text-center ">

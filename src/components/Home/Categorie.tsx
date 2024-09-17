@@ -52,7 +52,7 @@ function Categorie() {
   return (
     <div className="mb-8 mt-8 w-full mr-[50px]">
       <div className="">
-        <h2 className="text-titles ml-2 mb-4 poppins-semibold md:md:text-[24px] ">
+        <h2 className="text-titles ml-2 mb-4 poppins-semibold md:text-[24px] ">
           {t.rich("description", {
             code: (chunks) => <code>{chunks}</code>,
           })}
@@ -70,13 +70,13 @@ function Categorie() {
               onMouseLeave={handleMouseLeave}
               alt={"type-icon" + index}
               src={hovered === index ? icon.hoverSrc : icon.src}
-              className="h-[100px]"
+              className="h-[80px] w-[80px] md:h-[100px] md:w-[100px]"
             />
             <p
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={handleMouseLeave}
-              className={`md:poppins-medium poppins-regular  ${
-                hovered === index ? "text-mainBlue" : "text-black"
+              className={`md:poppins-medium poppins-regular  whitespace-nowrap ${
+                hovered === index ? "text-mainBlue" : "text-gray-500"
               }`}
             >
               {icon.label}

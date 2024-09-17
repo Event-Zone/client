@@ -46,18 +46,21 @@ function Villes() {
       </h2>
 
       {/* Add horizontal scrolling for the container */}
-      <div className="flex flex-row  md:flex-wrap justify-between  overflow-hidden w-full">
+      <div className="flex flex-row  md:flex-wrap justify-between overflow-x-scroll element-with-scrollbar  md:overflow-hidden w-full">
         <div
           onClick={() => setSelectedLocations(["Alger"])}
           className="flex-shrink-0 w-auto ville-container "
         >
-          <div className="relative w-full">
+          <div className="flex flex-col items-center relative w-full">
             <img
               alt="event-img"
-              className="object-cover w-full h-[150px] md:h-48 md:rounded-md rounded-full"
+              className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px]  md:rounded-md rounded-full"
               src="/images/Frame 920.png"
-            />
-            <div className="ville-overlay">
+            />{" "}
+            <p className="md:hidden block text-gray-500 text-[10px] text-center mt-2 ">
+              Alger
+            </p>
+            <div className="ville-overlay md:block hidden">
               <div className="flex justify-between">
                 <p>Alger</p>
                 <p>{"→"}</p>
@@ -70,13 +73,16 @@ function Villes() {
           onClick={() => setSelectedLocations(["Oran"])}
           className="flex-shrink-0 w-auto ville-container"
         >
-          <div className="relative w-full">
+          <div className="flex flex-col items-center relative w-full">
             <img
               alt="event-img"
-              className="object-cover w-full h-[150px] md:h-48 md:rounded-md rounded-full"
+              className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px]  md:rounded-md rounded-full"
               src="/images/Frame 643.png"
-            />
-            <div className="ville-overlay">
+            />{" "}
+            <p className="md:hidden block text-gray-500 text-[10px] text-center mt-2 ">
+              Oran
+            </p>
+            <div className="ville-overlay md:block hidden">
               <div className="flex justify-between">
                 <p>Oran</p>
                 <p>{"→"}</p>
@@ -89,13 +95,16 @@ function Villes() {
           onClick={() => setSelectedLocations(["Annaba"])}
           className="flex-shrink-0 w-auto ville-container"
         >
-          <div className="relative w-full">
+          <div className="flex flex-col items-center relative w-full">
             <img
               alt="event-img"
-              className="object-cover w-full h-[150px] md:h-48 md:rounded-md rounded-full"
+              className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px]  md:rounded-md rounded-full"
               src="/images/Frame 921.png"
-            />
-            <div className="ville-overlay">
+            />{" "}
+            <p className="md:hidden block text-gray-500 text-[10px] text-center mt-2 ">
+              Annaba
+            </p>
+            <div className="ville-overlay md:block hidden">
               <div className="flex justify-between">
                 <p>Annaba</p>
                 <p>{"→"}</p>
@@ -108,13 +117,16 @@ function Villes() {
           onClick={() => setSelectedLocations(["Constantine"])}
           className="flex-shrink-0 w-auto ville-container"
         >
-          <div className="relative w-full">
+          <div className="flex flex-col items-center relative w-full">
             <img
               alt="event-img"
-              className="object-cover w-full h-[150px] md:h-48 md:rounded-md rounded-full"
+              className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px]  md:rounded-md rounded-full"
               src="/images/Frame 922.png"
             />
-            <div className="ville-overlay">
+            <p className="md:hidden block text-gray-500 text-[10px] text-center mt-2 ">
+              Constantine
+            </p>
+            <div className="ville-overlay md:block hidden">
               <div className="flex justify-between">
                 <p>Constantine</p>
                 <p>{"→"}</p>

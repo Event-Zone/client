@@ -30,7 +30,7 @@ function NextEventCard({ event }: { event: any }) {
     <>
       <Image
         alt="event-img"
-        className="lg:w-full  md:h-[187px] md:w-full max-h-[187px] w-[270px] object-cover"
+        className="lg:w-full  md:h-[187px] w-full max-h-[187px] object-cover"
         src={
           event.eventImages
             ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event.eventImages[0]}`
@@ -46,12 +46,12 @@ function NextEventCard({ event }: { event: any }) {
             {event?.Categorie[0]}
           </p>
         </div>
-        <h3 className="text-xl poppins-semibold text-ellipsis text-[16px] line-clamp-3 text-titles">
+        <h3 className="sm:text-xl poppins-semibold text-ellipsis text-[14px] line-clamp-3 text-titles">
           {event?.eventAcronym && <>{event.eventAcronym} - </>}
           {event?.eventName}
         </h3>
         {fetchedSubscription?.pack === "Business" ? (
-          <div className=" my-2 flex text-gray-600">
+          <div className=" my-2 flex text-[12px] sm:text-[14px] text-gray-600">
             <img
               alt="icon"
               src="/icons/ph_seal-check-fill (1).png"
@@ -60,7 +60,7 @@ function NextEventCard({ event }: { event: any }) {
             {fetchedSubscription?.company}
           </div>
         ) : null}
-        <p className="my-2 text-gray-600 flex flex-row items-center">
+        <p className="my-2 text-gray-600 text-[12px] sm:text-[14px] flex flex-row items-center">
           {event.location?.address?.commercial ? (
             <>
               <img alt="location-icon" src="/icons/LocationGray.png" />
@@ -75,7 +75,7 @@ function NextEventCard({ event }: { event: any }) {
             )
           )}
         </p>
-        <p className="my-2 text-gray-600 flex flex-row items-center">
+        <p className="my-2 text-gray-600 text-[12px] sm:text-[14px] flex flex-row items-center">
           <img alt="calendar-icon" src="/icons/CalendarGray.png" />
           {event.startdate
             ? formatDate(event.startdate as unknown as string)

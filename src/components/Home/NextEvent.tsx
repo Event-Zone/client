@@ -136,7 +136,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
       </div>
 
       {/* Horizontal scrollable events list */}
-      <div className="flex-col  md:flex-row flex-wrap  md:flex overflow-x-auto md:pl-0 pl-10 items-center justify-between w-full py-4 element-with-scrollbar">
+      <div className="flex-col  md:flex-row flex-wrap  md:flex overflow-x-auto md:pl-0  items-center justify-center md:justify-between w-full py-4 element-with-scrollbar">
         {searchedEvents && searchedEvents.length !== 0 ? (
           searchedEvents
             .slice(0, visibleEventsCount)
@@ -144,7 +144,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
               <div
                 onClick={() => router.push(`/events/details/${event._id}`)}
                 key={index}
-                className="md:m-0 ml-20 lg:w-[23%] w-[270px]  h-[460px] flex-shrink-0 bg-white rounded-lg overflow-hidden"
+                className="md:m-0  lg:w-[23%] w-full  h-[460px] flex-shrink-0 bg-white rounded-lg overflow-hidden"
               >
                 <NextEventCard event={event} />
               </div>
