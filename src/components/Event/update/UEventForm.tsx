@@ -170,6 +170,9 @@ function EventForm({
     updatedTags.splice(index, 1); // Remove the tag at the specified index
     setFormData({ ...formData, tags: updatedTags });
   };
+  useEffect(() => {
+    console.log("location", formData?.location);
+  }, [formData?.location]);
 
   return (
     <div>

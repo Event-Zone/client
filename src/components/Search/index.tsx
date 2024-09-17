@@ -251,7 +251,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             <span className="text-mainBlue">{tmpLocation}</span>
           </p>
         )}
-        <div className="flex flex-wrap justify-around w-[88%]">
+        <div className="flex  justify-around lg:w-[700px] w-[88%]">
           <button
             className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-md mb-2"
             onClick={() => {

@@ -61,6 +61,11 @@ function EditEvent({ event }: { event: any }) {
   });
   const [secondFormData, setSecondFormData] = useState(new FormData());
   const router = useRouter();
+  // useEffect(() => {
+  //   Object.keys(firstFormData).forEach((value: any, key: any) => {
+  //     console.log(`DATA ${{ ...(firstFormData as any)["loaction"] }}`);
+  //   });
+  // }, [firstFormData]); // Call the mutation})
   const handlePublier = async () => {
     console.log("Publier");
     const combinedFormData = new FormData();
