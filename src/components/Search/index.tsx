@@ -251,9 +251,9 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             <span className="text-mainBlue">{tmpLocation}</span>
           </p>
         )}
-        <div className="flex  justify-around lg:w-[700px] w-[88%]">
+        <div className="flex  overflow-scroll element-with-scrollbar  justify-around lg:w-[700px] w-full md:w-[88%]">
           <button
-            className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-md mb-2"
+            className=" poppins-regular bg-gray-200 whitespace-nowrap mr-[5px] text-gray-500  px-4 md:py-2 rounded-md mb-2"
             onClick={() => {
               setIsLocationSelectorVisible(false);
               setShowDialog(false);
@@ -268,7 +268,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             ></select>
           </button>
           {isTypeSelectorVisible && (
-            <div className="bg-gray-50 p-4 rounded-md shadow-md z-30 absolute left-4">
+            <div className="bg-gray-50 p-4 whitespace-nowrap mr-[5px]  rounded-md shadow-md z-30 absolute left-4">
               <p className="poppins-semibold text-gray-700 mb-2">{t("type")}</p>
               <div className="flex flex-col space-y-2">
                 {types?.map((Type: any) => (
@@ -310,7 +310,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
           {/* Trigger for the date picker dialog */}
           <div
             onClick={toggleDialog}
-            className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-md mb-2"
+            className=" poppins-regular whitespace-nowrap mr-[5px]  bg-gray-200 text-gray-500  px-4 py-2 rounded-md mb-2"
           >
             {" "}
             {t("date")}
@@ -327,7 +327,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
               setCategorieSelectorVisible(false);
               setTypeSelectorVisible(false);
             }}
-            className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-md mb-2"
+            className=" poppins-regular whitespace-nowrap mr-[5px]  bg-gray-200 text-gray-500  px-4 py-2 rounded-md mb-2"
           >
             {t("place")}{" "}
             <select
@@ -337,7 +337,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
           </div>
           <div className="flex flex-wrap justify-between w-fit ">
             <button
-              className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-md mb-2"
+              className=" poppins-regular whitespace-nowrap mr-[5px]  bg-gray-200 text-gray-500  px-4 py-2 rounded-md mb-2"
               onClick={() => {
                 setIsLocationSelectorVisible(false);
                 setShowDialog(false);
