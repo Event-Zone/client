@@ -205,7 +205,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
   };
 
   return (
-    <div className="z-30 bg-white absolute w-full max-w-lg mx-auto p-4">
+    <div className="z-30 bg-gray-50 shadow-md absolute w-full max-w-lg mx-auto p-4">
       <div className="flex justify-between border-b border-gray-300">
         <div
           onClick={() => setViewMode("calendar")}

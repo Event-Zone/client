@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import Progress from "../shared/Progress";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
+import { setlocation } from "@/store/features/locationSlice";
 
 function Villes() {
   const t = useTranslations("Villes");
@@ -20,7 +21,9 @@ function Villes() {
   } = useSearchEventsByLocationQuery(selectedLocations!, {
     skip: !selectedLocations,
   });
-
+  useEffect(() => {
+    if (selectedLocations) dispatch(setlocation(selectedLocations[0]));
+  }, [selectedLocations]);
   useEffect(() => {
     if (eventByLocationIsLoading) {
       console.log("Loading events by location...");

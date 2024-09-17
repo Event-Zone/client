@@ -171,7 +171,9 @@
     "place": "Anywhere",
     "Annuler": "Cancel",
     "Filtrer": "Filter",
-    "noEvents": "No events"
+    "noEvents": "No events",
+    
+"header": "events near "
   },
     "subscriptions": {
     "accept": "I accept",

@@ -171,7 +171,8 @@
     "place":"N'import ou",
     "Annuler":"Annuler",
     "Filtrer":"Filtrer",
-    "noEvents":"pas d'evenement"
+    "noEvents":"pas d'evenement",
+    "header":"événements à proximité de"
   },
   "subscriptions":{
     "accept":"J'accepte",

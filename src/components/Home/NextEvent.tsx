@@ -90,7 +90,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
           <span
             className={` ${
               selectedCategory && selectedCategory[0] === "Tout"
-                ? "border-b-[2px] border-b-mainBlue"
+                ? "border-b-[2px] border-b-mainBlue text-mainBlue"
                 : ""
             }`}
           >
@@ -107,7 +107,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
             <span
               className={`${
                 selectedCategory && selectedCategory[0] === category.name
-                  ? "border-b-[2px] border-b-mainBlue"
+                  ? "border-b-[2px] border-b-mainBlue text-mainBlue"
                   : ""
               }`}
             >

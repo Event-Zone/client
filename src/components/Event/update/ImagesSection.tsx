@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { useTranslations } from "next-intl";
 
 function ImagesSection({
   setEventImages,
@@ -47,20 +48,20 @@ function ImagesSection({
   useEffect(() => {
     console.log(videoUrl);
   }, [videoUrl]);
-
+  const t = useTranslations("Search");
   return (
     <>
-      <div className="mb-3">
-        <div>
+      <div className="  mb-3  ">
+        <div className="mx-3">
           <h3 className="text-2xl poppins-semibold">Images </h3>
-          <p className="text-gray-600 poppins-regular">
-            Ajouter des photos pour montrer le sujet de votre événement
-          </p>
+          <p className="text-gray-600 poppins-regular">{t("imagesDes")}</p>{" "}
         </div>
       </div>
       <div
         onClick={() => setIsEventImagesSubmitted(false)}
-        className="relative rounded-md flex justify-center items-center py-48 md:max-h-[500px] md:max-w-[800px] bg-cover"
+        className={`relative rounded-3xl flex justify-center items-center  py-48 md:max-h-[500px] md:max-w-full bg-cover mx-4 ${
+          eventImages.length === 0 && "bg-[#0052B40D]"
+        }`}
         style={{
           backgroundImage: `url(${
             eventImages.length > 0
@@ -78,45 +79,13 @@ function ImagesSection({
             src="/icons/submittedIcon.png"
           />
         )}
-        {!isEventImagesSubmitted && (
-          <label
-            htmlFor="media"
-            className="md:p-8 md:w-auto w-[200px] flex flex-col items-center cursor-pointer rounded-lg"
-          >
-            <input
-              disabled={true}
-              type="file"
-              id="media"
-              name="media"
-              accept=".jpg,.jpeg,.png,.svg"
-              className="relative inset-0 opacity-0 cursor-pointer"
-              onChange={(event) => {
-                if (event.target.files) {
-                  const files = Array.from(event.target.files as FileList);
-                  const imageFiles = files.filter((file) =>
-                    ["image/jpeg", "image/png", "image/svg+xml"].includes(
-                      file.type
-                    )
-                  );
-                  if (eventImages.length >= 4) {
-                    return alert("Only 4 images are allowed");
-                  }
-                  // setEventImages((prevImages: any) => [
-                  //   ...prevImages,
-                  //   ...imageFiles,
-                  // ]);
-                }
-              }}
-            />
-          </label>
-        )}
       </div>
       {isEventImagesSubmitted && (
         <div className="flex">
           {eventImages.map((_, index) => (
             <div
               key={index}
-              className={`progress-bar w-[50px] h-[10px] bg-gray-600 mr-2 rounded-md cursor-pointer`}
+              className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
               onClick={() => handleBarClick(index)}
             ></div>
           ))}
@@ -128,7 +97,7 @@ function ImagesSection({
             <Droppable droppableId="eventImages" direction="horizontal">
               {(provided) => (
                 <div
-                  className="flex flex-wrap w-full mt-4"
+                  className="flex flex-wrap w-full mt-4 relative"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                   style={{ display: "flex", overflowX: "auto" }}
@@ -148,21 +117,27 @@ function ImagesSection({
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className={`relative w-24 h-24 m-2`}
+                          className="relative  h-24 m-2 w-[140px]" // Individual image container
                         >
-                          <img
-                            src={getImageUrl(image)}
-                            alt={`event-${index}`}
-                            className={`w-full h-full object-cover rounded-lg ${
-                              index === 0 ? "border-8 border-gray-900" : ""
-                            }`}
-                          />
-                          {/* <button
-                            onClick={() => handleDeleteImage(index)}
-                            className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
-                          >
-                            X
-                          </button> */}
+                          <div className="group relative w-full h-full">
+                            {index === 0 && (
+                              <img
+                                alt="show"
+                                src={`/icons/Show.png`}
+                                className="w-[23px] h-[23px] bg-white rounded-full  absolute right-1 top-1"
+                              />
+                            )}
+                            <img
+                              src={getImageUrl(image)}
+                              alt={`event-${index}`}
+                              className={`w-full h-full object-cover rounded-lg ${
+                                index === 0 ? "border-8 border-gray-900" : ""
+                              }`}
+                            />{" "}
+                            <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              <span className="text-white text-4xl">=</span>
+                            </div>
+                          </div>
                         </div>
                       )}
                     </Draggable>

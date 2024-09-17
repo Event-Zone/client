@@ -27,8 +27,16 @@ import Locations from "../shared/Locations";
 import Ads from "./Ads";
 import Progress from "../shared/Progress";
 import { useTranslations } from "next-intl";
+import { selectlocation, setlocation } from "@/store/features/locationSlice";
 
 function Search({ initEvents = [] }: { initEvents: any[] | null }) {
+  const dispatch = useDispatch();
+  const locationHeader = useSelector(selectlocation);
+  const [tmpLocation, setTmpLocation] = useState<string | null>(null);
+  useEffect(() => {
+    if (locationHeader) setTmpLocation(locationHeader);
+    dispatch(setlocation(null));
+  }, [locationHeader]);
   const {
     data: CategoriesList,
     isLoading: CategoriesLoading,
@@ -37,7 +45,6 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   const allEvents = useSelector(selectInitialEvents);
   const seachedEvents = useSelector(selectSearchedEvents);
 
-  const dispatch = useDispatch();
   const [isTypeSelectorVisible, setTypeSelectorVisible] = useState(false);
   const [isCategorieSelectorVisible, setCategorieSelectorVisible] =
     useState(false);
@@ -238,9 +245,15 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   return (
     <div className="relative p-1 md:px-20 ">
       <div className="max-w-full h-fit">
-        <div className="flex flex-wrap justify-between w-full">
+        {tmpLocation && (
+          <p className="poppins-semibold text-[24px] my-4 text-titles">
+            {t("header")}
+            <span className="text-mainBlue">{tmpLocation}</span>
+          </p>
+        )}
+        <div className="flex flex-wrap justify-around w-[88%]">
           <button
-            className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
+            className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-md mb-2"
             onClick={() => {
               setIsLocationSelectorVisible(false);
               setShowDialog(false);
@@ -255,7 +268,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             ></select>
           </button>
           {isTypeSelectorVisible && (
-            <div className="bg-gray-50 p-4 rounded-md shadow-md z-30 absolute">
+            <div className="bg-gray-50 p-4 rounded-md shadow-md z-30 absolute left-4">
               <p className="poppins-semibold text-gray-700 mb-2">{t("type")}</p>
               <div className="flex flex-col space-y-2">
                 {types?.map((Type: any) => (
@@ -297,7 +310,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
           {/* Trigger for the date picker dialog */}
           <div
             onClick={toggleDialog}
-            className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
+            className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-md mb-2"
           >
             {" "}
             {t("date")}
@@ -314,7 +327,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
               setCategorieSelectorVisible(false);
               setTypeSelectorVisible(false);
             }}
-            className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
+            className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-md mb-2"
           >
             {t("place")}{" "}
             <select
@@ -324,7 +337,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
           </div>
           <div className="flex flex-wrap justify-between w-fit ">
             <button
-              className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-3xl mb-2"
+              className=" poppins-regular bg-gray-200 text-gray-500  px-4 py-2 rounded-md mb-2"
               onClick={() => {
                 setIsLocationSelectorVisible(false);
                 setShowDialog(false);
@@ -340,7 +353,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
               ></select>
             </button>
             {isCategorieSelectorVisible && (
-              <div className="p-4 rounded-md shadow-md z-30 absolute bg-gray-50 ">
+              <div className="p-4  rounded-md shadow-md z-30 absolute bg-gray-50 ">
                 <div className="flex flex-col space-y-2 h-[400px] overflow-scroll element-with-scrollbar ">
                   {CategoriesList?.map((category: any) => (
                     <label className="flex items-center space-x-2">

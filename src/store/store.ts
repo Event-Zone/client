@@ -3,6 +3,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { apiSlice } from './features/api/apiSlice';
 import userReducer from './features/userSlice';
 import eventsReducer from './features/eventSlice'
+import locationReducer from './features/locationSlice'
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
@@ -24,7 +25,8 @@ export const store = configureStore({
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer,
         auth: persistedReducer,
-        events: persistedEventsReducer
+        events: persistedEventsReducer,
+        location: locationReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

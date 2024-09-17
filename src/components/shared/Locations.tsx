@@ -84,7 +84,7 @@ function Locations({ setShowDialog }: { setShowDialog: Function }) {
   }, [searchedTerm, locations]);
 
   return (
-    <div className="z-30 bg-white absolute w-full max-w-lg mx-auto p-4">
+    <div className="z-30 shadow-md bg-gray-50 absolute w-full max-w-lg mx-auto p-4">
       <div className="flex flex-col md:flex-row md:justify-between ">
         <div className="w-fit">
           <p className="text-titles poppins-medium mb-2">

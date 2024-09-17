@@ -5,8 +5,16 @@ import React from "react";
 import { usePathname, useRouter } from "@/navigation";
 import { useParams } from "next/navigation";
 import { ChangeEvent, ReactNode, useTransition } from "react";
+import { useSelector } from "react-redux";
+import {
+  selectInitialEvents,
+  setSearchedEvents,
+} from "@/store/features/eventSlice";
+import { useDispatch } from "react-redux";
 
 function Footer() {
+  const initiaEvents = useSelector(selectInitialEvents);
+  const dispatch = useDispatch();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
@@ -44,8 +52,24 @@ function Footer() {
               {t("Collaborez Avec Eventzone")}
             </p>
             <ul>
-              <li className="mb-[2px]"> {t("Decouvrez Nos Evenements")}</li>
-              <li className="mb-[2px]"> {t("Ajoutez Votre Evenement")}</li>
+              <li
+                onClick={() => {
+                  dispatch(setSearchedEvents(initiaEvents));
+
+                  router.push("/search");
+                }}
+                className="mb-[2px]"
+              >
+                {" "}
+                {t("Decouvrez Nos Evenements")}
+              </li>
+              <li
+                onClick={() => router.push(`/tarification`)}
+                className="mb-[2px]"
+              >
+                {" "}
+                {t("Ajoutez Votre Evenement")}
+              </li>
             </ul>
           </div>
         </div>

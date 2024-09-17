@@ -65,8 +65,8 @@ function EventDetails({
   }, [secondFormData]);
   const t = useTranslations("Event");
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex flex-col w-full px-4    py-16">
+    <div className="flex flex-col w-full items-center ">
+      <div className="flex flex-col w-auto lg:w-[1050px] px-2  md:px-4 lg:px-0  py-16">
         <div className="relative flex items-center justify-center rounded-xl overflow-hidden h-[460px] w-full ">
           {secondFormData?.get("videoUrl") && videoId && currentBar === -1 ? (
             <div className="absolute w-full h-full z-20">

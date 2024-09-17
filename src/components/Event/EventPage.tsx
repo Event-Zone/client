@@ -110,8 +110,8 @@ function EventPage({ data }: { data: any }) {
   }, [data.eventImages, currentBar]);
   const t = useTranslations("Event");
   return (
-    <div className="flex flex-col w-full md:px-16">
-      <div className="flex flex-col w-full px-4 md:px-20 lg:px-44  py-16">
+    <div className="flex flex-col w-full items-center ">
+      <div className="flex flex-col w-auto lg:w-[1050px] px-2  md:px-4 lg:px-0  py-16">
         <div className="relative flex items-center justify-center rounded-xl overflow-hidden h-[460px] w-full ">
           {data?.videoUrl && videoId && currentBar === -1 ? (
             <div className="absolute w-full h-full z-20">
@@ -158,7 +158,7 @@ function EventPage({ data }: { data: any }) {
               {data.eventImages.map((_: any, index: number) => (
                 <div
                   key={index}
-                  className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
+                  className={`progress-bar md:mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
                   onClick={() => handleBarClick(index)}
                 >
                   {index === currentBar && (
@@ -199,7 +199,7 @@ function EventPage({ data }: { data: any }) {
             })}
           </p>
         </div>
-        <div className=" mt-4 poppins-semibold text-titles text-3xl">
+        <div className=" mt-4 poppins-semibold text-titles md:text-3xl">
           {data.eventAcronym ? (
             <h1>
               {data.eventAcronym} - {data.eventName}
