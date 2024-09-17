@@ -377,7 +377,7 @@ function EventForm({
         <p className="text-gray-600 poppins-regular">{t("DateDesc")} </p>
         <div className="flex flex-row w-full">
           <div className="flex flex-col flex-1 mr-2">
-            <div className="border-gray-300 border-[1.3px] p-2 mb-2">
+            <div className="border-gray-300 border-[1.3px] p-2 mb-[5px] md:h-[56px] rounded-[4px]">
               <label
                 htmlFor="startdate"
                 className="block text-sm poppins-medium poppins-semibold text-gray-700"
@@ -400,7 +400,7 @@ function EventForm({
                 />{" "}
               </div>
             </div>
-            <div className="border-gray-300 border-[1.3px] p-2">
+            <div className="border-gray-300 border-[1.3px] p-2 mb-[5px] md:h-[56px] rounded-[4px]">
               <label
                 htmlFor="enddate"
                 className="block text-sm poppins-medium poppins-semibold text-gray-700"

@@ -16,7 +16,6 @@ function EventDetails({
 }) {
   const [hovered, setHovered] = useState<number | null>(null);
   const handleMouseEnter = (index: number | null) => setHovered(index);
-
   const [showMobile, setShowMobile] = useState<boolean>(false);
 
   const user = useSelector(selectUser);
@@ -126,22 +125,26 @@ function EventDetails({
             </>
           </div>
         </div>
-        <div className="flex mt-3 w-full overflow-scroll element-with-scrollbar">
-          <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+        <div className="flex mt-3 element-with-scrollbar w-full overflow-x-auto whitespace-nowrap">
+          <p className="poppins-medium text-mainBlue bg-[#E9F1FC] rounded-lg px-4 py-2 mr-3">
             {firstFormData.type}
           </p>
-          {isArray(firstFormData?.Categorie) ? (
-            firstFormData?.Categorie?.map((categorie: any) => (
-              <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+          {Array.isArray(firstFormData?.Categorie) ? (
+            firstFormData?.Categorie.map((categorie: any) => (
+              <p
+                key={categorie}
+                className="poppins-medium text-mainBlue bg-[#E9F1FC] rounded-lg px-4 py-2 mr-3"
+              >
                 {categorie}
               </p>
             ))
           ) : (
-            <p className="poppins-medium text-mainBlue bg-[#E9F1FC]  rounded-lg px-4 py-2 mr-3">
+            <p className="poppins-medium text-mainBlue bg-[#E9F1FC] rounded-lg px-4 py-2 mr-3">
               {firstFormData?.Categorie}
             </p>
           )}
         </div>
+
         <div className=" ">
           <p className="poppins-medium text-gray-600 rounded-lg px-4 py-2">
             {new Date(firstFormData.startdate).toLocaleDateString("fr-FR", {
@@ -248,28 +251,51 @@ function EventDetails({
             </div>
           )}
         </div>
-        <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
-          <div className="flex items-center justify-between p-8">
-            <div className="flex flex-row">
-              <div className="text-gray-600">
-                <h3 className="poppins-medium">{t("Organisateur")}</h3>
+        {user && (
+          <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
+            <div className="flex items-center justify-between p-8">
+              <div className="flex flex-row">
+                <Image
+                  width={30}
+                  height={30}
+                  className="mr-4 h-[50px] w-[50px] rounded-full object-cover"
+                  src={
+                    user?.profilePicture
+                      ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${user.profilePicture}`
+                      : "https://via.placeholder.com/150"
+                  }
+                  alt="Profile"
+                />
+                <div className="text-gray-600">
+                  <h3 className="poppins-regular text-[12px]">
+                    {t("Organisateur")}
+                  </h3>
 
-                <p className="poppins-medium text-titles">
-                  {fetchedSubscription?.company}
+                  <div className="flex">
+                    <p className="poppins-semibold text-titles">
+                      {fetchedSubscription?.company}
+                    </p>{" "}
+                    {fetchedSubscription?.pack === "Business" ? (
+                      <div className="flex ">
+                        <img
+                          alt="icon"
+                          src="/icons/ph_seal-check-fill (1).png"
+                          className="max-w-[20px] max-h-[20px]"
+                        />
+                      </div>
+                    ) : null}
+                  </div>
+                </div>{" "}
+              </div>
+              <div className="flex justify-between items-center cursor-pointer bg-[#DAE6F4] rounded-md p-2">
+                <p className="text-mainBlue poppins-regular text-sm  flex  ">
+                  <img alt="calendaricon" src="/icons/calendar-edit.png" />
+                  {t("AutreEvents")}
                 </p>
-              </div>{" "}
-              {fetchedSubscription?.pack === "Business" ? (
-                <div className="flex ">
-                  <img
-                    alt="icon"
-                    src="/icons/ph_seal-check-fill (1).png"
-                    className="max-w-[20px] max-h-[20px]"
-                  />
-                </div>
-              ) : null}
+              </div>
             </div>
           </div>
-        </div>
+        )}
         <div className="mt-4 poppins-semibold text-titles">
           <h3 className="text-2xl">{t("DateTitle")}</h3>
           <div className="flex items-center mt-3">
