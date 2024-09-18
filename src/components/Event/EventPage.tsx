@@ -110,9 +110,9 @@ function EventPage({ data }: { data: any }) {
   }, [data.eventImages, currentBar]);
   const t = useTranslations("Event");
   return (
-    <div className="flex flex-col w-full items-center ">
-      <div className="flex flex-col w-auto lg:w-[1050px] px-2  md:px-4 lg:px-0  py-16">
-        <div className="relative flex items-center justify-center rounded-xl overflow-hidden h-[460px] w-full ">
+    <div className="flex flex-col w-full items-center">
+      <div className="flex flex-col w-full md:w-[90%] lg:w-[1050px] px-2 md:px-4 lg:px-0 py-16">
+        <div className="relative flex items-center justify-center rounded-xl overflow-hidden h-[179px] md:h-[460px] w-full ">
           {data?.videoUrl && videoId && currentBar === -1 ? (
             <div className="absolute w-full h-full z-20">
               <iframe
@@ -189,7 +189,7 @@ function EventPage({ data }: { data: any }) {
           )}
         </div>
 
-        <div className=" ">
+        <div className=" md:block hidden">
           <p className="poppins-medium text-gray-600 rounded-lg px-4 py-2">
             {new Date(data.startdate).toLocaleDateString("fr-FR", {
               day: "2-digit",
@@ -212,10 +212,47 @@ function EventPage({ data }: { data: any }) {
             <h1>{data.eventName}</h1>
           )}
         </div>
-
-        <div className="flex justify-start mt-4 flex-wrap">
+        <div className="relative z-10 my-6 ">
+          <p className="flex flex-row text-titles poppins-medium items-center">
+            <img
+              alt="location-icon"
+              src="/icons/LocationGray.png"
+              className="w-[20px] h-[20px] mr-2"
+            />
+            {data?.location ? (
+              data?.location.address.commercial ? (
+                <>
+                  {data?.location.address.commercial}{" "}
+                  {data?.location.address.state}
+                </>
+              ) : (
+                data?.location.address.state
+              )
+            ) : (
+              <>Online</>
+            )}
+          </p>
+          <p className="flex flex-row text-titles poppins-medium items-center">
+            <img
+              alt="calendar-icon"
+              src="/icons/CalendarGray.png"
+              className="w-[18px] h-[18px] mr-2"
+            />
+            {new Date(data?.startdate).toLocaleDateString("fr-FR", {
+              day: "2-digit",
+              month: "short",
+            })}{" "}
+            -{" "}
+            {new Date(data?.enddate).toLocaleDateString("fr-FR", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            })}
+          </p>
+        </div>
+        <div className="flex md:justify-start  justify-center mt-4 flex-wrap">
           {data?.linkInscription ? (
-            <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
+            <div className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular p-3  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
               <img
                 alt="icon"
                 src="/icons/Edit Square.png"
@@ -234,7 +271,7 @@ function EventPage({ data }: { data: any }) {
             <div
               onMouseEnter={() => handleMouseEnter(0)}
               onMouseLeave={() => handleMouseEnter(null)}
-              className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center "
+              className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center "
             >
               <img
                 alt="icon"
@@ -255,7 +292,7 @@ function EventPage({ data }: { data: any }) {
           {data?.mobile && (
             <div
               onClick={() => setShowMobile((prev) => !prev)}
-              className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
+              className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
               onMouseEnter={() => handleMouseEnter(1)}
               onMouseLeave={() => handleMouseEnter(null)}
             >
@@ -276,7 +313,7 @@ function EventPage({ data }: { data: any }) {
             <div
               onMouseEnter={() => handleMouseEnter(2)}
               onMouseLeave={() => handleMouseEnter(null)}
-              className="mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center "
+              className="md:w-auto w-[128px] mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center "
             >
               <img
                 alt="icon"
@@ -297,12 +334,12 @@ function EventPage({ data }: { data: any }) {
         </div>
         {fetchedOrganizer && (
           <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
-            <div className="flex items-center justify-between p-8">
-              <div className="flex flex-row">
+            <div className="flex md:flex-row flex-col items-center justify-between p-8">
+              <div className="mb-2 flex md:flex-row flex-col items-center">
                 <Image
                   width={30}
                   height={30}
-                  className="mr-4 h-[50px] w-[50px] rounded-full object-cover"
+                  className="mr-4 h-[50px] w-[50px] rounded-full object-cover mb-2"
                   src={
                     fetchedOrganizer?.profilePicture
                       ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${fetchedOrganizer.profilePicture}`
@@ -453,7 +490,7 @@ function EventPage({ data }: { data: any }) {
           <h3 className="mt-4 poppins-semibold text-titles text-2xl">
             {t("About")}
           </h3>
-          <div className="flex mb-4 mt-3 ">
+          <div className="flex flex-wrap mb-4 mt-3 ">
             {data.lieu ? (
               <div className="flex mr-4">
                 <img
@@ -492,9 +529,9 @@ function EventPage({ data }: { data: any }) {
         </div>
         <div className="mt-4 poppins-semibold text-titles mb-t">
           <h3 className="text-2xl mb-3">Sponsors</h3>
-          <div className="flex w-full flex-wrap element-with-scrollbar ">
+          <div className="flex w-full flex-wrap element-with-scrollbar items-center justify-center ">
             {data?.sponsorImages.map((img: any, index: number) => (
-              <div className=" flex items-center justify-center md:w-[128px]  md:h-[128px] w-[100px] h-[100px] rounded-lg border-[1.3px] mr-3 border-gray-300 p-[12px]">
+              <div className="mb-2 flex items-center justify-center md:w-[128px]  md:h-[128px] w-[100px] h-[100px] rounded-lg border-[1.3px] mr-3 border-gray-300 p-[12px]">
                 <img
                   className="max-h-[90px] "
                   key={index}
@@ -509,13 +546,13 @@ function EventPage({ data }: { data: any }) {
             ))}
           </div>
         </div>
-        <div className="mt-4 poppins-meduim w-full overflow-scroll element-with-scrollbar">
+        <div className="mt-4 poppins-meduim w-full  md:overflow-scroll element-with-scrollbar">
           <h3 className="poppins-semibold text-2xl text-titles mb-3">Tags</h3>
-          <div className="flex">
+          <div className="flex flex-wrap">
             {data?.tags?.map((tag: string, index: number) => (
               <span
                 key={index}
-                className="tag mr-4 poppins-meduim text-titles rounded-lg px-3 bg-gray-200"
+                className="mb-3 tag mr-4 poppins-meduim text-titles rounded-lg px-3 bg-gray-200"
               >
                 {tag}
               </span>
