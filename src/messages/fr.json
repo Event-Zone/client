@@ -40,6 +40,7 @@
         "forgotpassword":"mot de passe oublier"
     },
     "Event":{
+      "plusEvent":"Plus d'événements de cet organisateur",
       "avaliable":"non disponible en pack starter ",
         "Info":"Informations principales",
         "Apercu":"Aperçu de l'événement",

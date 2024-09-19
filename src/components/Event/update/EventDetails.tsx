@@ -78,6 +78,21 @@ function EventDetails({
       }
     }
   }, [secondFormData.get("videoUrl")]);
+  useEffect(() => {
+    if (!secondFormData.getAll("eventImages")?.length) return; // Check if images exist
+
+    const interval = setInterval(() => {
+      if (currentBar >= 0) {
+        setCurrentImage((prev) =>
+          prev === secondFormData.getAll("eventImages").length - 1
+            ? 0
+            : prev + 1
+        );
+      }
+    }, 7000);
+
+    return () => clearInterval(interval);
+  }, [secondFormData.getAll("eventImages"), currentBar]);
   return (
     <div className="flex flex-col w-full items-center ">
       <div className="flex flex-col w-full items-center">
@@ -112,7 +127,7 @@ function EventDetails({
               />
             )}
 
-            <div className="absolute bottom-3 flex flex-row z-30 justify-center items-center w-full p-4">
+            {/* <div className="absolute bottom-3 flex flex-row z-30 justify-center items-center w-full p-4">
               <>
                 {secondFormData.get("videoUrl") && videoId && (
                   <>
@@ -139,7 +154,54 @@ function EventDetails({
                     </div>
                   ))}
               </>
-            </div>
+            </div> */}
+          </div>
+          <div className="  flex flex-row z-30 justify-center items-center w-full p-4">
+            <>
+              <div className=" flex items-center justify-center h-[50px]">
+                <div className=" opacity-100 flex z-30  transform rotate-[-90deg]">
+                  <div className=" flex flex-col z-30 justify-center items-end  w-full p-4">
+                    {secondFormData.getAll("videoUrl") && videoId && (
+                      <>
+                        <div
+                          key={0}
+                          className={`progress-bar w-[10px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
+                          onClick={() => handleBarClick(-1)}
+                        >
+                          <div className="fill-bar-horizontal w-full h-full rounded-md bg-gray-700"></div>
+                        </div>
+                      </>
+                    )}
+                    {secondFormData
+                      .getAll("eventImages")
+                      .map((_: any, index: number) => (
+                        <div
+                          key={index}
+                          className={`progress-bar w-[10px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
+                          onClick={() => handleBarClick(index)}
+                        >
+                          {index <= currentImage && (
+                            <div className="fill-bar-horizontal w-full h-full rounded-md bg-gray-700"></div>
+                          )}
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+              {/* {secondFormData
+                .getAll("eventImages")
+                .map((_: any, index: number) => (
+                  <div
+                    key={index}
+                    className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
+                    onClick={() => handleBarClick(index)}
+                  >
+                    {index === currentBar && (
+                      <div className=" w-full h-full rounded-md bg-gray-300  "></div>
+                    )}
+                  </div>
+                ))}{" "} */}
+            </>
           </div>
           <div className="flex mt-3 element-with-scrollbar w-full overflow-x-auto whitespace-nowrap">
             <p className="poppins-medium text-mainBlue bg-[#E9F1FC] rounded-lg px-4 py-2 mr-3">

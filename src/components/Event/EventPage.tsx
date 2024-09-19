@@ -10,6 +10,7 @@ import { Link, useRouter } from "@/navigation";
 import { isArray } from "util";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import EventCard from "../Search/EventCard";
 
 function EventPage({ data }: { data: any }) {
   const [showMobile, setShowMobile] = useState<boolean>(false);
@@ -141,32 +142,33 @@ function EventPage({ data }: { data: any }) {
               // placeholder="blur" // Optionally use a low-quality placeholder
             />
           )}
-
-          <div className="absolute bottom-3 flex flex-row z-30 justify-center items-center w-full p-4">
-            <>
+        </div>
+        <div className=" flex items-center justify-center h-[50px]">
+          <div className=" opacity-100 flex z-30  transform rotate-[-90deg]">
+            <div className=" flex flex-col z-30 justify-center items-end  w-full p-4">
               {data?.videoUrl && videoId && (
                 <>
                   <div
                     key={0}
-                    className={`progress-bar mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer ${
-                      currentBar === -1 && "bg-white"
-                    }`}
+                    className={`progress-bar w-[10px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
                     onClick={() => handleBarClick(-1)}
-                  ></div>
+                  >
+                    <div className="fill-bar-horizontal w-full h-full rounded-md bg-gray-700"></div>
+                  </div>
                 </>
               )}
               {data.eventImages.map((_: any, index: number) => (
                 <div
                   key={index}
-                  className={`progress-bar md:mr-4 flex-1 h-[10px] mb-2 bg-gray-700 rounded-md cursor-pointer`}
+                  className={`progress-bar w-[10px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
                   onClick={() => handleBarClick(index)}
                 >
-                  {index === currentBar && (
-                    <div className=" w-full h-full rounded-md bg-gray-300  "></div>
+                  {index <= currentBar && (
+                    <div className="fill-bar-horizontal w-full h-full rounded-md bg-gray-700"></div>
                   )}
                 </div>
               ))}
-            </>
+            </div>
           </div>
         </div>
         <div className="flex mt-3 element-with-scrollbar w-full overflow-x-auto whitespace-nowrap">
@@ -557,6 +559,14 @@ function EventPage({ data }: { data: any }) {
                 {tag}
               </span>
             ))}
+          </div>
+        </div>
+        <div className="text-titles my-2 ">
+          <h3 className="poppins-semibold text-xl my-2">{t("plusEvent")}</h3>
+          <div>
+            {events?.map((event: any, index: number) => {
+              if (index <= 1) return <EventCard event={event} />;
+            })}
           </div>
         </div>
       </div>

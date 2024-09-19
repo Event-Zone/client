@@ -42,6 +42,8 @@
         "forgotpassword": "Forgot Password"
     },
    "Event": {
+          "plusEvent":"More events from this organizer",
+
     "avaliable":"Not avaliable in starter pack",
         "Info": "Main Information",
         "Apercu": "Event Overview",
