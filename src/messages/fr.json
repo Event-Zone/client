@@ -193,14 +193,15 @@
   "Contacter le service commercial":"Contacter le service commercial",
          
         "Starter0": "Nombre d'événements : 1", 
-         "Starter1": "Support Prioritaire", 
-         "Starter2": "Badge d'organisateur premium", 
-         "Starter3": "Liste des Sponsors", 
-         "Starter4": "Plusieurs photos et vidéos", 
-         "Starter5": "Promotion sur les réseaux sociaux", 
-         "Starter6": "Lien d'inscription", 
-         "Starter7": "Site web et localisation", 
-         "Starter8": "Pages vitrine personnalisée pour vous", 
+        "Starter1": "Pages vitrine personnalisée pour vous", 
+         "Starter2": "Site web et localisation", 
+         "Starter3": "Lien d'inscription", 
+         "Starter4": "Promotion sur les réseaux sociaux", 
+         "Starter5": "Plusieurs photos et vidéos", 
+         "Starter6": "Liste des Sponsors", 
+         "Starter7": "Badge d'organisateur premium", 
+        "Starter8": "Support Prioritaire", 
+
 
 
          "Business0": "Nombre d'événements illimités", 
@@ -217,7 +218,7 @@
     
          "Student0": "Nombre d'événements: 5", 
          "Student1": "Pages vitrine personnalisée pour vous", 
-         "Student2": "Mobile, Email, site web et localisation", 
+         "Student2": "Site web et localisation", 
          "Student3": "Lien d'inscription", 
          "Student4": "Promotion sur les réseaux sociaux", 
          "Student5": "Plusieurs photos et vidéos", 
@@ -269,7 +270,31 @@
 "localswitcher":{
   "label":"changer Langue",
   "locale":"{locale , select , fr {'/images/fr.png'} en {English} other {unknown}}"
-}
+},
+"Terms": {
+    "terms_conditions_title": "Conditions générales d'utilisation de la plateforme Eventzone",
+    "introduction_title": "Introduction",
+    "introduction_content": "En accédant ou en utilisant la plateforme Eventzone, les utilisateurs acceptent d'être liés par ces conditions générales. Eventzone fournit des services professionnels de promotion d'événements, y compris la création de pages d'événements, la publicité et la prestation de services supplémentaires aux organisateurs d'événements.",
+    "user_accounts_title": "Comptes utilisateurs",
+    "user_accounts_content": "Les organisateurs sont tenus de s'inscrire pour utiliser la plateforme. Toutes les informations de compte doivent être exactes, complètes et à jour. Seuls les organisateurs disposant d'un enregistrement commercial valide peuvent publier des événements.",
+    "services_offered_title": "Services proposés",
+    "services_offered_content": "Eventzone permet aux organisateurs d'événements de créer et promouvoir leurs événements sur la plateforme. Les services supplémentaires incluent la publicité, la promotion sur les réseaux sociaux, la couverture médiatique et l'assistance à la planification d'événements.",
+    "acceptable_use_title": "Utilisation acceptable",
+    "acceptable_use_content": "Il est interdit aux utilisateurs de publier des contenus qui enfreignent les lois locales ou internationales. Les événements publiés doivent être professionnels et conformes aux directives d'Eventzone. Les événements tels que festivals, spectacles ou sessions de formation de plus d'une semaine avec un seul coach ne sont pas autorisés.",
+    "payments_billing_title": "Paiements et facturation",
+    "payments_billing_content": "Les organisateurs peuvent accéder à différents niveaux de services, y compris un abonnement Business Pro. Le paiement doit être effectué dans les 20 jours suivant la signature du contrat. Le non-respect de cette condition peut entraîner la suspension des services. Eventzone propose des factures pro forma pour chaque contrat.",
+    "content_ownership_title": "Propriété du contenu",
+    "content_ownership_content": "Les organisateurs d'événements conservent la propriété du contenu qu'ils publient mais accordent à Eventzone le droit de l'afficher, de le promouvoir et de faire la publicité de l'événement dans le cadre de ses services. Eventzone n'est pas responsable des inexactitudes du contenu fournies par les organisateurs.",
+    "termination_account_title": "Résiliation de compte",
+    "termination_account_content": "Eventzone se réserve le droit de résilier ou de suspendre un compte si les utilisateurs enfreignent ces conditions. L'utilisation abusive de la plateforme, y compris toute activité frauduleuse ou fausse information, peut entraîner des conséquences juridiques.",
+    "liability_disclaimer_title": "Clause de non-responsabilité",
+    "liability_disclaimer_content": "Eventzone ne pourra être tenue responsable des dommages ou pertes résultant de l'utilisation ou de l'incapacité d'utiliser la plateforme. Bien qu'Eventzone s'efforce de maintenir l'exactitude et la qualité de ses services, elle ne garantit pas des résultats spécifiques en rapport avec la promotion des événements.",
+    "amendments_terms_title": "Modifications des conditions",
+    "amendments_terms_content": "Eventzone se réserve le droit de mettre à jour ou de modifier ces conditions à tout moment. Les modifications seront communiquées par e-mail ou notification sur la plateforme. L'utilisation continue de la plateforme après les mises à jour vaut acceptation des nouvelles conditions.",
+    "governing_law_title": "Loi applicable",
+    "governing_law_content": "Ces conditions sont régies par la loi algérienne. Tout litige découlant de l'utilisation de la plateforme sera résolu devant les tribunaux locaux.",
+    "close_button_text": "Fermer"
+  }
 
 
 }

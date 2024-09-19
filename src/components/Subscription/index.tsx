@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslations } from "next-intl";
 import { setSubscriptionData } from "@/store/features/subscriptionSlice";
+import TermsConditions from "./TermsConditions"; // Import the TermsConditions component
 
 function Subscription({ pack }: { pack: string }) {
   const router = useRouter();
@@ -27,6 +28,8 @@ function Subscription({ pack }: { pack: string }) {
     termsAccepted: false,
     pack: pack,
   });
+
+  const [showTerms, setShowTerms] = useState(false); // State to toggle the terms dialog
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -50,17 +53,18 @@ function Subscription({ pack }: { pack: string }) {
     try {
       console.log(formData);
       await addSubscription(formData).unwrap();
-      // Handle successful subscription
     } catch (error) {
       // Handle error
     }
   };
+
   const {
     data: fetchedSubscription,
     error,
     isLoading,
     refetch,
   } = useGetSubscriptionQuery(user.subscription, { skip: !user?.subscription });
+
   useEffect(() => {
     if (fetchedSubscription) {
       console.log("fetchedSubscriptionDESS", fetchedSubscription);
@@ -69,30 +73,25 @@ function Subscription({ pack }: { pack: string }) {
       console.error("error fetching subscription", error);
     }
   }, [fetchedSubscription, error]);
+
   useEffect(() => {
     if (addSubscriptionResult.status === "fulfilled") {
       console.log("Subscription successful");
       refetchUser().then((result) => {
         if (result.data) {
-          console.log("result.data", result.data);
           dispatch(updateUserData(result.data));
         }
       });
       if (addSubscriptionResult?.data?.pack === "Business")
         router.push("/events/validation");
       else router.replace("/");
-      // Reset form data and display success message
-    } else if (addSubscriptionResult.status === "rejected") {
-      console.log("Subscription failed");
-      // Display error message
-    } else if (addSubscriptionResult.status === "pending") {
-      console.log("Subscription is loading");
-      // Show loading spinner or progress bar
     }
   }, [addSubscriptionResult.status, refetchUser, dispatch, router]);
+
   const t = useTranslations("subscriptions");
+
   return (
-    <div className="flex-grow md:p-8 bg-white rounded-lg shadow-md justify-center items-center">
+    <div className="flex-grow md:p-8 bg-white rounded-lg shadow-md justify-center items-center overflow-hidden">
       <div className="border-[1.4px] border-gray-400 rounded-lg p-12 md:mx-32 md:my-16">
         <div className="flex md:flex-row flex-col justify-between items-center">
           <h3 className="poppins-regular text-[18px]">Inscription</h3>
@@ -196,7 +195,10 @@ function Subscription({ pack }: { pack: string }) {
             />
             <label htmlFor="terms" className="text-gray-500 poppins-regular">
               {t("accept")}
-              <span className="text-mainBlue cursor-pointer ml-1">
+              <span
+                onClick={() => setShowTerms(true)} // Show the terms dialog on click
+                className="text-mainBlue cursor-pointer ml-1 underline"
+              >
                 {t("acceptTerms")}
               </span>
             </label>
@@ -211,6 +213,9 @@ function Subscription({ pack }: { pack: string }) {
           </div>
         </form>
       </div>
+
+      {/* Terms and Conditions Dialog */}
+      {showTerms && <TermsConditions setShow={setShowTerms} />}
     </div>
   );
 }

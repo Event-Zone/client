@@ -10,7 +10,7 @@ const cardData = [
       { text: "Nombre d'événements : 1", checked: true },
       { text: "Pages vitrine personnalisée pour vous", checked: true },
       { text: "Site web et localisation", checked: true },
-      { text: "Lien d'inscription", checked: true },
+      { text: "Lien d'inscription", checked: false },
       { text: "Promotion sur les réseaux sociaux", checked: false },
       { text: "Plusieurs photos et vidéos", checked: false },
       { text: "Liste des Sponsors", checked: false },

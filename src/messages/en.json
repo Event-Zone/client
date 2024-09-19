@@ -192,18 +192,19 @@
     "Contacter le service commercial": "Contact Sales",
     
     "Starter0": "Number of events: 1", 
-    "Starter1": "Priority Support", 
-    "Starter2": "Premium Organizer Badge", 
-    "Starter3": "Sponsors List", 
-    "Starter4": "Multiple photos and videos", 
-    "Starter5": "Social Media Promotion", 
-    "Starter6": "Registration Link", 
-    "Starter7": "Website and Location", 
-    "Starter8": "Custom showcase pages for you", 
+    "Starter1": "Custom showcase pages for you", 
+    "Starter2": "Website and Location", 
+    "Starter3": "Registration Link", 
+    "Starter4": "Social Media Promotion", 
+    "Starter5": "Multiple photos and videos", 
+    "Starter6": "Sponsors List", 
+    "Starter7": "Premium Organizer Badge", 
+    "Starter8": "Priority Support", 
+    
 
     "Business0": "Unlimited number of events", 
     "Business1": "Custom showcase pages for you", 
-    "Business2": "Mobile, Email, website, and location", 
+    "Business2": "Website, and location", 
     "Business3": "Registration Link", 
     "Business4": "Social Media Promotion", 
     "Business5": "Multiple photos and videos", 
@@ -258,6 +259,31 @@
   },"localswitcher":{
   "label":"changer Langue",
   "locale":"{locale , select , fr {French} en {English} other {unknown}}"
+}
+,
+"Terms":{
+  "terms_conditions_title": "Terms and Conditions of Using Eventzone Platform",
+  "introduction_title": "Introduction",
+  "introduction_content": "By accessing or using the Eventzone platform, users agree to be bound by these terms and conditions. Eventzone provides professional event promotion services, including creating event pages, advertising, and offering additional services to event organizers.",
+  "user_accounts_title": "User Accounts",
+  "user_accounts_content": "Organizers are required to register an account to use the platform. All account information must be accurate, complete, and current. Only organizers with a valid commercial registration can post events.",
+  "services_offered_title": "Services Offered",
+  "services_offered_content": "Eventzone allows event organizers to create and promote their events on the platform. Additional services include advertising, social media promotion, media coverage, and event planning assistance.",
+  "acceptable_use_title": "Acceptable Use",
+  "acceptable_use_content": "Users are prohibited from posting content that violates any local or international laws. Events published must be professional and aligned with the guidelines set by Eventzone. Events such as festivals, spectacles, or training sessions exceeding one week led by a single coach are not allowed.",
+  "payments_billing_title": "Payments and Billing",
+  "payments_billing_content": "Organizers can access various service tiers, including a Business Pro subscription. Payment must be made within 20 days of contract signature. Failure to comply may result in the suspension of services. Eventzone offers pro forma invoices for each contract.",
+  "content_ownership_title": "Content Ownership",
+  "content_ownership_content": "Event organizers retain ownership of the content they post but grant Eventzone the right to display, promote, and advertise the event as part of its services. Eventzone is not liable for content inaccuracies provided by the organizers.",
+  "termination_account_title": "Termination of Account",
+  "termination_account_content": "Eventzone reserves the right to terminate or suspend an account if users violate these terms. Misuse of the platform, including fraudulent activity or false information, may lead to legal consequences.",
+  "liability_disclaimer_title": "Liability Disclaimer",
+  "liability_disclaimer_content": "Eventzone will not be held responsible for any damages or losses resulting from the use or inability to use the platform. While Eventzone strives to maintain the accuracy and quality of its services, it does not guarantee specific outcomes related to event promotion.",
+  "amendments_terms_title": "Amendments to Terms",
+  "amendments_terms_content": "Eventzone reserves the right to update or modify these terms at any time. Changes will be communicated via email or platform notification. Continued use of the platform after updates constitutes acceptance of the new terms.",
+  "governing_law_title": "Governing Law",
+  "governing_law_content": "These terms are governed by Algerian law. Any disputes arising from the use of the platform shall be resolved through local courts.",
+  "close_button_text": "Close"
 }
 
 
