@@ -13,7 +13,7 @@ import { selectSubscription } from "@/store/features/subscriptionSlice";
 
 function Page({ params: { pack } }: { params: { pack: string } }) {
   const user = useSelector(selectUser);
-  const fetchedSubscription = useSelector(selectSubscription);
+  const fetchedSubscription: any = useSelector(selectSubscription);
 
   const router = useRouter();
 
@@ -34,7 +34,7 @@ function Page({ params: { pack } }: { params: { pack: string } }) {
             user?.eventsIds?.length >= 1)
         )
       )
-        return <CreateEvent fetchedSubscription={fetchedSubscription} />;
+        return <CreateEvent />;
       else return router.replace(`/profile/${user?._id}`);
     } else {
       return (

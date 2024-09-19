@@ -45,10 +45,7 @@ function Page({ params: { id } }: { params: { id: string } }) {
   if (isLoading || subsLoading) return <Progress />;
   return (
     <div>
-      <EditEvent
-        fetchedSubscription={fetchedSubscription}
-        event={fetchedEvent}
-      />
+      <EditEvent event={fetchedEvent} />
     </div>
   );
 }
