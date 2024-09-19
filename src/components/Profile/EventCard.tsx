@@ -34,7 +34,7 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
 
   const router = useRouter();
   return (
-    <div className="relative border mr-2 mb-2 border-purple-300 rounded-lg shadow-lg overflow-hidden max-w-[250px] max-h-[200px]">
+    <div className="relative border mr-2 mb-2 border-purple-300 rounded-lg shadow-lg  max-w-[250px] max-h-[200px]">
       {/* Status Badge */}
       <div
         className={`absolute top-2 left-2  text-white px-3 py-1 rounded-full ${
@@ -60,7 +60,58 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
       />
 
       {/* Content */}
-      <div className="p-4 ">
+      <div className="p-4 relative">
+        <div className="absolute top-2 right-2">
+          <button
+            className="text-gray-500 hover:text-gray-700"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 6.75a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM12 12a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM12 17.25a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+              />
+            </svg>
+          </button>
+
+          {/* Dropdown Menu */}
+          {isMenuOpen && (
+            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+              <button
+                onClick={() => {
+                  router.replace(`/events/update/${event._id}`);
+                }}
+                className="block w-full text-left px-4 py-2 text-blue-700 bg-blue-100 poppins-semibold rounded-t-lg hover:bg-blue-200"
+              >
+                Modifier
+              </button>
+              <button
+                onClick={() => {
+                  router.replace(`/events/details/${event._id}`);
+                }}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+              >
+                Voir
+              </button>
+
+              <button
+                onClick={handleDelete}
+                className="block w-full text-left px-4 py-2 text-red-700 hover:bg-red-100 rounded-b-lg"
+              >
+                Supprimer
+              </button>
+            </div>
+          )}
+        </div>
+
         <h3 className="text-md  poppins-semibold mb-2 text-ellipsis line-clamp-1">
           <>
             {
@@ -105,56 +156,6 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
       </div>
 
       {/* Ellipsis Menu */}
-      <div className="absolute top-2 right-2">
-        <button
-          className="text-gray-500 hover:text-gray-700"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 6.75a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM12 12a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM12 17.25a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
-            />
-          </svg>
-        </button>
-
-        {/* Dropdown Menu */}
-        {isMenuOpen && (
-          <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-            <button
-              onClick={() => {
-                router.replace(`/events/update/${event._id}`);
-              }}
-              className="block w-full text-left px-4 py-2 text-blue-700 bg-blue-100 poppins-semibold rounded-t-lg hover:bg-blue-200"
-            >
-              Modifier
-            </button>
-            <button
-              onClick={() => {
-                router.replace(`/events/details/${event._id}`);
-              }}
-              className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
-            >
-              Voir
-            </button>
-
-            <button
-              onClick={handleDelete}
-              className="block w-full text-left px-4 py-2 text-red-700 hover:bg-red-100 rounded-b-lg"
-            >
-              Supprimer
-            </button>
-          </div>
-        )}
-      </div>
     </div>
   );
 }

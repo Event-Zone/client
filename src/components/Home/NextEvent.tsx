@@ -28,7 +28,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
 
   const [selectedCategory, setCategory] = useState<string[] | null>(["Tout"]);
   const [searchedEvents, setSearchedEvents] = useState<any>([]);
-  const [visibleEventsCount, setVisibleEventsCount] = useState<number>(4);
+  const [visibleEventsCount, setVisibleEventsCount] = useState<number>(8);
   const [selectedType, setType] = useState<string[] | null>(null);
   const initialEvents = useSelector(selectInitialEvents);
 

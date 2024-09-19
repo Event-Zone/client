@@ -7,15 +7,15 @@ const cardData = [
     title: "Starter",
     price: "Gratuit",
     features: [
-      { text: "Support Prioritaire", checked: true },
-      { text: "Badge d'organisateur premium", checked: false },
-      { text: "Liste des Sponsors", checked: false },
-      { text: "Plusieurs photos et vidéos", checked: false },
-      { text: "Promotion sur les réseaux sociaux", checked: false },
-      { text: "Lien d'inscription", checked: true },
-      { text: "Site web et localisation", checked: true },
-      { text: "Pages vitrine personnalisée pour vous", checked: false },
       { text: "Nombre d'événements : 1", checked: true },
+      { text: "Pages vitrine personnalisée pour vous", checked: true },
+      { text: "Site web et localisation", checked: true },
+      { text: "Lien d'inscription", checked: true },
+      { text: "Promotion sur les réseaux sociaux", checked: false },
+      { text: "Plusieurs photos et vidéos", checked: false },
+      { text: "Liste des Sponsors", checked: false },
+      { text: "Badge d'organisateur premium", checked: false },
+      { text: "Support Prioritaire", checked: false },
     ],
     icon: "/icons/starterIcon.png",
     borderColor: "border-gray-400",
@@ -41,7 +41,7 @@ const cardData = [
     title: "Student",
     price: "Gratuit",
     features: [
-      { text: "Nombre d'événements: 5", checked: true },
+      { text: "Nombre d'événements: 10", checked: true },
       { text: "Pages vitrine personnalisée pour vous", checked: true },
       { text: "Mobile, Email, site web et localisation", checked: true },
       { text: "Lien d'inscription", checked: true },
@@ -64,7 +64,7 @@ function Changecards({ price }: { price: number }) {
   return (
     <div
       key={`${price}`}
-      className="flex flex-row mt-4 px-20 transition-transform duration-800 hover:transform animate-slide-up"
+      className="flex lg:flex-row flex-col mt-4 px-[10px] sm:px-20 transition-transform duration-800 hover:transform animate-slide-up"
     >
       {cardData.map((card, index) => (
         <div
@@ -72,12 +72,14 @@ function Changecards({ price }: { price: number }) {
             router.push(`/events/changeSubscription/${card.title}`)
           }
           key={index}
-          className={`mr-3 flex flex-col ${card.borderColor} border-[1.5px] rounded-[30px] p-4 transition-transform duration-800 hover:transform hover:-translate-y-3`}
+          className={`sm:mb-1 mb-4 mr-3 flex flex-col ${card.borderColor} border-[1.5px] rounded-[30px] p-4 transition-transform duration-800 hover:transform hover:-translate-y-3`}
         >
           <div className="flex mb-4">
             <img alt={`${card.title}-icon`} src={card.icon} />
           </div>
-          <h3 className="text-titles poppins-regular text-3xl">{card.title}</h3>
+          <h3 className="text-titles poppins-medium text-[24px]">
+            {card.title}
+          </h3>
           <p className="text-sm mb-3 text-gray-600 poppins-regular">
             {card.title === "Starter" ? (
               <>{t("planIdeal")}</>
@@ -87,12 +89,12 @@ function Changecards({ price }: { price: number }) {
               <>{t("planIdeal")}</>
             )}
           </p>
-          <h3 className="text-titles  text-3xl poppins-bold">
+          <h3 className="text-titles  text-[32px] poppins-semibold">
             {index === 1 ? price : t("free")}
             {index === 1 ? (
               price === 4000 ? (
                 <span className="ml-2 text-sm mb-3 text-gray-600 poppins-poppins">
-                  DA/{t("monthh")}
+                  DA/{t("month")}
                 </span>
               ) : (
                 <span className="ml-2 text-sm mb-3 text-gray-600 poppins-poppins">
@@ -105,7 +107,7 @@ function Changecards({ price }: { price: number }) {
           {card.features.map((feature, idx) => (
             <p
               key={idx}
-              className="text-sm mb-3 text-gray-600 poppins-regular flex"
+              className="text-sm mb-3 text-gray-600 poppins-poppins flex"
             >
               <img
                 alt={feature.checked ? "check" : "uncheck"}

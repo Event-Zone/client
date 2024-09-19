@@ -268,7 +268,7 @@ function Navbar() {
           </div>
           <div className="border-l border-[.1] h-[28px] border-gray-700 rounded-3xl"></div>
 
-          <div className="relative lg:w-[70px] z-10">
+          <div className="relative sm:w-1/4 z-10">
             <span className="absolute inset-y-0 left-0 flex items-center pl-2">
               <img
                 src="/icons/Location.svg"
@@ -282,7 +282,7 @@ function Navbar() {
                 setShowSearch(!showSearch);
               }}
               onChange={handleStateSearch}
-              className="p-2 pl-8 text-gray-500 focus:outline-none"
+              className="md:w-full  pl-8 text-gray-500 focus:outline-none"
               value={stateName !== "" ? stateName : inputLocation}
             />
             <div className="absolute  z-50 bg-white">

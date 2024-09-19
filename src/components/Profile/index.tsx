@@ -307,11 +307,11 @@ const Profile = ({ params: { userId } }: { params: { userId: string } }) => {
         {page === 0 ? (
           <>
             {" "}
-            <div className="mt-8 flex items-center space-x-6">
+            <div className="mt-8 flex md:flex-row flex-col justify-center items-center">
               <div className="relative">
-                <div>
+                <div className="">
                   <img
-                    className="md:w-32 md:h-32 h-[60px] w-[60px] rounded-full object-cover"
+                    className="md:w-[80px] md:h-[80px] h-[60px] w-[60px] rounded-full object-cover flex-shrink-0" // Ensure the image doesn't shrink
                     src={
                       userInputForm.profilePicture instanceof File
                         ? URL.createObjectURL(userInputForm.profilePicture)
@@ -327,19 +327,18 @@ const Profile = ({ params: { userId } }: { params: { userId: string } }) => {
                     onChange={handleFileChange}
                   />
                 </div>
+                <div className="  md:block hidden">
+                  {/* Ensure the Cord is hidden on smaller screens */}
+                  <h3 className="md:text-xl poppins-bold">{t("Cord")} </h3>
+                </div>
               </div>
-              <div className="flex-grow">
-                <h3 className="md:text-xl hidden md:block poppins-bold">
-                  {t("Cord")}{" "}
-                </h3>
-              </div>
+
               {fetchedSubscription && (
                 <div
                   onClick={() => router.replace("/changeSubscription")}
-                  className="flex justify-center items-center poppins-medium cursor-pointer"
+                  className=" flex w-full justify-center items-center poppins-medium cursor-pointer"
                 >
-                  {fetchedSubscription.pack}{" "}
-                  <div>
+                  <div className="flex flex-col items-center justify-center">
                     <img
                       className="min-w-[40px] min-h-[40px]"
                       alt={fetchedSubscription._id}
@@ -351,18 +350,18 @@ const Profile = ({ params: { userId } }: { params: { userId: string } }) => {
                           : "/icons/studentIcon.png"
                       }
                     />
-
+                    {fetchedSubscription.pack}
                     {userData && userData.eventsIds && (
                       <>
-                        {userData.eventsIds.length > 0 &&
+                        {userData.eventsIds.length === 0 &&
                           fetchedSubscription.pack === "Starter" && (
-                            <p className="poppins-regular text-gray-600">
+                            <p className="poppins-regular underline text-mainBlue">
                               {t("UpgradeToBusinessPack")}{" "}
                             </p>
                           )}
-                        {userData.eventsIds.length > 4 &&
+                        {userData.eventsIds.length > 9 &&
                           fetchedSubscription.pack === "Student" && (
-                            <p className="poppins-regular text-gray-600">
+                            <p className="poppins-regular underline text-mainBlue">
                               {t("UpgradeToBusinessPack")}{" "}
                             </p>
                           )}

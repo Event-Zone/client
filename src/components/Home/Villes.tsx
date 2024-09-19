@@ -49,13 +49,14 @@ function Villes() {
       <div className="flex flex-row  md:flex-wrap justify-between overflow-x-scroll element-with-scrollbar  md:overflow-hidden w-full">
         <div
           onClick={() => setSelectedLocations(["Alger"])}
-          className="flex-shrink-0 w-auto ville-container "
+          className="flex-shrink-0 w-[23%] ville-container "
         >
           <div className="flex flex-col items-center relative w-full">
+            <p className="absolute bottom-1 left-1 text-white">Alger</p>
             <img
               alt="event-img"
               className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px]  md:rounded-md rounded-full"
-              src="/images/Frame 920.png"
+              src="/images/Alger.png"
             />{" "}
             <p className="md:hidden block text-gray-500 text-[10px] text-center mt-2 ">
               Alger
@@ -71,13 +72,14 @@ function Villes() {
 
         <div
           onClick={() => setSelectedLocations(["Oran"])}
-          className="flex-shrink-0 w-auto ville-container"
+          className="flex-shrink-0 w-[23%] ville-container"
         >
           <div className="flex flex-col items-center relative w-full">
+            <p className="absolute bottom-1 left-1 text-white">Oran</p>
             <img
               alt="event-img"
               className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px]  md:rounded-md rounded-full"
-              src="/images/Frame 643.png"
+              src="/images/Oran.png"
             />{" "}
             <p className="md:hidden block text-gray-500 text-[10px] text-center mt-2 ">
               Oran
@@ -93,13 +95,14 @@ function Villes() {
 
         <div
           onClick={() => setSelectedLocations(["Annaba"])}
-          className="flex-shrink-0 w-auto ville-container"
+          className="flex-shrink-0 w-[23%] ville-container"
         >
           <div className="flex flex-col items-center relative w-full">
+            <p className="absolute bottom-1 left-1 text-white">Annaba</p>
             <img
               alt="event-img"
               className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px]  md:rounded-md rounded-full"
-              src="/images/Frame 921.png"
+              src="/images/Annaba.png"
             />{" "}
             <p className="md:hidden block text-gray-500 text-[10px] text-center mt-2 ">
               Annaba
@@ -115,13 +118,14 @@ function Villes() {
 
         <div
           onClick={() => setSelectedLocations(["Constantine"])}
-          className="flex-shrink-0 w-auto ville-container"
+          className="flex-shrink-0 w-[23%] ville-container"
         >
           <div className="flex flex-col items-center relative w-full">
+            <p className="absolute bottom-1 left-1 text-white">Constantine</p>
             <img
               alt="event-img"
               className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px]  md:rounded-md rounded-full"
-              src="/images/Frame 922.png"
+              src="/images/Constantine.png"
             />
             <p className="md:hidden block text-gray-500 text-[10px] text-center mt-2 ">
               Constantine

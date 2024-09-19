@@ -2,21 +2,20 @@
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import React, { useEffect } from "react";
-
 const cardData = [
   {
     title: "Starter",
     price: "Gratuit",
     features: [
-      { text: "Support Prioritaire", checked: true },
-      { text: "Badge d'organisateur premium", checked: false },
-      { text: "Liste des Sponsors", checked: false },
-      { text: "Plusieurs photos et vidéos", checked: false },
-      { text: "Promotion sur les réseaux sociaux", checked: false },
-      { text: "Lien d'inscription", checked: true },
-      { text: "Site web et localisation", checked: true },
-      { text: "Pages vitrine personnalisée pour vous", checked: false },
       { text: "Nombre d'événements : 1", checked: true },
+      { text: "Pages vitrine personnalisée pour vous", checked: true },
+      { text: "Site web et localisation", checked: true },
+      { text: "Lien d'inscription", checked: true },
+      { text: "Promotion sur les réseaux sociaux", checked: false },
+      { text: "Plusieurs photos et vidéos", checked: false },
+      { text: "Liste des Sponsors", checked: false },
+      { text: "Badge d'organisateur premium", checked: false },
+      { text: "Support Prioritaire", checked: false },
     ],
     icon: "/icons/starterIcon.png",
     borderColor: "border-gray-400",
@@ -35,14 +34,14 @@ const cardData = [
       { text: "Badge d'organisateur premium", checked: true },
       { text: "Support Prioritaire", checked: true },
     ],
-    icon: "/icons/F-Verified Check.png",
+    icon: "/icons/businessIcon.png",
     borderColor: "border-mainBlue",
   },
   {
     title: "Student",
     price: "Gratuit",
     features: [
-      { text: "Nombre d'événements: 5", checked: true },
+      { text: "Nombre d'événements: 10", checked: true },
       { text: "Pages vitrine personnalisée pour vous", checked: true },
       { text: "Mobile, Email, site web et localisation", checked: true },
       { text: "Lien d'inscription", checked: true },
@@ -50,7 +49,6 @@ const cardData = [
       { text: "Plusieurs photos et vidéos", checked: false },
       { text: "Liste des Sponsors", checked: false },
       { text: "Badge d'organisateur premium", checked: false },
-
       { text: "Support Prioritaire", checked: false },
     ],
     icon: "/icons/studentIcon.png",

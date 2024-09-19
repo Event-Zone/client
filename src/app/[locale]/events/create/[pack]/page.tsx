@@ -28,10 +28,13 @@ function Page({ params: { pack } }: { params: { pack: string } }) {
       console.log("Fetched subscription://///", fetchedSubscription);
     }
   }, [fetchedSubscription, error, isLoading]);
+  useEffect(() => {
+    if (fetchedSubscription?.pack !== pack) router.replace("/");
+  }, [fetchedSubscription, pack]);
 
   console.log(fetchedSubscription);
 
-  if (fetchedSubscription) {
+  if (fetchedSubscription && pack) {
     if (fetchedSubscription.validated) {
       if (
         !(

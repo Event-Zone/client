@@ -174,6 +174,30 @@ function EventForm({
     console.log("location", formData?.location);
   }, [formData?.location]);
 
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setCategorieSelectorVisible(false);
+      }
+    };
+
+    if (isCategorieSelectorVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isCategorieSelectorVisible]);
+
   return (
     <div>
       <h3 className="text-2xl poppins-semibold">{t("infoDeBase")}</h3>
@@ -243,7 +267,10 @@ function EventForm({
               {t("Category")}
             </div>
             {isCategorieSelectorVisible && (
-              <div className="bg-white p-4 rounded-md shadow-md z-30 absolute ">
+              <div
+                ref={dropdownRef} // Attach ref to the dropdown
+                className="bg-white p-4 rounded-md shadow-md z-30 absolute "
+              >
                 <div className="flex flex-col space-y-2 h-[400px] overflow-scroll">
                   {Categories?.map((category: any) => (
                     <label

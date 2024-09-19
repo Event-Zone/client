@@ -62,7 +62,9 @@ function Subscription({ pack }: { pack: string }) {
           dispatch(updateUserData(result.data));
         }
       });
-      router.push("/events/validation");
+      if (addSubscriptionResult?.data?.pack === "Business")
+        router.push("/events/validation");
+      else router.replace("/");
       // Reset form data and display success message
     } else if (addSubscriptionResult.status === "rejected") {
       console.log("Subscription failed");
