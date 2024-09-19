@@ -42,6 +42,7 @@
         "forgotpassword": "Forgot Password"
     },
    "Event": {
+    "avaliable":"Not avaliable in starter pack",
         "Info": "Main Information",
         "Apercu": "Event Overview",
         "Publier": "Publish",

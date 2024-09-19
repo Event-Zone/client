@@ -516,17 +516,20 @@ function EventForm({
         <div className="mb-2 border-gray-300 border-[1.3px] p-2 flex flex-row">
           <img alt="linksubscription" src={"/icons/EditSquare.png"} />
 
-          {fetchedSubscription.pack !== "Starter" && (
-            <input
-              type="text"
-              id="linkInscription"
-              name="linkInscription"
-              value={formData.linkInscription}
-              className="poppins-regular ml-2 py- shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-              placeholder="www.exemple.com/inscription"
-              onChange={handleInputChange}
-            />
-          )}
+          <input
+            type="text"
+            id="linkInscription"
+            name="linkInscription"
+            disabled={fetchedSubscription.pack === "Starter"}
+            value={formData.linkInscription}
+            className="poppins-regular ml-2 py- shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+            placeholder={
+              fetchedSubscription.pack === "Starter"
+                ? t("avaliable")
+                : "www.exemple.com/inscription"
+            }
+            onChange={handleInputChange}
+          />
         </div>
       </form>
       {(CategoriesLoading || TypesLoading) && <Progress />}

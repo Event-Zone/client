@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useTranslations } from "next-intl";
+import { useSelector } from "react-redux";
+import { selectSubscription } from "@/store/features/subscriptionSlice";
+import Progress from "../shared/Progress";
 
 function ImagesSection({
   setVideoUrl,
@@ -13,6 +16,19 @@ function ImagesSection({
   eventImages: File[];
   setEventImages: Function;
 }) {
+  const fetchedSubscription = useSelector(selectSubscription);
+  const [numberImages, setNumberImages] = useState(4);
+  useEffect(() => {
+    if (fetchedSubscription)
+      if (fetchedSubscription?.pack !== "Starter") {
+        console.log("4", fetchedSubscription?.pack);
+        setNumberImages(4);
+      } else {
+        console.log("1", fetchedSubscription?.pack);
+
+        setNumberImages(1);
+      }
+  }, [fetchedSubscription]);
   const [isEventImagesSubmitted, setIsEventImagesSubmitted] = useState(false);
   const [selectedImage, setSelectedImage] = useState<number>(0);
   //   const [eventImages, setEventImages] = useState<File[]>([]);
@@ -39,6 +55,10 @@ function ImagesSection({
     setEventImages(updatedImages);
   };
   const t = useTranslations("Event");
+  useEffect(() => {
+    console.log(numberImages, "IMAGES");
+  }, [numberImages]);
+  if (!fetchedSubscription) return <Progress />;
   return (
     <>
       <div className="  mb-3  ">
@@ -100,8 +120,9 @@ function ImagesSection({
                       file.type
                     )
                   );
-                  if (eventImages.length >= 4) {
-                    return alert("only 4 images are alowed");
+                  if (eventImages.length >= numberImages) {
+                    console.log("Images", numberImages);
+                    return alert(`only ${numberImages} images are alowed`);
                   }
                   setEventImages((prevImages: any) => [
                     ...prevImages,
@@ -179,8 +200,10 @@ function ImagesSection({
                                 "image/svg+xml",
                               ].includes(file.type)
                             );
-                            if (eventImages.length >= 4) {
-                              return alert("only 4 images are alowed");
+                            if (eventImages.length >= numberImages) {
+                              return alert(
+                                `only ${numberImages} images are alowed`
+                              );
                             }
                             setEventImages((prevImages: any) => [
                               ...prevImages,

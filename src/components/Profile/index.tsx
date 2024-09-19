@@ -351,20 +351,18 @@ const Profile = ({ params: { userId } }: { params: { userId: string } }) => {
                       }
                     />
                     {fetchedSubscription.pack}
-                    {userData && userData.eventsIds && (
+                    {userData && (
                       <>
-                        {userData.eventsIds.length === 0 &&
-                          fetchedSubscription.pack === "Starter" && (
-                            <p className="poppins-regular underline text-mainBlue">
-                              {t("UpgradeToBusinessPack")}{" "}
-                            </p>
-                          )}
-                        {userData.eventsIds.length > 9 &&
-                          fetchedSubscription.pack === "Student" && (
-                            <p className="poppins-regular underline text-mainBlue">
-                              {t("UpgradeToBusinessPack")}{" "}
-                            </p>
-                          )}
+                        {fetchedSubscription.pack === "Starter" && (
+                          <p className="poppins-regular underline text-mainBlue">
+                            {t("UpgradeToBusinessPack")}{" "}
+                          </p>
+                        )}
+                        {fetchedSubscription.pack === "Student" && (
+                          <p className="poppins-regular underline text-mainBlue">
+                            {t("UpgradeToBusinessPack")}{" "}
+                          </p>
+                        )}
                       </>
                     )}
                   </div>
