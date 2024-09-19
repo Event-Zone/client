@@ -11,6 +11,7 @@ import GoogleLoginButton from "../shared/GoogleLoginButton";
 import Spinner from "@/components/shared/Progress";
 import MessageDialog from "@/components/shared/Message";
 import { useTranslations } from "next-intl";
+import { resetsubscriptionData } from "@/store/features/subscriptionSlice";
 
 function RegisterForm() {
   const [showFormCode, setShowFormCode] = useState(false);
@@ -19,6 +20,7 @@ function RegisterForm() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(resetUserData());
+    dispatch(resetsubscriptionData());
   }, []);
 
   const handleA2fSubmit = async (e: React.FormEvent) => {

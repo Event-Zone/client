@@ -1,6 +1,7 @@
 "use client";
 import {
   useAddSubscriptionMutation,
+  useGetSubscriptionQuery,
   useGetUserQuery,
 } from "@/store/features/api/apiSlice";
 import { selectUser, updateUserData } from "@/store/features/userSlice";
@@ -8,6 +9,7 @@ import { useRouter } from "@/navigation";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslations } from "next-intl";
+import { setSubscriptionData } from "@/store/features/subscriptionSlice";
 
 function Subscription({ pack }: { pack: string }) {
   const router = useRouter();
@@ -53,12 +55,26 @@ function Subscription({ pack }: { pack: string }) {
       // Handle error
     }
   };
-
+  const {
+    data: fetchedSubscription,
+    error,
+    isLoading,
+    refetch,
+  } = useGetSubscriptionQuery(user.subscription, { skip: !user?.subscription });
+  useEffect(() => {
+    if (fetchedSubscription) {
+      console.log("fetchedSubscriptionDESS", fetchedSubscription);
+      dispatch(setSubscriptionData(fetchedSubscription));
+    } else if (error) {
+      console.error("error fetching subscription", error);
+    }
+  }, [fetchedSubscription, error]);
   useEffect(() => {
     if (addSubscriptionResult.status === "fulfilled") {
       console.log("Subscription successful");
       refetchUser().then((result) => {
         if (result.data) {
+          console.log("result.data", result.data);
           dispatch(updateUserData(result.data));
         }
       });

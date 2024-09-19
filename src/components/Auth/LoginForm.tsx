@@ -6,17 +6,23 @@ import {
   useLoginUserMutation,
   useForgotPasswordMutation,
   useUpdateForgotPasswordMutation,
+  useGetSubscriptionQuery,
 } from "@/store/features/api/apiSlice";
 import { resetUserData, setUserData } from "@/store/features/userSlice";
 import GoogleLoginButton from "../shared/GoogleLoginButton";
 import Spinner from "@/components/shared/Progress";
 import MessageDialog from "@/components/shared/Message";
 import { useTranslations } from "next-intl";
+import {
+  resetsubscriptionData,
+  setSubscriptionData,
+} from "@/store/features/subscriptionSlice";
 
 function LoginForm() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(resetUserData());
+    dispatch(resetsubscriptionData());
   }, []);
 
   const router = useRouter();
@@ -95,11 +101,28 @@ function LoginForm() {
     }
   };
 
+  const {
+    data: fetchedSubscriptionData,
+    isSuccess,
+    error,
+    refetch,
+  } = useGetSubscriptionQuery(loginUserResult?.data?.user?.subscription, {
+    skip: !loginUserResult?.isSuccess,
+  });
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(setSubscriptionData(fetchedSubscriptionData));
+      router.replace("/");
+    } else if (error) {
+      router.replace("/");
+
+      console.error("////Error fetching subscription");
+    }
+  }, [isSuccess, error]);
   useEffect(() => {
     if (loginUserResult.isSuccess) {
       console.log("User logged in successfully");
       dispatch(setUserData(loginUserResult.data));
-      router.replace("/");
     } else if (loginUserResult.isError) {
       console.error("Error logging in user:", loginUserResult.error);
       setMessage({ type: 0, content: "Error logging in user" });

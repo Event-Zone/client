@@ -14,12 +14,14 @@ import Progress from "../shared/Progress";
 import { useTranslations } from "next-intl";
 
 function EventForm({
+  fetchedSubscription,
   setIsNext,
   formData,
   setFormData,
 }: {
   setIsNext: Function;
   formData: any;
+  fetchedSubscription: any;
   setFormData: Function;
 }) {
   const {
@@ -498,7 +500,7 @@ function EventForm({
         </div>
 
         <div className="mb-2 border-gray-300 border-[1.3px] p-2 flex flex-row">
-          <img alt="mobile" src={"/icons/global.png"} />
+          <img alt="global" src={"/icons/global.png"} />
 
           <input
             type="text"
@@ -512,17 +514,19 @@ function EventForm({
         </div>
 
         <div className="mb-2 border-gray-300 border-[1.3px] p-2 flex flex-row">
-          <img alt="mobile" src={"/icons/EditSquare.png"} />
+          <img alt="linksubscription" src={"/icons/EditSquare.png"} />
 
-          <input
-            type="text"
-            id="linkInscription"
-            name="linkInscription"
-            value={formData.linkInscription}
-            className="poppins-regular ml-2 py- shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-            placeholder="www.exemple.com/inscription"
-            onChange={handleInputChange}
-          />
+          {fetchedSubscription.pack !== "Starter" && (
+            <input
+              type="text"
+              id="linkInscription"
+              name="linkInscription"
+              value={formData.linkInscription}
+              className="poppins-regular ml-2 py- shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              placeholder="www.exemple.com/inscription"
+              onChange={handleInputChange}
+            />
+          )}
         </div>
       </form>
       {(CategoriesLoading || TypesLoading) && <Progress />}

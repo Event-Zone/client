@@ -9,8 +9,10 @@ import { useSelector } from "react-redux";
 import { selectUser } from "@/store/features/userSlice";
 import Progress from "../shared/Progress";
 import { useTranslations } from "next-intl";
+import { selectSubscription } from "@/store/features/subscriptionSlice";
 
 function CreateEvent() {
+  const fetchedSubscription = useSelector(selectSubscription);
   const [isNext1, setIsNext1] = useState(false);
   const [isNext2, setIsNext2] = useState(false);
 
@@ -62,6 +64,7 @@ function CreateEvent() {
     }
   }, [addEventResult]);
   const t = useTranslations("Event");
+
   return (
     <div className="flex md:justify-center md:items-center flex-col px-1 md:px-20 lg:px-44 py-10 md:py-20">
       {page !== 3 ? (
@@ -114,12 +117,14 @@ function CreateEvent() {
       ) : null}
       {page === 0 ? (
         <EventForm
+          fetchedSubscription={fetchedSubscription}
           setIsNext={setIsNext1}
           formData={firstFormData}
           setFormData={setFirstFormData}
         />
       ) : page === 1 ? (
         <ImagesForm
+          fetchedSubscription={fetchedSubscription}
           setIsNext={setIsNext2}
           formData={secondFormData}
           setFormData={setSecondFormData}

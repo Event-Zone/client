@@ -10,7 +10,10 @@ import { useUpdateEventMutation } from "@/store/features/api/apiSlice";
 import { combineReducers } from "@reduxjs/toolkit";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
+import { selectSubscription } from "@/store/features/subscriptionSlice";
 function EditEvent({ event }: { event: any }) {
+  const fetchedSubscription = useSelector(selectSubscription);
+
   const [isNext1, setIsNext1] = useState(false);
   const [isNext2, setIsNext2] = useState(false);
 
@@ -172,12 +175,14 @@ function EditEvent({ event }: { event: any }) {
       ) : null}
       {page === 0 ? (
         <EventForm
+          fetchedSubscription={fetchedSubscription}
           setIsNext={setIsNext1}
           formData={firstFormData}
           setFormData={setFirstFormData}
         />
       ) : page === 1 ? (
         <ImagesForm
+          fetchedSubscription={fetchedSubscription}
           sponsorImagesData={sponsorImagesData}
           eventImagesData={eventImagesData}
           formValuesData={{ accessibilite, portee, public: publicData, lieu }}

@@ -11,7 +11,6 @@ import Progress from "../shared/Progress";
 
 function Home() {
   const [events, setEvents] = useState([]);
-  const [subscription, setSubscription] = useState(null);
   const user = useSelector(selectUser);
   const {
     data: fetchedEvents,

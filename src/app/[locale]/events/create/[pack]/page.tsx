@@ -9,27 +9,17 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Tarification from "@/components/Tarification";
 import Validation from "@/components/Subscription/Validation";
+import { selectSubscription } from "@/store/features/subscriptionSlice";
 
 function Page({ params: { pack } }: { params: { pack: string } }) {
   const user = useSelector(selectUser);
-  const {
-    data: fetchedSubscription,
-    error,
-    isLoading,
-    refetch,
-  } = useGetSubscriptionQuery(user.subscription, { skip: !user?.subscription });
+  const fetchedSubscription = useSelector(selectSubscription);
+
   const router = useRouter();
+
   useEffect(() => {
-    if (isLoading) {
-      console.log("Loading events...");
-    } else if (error) {
-      console.error("Error fetching events:", error);
-    } else if (fetchedSubscription) {
-      console.log("Fetched subscription://///", fetchedSubscription);
-    }
-  }, [fetchedSubscription, error, isLoading]);
-  useEffect(() => {
-    if (fetchedSubscription?.pack !== pack) router.replace("/");
+    if (fetchedSubscription && pack)
+      if (fetchedSubscription?.pack !== pack) router.replace("/");
   }, [fetchedSubscription, pack]);
 
   console.log(fetchedSubscription);
@@ -44,7 +34,7 @@ function Page({ params: { pack } }: { params: { pack: string } }) {
             user?.eventsIds?.length >= 1)
         )
       )
-        return <CreateEvent />;
+        return <CreateEvent fetchedSubscription={fetchedSubscription} />;
       else return router.replace(`/profile/${user?._id}`);
     } else {
       return (

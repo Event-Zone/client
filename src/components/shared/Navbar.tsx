@@ -19,6 +19,7 @@ import Progress from "./Progress";
 import { useTranslation } from "@/hooks/useTranslation";
 import LocalSwitcher from "../LocalSwitcher";
 import Ads from "../Search/Ads";
+import { selectSubscription } from "@/store/features/subscriptionSlice";
 function Navbar() {
   const [showSearchs, setShowSearchs] = useState<boolean>(false);
   const allInitEvents = useSelector(selectInitialEvents);
@@ -31,16 +32,14 @@ function Navbar() {
 
   const isAuth = useSelector(selectToken);
   const user = useSelector(selectUser);
-
   const router = useRouter();
   const pathname = usePathname();
   const isV1 = pathname === "/welcome" || pathname === "/tarification";
+  const fetchedSubscription = useSelector(selectSubscription);
 
-  const { data: fetchedSubscription } = useGetSubscriptionQuery(
-    user?.subscription,
-    { skip: !isAuth }
-  );
-
+  useEffect(() => {
+    console.log("fetchedSubscriptionNav", fetchedSubscription);
+  }, [fetchedSubscription, user]);
   const {
     data: searchedEvents,
     error: searchedEventsError,

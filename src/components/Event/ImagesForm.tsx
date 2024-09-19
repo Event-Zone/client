@@ -5,12 +5,14 @@ import SponsorsSection from "./SponsorsSection";
 import EventForm from "./EventForm";
 
 function ImagesForm({
+  fetchedSubscription,
   setIsNext,
   formData,
   setFormData,
 }: {
   setIsNext: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
+  fetchedSubscription: any;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
 }) {
   const [isFormValid, setIsFormValid] = useState(false);
@@ -113,16 +115,18 @@ function ImagesForm({
           setVideoUrl={setVideoUrl}
         />
       </div>
-      {/* Event Properties Section */}
+
       <PropretiesSection
         setFormValues={setFormValues}
         formValues={formValues}
       />
-      {/* Sponsor Upload Section */}
-      <SponsorsSection
-        sponsorImages={sponsorImages}
-        setSponsorImages={setSponsorImages}
-      />
+
+      {fetchedSubscription?.pack !== "Starter" && (
+        <SponsorsSection
+          sponsorImages={sponsorImages}
+          setSponsorImages={setSponsorImages}
+        />
+      )}
     </div>
   );
 }

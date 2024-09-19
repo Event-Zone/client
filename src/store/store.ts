@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { apiSlice } from './features/api/apiSlice';
 import userReducer from './features/userSlice';
+import subscriptionReducer from './features/subscriptionSlice';
 import eventsReducer from './features/eventSlice'
 import locationReducer from './features/locationSlice'
 import storage from 'redux-persist/lib/storage';
@@ -12,6 +13,11 @@ const userPersistConfig = {
     storage,
     whitelist: ["user", 'token'],
 };
+const subscriptionPersistConfig = {
+    key: "subscription",
+    storage,
+    whitelist: ["subscription"],
+};
 const eventsPersistConfig = {
     key: "events",
     storage,
@@ -19,6 +25,7 @@ const eventsPersistConfig = {
 };
 
 const persistedReducer = persistReducer(userPersistConfig, userReducer);
+const persistedSubscriptionReducer = persistReducer(subscriptionPersistConfig, subscriptionReducer);
 const persistedEventsReducer = persistReducer(eventsPersistConfig, eventsReducer);
 
 export const store = configureStore({
@@ -26,7 +33,8 @@ export const store = configureStore({
         [apiSlice.reducerPath]: apiSlice.reducer,
         auth: persistedReducer,
         events: persistedEventsReducer,
-        location: locationReducer
+        location: locationReducer,
+        subscription: persistedSubscriptionReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

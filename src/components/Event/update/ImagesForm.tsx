@@ -4,6 +4,7 @@ import PropretiesSection from "./PropretiesSection";
 import SponsorsSection from "./SponsorsSection";
 
 function ImagesForm({
+  fetchedSubscription,
   setIsNext,
   formData,
   setFormData,
@@ -13,6 +14,7 @@ function ImagesForm({
 }: {
   formValuesData: any;
   eventImagesData: any;
+  fetchedSubscription: any;
   sponsorImagesData: any;
   setIsNext: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
@@ -99,10 +101,12 @@ function ImagesForm({
         formValues={formValues}
       />
       {/* Sponsor Upload Section */}
-      <SponsorsSection
-        sponsorImages={sponsorImages}
-        setSponsorImages={setSponsorImages}
-      />
+      {fetchedSubscription?.pack !== "Starter" && (
+        <SponsorsSection
+          sponsorImages={sponsorImages}
+          setSponsorImages={setSponsorImages}
+        />
+      )}
     </div>
   );
 }
