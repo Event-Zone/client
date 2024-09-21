@@ -38,7 +38,7 @@ function Villes() {
   }, [eventByLocationIsLoading, eventByLocationIsError, eventsByLocation]);
 
   return (
-    <div className="w-full py-4">
+    <div className="w-full md:py-4">
       <h2 className="text-titles ml-1 mb-4 poppins-semibold md:text-[24px]">
         {t.rich("description", {
           span: (chunks) => <span className="text-mainBlue">{chunks}</span>,
@@ -52,7 +52,9 @@ function Villes() {
           className="flex-shrink-0 w-[23%]  ville-container "
         >
           <div className="flex flex-col items-center relative w-full">
-            <p className="absolute bottom-4 left-4 text-white">Alger</p>
+            <p className="md:absolute md:block hidden bottom-4 left-4 text-white">
+              Alger
+            </p>
             <img
               alt="event-img"
               className=" object-cover w-[76px] h-[76px] md:w-full md:h-[150px]  lg:h-[200px]   md:rounded-md rounded-full"
@@ -75,7 +77,9 @@ function Villes() {
           className="flex-shrink-0 w-[23%] ville-container"
         >
           <div className="flex flex-col items-center relative w-full">
-            <p className="absolute bottom-4 left-4 text-white">Oran</p>
+            <p className="md:absolute md:block hidden bottom-4 left-4 text-white">
+              Oran
+            </p>
             <img
               alt="event-img"
               className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px] lg:h-[200px]  md:rounded-md rounded-full"
@@ -98,7 +102,9 @@ function Villes() {
           className="flex-shrink-0 w-[23%] ville-container"
         >
           <div className="flex flex-col items-center relative w-full">
-            <p className="absolute bottom-4 left-4 text-white">Annaba</p>
+            <p className="md:absolute md:block hidden bottom-4 left-4 text-white">
+              Annaba
+            </p>
             <img
               alt="event-img"
               className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px] lg:h-[200px]  md:rounded-md rounded-full"
@@ -121,7 +127,9 @@ function Villes() {
           className="flex-shrink-0 w-[23%] ville-container"
         >
           <div className="flex flex-col items-center relative w-full">
-            <p className="absolute bottom-4 left-4 text-white">Constantine</p>
+            <p className="md:absolute md:block hidden bottom-4 left-4 text-white">
+              Constantine
+            </p>
             <img
               alt="event-img"
               className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px] lg:h-[200px]  md:rounded-md rounded-full"

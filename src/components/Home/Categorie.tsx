@@ -50,7 +50,7 @@ function Categorie() {
   const router = useRouter();
   const t = useTranslations("Categorie");
   return (
-    <div className="mb-8 mt-8 w-full mr-[50px]">
+    <div className="mb-8 md:mt-8 mt-0 w-full mr-[50px]">
       <div className="">
         <h2 className="text-titles ml-2 mb-4 poppins-semibold md:text-[24px] ">
           {t.rich("description", {
@@ -58,11 +58,11 @@ function Categorie() {
           })}
         </h2>
       </div>
-      <div className="flex flex-row justify-between items-center w-full element-with-scrollbar overflow-x-scroll">
+      <div className=" flex flex-row justify-between items-center w-full element-with-scrollbar overflow-x-scroll">
         {icons.map((icon, index) => (
           <div
             key={index}
-            className="flex flex-col items-center px-4"
+            className="flex flex-col items-center px-4 min-w-fit"
             onClick={() => router.replace(icon.route)}
           >
             <img

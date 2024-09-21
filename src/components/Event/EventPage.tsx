@@ -145,7 +145,7 @@ function EventPage({ data }: { data: any }) {
                 <>
                   <div
                     key={0}
-                    className={`progress-bar w-[5px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
+                    className={`progress-bar w-[5px] h-[60px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
                     onClick={() => handleBarClick(-1)}
                   >
                     <div className="fill-bar-horizontal w-full h-full rounded-md bg-gray-700"></div>
@@ -155,7 +155,7 @@ function EventPage({ data }: { data: any }) {
               {data.eventImages.map((_: any, index: number) => (
                 <div
                   key={index}
-                  className={`progress-bar w-[5px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
+                  className={`progress-bar w-[5px] h-[60px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
                   onClick={() => handleBarClick(index)}
                 >
                   {index <= currentBar && (
@@ -200,7 +200,7 @@ function EventPage({ data }: { data: any }) {
             })}
           </p>
         </div>
-        <div className=" mt-4 poppins-semibold text-titles md:text-3xl">
+        <div className=" md:mb-0 mb-3 mt-4 poppins-semibold text-titles md:text-3xl">
           {data.eventAcronym ? (
             <h1>
               {data.eventAcronym} - {data.eventName}
@@ -210,9 +210,9 @@ function EventPage({ data }: { data: any }) {
           )}
         </div>
 
-        <div className="flex md:justify-start  justify-center mt-4 flex-wrap">
+        <div className=" hidden md:flex md:justify-start flex-1 justify-center mt-4 flex-wrap">
           {data?.linkInscription ? (
-            <div className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular p-3  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
+            <div className=" md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular px-3 py-5  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
               <img
                 alt="icon"
                 src="/icons/Edit Square.png"
@@ -231,7 +231,7 @@ function EventPage({ data }: { data: any }) {
             <div
               onMouseEnter={() => handleMouseEnter(0)}
               onMouseLeave={() => handleMouseEnter(null)}
-              className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center "
+              className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular px-3 py-5 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center "
             >
               <img
                 alt="icon"
@@ -252,7 +252,7 @@ function EventPage({ data }: { data: any }) {
           {data?.mobile && (
             <div
               onClick={() => setShowMobile((prev) => !prev)}
-              className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
+              className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular px-3 py-5 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
               onMouseEnter={() => handleMouseEnter(1)}
               onMouseLeave={() => handleMouseEnter(null)}
             >
@@ -273,7 +273,7 @@ function EventPage({ data }: { data: any }) {
             <div
               onMouseEnter={() => handleMouseEnter(2)}
               onMouseLeave={() => handleMouseEnter(null)}
-              className="md:w-auto w-[128px] mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center "
+              className="md:w-auto w-[128px] mb-2 rounded-3xl poppins-regular px-3 py-5 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center "
             >
               <img
                 alt="icon"
@@ -292,14 +292,82 @@ function EventPage({ data }: { data: any }) {
             </div>
           )}
         </div>
+        <div className="md:hidden w-full flex items-center justify-between relative z-10">
+          <a
+            target="_blank"
+            href={data?.website}
+            className="flex justify-center items-center mr-3 flex-1 rounded-[30px] px-4 py-1 bg-white h-[40px] text-titles border-titles border-[1.4px] poppins-medium text-[14px] text-center"
+          >
+            <img
+              alt="globe-icon"
+              src="/icons/globalDark.png"
+              className="w-[20px] h-[20px] mr-2"
+            />
+            Web Site
+          </a>
+
+          {data?.location && (
+            <div
+              onMouseEnter={() => handleMouseEnter(2)}
+              onMouseLeave={() => handleMouseEnter(null)}
+              className="flex-1 md:w-auto w-[128px] rounded-3xl poppins-regular px-3 py-5 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center text-[14px]"
+            >
+              <img
+                alt="icon"
+                src={`${
+                  hovered === 2 ? "/icons/gpsWhite.png" : "/icons/gps.png"
+                }`}
+                className="max-w-[30px] max-h-[30px]"
+              />{" "}
+              <a
+                target="_blank"
+                href={`https://www.google.com/maps/place/${data?.location?.lat},${data?.location?.lon}`}
+                className="rounded-xl ml-2 poppins-regular  "
+              >
+                Maps
+              </a>
+            </div>
+          )}
+        </div>
+        <div className="my-2 text-[12px]  md:hidden w-full flex items-center justify-between relative z-10">
+          <div
+            onClick={() => setShowMobile((prev) => !prev)}
+            className="flex-1 md:w-auto w-[128px]  mr-2 rounded-3xl poppins-regular px-3 py-5 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
+            onMouseEnter={() => handleMouseEnter(1)}
+            onMouseLeave={() => handleMouseEnter(null)}
+          >
+            <img
+              alt="icon"
+              src={`${
+                hovered === 1 ? "/icons/mobileW.png" : "/icons/mobileB.png"
+              }`}
+              className="max-w-[30px] max-h-[30px]"
+            />
+            <button className="rounded-xl ml-2 text-[14px] poppins-regular">
+              {showMobile ? data?.mobile : <>Mobile</>}
+            </button>
+          </div>
+          <button
+            onClick={() => {
+              router.replace(`/events/details/${data?._id}`);
+            }}
+            className=" flex-1 rounded-[30px] px-3 py-1 bg-mainBlue text-white h-[40px] poppins-medium text-[12px] text-center"
+          >
+            <a
+              target="_blank"
+              href={data?.linkInscription}
+              className="rounded-xl text-[14px] ml-2 poppins-regular  "
+            >
+              {t("Participer")}
+            </a>
+          </button>
+        </div>
         {fetchedOrganizer && (
           <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
             <div className="flex md:flex-row flex-col items-center justify-between px-8 py-4">
               <div className="mb-2 flex md:flex-row flex-col justify-center items-center">
-                <Image
-                  width={30}
-                  height={30}
-                  className="mr-4 h-[50px] w-[50px] rounded-full object-cover "
+                <img
+                  className="md:mr-2 h-[50px] w-[50px] rounded-full object-cover flex-shrink-0" // Ensure the image doesn't shrink
                   src={
                     fetchedOrganizer?.profilePicture
                       ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${fetchedOrganizer.profilePicture}`

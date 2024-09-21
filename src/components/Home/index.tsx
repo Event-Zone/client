@@ -31,7 +31,7 @@ function Home() {
   }, [fetchedEvents, error, isLoading]);
 
   return (
-    <div className="min-w-screen md:px-[0px] px-[10px]">
+    <div className="min-w-screen ">
       <Hero />
       <div className="md:px-28 ">
         <Categorie />

@@ -73,9 +73,9 @@ function NextEvent({ events }: { events: IEvent[] }) {
   };
   const t = useTranslations("NextEvents");
   return (
-    <div className="w-full py-4">
+    <div className="w-full pt-4">
       <div className="w-[90%] ml-1 my-3">
-        <h2 className="text-titles mb-4 poppins-semibold md:text-[24px]">
+        <h2 className="text-titles md:mb-4 mb-1 poppins-semibold md:text-[24px]">
           {t("description")}
         </h2>
       </div>
@@ -136,7 +136,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
       </div>
 
       {/* Horizontal scrollable events list */}
-      <div className="flex-col  md:flex-row flex-wrap  md:flex overflow-x-auto md:pl-0  items-center justify-center md:justify-between w-full py-4 element-with-scrollbar">
+      <div className="flex-col  md:flex-row flex-wrap  md:flex overflow-x-auto md:pl-0  items-center justify-center md:justify-between w-full pt-4 element-with-scrollbar">
         {searchedEvents && searchedEvents.length !== 0 ? (
           searchedEvents
             .slice(0, visibleEventsCount)
@@ -144,7 +144,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
               <div
                 onClick={() => router.push(`/events/details/${event._id}`)}
                 key={index}
-                className="md:m-0  lg:w-[23%] w-full  h-[460px] flex-shrink-0 bg-white rounded-lg overflow-hidden"
+                className="md:mb-0 mb-3 md:border-0 border-[1.3px] border-gray-300 md:m-0 pb-1  lg:w-[23%] w-full h-fit  md:h-[460px] flex-shrink-0 bg-white rounded-lg overflow-hidden"
               >
                 <NextEventCard event={event} />
               </div>

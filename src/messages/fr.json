@@ -173,7 +173,8 @@
     "Annuler":"Annuler",
     "Filtrer":"Filtrer",
     "noEvents":"pas d'evenement",
-    "header":"Événement à proximité de "
+    "header":"Événement à proximité de ",
+    "search":"Rechercher"
   },
   "subscriptions":{
     "accept":"J'accepte",

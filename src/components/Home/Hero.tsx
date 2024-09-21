@@ -79,9 +79,9 @@ const Hero = () => {
 
   const t = useTranslations("Hero");
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col md:mt-0 mt-3">
       <div
-        className="relative w-full h-[179px] sm:h-[450px] md:py-20 flex flex-row items-center overflow-hidden" // Added overflow-hidden
+        className="relative w-full h-[179px] sm:h-[450px] md:py-20 flex flex-row items-center rounded-md overflow-hidden" // Added overflow-hidden
       >
         <Image
           src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${eventAdds[currentBar]?.eventImages[0]}`}
@@ -91,7 +91,7 @@ const Hero = () => {
           quality={75}
           className="absolute top-0 left-0 w-full h-full object-cover" // Ensure the image covers the container
         />
-        <div className="hero-overlay"></div>
+        <div className="hero-overlay md:block hidden"></div>
         <div className="md:opacity-100 opacity-0 md:ml-16 z-30  mr-[6%]">
           {eventAdds.map((_, index) => (
             <div
@@ -105,7 +105,7 @@ const Hero = () => {
             </div>
           ))}
         </div>
-        <div className="z-30 absolute w-[95%] mx-[2px] overflow-scroll element-with-scrollbar bottom-1 left-3 md:hidden flex">
+        <div className="z-30 absolute w-[95%] mx-[2px] my-[6px] overflow-scroll element-with-scrollbar bottom-1 left-3 md:hidden flex">
           <div className="flex mt-3 ">
             <p className="mr-2 text-[12px] poppins-regular inline-block rounded-md  px-2 py-1 h-[28px]  bg-[#E9F1FC] text-mainBlue text-center border border-white whitespace-nowrap box-border">
               {eventAdds[currentBar]?.type}
@@ -148,7 +148,8 @@ const Hero = () => {
               </h2>
             </div>
           </div>
-          <div className="relative z-10 mb-6">
+          {eventAdds[currentBar]?.eventAcronym}
+          <div className=" relative z-10 mb-6">
             <p className="flex flex-row text-white poppins-regular  text-md  mt-1 items-center">
               <img
                 alt="location-icon"
@@ -232,32 +233,48 @@ const Hero = () => {
       <div className="mx-1 md:hidden flex flex-col justify-between">
         <div className="flex flex-row relative z-10">
           <div>
-            <h2 className="mb-[10px] text-titles poppins-medium md:text-[30px] poppins-semibold text-left">
-              {eventAdds.length > 0 && eventAdds[currentBar]?.eventName}
+            <h2 className="my-[10px] text-titles poppins-medium md:text-[30px] poppins-semibold text-left">
+              {eventAdds.length > 0 && (
+                <>
+                  {
+                    <>
+                      {eventAdds[currentBar]?.eventAcronym && (
+                        <>
+                          {eventAdds[currentBar]?.eventAcronym}
+                          {" - "}
+                        </>
+                      )}
+                    </>
+                  }{" "}
+                  {eventAdds[currentBar]?.eventName}
+                </>
+              )}
             </h2>
           </div>
         </div>
-        <div className="relative z-10 mb-6">
-          <p className="flex flex-row text-titles poppins-medium items-center">
+        <div className="text-[14px]  border-2 rounded-xl border-gray-300  relative z-10 mb-3">
+          <p className="p-2 border-b-2 border-gray-300 flex flex-row text-titles poppins-medium items-center">
             <img
               alt="location-icon"
               src="/icons/LocationGray.png"
               className="w-[18px] h-[18px] mr-2"
             />
-            {eventAdds[currentBar]?.location ? (
-              eventAdds[currentBar]?.location.address.commercial ? (
-                <>
-                  {eventAdds[currentBar]?.location.address.commercial}{" "}
-                  {eventAdds[currentBar]?.location.address.state}
-                </>
+            <p className="text-ellipsis line-clamp-1">
+              {eventAdds[currentBar]?.location ? (
+                eventAdds[currentBar]?.location.address.commercial ? (
+                  <>
+                    {eventAdds[currentBar]?.location.address.commercial}{" "}
+                    {eventAdds[currentBar]?.location.address.state}
+                  </>
+                ) : (
+                  eventAdds[currentBar]?.location.address.state
+                )
               ) : (
-                eventAdds[currentBar]?.location.address.state
-              )
-            ) : (
-              <>Online</>
-            )}
+                <>Online</>
+              )}{" "}
+            </p>
           </p>
-          <p className="flex flex-row text-titles poppins-medium items-center">
+          <p className="p-2 flex flex-row text-titles poppins-medium items-center">
             <img
               alt="calendar-icon"
               src="/icons/CalendarGray.png"
@@ -282,11 +299,11 @@ const Hero = () => {
           </p>
         </div>
 
-        <div className="w-[90%] flex items-center relative z-10">
+        <div className="w-full flex items-center justify-between relative z-10">
           <a
             target="_blank"
             href={eventAdds[currentBar]?.website}
-            className="flex justify-center items-center mr-2 flex-1 rounded-[30px] px-4 py-1 bg-white h-[40px] text-titles border-titles border-[1.4px] poppins-medium text-[12px] text-center"
+            className="flex justify-center items-center mr-3 flex-1 rounded-[30px] px-4 py-1 bg-white h-[40px] text-titles border-titles border-[1.4px] poppins-medium text-[12px] text-center"
           >
             <img
               alt="globe-icon"
@@ -299,7 +316,7 @@ const Hero = () => {
             onClick={() => {
               router.replace(`/events/details/${eventAdds[currentBar]?._id}`);
             }}
-            className="mr-2 flex-1 rounded-[30px] px-4 py-1 bg-mainBlue text-white h-[40px] poppins-medium text-[12px] text-center"
+            className=" flex-1 rounded-[30px] px-4 py-1 bg-mainBlue text-white h-[40px] poppins-medium text-[12px] text-center"
           >
             Voir plus
           </button>

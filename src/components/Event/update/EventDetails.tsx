@@ -286,7 +286,7 @@ function EventDetails({
           </div>
           <div className="flex md:justify-start  justify-center mt-4 flex-wrap">
             {firstFormData?.linkInscription ? (
-              <div className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular p-3  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
+              <div className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular px-3 py-5  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
                 <img
                   alt="icon"
                   src="/icons/Edit Square.png"
@@ -305,7 +305,7 @@ function EventDetails({
               <div
                 onMouseEnter={() => handleMouseEnter(0)}
                 onMouseLeave={() => handleMouseEnter(null)}
-                className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center "
+                className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular px-3 py-5 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center "
               >
                 <img
                   alt="icon"
@@ -328,7 +328,7 @@ function EventDetails({
             {firstFormData?.mobile && (
               <div
                 onClick={() => setShowMobile((prev) => !prev)}
-                className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
+                className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular px-3 py-5 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
                 onMouseEnter={() => handleMouseEnter(1)}
                 onMouseLeave={() => handleMouseEnter(null)}
               >
@@ -349,7 +349,7 @@ function EventDetails({
               <div
                 onMouseEnter={() => handleMouseEnter(2)}
                 onMouseLeave={() => handleMouseEnter(null)}
-                className="md:w-auto w-[128px] mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center "
+                className="md:w-auto w-[128px] mb-2 rounded-3xl poppins-regular px-3 py-5 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center "
               >
                 <img
                   alt="icon"
@@ -372,10 +372,8 @@ function EventDetails({
             <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
               <div className="flex md:flex-row flex-col items-center justify-between p-8">
                 <div className="mb-2 flex md:flex-row flex-col items-center">
-                  <Image
-                    width={30}
-                    height={30}
-                    className="mr-4 h-[50px] w-[50px] rounded-full object-cover mb-2"
+                  <img
+                    className="md:mr-2 h-[50px] w-[50px] rounded-full object-cover flex-shrink-0" // Ensure the image doesn't shrink
                     src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${fetchedOrganizer?.profilePicture}`}
                     alt="Profile"
                   />

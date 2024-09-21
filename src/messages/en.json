@@ -168,6 +168,8 @@
     "ContactDes": "Whether you have technical questions, need promotional advice, or require troubleshooting assistance, we are here to support you."
   },
     "Search": {
+          "search":"Rechercher"
+,
     "type": "Choose type",
     "date": "Any date",
     "category": "Choose category",

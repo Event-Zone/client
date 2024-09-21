@@ -28,30 +28,32 @@ function NextEventCard({ event }: { event: any }) {
   });
   return (
     <>
-      <Image
-        alt="event-img"
-        className="lg:w-full  md:h-[187px] w-full max-h-[187px] object-cover"
-        src={
-          event.eventImages
-            ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event.eventImages[0]}`
-            : "https://via.placeholder.com/300x200"
-        }
-        width={500}
-        height={300}
-        quality={75}
-      />
-      <div className="py-4">
-        <div className="flex w-full overflow-scroll element-with-scrollbar">
-          <p className="whitespace-nowrap bg-[#206FDF1A] rounded-md text-mainBlue poppins-medium text-[12px] py-2 px-2">
+      <div className=" relative  h-fit">
+        <Image
+          alt="event-img"
+          className="lg:w-full  md:h-[187px] w-full max-h-[187px] object-cover"
+          src={
+            event.eventImages
+              ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event.eventImages[0]}`
+              : "https://via.placeholder.com/300x200"
+          }
+          width={500}
+          height={300}
+          quality={75}
+        />{" "}
+        <div className=" absolute bottom-3 left-3  w-fit overflow-scroll element-with-scrollbar">
+          <p className="whitespace-nowrap bg-[#E9F1FC]  rounded-md text-mainBlue poppins-medium text-[12px] py-2 px-2">
             {event?.Categorie[0]}
           </p>
-        </div>
+        </div>{" "}
+      </div>
+      <div className="md:mx-0 mx-4 ">
         <h3 className="mt-2 sm:text-md poppins-semibold text-ellipsis text-[14px] line-clamp-3 text-titles">
           {event?.eventAcronym && <>{event.eventAcronym} - </>}
           {event?.eventName}
         </h3>
         {fetchedSubscription?.pack === "Business" ? (
-          <div className=" my-2 flex text-[12px] sm:text-[14px] text-gray-600">
+          <div className=" md:w-auto w-fit px-1 md:bg-transparent bg-[#F9F9F9] rounded-md md:mx-0  my-2 flex text-[12px] sm:text-[14px] text-gray-600">
             <img
               alt="icon"
               src="/icons/ph_seal-check-fill (1).png"
@@ -60,30 +62,36 @@ function NextEventCard({ event }: { event: any }) {
             {fetchedSubscription?.company}
           </div>
         ) : null}
-        <p className="my-2  text-gray-600 text-[12px] sm:text-[14px] flex flex-row items-center">
-          {event.location?.address?.commercial ? (
-            <>
-              <img
-                className="mr-2"
-                alt="location-icon"
-                src="/icons/LocationGray.png"
-              />
-              {event.location?.address?.commercial}
-            </>
-          ) : (
-            event.location?.address?.state && (
+        {event.location?.address?.commercial && (
+          <p className="    md:w-auto w-fit px-1 pl-1 py-1 my-2 md:bg-transparent bg-[#F9F9F9] rounded-md md:mx-0   text-gray-600 text-[12px] sm:text-[14px] flex flex-row items-center">
+            {event.location?.address?.commercial ? (
               <>
                 <img
                   className="mr-2"
                   alt="location-icon"
                   src="/icons/LocationGray.png"
                 />
-                {event.location?.address?.state}
+                <p className="text-ellipsis line-clamp-1">
+                  {event.location?.address?.commercial}
+                </p>
               </>
-            )
-          )}
-        </p>
-        <p className="my-2 text-gray-600 text-[12px] sm:text-[14px] flex flex-row items-center">
+            ) : (
+              event.location?.address?.state && (
+                <>
+                  <img
+                    className="mr-2"
+                    alt="location-icon"
+                    src="/icons/LocationGray.png"
+                  />{" "}
+                  <p className="text-ellipsis line-clamp-1">
+                    {event.location?.address?.state}
+                  </p>
+                </>
+              )
+            )}
+          </p>
+        )}
+        <p className="md:w-auto w-fit px-1 md:bg-transparent bg-[#F9F9F9] rounded-md md:mx-0  py-1 pl-1 my-2 text-gray-600 text-[12px] sm:text-[14px] flex flex-row items-center">
           <img
             className="mr-2"
             alt="calendar-icon"

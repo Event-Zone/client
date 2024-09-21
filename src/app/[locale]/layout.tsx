@@ -34,12 +34,14 @@ export default async function RootLayout({
       </head>
       <body
         style={{ fontFamily: "Poppins , sans-serif" }}
-        className={`flex min-h-screen flex-col element-with-scrollbar  ${inter.className}`}
+        className={` flex min-h-screen flex-col element-with-scrollbar  ${inter.className}`}
       >
         <NextIntlClientProvider messages={messages}>
           <StoreProvider>
             <Navbar />
-            <main className="flex-grow flex flex-col">{children}</main>
+            <main className=" md:px-[0px] px-[20px] flex-grow flex flex-col">
+              {children}
+            </main>
             {/* <Footer /> */}
           </StoreProvider>
         </NextIntlClientProvider>

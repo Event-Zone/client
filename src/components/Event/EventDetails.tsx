@@ -206,7 +206,7 @@ function EventDetails({
 
         <div className="flex justify-start mt-4 flex-wrap">
           {firstFormData?.linkInscription ? (
-            <div className="mb-2 mr-2 rounded-3xl poppins-regular p-3  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
+            <div className="mb-2 mr-2 rounded-3xl poppins-regular px-3 py-5  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
               <img
                 alt="icon"
                 src="/icons/Edit Square.png"
@@ -225,7 +225,7 @@ function EventDetails({
             <div
               onMouseEnter={() => handleMouseEnter(0)}
               onMouseLeave={() => handleMouseEnter(null)}
-              className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center "
+              className="mb-2 mr-2 rounded-3xl poppins-regular px-3 py-5 hover:bg-titles  max-h-[33px]  text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center "
             >
               <img
                 alt="icon"
@@ -248,7 +248,7 @@ function EventDetails({
               onMouseEnter={() => handleMouseEnter(1)}
               onMouseLeave={() => handleMouseEnter(null)}
               onClick={() => setShowMobile((prev) => !prev)}
-              className="mb-2 mr-2 rounded-3xl poppins-regular p-3 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
+              className="mb-2 mr-2 rounded-3xl poppins-regular px-3 py-5 hover:bg-titles max-h-[33px] text-titles hover:text-white border-[1.3px] border-titles flex items-center justify-center"
             >
               <img
                 alt="icon"
@@ -267,7 +267,7 @@ function EventDetails({
             <div
               onMouseEnter={() => handleMouseEnter(2)}
               onMouseLeave={() => handleMouseEnter(null)}
-              className="mb-2 rounded-3xl poppins-regular p-3 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center "
+              className="mb-2 rounded-3xl poppins-regular px-3 py-5 hover:bg-titles   max-h-[33px]  texttitles hover:text-white  border-[1.3px] border-titles flex items-center justify-center "
             >
               <img
                 alt="icon"
@@ -290,10 +290,8 @@ function EventDetails({
           <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
             <div className="flex items-center justify-between p-8">
               <div className="flex flex-row">
-                <Image
-                  width={30}
-                  height={30}
-                  className="mr-4 h-[50px] w-[50px] rounded-full object-cover"
+                <img
+                  className="md:mr-2 h-[50px] w-[50px] rounded-full object-cover flex-shrink-0" // Ensure the image doesn't shrink
                   src={
                     user?.profilePicture
                       ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${user.profilePicture}`

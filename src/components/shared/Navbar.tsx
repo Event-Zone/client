@@ -20,6 +20,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import LocalSwitcher from "../LocalSwitcher";
 import Ads from "../Search/Ads";
 import { selectSubscription } from "@/store/features/subscriptionSlice";
+import { useTranslations } from "next-intl";
 function Navbar() {
   const [showSearchs, setShowSearchs] = useState<boolean>(false);
   const [showSearchLocation, setShowSearchLocation] = useState<boolean>(false);
@@ -74,7 +75,6 @@ function Navbar() {
     isLoading: locationsIsLoading,
     isError: locationsIsError,
   } = useSearchEventsLocationsQuery();
-  const { t, changeLanguage } = useTranslation();
 
   useEffect(() => {
     if (allEvents) dispatch(setInitialEvents(allEvents));
@@ -154,6 +154,7 @@ function Navbar() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropdownRef]);
+  const t = useTranslations("Search");
   return (
     <div className="border-b-[1px] border-[#BCC6CE] ">
       {/* Search Input for Small Screens */}
@@ -162,12 +163,12 @@ function Navbar() {
           onClick={() => setShowSearchs((prev) => !prev)}
           className=" md:hidden md:mt-0 mt-[56px]  lg:hidden z-50 absolute w-screen h-screen bg-white p-2 flex flex-col   "
         >
-          <div className="h-[380px]">
+          <div className="h-[635px]">
             <Ads />
           </div>
-          <div className="flex-grow flex flex-col ">
+          <div className="mt-3 flex-grow flex flex-col ">
             {" "}
-            <div className="flex items-center border-[1.4px] border-gray-200 mb-1 rounded-md">
+            <div className="flex items-center border-[1.4px] border-gray-200 mb-4 rounded-md">
               {" "}
               <img
                 onClick={() => {
@@ -187,7 +188,7 @@ function Navbar() {
               />
               <div className="absolute w-fit top-14   bg-white"></div>{" "}
             </div>
-            <div className="relative lg:w-[70px] z-10 border-[1.4px] rounded-md border-gray-200">
+            <div className="mb-2 relative lg:w-[70px] z-10 border-[1.4px] rounded-md border-gray-200">
               <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                 <img
                   src="/icons/Location.svg"
@@ -228,6 +229,23 @@ function Navbar() {
                 </div>
               </div>
             </div>
+            <button
+              onClick={() => {
+                handlSearchClick();
+                router.push("/search");
+              }}
+              className="flex rounded-md mt-2 bg-mainBlue items-center justify-center text-white px-4 py-3"
+            >
+              <p className="flex justify-center items-center text-center flex-1">
+                {" "}
+                <img
+                  alt="seatchicon"
+                  src="/icons/SearchComp.svg"
+                  className="w-[20px] h-[20px] mr-3"
+                />{" "}
+                {t("search")}
+              </p>
+            </button>
           </div>
         </div>
       )}
@@ -241,12 +259,15 @@ function Navbar() {
 
         <div
           className="flex items-center cursor-pointer"
-          onClick={() => router.push("/")}
+          onClick={() => {
+            handlSearchClick();
+            router.push("/");
+          }}
         >
           <img
             src="/images/footerLogo.png"
             alt="Navbar Logo"
-            className="max-w-[160px]"
+            className="md:max-w-[160px] max-w-[130px]"
           />
         </div>
 
@@ -349,7 +370,7 @@ function Navbar() {
         <div className="lg:hidden flex items-center">
           {
             <div
-              className="md:hidden flex w-[100px] "
+              className="md:hidden flex items-end justify-end mr-4 w-[100px] "
               onClick={handlSearchClick}
             >
               <img
