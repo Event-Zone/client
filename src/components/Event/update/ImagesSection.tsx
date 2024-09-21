@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useTranslations } from "next-intl";
+import { useSelector } from "react-redux";
+import { selectSubscription } from "@/store/features/subscriptionSlice";
 
 function ImagesSection({
   setEventImages,
@@ -23,6 +25,7 @@ function ImagesSection({
     }
     return `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${image}`;
   };
+  const fetchedSubscription = useSelector(selectSubscription);
 
   const onDragEnd = (result: any) => {
     if (!result.destination) return;
@@ -161,11 +164,17 @@ function ImagesSection({
                 src="/icons/Property 34.png"
               />
               <input
+                disabled={fetchedSubscription?.pack !== "Business"}
                 type="text"
                 id="videoUrl"
                 name="videoUrl"
                 className="shadow-sm p-3 poppins-regular focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                placeholder="video url"
+                placeholder={
+                  fetchedSubscription?.pack === "Business"
+                    ? "video url"
+                    : `Upgrade to the Business Pack to add the explainer video.
+`
+                }
                 onChange={(e) => setVideoUrl(e.target.value)}
               />
             </div>

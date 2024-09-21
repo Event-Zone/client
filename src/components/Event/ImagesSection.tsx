@@ -20,7 +20,7 @@ function ImagesSection({
   const [numberImages, setNumberImages] = useState(4);
   useEffect(() => {
     if (fetchedSubscription)
-      if (fetchedSubscription?.pack !== "Starter") {
+      if (fetchedSubscription?.pack === "Business") {
         console.log("4", fetchedSubscription?.pack);
         setNumberImages(4);
       } else {
@@ -122,7 +122,9 @@ function ImagesSection({
                   );
                   if (eventImages.length >= numberImages) {
                     console.log("Images", numberImages);
-                    return alert(`only ${numberImages} images are alowed`);
+                    return alert(
+                      `Upgrade to the Business Pack to add more pictures and the explainer video.`
+                    );
                   }
                   setEventImages((prevImages: any) => [
                     ...prevImages,
@@ -202,7 +204,7 @@ function ImagesSection({
                             );
                             if (eventImages.length >= numberImages) {
                               return alert(
-                                `only ${numberImages} images are alowed`
+                                `Upgrade to the Business Pack to add more pictures and the explainer video.`
                               );
                             }
                             setEventImages((prevImages: any) => [
@@ -291,11 +293,17 @@ function ImagesSection({
                 src="/icons/Property 34.png"
               />
               <input
+                disabled={fetchedSubscription?.pack !== "Business"}
                 type="text"
                 id="videoUrl"
                 name="videoUrl"
                 className="shadow-sm p-3 poppins-regular focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                placeholder="video url"
+                placeholder={
+                  fetchedSubscription?.pack === "Business"
+                    ? "video url"
+                    : `Upgrade to the Business Pack to add the explainer video.
+`
+                }
                 onChange={(e) => setVideoUrl(e.target.value)}
               />{" "}
             </div>

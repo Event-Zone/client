@@ -336,7 +336,7 @@ function EventDetails({
           <div className="flex items-center mt-3">
             <img
               alt="icon"
-              src="/icons/calendarGray.png"
+              src="/icons/CalendarGray.png"
               className="w-[15px] h-[15px] mr-2"
             />{" "}
             <p className="poppins-regular text-gray-600 rounded-lg px-4 py-2">
@@ -445,7 +445,7 @@ function EventDetails({
                 <div className="bg-[#206FDF0D]  p-2 rounded-md">
                   <img
                     alt="icon"
-                    src="/icons/globalBlue.png"
+                    src="/icons/bank.png"
                     className="max-w-[20px] max-h-[20px]"
                   />{" "}
                 </div>

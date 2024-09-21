@@ -346,7 +346,7 @@ function EventPage({ data }: { data: any }) {
           <div className="flex items-center mt-1">
             <img
               alt="icon"
-              src="/icons/calendarGray.png"
+              src="/icons/CalendarGray.png"
               className="  w-[15px] h-[15px] mr-2"
             />{" "}
             <p className="poppins-regular text-gray-600 rounded-lg  py-2">
@@ -458,7 +458,7 @@ function EventPage({ data }: { data: any }) {
                   {" "}
                   <img
                     alt="icon"
-                    src="/icons/globalBlue.png"
+                    src="/icons/bank.png"
                     className="bg-[#206FDF0D]   w-[20px] h-[20px]"
                   />
                 </div>

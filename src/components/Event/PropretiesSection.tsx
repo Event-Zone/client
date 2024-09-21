@@ -117,9 +117,9 @@ function PropretiesSection({
                   <input
                     type="radio"
                     name="accessibilite"
-                    value="invitation seulement"
+                    value="Invitation seulement"
                     className="poppins-regular mr-3 text-gray-500"
-                    checked={selectedAccessibilite === "invitation seulement"}
+                    checked={selectedAccessibilite === "Invitation seulement"}
                     onChange={handleRadioChange}
                   />
                   {t("Invitationseulement")}
@@ -275,9 +275,9 @@ function PropretiesSection({
                   <input
                     type="radio"
                     name="lieu"
-                    value="exterieureinterieur"
+                    value="Extérieure interieur"
                     className="mr-3 poppins-regular text-gray-500"
-                    checked={selectedLieu === "exterieureinterieur"}
+                    checked={selectedLieu === "Extérieure interieur"}
                     onChange={handleRadioChange}
                   />
                   {t("ExterieuretInterieur")}

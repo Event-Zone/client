@@ -41,11 +41,11 @@
     },
     "Event":{
       "plusEvent":"Plus d'événements de cet organisateur",
-      "avaliable":"non disponible en pack starter ",
+      "avaliable":"Passez au Business Pack pour ajouter le lien d'inscription.",
         "Info":"Informations principales",
         "Apercu":"Aperçu de l'événement",
         "Publier":"Publier",
-        "Precedent":"Precedent",
+        "Precedent":"Précedent",
         "Suivant":"Suivant",
         "infoDeBase":"Informations de base",
         "Nommez":"Nommez votre événement et expliquez aux participants pourquoi ils devraient y participer. Ajoutez des détails mettant en avant ce qui le rend unique.",
@@ -55,9 +55,9 @@
         "Tags":"Améliorez la visibilité de votre événement en ajoutant des balises pertinentes au sujet."
 ,"addTag":"Appuyez sur Entrée pour ajouter un tag",
 "Emplacement":"Emplacement",
-"EmplacementDescription":"Aidez les gens à découvrir votre événement et indiquez aux participants où se présenter."
-,"Lieuphysique":"Lieu physique",
-"Enligne":"Enligne",
+"EmplacementDescription":"Aidez les gens à découvrir votre événement et indiquez aux participants où se présenter.",
+"Lieuphysique":"Lieu physique",
+"Enligne":"En ligne",
 "aPlustard":"À annoncer plus tard",
 "DateTitle":"Dates & Horaires",
 "DateDesc":"Dites aux participants quand ils doivent se rendre.",
@@ -101,9 +101,8 @@
 "enLign":"en Lign",
 "seeMaps":"voir sur la carte",
 "About":"A propos de cet événement"
-    },
-    "Explor":{
-       
+},
+"Explor":{
   "VotreEntreprise": "Votre entreprise",
   "VotreProfession": "Votre profession",
   "tags": "Tags",

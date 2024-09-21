@@ -47,7 +47,7 @@ const cardData = [
       { text: "Lien d'inscription", checked: true },
       { text: "Promotion sur les réseaux sociaux", checked: false },
       { text: "Plusieurs photos et vidéos", checked: false },
-      { text: "Liste des Sponsors", checked: false },
+      { text: "Liste des Sponsors", checked: true },
       { text: "Badge d'organisateur premium", checked: false },
 
       { text: "Support Prioritaire", checked: false },
