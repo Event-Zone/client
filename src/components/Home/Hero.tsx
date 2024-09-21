@@ -146,7 +146,7 @@ const Hero = () => {
             </div>
           </div>
           <div className="relative z-10 mb-6">
-            <p className="flex flex-row text-white poppins-regular text-[12px] items-center">
+            <p className="flex flex-row text-white poppins-regular  text-md  mt-1 items-center">
               <img
                 alt="location-icon"
                 src="/icons/LocationLight.png"
@@ -165,7 +165,7 @@ const Hero = () => {
                 <>Online</>
               )}
             </p>
-            <p className="flex flex-row text-white poppins-regular text-[12px] items-center">
+            <p className="flex flex-row text-white poppins-regular  text-md  mt-1 items-center">
               <img
                 alt="location-icon"
                 src="/icons/Calendar.png"

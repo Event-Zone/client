@@ -73,12 +73,7 @@ function EventPage({ data }: { data: any }) {
   } = useSearchEventsByUserQuery(data?.organizerId as string, {
     skip: !data?.organizerId,
   });
-  const handleSearch = async () => {
-    if (events) {
-      dispatch(setSearchedEvents(events));
-      router.push(`/search`);
-    }
-  };
+  const handleSearch = async () => {};
   const getYouTubeId = (url: string) => {
     const urlParams = new URL(url).searchParams;
     return urlParams.get("v");
@@ -112,7 +107,7 @@ function EventPage({ data }: { data: any }) {
   const t = useTranslations("Event");
   return (
     <div className="flex flex-col w-full items-center">
-      <div className="flex flex-col w-full md:w-[90%] lg:w-[1050px] px-2 md:px-4 lg:px-0 py-16">
+      <div className="flex flex-col w-full md:w-[90%] lg:w-[1050px] px-2 md:px-4 lg:px-0 py-10">
         <div className="relative flex items-center justify-center rounded-xl overflow-hidden h-[179px] md:h-[460px] w-full ">
           {data?.videoUrl && videoId && currentBar === -1 ? (
             <div className="absolute w-full h-full z-20">
@@ -150,7 +145,7 @@ function EventPage({ data }: { data: any }) {
                 <>
                   <div
                     key={0}
-                    className={`progress-bar w-[10px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
+                    className={`progress-bar w-[5px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
                     onClick={() => handleBarClick(-1)}
                   >
                     <div className="fill-bar-horizontal w-full h-full rounded-md bg-gray-700"></div>
@@ -160,7 +155,7 @@ function EventPage({ data }: { data: any }) {
               {data.eventImages.map((_: any, index: number) => (
                 <div
                   key={index}
-                  className={`progress-bar w-[10px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
+                  className={`progress-bar w-[5px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
                   onClick={() => handleBarClick(index)}
                 >
                   {index <= currentBar && (
@@ -171,7 +166,7 @@ function EventPage({ data }: { data: any }) {
             </div>
           </div>
         </div>
-        <div className="flex mt-3 element-with-scrollbar w-full overflow-x-auto whitespace-nowrap">
+        <div className="flex mt-1 element-with-scrollbar w-full overflow-x-auto whitespace-nowrap">
           <p className="poppins-medium text-mainBlue bg-[#E9F1FC] rounded-lg px-4 py-2 mr-3">
             {data.type}
           </p>
@@ -192,7 +187,7 @@ function EventPage({ data }: { data: any }) {
         </div>
 
         <div className=" md:block hidden">
-          <p className="poppins-medium text-gray-600 rounded-lg px-4 py-2">
+          <p className="poppins-medium text-gray-600 rounded-lg px-0 pt-5">
             {new Date(data.startdate).toLocaleDateString("fr-FR", {
               day: "2-digit",
               month: "short",
@@ -214,44 +209,7 @@ function EventPage({ data }: { data: any }) {
             <h1>{data.eventName}</h1>
           )}
         </div>
-        <div className="relative z-10 my-6 ">
-          <p className="flex flex-row text-titles poppins-medium items-center">
-            <img
-              alt="location-icon"
-              src="/icons/LocationGray.png"
-              className="w-[20px] h-[20px] mr-2"
-            />
-            {data?.location ? (
-              data?.location.address.commercial ? (
-                <>
-                  {data?.location.address.commercial}{" "}
-                  {data?.location.address.state}
-                </>
-              ) : (
-                data?.location.address.state
-              )
-            ) : (
-              <>Online</>
-            )}
-          </p>
-          <p className="flex flex-row text-titles poppins-medium items-center">
-            <img
-              alt="calendar-icon"
-              src="/icons/CalendarGray.png"
-              className="w-[18px] h-[18px] mr-2"
-            />
-            {new Date(data?.startdate).toLocaleDateString("fr-FR", {
-              day: "2-digit",
-              month: "short",
-            })}{" "}
-            -{" "}
-            {new Date(data?.enddate).toLocaleDateString("fr-FR", {
-              day: "2-digit",
-              month: "short",
-              year: "numeric",
-            })}
-          </p>
-        </div>
+
         <div className="flex md:justify-start  justify-center mt-4 flex-wrap">
           {data?.linkInscription ? (
             <div className="md:w-auto w-[128px] mb-2 mr-2 rounded-3xl poppins-regular p-3  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
@@ -336,12 +294,12 @@ function EventPage({ data }: { data: any }) {
         </div>
         {fetchedOrganizer && (
           <div className="mt-4 bg-mainBlue bg-opacity-[5%] rounded-lg">
-            <div className="flex md:flex-row flex-col items-center justify-between p-8">
-              <div className="mb-2 flex md:flex-row flex-col items-center">
+            <div className="flex md:flex-row flex-col items-center justify-between px-8 py-4">
+              <div className="mb-2 flex md:flex-row flex-col justify-center items-center">
                 <Image
                   width={30}
                   height={30}
-                  className="mr-4 h-[50px] w-[50px] rounded-full object-cover mb-2"
+                  className="mr-4 h-[50px] w-[50px] rounded-full object-cover "
                   src={
                     fetchedOrganizer?.profilePicture
                       ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${fetchedOrganizer.profilePicture}`
@@ -359,7 +317,7 @@ function EventPage({ data }: { data: any }) {
                       {fetchedSubscription?.company}
                     </p>{" "}
                     {subscritionData?.pack === "Business" ? (
-                      <div className="flex ">
+                      <div className="md:ml-1 flex ">
                         <img
                           alt="icon"
                           src="/icons/ph_seal-check-fill (1).png"
@@ -370,7 +328,8 @@ function EventPage({ data }: { data: any }) {
                   </div>
                 </div>{" "}
               </div>
-              <div
+              <a
+                href="#otherevents"
                 onClick={handleSearch}
                 className="flex justify-between items-center cursor-pointer bg-[#DAE6F4] rounded-md p-2"
               >
@@ -378,19 +337,19 @@ function EventPage({ data }: { data: any }) {
                   <img alt="calendaricon" src="/icons/calendar-edit.png" />
                   {t("AutreEvents")}
                 </p>
-              </div>
+              </a>
             </div>
           </div>
         )}
         <div className="mt-4 poppins-semibold text-titles">
           <h3 className="text-2xl">{t("DateTitle")}</h3>
-          <div className="flex items-center mt-3">
+          <div className="flex items-center mt-1">
             <img
               alt="icon"
               src="/icons/calendarGray.png"
-              className="w-[15px] h-[15px] mr-2"
+              className="  w-[15px] h-[15px] mr-2"
             />{" "}
-            <p className="poppins-regular text-gray-600 rounded-lg px-4 py-2">
+            <p className="poppins-regular text-gray-600 rounded-lg  py-2">
               {" "}
               {new Date(data.startdate).toLocaleDateString("fr-FR", {
                 day: "2-digit",
@@ -414,7 +373,7 @@ function EventPage({ data }: { data: any }) {
               {data.startHour} - {data.endHour}
             </p>{" "}
           </div>
-          <div className="flex items-center">
+          <div className="mt-2 flex items-center">
             <img
               alt="icon"
               src="/icons/Frame 1170.png"
@@ -494,33 +453,41 @@ function EventPage({ data }: { data: any }) {
           </h3>
           <div className="flex flex-wrap mb-4 mt-3 ">
             {data.lieu ? (
-              <div className="flex mr-4">
-                <img
-                  alt="icon"
-                  src="/icons/globalBlue.png"
-                  className="max-w-[20px] max-h-[20px]"
-                />
-                <p className="poppins-medium">{data.lieu}</p>
+              <div className="flex mr-6 items-center">
+                <div className="bg-[#206FDF0D]  p-2 rounded-md">
+                  {" "}
+                  <img
+                    alt="icon"
+                    src="/icons/globalBlue.png"
+                    className="bg-[#206FDF0D]   w-[20px] h-[20px]"
+                  />
+                </div>
+
+                <p className="poppins-medium ml-2">{data.lieu}</p>
               </div>
             ) : null}
             {data.accessibilite ? (
-              <div className="flex mr-4 ">
-                <img
-                  alt="icon"
-                  src="/icons/Ticket.png"
-                  className="max-w-[20px] max-h-[20px]"
-                />
-                <p className="poppins-medium">{data.accessibilite}</p>
+              <div className="flex mr-6 items-center">
+                <div className=" bg-[#206FDF0D]  p-2 rounded-md">
+                  <img
+                    alt="icon"
+                    src="/icons/Ticket.png"
+                    className="w-[20px] h-[20px]"
+                  />
+                </div>
+                <p className="poppins-medium ml-2">{data.accessibilite}</p>
               </div>
             ) : null}
             {subscritionData?.pack === "Business" ? (
-              <div className="flex ">
-                <img
-                  alt="icon"
-                  src="/icons/ph_seal-check-fill (1).png"
-                  className="max-w-[20px] max-h-[20px]"
-                />
-                <p className="poppins-medium">Premium Organiser</p>
+              <div className="flex items-center">
+                <div className=" bg-[#206FDF0D] p-2 rounded-md">
+                  <img
+                    alt="icon"
+                    src="/icons/ph_seal-check-fill (1).png"
+                    className="w-[20px] h-[20px]"
+                  />
+                </div>
+                <p className="poppins-medium ml-2">Premium Organiser</p>
               </div>
             ) : null}
           </div>
@@ -531,7 +498,7 @@ function EventPage({ data }: { data: any }) {
         </div>
         <div className="mt-4 poppins-semibold text-titles mb-t">
           <h3 className="text-2xl mb-3">Sponsors</h3>
-          <div className="flex w-full flex-wrap element-with-scrollbar items-center justify-center ">
+          <div className="flex w-full flex-wrap element-with-scrollbar items-center md:justify-start justify-center ">
             {data?.sponsorImages.map((img: any, index: number) => (
               <div className="mb-2 flex items-center justify-center md:w-[128px]  md:h-[128px] w-[100px] h-[100px] rounded-lg border-[1.3px] mr-3 border-gray-300 p-[12px]">
                 <img
@@ -561,7 +528,7 @@ function EventPage({ data }: { data: any }) {
             ))}
           </div>
         </div>
-        <div className="text-titles my-2 ">
+        <div id="otherevents" className="text-titles my-2 ">
           <h3 className="poppins-semibold text-xl my-2">{t("plusEvent")}</h3>
           <div>
             {events?.map((event: any, index: number) => {

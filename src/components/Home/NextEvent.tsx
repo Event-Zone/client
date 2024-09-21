@@ -84,7 +84,7 @@ function NextEvent({ events }: { events: IEvent[] }) {
       <div className="flex space-x-4 w-full overflow-x-auto element-with-scrollbar mb-4 md:ml-1">
         <label
           key={"Tout"}
-          className={`px-4 py-2 text-gray-500 text-center cursor-pointer whitespace-nowrap`}
+          className={` py-2 text-gray-500 text-center cursor-pointer whitespace-nowrap`}
           onClick={() => setCategory(["Tout"])}
         >
           <span

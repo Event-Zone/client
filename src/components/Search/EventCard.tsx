@@ -52,12 +52,12 @@ function EventCard({ event }: EventCardProps) {
   return (
     <div
       onClick={() => router.replace(`/events/details/${event._id}`)}
-      className=" flex flex-col sm:flex-row items-start sm:items-center mb-4 border border-gray-300 rounded-lg overflow-hidden "
+      className=" flex flex-col sm:flex-row items-start sm:items-center mb-4  rounded-lg overflow-hidden "
     >
       <Image
         src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event?.eventImages[0]}`}
         alt={event.eventName}
-        className="w-full sm:w-[200px] md:w-[245px] "
+        className="w-full sm:w-[200px] md:w-[245px] rounded-md"
         width={500} // Specify width
         height={300} // Specify height
         quality={75} // Adjust quality to improve performance (default is 75)
@@ -76,7 +76,7 @@ function EventCard({ event }: EventCardProps) {
             year: "numeric",
           })}
         </p>
-        <h3 className="text-lg sm:text-2xl poppins-semibold mb-2 text-ellipsis line-clamp-2 ">
+        <h3 className="text-lg sm:text-lg poppins-semibold mb-2 text-ellipsis line-clamp-2 ">
           {event.eventAcronym && (
             <>
               {event.eventAcronym}
@@ -85,13 +85,13 @@ function EventCard({ event }: EventCardProps) {
           )}
           {event.eventName}
         </h3>
-        <p className="text-gray-500 text-sm sm:text-base poppins-medium mb-2 flex">
+        <p className="text-gray-500 text-sm sm:text-md poppins-medium mb-2 flex">
           {event.location &&
             (event.location.address.commercial
               ? event.location.address.commercial
               : event.location.address.state)}
         </p>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap ">
           {event.lieu ? (
             <div className="flex items-center mr-4 mb-2">
               <img
@@ -99,7 +99,7 @@ function EventCard({ event }: EventCardProps) {
                 src="/icons/globalBlue.png"
                 className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]"
               />
-              <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-base">
+              <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-md">
                 Evenement {event.lieu}
               </p>
             </div>
@@ -111,7 +111,7 @@ function EventCard({ event }: EventCardProps) {
                 src="/icons/Ticket.png"
                 className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]"
               />
-              <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-base">
+              <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-md">
                 {event.accessibilite}
               </p>
             </div>
@@ -123,7 +123,7 @@ function EventCard({ event }: EventCardProps) {
                 src="/icons/ph_seal-check-fill (1).png"
                 className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]"
               />
-              <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-base">
+              <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-md">
                 {subscritionData?.company}
               </p>
             </div>

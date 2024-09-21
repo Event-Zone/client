@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
@@ -242,6 +242,42 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
     refetch: refetchTypes,
   } = useGetTypesQuery();
   const t = useTranslations("Search");
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setCategorieSelectorVisible(false);
+        setTypeSelectorVisible(false);
+        setShowDialog(false);
+        setIsLocationSelectorVisible(false);
+      }
+    };
+
+    if (
+      isCategorieSelectorVisible ||
+      isTypeSelectorVisible ||
+      isLocationSelectorVisible ||
+      showDialog
+    ) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [
+    isCategorieSelectorVisible,
+    isTypeSelectorVisible,
+    isLocationSelectorVisible,
+
+    showDialog,
+  ]);
+
   return (
     <div className="relative p-1 md:px-20 ">
       <div className="max-w-full h-fit">
@@ -251,7 +287,10 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             <span className="text-mainBlue">{tmpLocation}</span>
           </p>
         )}
-        <div className="flex  overflow-scroll element-with-scrollbar  justify-around lg:w-[700px] w-full md:w-[88%]">
+        <div
+          ref={dropdownRef}
+          className="flex mt-5 overflow-scroll element-with-scrollbar  justify-around lg:w-[700px] w-full md:w-[88%]"
+        >
           <button
             className=" poppins-regular bg-gray-200 whitespace-nowrap mr-[5px] text-gray-500  px-4 md:py-2 rounded-md mb-2"
             onClick={() => {
@@ -268,7 +307,10 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
             ></select>
           </button>
           {isTypeSelectorVisible && (
-            <div className="bg-gray-50 p-4 whitespace-nowrap mr-[5px]  rounded-md shadow-md z-30 absolute left-4">
+            <div
+              ref={dropdownRef}
+              className="bg-gray-50 p-4 whitespace-nowrap mr-[5px]  rounded-md shadow-md z-30 absolute left-4"
+            >
               <p className="poppins-semibold text-gray-700 mb-2">{t("type")}</p>
               <div className="flex flex-col space-y-2">
                 {types?.map((Type: any) => (
@@ -353,7 +395,10 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
               ></select>
             </button>
             {isCategorieSelectorVisible && (
-              <div className="p-4  rounded-md shadow-md z-30 absolute bg-gray-50 ">
+              <div
+                ref={dropdownRef}
+                className="p-4  rounded-md shadow-md z-30 absolute bg-gray-50 "
+              >
                 <div className="flex flex-col space-y-2 h-[400px] overflow-scroll element-with-scrollbar ">
                   {CategoriesList?.map((category: any) => (
                     <label className="flex items-center space-x-2">
@@ -396,9 +441,15 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
       </div>
 
       {/* Dialog */}
-      {showDialog && <Calendar setShowDialog={setShowDialog} />}
+      {showDialog && (
+        <div ref={dropdownRef}>
+          <Calendar setShowDialog={setShowDialog} />
+        </div>
+      )}
       {isLocationSelectorVisible && (
-        <Locations setShowDialog={setIsLocationSelectorVisible} />
+        <div ref={dropdownRef}>
+          <Locations setShowDialog={setIsLocationSelectorVisible} />
+        </div>
       )}
 
       {/* Display Results */}

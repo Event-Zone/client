@@ -122,7 +122,7 @@ function EventDetails({
                     <>
                       <div
                         key={0}
-                        className={`progress-bar w-[10px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
+                        className={`progress-bar w-[5px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
                         onClick={() => handleBarClick(-1)}
                       >
                         <div className="fill-bar-horizontal w-full h-full rounded-md bg-gray-700"></div>
@@ -134,7 +134,7 @@ function EventDetails({
                     .map((_: any, index: number) => (
                       <div
                         key={index}
-                        className={`progress-bar w-[10px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
+                        className={`progress-bar w-[5px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
                         onClick={() => handleBarClick(index)}
                       >
                         {index <= currentImage && (
@@ -439,37 +439,45 @@ function EventDetails({
           <h3 className="mt-4 poppins-semibold text-titles text-2xl">
             {t("About")}{" "}
           </h3>
-          <div className="flex mb-4 mt-3 ">
+          <div className="flex flex-wrap mb-4 mt-3 ">
             {secondFormData.get("lieu") ? (
-              <div className="flex mr-4">
-                <img
-                  alt="icon"
-                  src="/icons/globalBlue.png"
-                  className="max-w-[20px] max-h-[20px]"
-                />
-                <p className="poppins-medium">{secondFormData.get("lieu")}</p>
+              <div className="flex mr-6 items-center">
+                <div className="bg-[#206FDF0D]  p-2 rounded-md">
+                  <img
+                    alt="icon"
+                    src="/icons/globalBlue.png"
+                    className="max-w-[20px] max-h-[20px]"
+                  />{" "}
+                </div>
+                <p className="poppins-medium ml-2">
+                  {secondFormData.get("lieu")}
+                </p>
               </div>
             ) : null}
             {secondFormData.get("accessibilite") ? (
-              <div className="flex mr-4 ">
-                <img
-                  alt="icon"
-                  src="/icons/Ticket.png"
-                  className="max-w-[20px] max-h-[20px]"
-                />
-                <p className="poppins-medium">
+              <div className="flex mr-6 items-center">
+                <div className=" bg-[#206FDF0D]  p-2 rounded-md">
+                  <img
+                    alt="icon"
+                    src="/icons/Ticket.png"
+                    className="max-w-[20px] max-h-[20px]"
+                  />
+                </div>
+                <p className="poppins-medium ml-2">
                   {secondFormData.get("accessibilite")}
                 </p>
               </div>
             ) : null}
             {subscriptionData?.pack === "Business" ? (
-              <div className="flex ">
-                <img
-                  alt="icon"
-                  src="/icons/ph_seal-check-fill (1).png"
-                  className="max-w-[20px] max-h-[20px]"
-                />
-                <p className="poppins-medium">Premium Organiser</p>
+              <div className="flex items-center">
+                <div className=" bg-[#206FDF0D] p-2 rounded-md">
+                  <img
+                    alt="icon"
+                    src="/icons/ph_seal-check-fill (1).png"
+                    className="max-w-[20px] max-h-[20px]"
+                  />{" "}
+                </div>
+                <p className="poppins-medium ml-2">Premium Organiser</p>
               </div>
             ) : null}
           </div>

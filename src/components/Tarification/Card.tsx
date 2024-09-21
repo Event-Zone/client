@@ -34,7 +34,7 @@ const cardData = [
       { text: "Badge d'organisateur premium", checked: true },
       { text: "Support Prioritaire", checked: true },
     ],
-    icon: "/icons/businessIcon.png",
+    icon: "/icons/businessIcon1.png",
     borderColor: "border-mainBlue",
   },
   {
@@ -69,10 +69,14 @@ function Cards({ price }: { price: number }) {
         <div
           onClick={() => router.push(`/events/create/${card.title}`)}
           key={index}
-          className={`sm:mb-1 mb-4 mr-3 flex flex-col ${card.borderColor} border-[1.5px] rounded-[30px] p-4 transition-transform duration-800 hover:transform hover:-translate-y-3`}
+          className={`sm:mb-1 mb-4 mr-3 flex flex-col ${card.borderColor} border-[2px] rounded-[30px] p-8 transition-transform duration-800 hover:transform hover:-translate-y-3 `}
         >
           <div className="flex mb-4">
-            <img alt={`${card.title}-icon`} src={card.icon} />
+            <img
+              className="w-[60px] h-[60px]"
+              alt={`${card.title}-icon`}
+              src={card.icon}
+            />
           </div>
           <h3 className="text-titles poppins-medium text-[24px]">
             {card.title}

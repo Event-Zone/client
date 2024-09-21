@@ -11,6 +11,8 @@ import Message from "@/components/shared/Message"; // Import the Message compone
 import { useTranslations } from "next-intl";
 
 function Tarification() {
+  const [hovered, setHovered] = useState(false);
+
   const user = useSelector(selectUser);
 
   const {
@@ -50,7 +52,7 @@ function Tarification() {
   }, [fetchedSubscription]);
   const t = useTranslations("tarification");
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="mt-4 flex flex-col justify-center items-center">
       {message && <Message message={message} />}{" "}
       {/* Conditionally render the message dialog */}
       <h3 className="text-mainBlue poppins-semibold  text-[18px]">Packs</h3>
@@ -88,9 +90,17 @@ function Tarification() {
         </button>
       </div>
       <Cards price={selectedPrice} />
-      <div className="mt-8 flex justify-center items-center overflow-hidden bg-mainBlue rounded-md">
+      <div
+        onMouseLeave={() => setHovered(false)}
+        onMouseEnter={() => setHovered(true)}
+        className="mt-8 flex justify-center items-center overflow-hidden bg-mainBlue rounded-md"
+      >
         <button className="poppins-medium px-8 py-4 text-center text-white">
-          {t("Contacter le service commercial")}
+          {!hovered ? (
+            <> {t("Contacter le service commercial")}</>
+          ) : (
+            <>+213 781 45 75 11 </>
+          )}
         </button>
       </div>
       <Questions />

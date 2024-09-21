@@ -42,11 +42,11 @@ function NextEventCard({ event }: { event: any }) {
       />
       <div className="py-4">
         <div className="flex w-full overflow-scroll element-with-scrollbar">
-          <p className="whitespace-nowrap bg-[#206FDF1A] rounded-2xl text-mainBlue poppins-medium text-[12px] py-2 px-2">
+          <p className="whitespace-nowrap bg-[#206FDF1A] rounded-md text-mainBlue poppins-medium text-[12px] py-2 px-2">
             {event?.Categorie[0]}
           </p>
         </div>
-        <h3 className="sm:text-xl poppins-semibold text-ellipsis text-[14px] line-clamp-3 text-titles">
+        <h3 className="mt-2 sm:text-md poppins-semibold text-ellipsis text-[14px] line-clamp-3 text-titles">
           {event?.eventAcronym && <>{event.eventAcronym} - </>}
           {event?.eventName}
         </h3>
@@ -55,28 +55,40 @@ function NextEventCard({ event }: { event: any }) {
             <img
               alt="icon"
               src="/icons/ph_seal-check-fill (1).png"
-              className=" max-w-[20px] max-h-[20px]"
+              className="mr-2 max-w-[20px] max-h-[20px]"
             />
             {fetchedSubscription?.company}
           </div>
         ) : null}
-        <p className="my-2 text-gray-600 text-[12px] sm:text-[14px] flex flex-row items-center">
+        <p className="my-2  text-gray-600 text-[12px] sm:text-[14px] flex flex-row items-center">
           {event.location?.address?.commercial ? (
             <>
-              <img alt="location-icon" src="/icons/LocationGray.png" />
+              <img
+                className="mr-2"
+                alt="location-icon"
+                src="/icons/LocationGray.png"
+              />
               {event.location?.address?.commercial}
             </>
           ) : (
             event.location?.address?.state && (
               <>
-                <img alt="location-icon" src="/icons/LocationGray.png" />
+                <img
+                  className="mr-2"
+                  alt="location-icon"
+                  src="/icons/LocationGray.png"
+                />
                 {event.location?.address?.state}
               </>
             )
           )}
         </p>
         <p className="my-2 text-gray-600 text-[12px] sm:text-[14px] flex flex-row items-center">
-          <img alt="calendar-icon" src="/icons/CalendarGray.png" />
+          <img
+            className="mr-2"
+            alt="calendar-icon"
+            src="/icons/CalendarGray.png"
+          />
           {event.startdate
             ? formatDate(event.startdate as unknown as string)
             : null}

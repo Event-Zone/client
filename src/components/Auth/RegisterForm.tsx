@@ -138,11 +138,11 @@ function RegisterForm() {
             />
           </div>
           <div className="w-full flex mb-4">
-            <div className="w-1/2 pr-2">
+            <div className="w-full ">
               <input
                 type="text"
                 name={"fullname"}
-                placeholder="Nom"
+                placeholder="fullname"
                 value={formData.fullname}
                 onChange={handleChange}
                 className="w-full p-2 border border-gray-300 rounded"

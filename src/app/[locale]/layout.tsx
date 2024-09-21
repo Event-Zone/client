@@ -9,7 +9,7 @@ import { NextIntlClientProvider } from "next-intl";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Event Zone",
+  title: "Eventzone",
   description: "Event Zone is a community-driven professional event platform.",
 };
 

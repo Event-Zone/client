@@ -340,11 +340,11 @@ const Profile = ({ params: { userId } }: { params: { userId: string } }) => {
                 >
                   <div className="flex flex-col items-center justify-center">
                     <img
-                      className="min-w-[40px] min-h-[40px]"
+                      className="w-[60px] h-[60px]"
                       alt={fetchedSubscription._id}
                       src={
                         fetchedSubscription.pack === "Business"
-                          ? "/icons/businessIcon.png"
+                          ? "/icons/BusinessIcon1.png"
                           : fetchedSubscription.pack === "Starter"
                           ? "/icons/starterIcon.png"
                           : "/icons/studentIcon.png"

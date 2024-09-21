@@ -140,7 +140,7 @@ function Locations({ setShowDialog }: { setShowDialog: Function }) {
           onClick={() => setIsFilter(true)}
           className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center poppins-regular"
         >
-          {t("Filtrer")} <span className="ml-2">✈️</span>
+          {t("Filtrer")} <span className="ml-2"></span>
         </button>
       </div>
     </div>

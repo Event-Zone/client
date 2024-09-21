@@ -285,6 +285,12 @@
   "governing_law_content": "These terms are governed by Algerian law. Any disputes arising from the use of the platform shall be resolved through local courts.",
   "close_button_text": "Close"
 }
-
+,
+  "validation": {
+    "welcome": "Welcome to EventZone!",
+    "des": "Your account has been created and is under review by our team. You will receive a call from us within the next 24 hours to complete the verification of your account.",
+    "complete": "Complete your Profile",
+    "complete2": "Home page"
+  }
 
 }

@@ -43,11 +43,11 @@ function Footer() {
                 height={30}
                 alt="logoEvenZone"
                 src={"/icons/Union1.png"}
-                className=" md:w-[45px] md:h-[45px] w-[38px] h-[42px] md:mt-[-20px] mt-[20px]"
+                className=" md:ml-8 md:w-[45px] md:h-[45px] w-[38px] h-[42px] md:mt-[-20px] mt-[20px]"
               />
             </div>
           </div>
-          <div className="text-sm space-y-2">
+          <div className="md:ml-8 text-start text-sm space-y-2">
             <p className="poppins-regular text-gray-500">
               {t("Collaborez Avec Eventzone")}
             </p>
@@ -58,29 +58,27 @@ function Footer() {
 
                   router.push("/search");
                 }}
-                className="mb-[2px]"
+                className="mb-[2px] cursor-pointer"
               >
-                {" "}
                 {t("Decouvrez Nos Evenements")}
               </li>
               <li
                 onClick={() => router.push(`/tarification`)}
-                className="mb-[2px]"
+                className="mb-[2px] cursor-pointer"
               >
-                {" "}
                 {t("Ajoutez Votre Evenement")}
               </li>
             </ul>
           </div>
         </div>
         <div className="text-sm space-y-2">
-          <p className="text-center poppins-regular text-gray-500">
+          <p className="md:text-start text-center poppins-regular text-gray-500">
             {" "}
             {t("Contactez Nous")}
           </p>
           <ul>
             <li className="mb-[2px]">Contact@eventzone.pro</li>
-            <li className="text-center">+(213) 781 45 75 11</li>
+            <li className="md:text-start text-center">+(213) 781 45 75 11</li>
           </ul>
         </div>
         {/* Middle Section - Language Selection */}

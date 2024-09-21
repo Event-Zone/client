@@ -294,6 +294,12 @@
     "governing_law_title": "Loi applicable",
     "governing_law_content": "Ces conditions sont régies par la loi algérienne. Tout litige découlant de l'utilisation de la plateforme sera résolu devant les tribunaux locaux.",
     "close_button_text": "Fermer"
+  },
+  "validation":{
+    "welcome":"Bienvenue sur EventZone!",
+    "des":"Votre compte a été créé et est en cours de vérification par notre équipe. Vous recevrez un appel de notre part dans les 24 prochaines heures pour finaliser la vérification de votre compte.",
+    "complete":"Complète ton Profile",
+    "complete2":"Page d'accueil"
   }
 
 

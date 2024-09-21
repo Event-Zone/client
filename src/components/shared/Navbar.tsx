@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "@/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { selectToken, selectUser } from "@/store/features/userSlice";
@@ -129,16 +129,36 @@ function Navbar() {
         break;
     }
   }, [user, fetchedSubscription]);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    console.log(matchingLocations);
-  }, [matchingLocations]);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        // setCategorieSelectorVisible(false);
+        setMenuOpen(false);
+        setMatchingLocations(false);
+      }
+    };
+
+    if (true) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
-    <>
+    <div className="border-b-[1px] border-[#BCC6CE] ">
       {/* Search Input for Small Screens */}
       {searchOpen && (
         <div
           onClick={() => setShowSearchs((prev) => !prev)}
-          className="md:hidden md:mt-0 mt-[56px]  lg:hidden z-50 absolute w-screen h-screen bg-white p-2 flex flex-col   "
+          className=" md:hidden md:mt-0 mt-[56px]  lg:hidden z-50 absolute w-screen h-screen bg-white p-2 flex flex-col   "
         >
           <div className="h-[380px]">
             <Ads />
@@ -188,6 +208,7 @@ function Navbar() {
                     showSearch &&
                     matchingLocations.map((state: string) => (
                       <div
+                        ref={dropdownRef}
                         key={state}
                         onClick={() => {
                           setStateName(state);
@@ -197,7 +218,7 @@ function Navbar() {
                       >
                         {state}
                       </div>
-                    ))}{" "}
+                    ))}
                 </div>
               </div>
             </div>
@@ -250,6 +271,7 @@ function Navbar() {
                     showSearchs &&
                     searchedEvents.map((event: any) => (
                       <div
+                        ref={dropdownRef}
                         key={event?._id}
                         onClick={() => {
                           router.push("/search");
@@ -290,6 +312,7 @@ function Navbar() {
                   showSearch &&
                   matchingLocations.map((state: string) => (
                     <div
+                      ref={dropdownRef}
                       key={state}
                       onClick={() => {
                         setStateName(state);
@@ -393,7 +416,10 @@ function Navbar() {
 
         {/* Mobile Menu Dropdown */}
         {menuOpen && !searchOpen && (
-          <div className="lg:hidden absolute top-[5px] right-0 bg-white border border-gray-300 rounded-md shadow-lg z-10">
+          <div
+            ref={dropdownRef}
+            className="lg:hidden absolute top-[5px] right-0 bg-white border border-gray-300 rounded-md shadow-lg z-10"
+          >
             <ul className="py-1">
               {!isAuth ? (
                 <>
@@ -488,7 +514,7 @@ function Navbar() {
         )}
         {searchedEventsLoading && <Progress />}
       </div>{" "}
-    </>
+    </div>
   );
 }
 
