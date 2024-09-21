@@ -112,7 +112,10 @@ const Hero = () => {
             </p>
             {isArray(eventAdds[currentBar]?.Categorie) ? (
               eventAdds[currentBar]?.Categorie.map((categorie: any) => (
-                <p className="mr-2 text-[12px] poppins-regular inline-block rounded-md  px-2 py-1 h-[28px]  bg-[#E9F1FC] text-mainBlue text-center border border-white whitespace-nowrap box-border">
+                <p
+                  key={categorie}
+                  className="mr-2 text-[12px] poppins-regular inline-block rounded-md  px-2 py-1 h-[28px]  bg-[#E9F1FC] text-mainBlue text-center border border-white whitespace-nowrap box-border"
+                >
                   {categorie}
                 </p>
               ))

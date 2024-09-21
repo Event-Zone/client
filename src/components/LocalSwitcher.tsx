@@ -13,7 +13,6 @@ function LocalSwitcher() {
         value={"fr"}
         className="text-gray-600 poppins-medium p-3"
       >
-        <img src={"/images/fr.png"} alt={"fr"} />
         French
       </option>
       <option
@@ -21,11 +20,6 @@ function LocalSwitcher() {
         value={"en"}
         className="text-gray-600 poppins-medium p-3"
       >
-        <img
-          src="/images/en.png"
-          alt="en-icon"
-          className="h-5 w-5 relative text-gray-500"
-        />
         English
       </option>
     </LocaleSwitcherSelect>

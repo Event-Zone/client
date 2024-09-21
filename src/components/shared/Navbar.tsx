@@ -22,6 +22,7 @@ import Ads from "../Search/Ads";
 import { selectSubscription } from "@/store/features/subscriptionSlice";
 function Navbar() {
   const [showSearchs, setShowSearchs] = useState<boolean>(false);
+  const [showSearchLocation, setShowSearchLocation] = useState<boolean>(false);
   const allInitEvents = useSelector(selectInitialEvents);
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -49,7 +50,9 @@ function Navbar() {
     { searchTerm, stateName },
     { skip: searchTerm?.length === 0 }
   );
-
+  useEffect(() => {
+    console.log(showSearchLocation);
+  }, [showSearchLocation]);
   useEffect(() => {
     if (searchTerm === "") dispatch(setSearchedEvents(allInitEvents));
   }, [searchTerm]);
@@ -90,7 +93,6 @@ function Navbar() {
   };
   const [inputLocation, setInputocation] = useState("");
   const [matchingLocations, setMatchingLocations] = useState<any>([]);
-  const [showSearch, setShowSearch] = useState<boolean>(false);
   const handleStateSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputocation(e.target.value);
   };
@@ -99,10 +101,10 @@ function Navbar() {
       location.toLowerCase().includes(inputLocation.toLowerCase())
     );
     setMatchingLocations(matchingLocations);
-
+    setShowSearchLocation(true);
     // Do something with matchingLocations, such as setting state
     console.log(matchingLocations);
-  }, [inputLocation, locations]); // Add 'locations' to the dependency array
+  }, [inputLocation]); // Add 'locations' to the dependency array
 
   const handlSearchClick = () => {
     setSearchOpen((prev) => !prev);
@@ -129,29 +131,29 @@ function Navbar() {
         break;
     }
   }, [user, fetchedSubscription]);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
+    // Function to hide dropdown when clicking outside
     const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {
-        // setCategorieSelectorVisible(false);
-        setMenuOpen(false);
-        setMatchingLocations(false);
+        setShowSearchs(false); // Hide the dropdown
+        setShowSearchLocation(false); // Hide the dropdown
       }
     };
 
-    if (true) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
+      // Unbind the event listener on cleanup
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [dropdownRef]);
   return (
     <div className="border-b-[1px] border-[#BCC6CE] ">
       {/* Search Input for Small Screens */}
@@ -196,23 +198,27 @@ function Navbar() {
               <input
                 onClick={() => {
                   setStateName("");
-                  setShowSearch(!showSearch);
+                  setShowSearchLocation(true);
                 }}
                 onChange={handleStateSearch}
                 className="p-2 pl-8 text-gray-500 focus:outline-none w-full bg-transparent"
                 value={stateName !== "" ? stateName : inputLocation}
               />
               <div className="absolute  z-50 bg-white">
-                <div className="relative w-fit">
-                  {matchingLocations &&
-                    showSearch &&
-                    matchingLocations.map((state: string) => (
+                <div
+                  onClick={() => setShowSearchLocation(true)}
+                  className="relative w-fit"
+                  ref={dropdownRef}
+                >
+                  {showSearchLocation &&
+                    matchingLocations &&
+                    matchingLocations?.map((state: string) => (
                       <div
-                        ref={dropdownRef}
+                        // ref={dropdownRef}
                         key={state}
                         onClick={() => {
                           setStateName(state);
-                          setShowSearch(false);
+                          setShowSearchLocation(false);
                         }}
                         className="text-gray-500   pippins-regular px-4 py-1 hover:bg-mainBlue bg-opacity-5"
                       >
@@ -266,12 +272,11 @@ function Navbar() {
                 className="p-2 pl-4 w-full text-gray-700 poppins-regular outline-none focus:outline-none border-0"
               />
               <div className="absolute w-fit top-14   bg-white">
-                <div className="relative w-fit z-50">
+                <div ref={dropdownRef} className="relative w-fit z-50">
                   {searchedEvents &&
                     showSearchs &&
                     searchedEvents.map((event: any) => (
                       <div
-                        ref={dropdownRef}
                         key={event?._id}
                         onClick={() => {
                           router.push("/search");
@@ -300,23 +305,27 @@ function Navbar() {
             <input
               onClick={() => {
                 setStateName("");
-                setShowSearch(!showSearch);
+                setShowSearchLocation(!showSearchLocation);
               }}
               onChange={handleStateSearch}
               className="md:w-full  pl-8 text-gray-500 focus:outline-none"
               value={stateName !== "" ? stateName : inputLocation}
             />
             <div className="absolute  z-50 bg-white">
-              <div className="relative w-fit">
-                {matchingLocations &&
-                  showSearch &&
-                  matchingLocations.map((state: string) => (
+              <div
+                onClick={() => setShowSearchLocation(!showSearchLocation)}
+                className="relative w-fit"
+                ref={dropdownRef}
+              >
+                {showSearchLocation &&
+                  matchingLocations &&
+                  matchingLocations?.map((state: string) => (
                     <div
-                      ref={dropdownRef}
+                      // ref={dropdownRef}
                       key={state}
                       onClick={() => {
                         setStateName(state);
-                        setShowSearch(false);
+                        setShowSearchLocation(false);
                       }}
                       className="text-gray-500   pippins-regular px-4 py-1 hover:bg-mainBlue bg-opacity-5"
                     >

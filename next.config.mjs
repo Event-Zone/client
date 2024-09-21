@@ -10,7 +10,8 @@ const nextConfig = {
         ignoreDuringBuilds: true,
     },
     images: {
-        domains: [process.env.NEXT_PUBLIC_HOST_NAME],
+        domains: [process.env.NEXT_PUBLIC_HOST_NAME, 'via.placeholder.com',             // Allow placeholder images
+        ],
     },
 
 };

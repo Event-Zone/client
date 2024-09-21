@@ -42,14 +42,14 @@ function Users() {
     console.log("refetched//////////////////////////");
 
     if (fetchedUsers && fetchedSubscriptions) {
-      let mmdata = fetchedUsers.filter((user: any) => !user.suspended);
+      let mmdata = fetchedUsers?.filter((user: any) => !user.suspended);
       mmdata = mmdata
-        .filter((user: any) =>
+        ?.filter((user: any) =>
           fetchedSubscriptions.some(
             (subscription: any) => subscription._id === user.subscription
           )
         )
-        .map((user: any) => {
+        ?.map((user: any) => {
           const subscription = fetchedSubscriptions.find(
             (subscription: any) => subscription._id === user.subscription
           );
@@ -100,11 +100,11 @@ function Users() {
         console.log("Visitors", fetchedUsers);
         setUsers(
           fetchedUsers
-            .filter((user: any) => {
+            ?.filter((user: any) => {
               console.log(user);
               return !user?.subscription;
             })
-            .map((user: any) => ({
+            ?.map((user: any) => ({
               ...user,
               userId: user._id,
               eventsIds: user.eventsIds,
@@ -212,7 +212,7 @@ function Users() {
           </thead>
           <tbody>
             {users &&
-              users.map((user: any) => {
+              users?.map((user: any) => {
                 return (
                   <User setSelected={setSelected} key={user._id} user={user} />
                 );
