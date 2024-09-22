@@ -28,6 +28,8 @@ import Ads from "./Ads";
 import Progress from "../shared/Progress";
 import { useTranslations } from "next-intl";
 import { selectlocation, setlocation } from "@/store/features/locationSlice";
+import NextEventCard from "../Home/NextEventCard";
+import { useRouter } from "@/navigation";
 
 function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   const dispatch = useDispatch();
@@ -58,7 +60,7 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
   >();
 
   const [events, setEvents] = useState<any[] | null>([]);
-
+  const router = useRouter();
   useEffect(() => {
     setEvents(seachedEvents);
     console.log("seachedEvents", seachedEvents);
@@ -453,10 +455,28 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
       )}
 
       {/* Display Results */}
-      <div className="flex">
+      <div className="hidden md:flex">
         <div className="mt-4">
           {events && events?.length > 0 ? (
             events.map((event) => <EventCard key={event._id} event={event} />)
+          ) : (
+            <p className="poppins-medium"> {t("noEvents")}</p>
+          )}
+        </div>
+      </div>
+      {/* small screen */}
+      <div className=" md:hidden flex">
+        <div className="mt-4">
+          {events && events?.length > 0 ? (
+            events.map((event: any, index: number) => (
+              <div
+                onClick={() => router.push(`/events/details/${event._id}`)}
+                key={index}
+                className="md:mb-0 mb-3 md:border-0 border-[1.3px] border-gray-300 md:m-0 pb-1  lg:w-[23%] w-full h-fit  md:h-[460px] flex-shrink-0 bg-white rounded-lg overflow-hidden"
+              >
+                <NextEventCard event={event} />
+              </div>
+            ))
           ) : (
             <p className="poppins-medium"> {t("noEvents")}</p>
           )}

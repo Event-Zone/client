@@ -163,9 +163,11 @@ function Navbar() {
           onClick={() => setShowSearchs((prev) => !prev)}
           className=" md:hidden md:mt-0 mt-[56px]  lg:hidden z-50 absolute w-screen h-screen bg-white p-2 flex flex-col   "
         >
-          <div className="h-[635px]">
-            <Ads />
-          </div>
+          {
+            <div className="h-[635px]">
+              <Ads />
+            </div>
+          }
           <div className="mt-3 flex-grow flex flex-col ">
             {" "}
             <div className="flex items-center border-[1.4px] border-gray-200 mb-4 rounded-md">
@@ -260,7 +262,7 @@ function Navbar() {
         <div
           className="flex items-center cursor-pointer"
           onClick={() => {
-            handlSearchClick();
+            setSearchOpen(false);
             router.push("/");
           }}
         >
