@@ -1,6 +1,7 @@
 import { IEvent } from "@/types/Event";
 import React, { useEffect, useState } from "react";
 import {
+  useDeleteEventMutation,
   useGetSubscriptionQuery,
   useGetUserQuery,
   useUpdateEventStatusMutation,
@@ -19,6 +20,19 @@ function Event({
   event: IEvent;
   refetchEvents: Function;
 }) {
+  const [deleteEvent, deleteEventResult] = useDeleteEventMutation();
+  const handleDelete = () => {
+    deleteEvent(event._id);
+  };
+  useEffect(() => {
+    if (deleteEventResult.status === "fulfilled") {
+      console.log("fulfilled");
+      refetchEvents();
+    } else if (deleteEventResult.status === "rejected") {
+      console.error("rejected");
+    }
+  }, [deleteEventResult]);
+
   useEffect(() => {
     console.log(status);
   }, [status]);
@@ -128,6 +142,19 @@ function Event({
               />
             </button>
           )}
+          {
+            <button onClick={handleDelete} className="w-fit h-fit rounded-full">
+              <Image
+                src="/icons/delete.png"
+                alt="reject"
+                width={500} // Specify width
+                height={300} // Specify height
+                quality={75} // Adjust quality to improve performance (default is 75)
+                // placeholder="blur" // Optionally use a low-quality placeholder
+                className="w-[30px] h-[30px]"
+              />{" "}
+            </button>
+          }
           {status === "approved" || status === "pending" ? (
             <button
               onClick={handleDecline}
