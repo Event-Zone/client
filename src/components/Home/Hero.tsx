@@ -88,7 +88,7 @@ const Hero = () => {
           alt={`eventHeroImage${currentBar}`}
           width={1920} // Specify a large width for better responsiveness
           height={1080} // Specify a large height to maintain aspect ratio
-          quality={75}
+          quality={90}
           className="absolute top-0 left-0 w-full h-full object-cover" // Ensure the image covers the container
         />
         <div className="hero-overlay md:block hidden"></div>

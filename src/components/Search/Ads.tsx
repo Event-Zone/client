@@ -41,7 +41,7 @@ function Ads() {
             alt={`ad${currentBar}`}
             width={500} // Specify width
             height={300} // Specify height
-            quality={75} // Adjust quality to improve performance (default is 75)
+            quality={90} // Adjust quality to improve performance (default is 75)
             // placeholder="blur" // Optionally use a low-quality placeholder
           />
 

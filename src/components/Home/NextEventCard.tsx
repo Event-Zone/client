@@ -39,7 +39,7 @@ function NextEventCard({ event }: { event: any }) {
           }
           width={500}
           height={300}
-          quality={75}
+          quality={90}
         />{" "}
         <div className=" absolute bottom-3 left-3  w-fit overflow-scroll element-with-scrollbar">
           <p className="whitespace-nowrap bg-[#E9F1FC]  rounded-md text-mainBlue poppins-medium text-[12px] py-2 px-2">

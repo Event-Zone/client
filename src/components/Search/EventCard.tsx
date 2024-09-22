@@ -61,7 +61,7 @@ function EventCard({ event }: EventCardProps) {
           className="w-full sm:w-[200px] md:w-[245px] rounded-md"
           width={500} // Specify width
           height={300} // Specify height
-          quality={75} // Adjust quality to improve performance (default is 75)
+          quality={90} // Adjust quality to improve performance (default is 75)
           // placeholder="blur" // Optionally use a low-quality placeholder
         />
         <div className="p-4 w-full sm:w-2/3">
