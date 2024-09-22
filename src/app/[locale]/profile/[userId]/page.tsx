@@ -8,7 +8,6 @@ function Page({ params: { userId } }: { params: { userId: string } }) {
   return (
     <>
       <Profile params={{ userId }} />
-      <Footer />
     </>
   );
 }

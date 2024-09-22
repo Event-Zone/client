@@ -91,7 +91,7 @@ function Subscription({ pack }: { pack: string }) {
   const t = useTranslations("subscriptions");
 
   return (
-    <div className="flex-grow md:p-8 bg-white rounded-lg shadow-md justify-center items-center overflow-hidden">
+    <div className=" flex-grow md:p-8 bg-white rounded-lg shadow-md justify-center items-center overflow-hidden">
       <div className="border-[1.4px] border-gray-400 rounded-lg p-12 md:mx-32 md:my-16">
         <div className="flex md:flex-row flex-col justify-between items-center">
           <h3 className="poppins-regular text-[18px]">Inscription</h3>

@@ -9,7 +9,6 @@ function ChangeSubscription() {
   return (
     <div>
       <ChangeSubscriptionComponent />
-      <Footer />
     </div>
   );
 }

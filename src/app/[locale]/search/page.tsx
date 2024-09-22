@@ -18,7 +18,6 @@ function Page() {
           <Ads />
         </div>
       </div>{" "}
-      <Footer />{" "}
     </>
   );
 }

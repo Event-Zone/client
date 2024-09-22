@@ -9,7 +9,6 @@ function Tarification() {
   return (
     <>
       <TarificationComponenet />
-      <Footer />{" "}
     </>
   );
 }

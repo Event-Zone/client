@@ -47,7 +47,7 @@ function EditPassword({ id }: { id: string }) {
   }, [oldPassword, newPassword, confirmNewPassword]);
   const t = useTranslations("Login");
   return (
-    <div>
+    <div className="">
       <form className="p-20" onSubmit={handleSubmit}>
         <div>
           <label>{t("password")}:</label>

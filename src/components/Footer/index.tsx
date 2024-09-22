@@ -30,7 +30,7 @@ function Footer() {
   }
   const t = useTranslations("Footer");
   return (
-    <footer className="mt-8 text-center flex  justify-center items-center w-full bg-[#0a1a35] text-white py-8 md:h-[300px] ">
+    <footer className=" mt-8 text-center flex  justify-center items-center w-full bg-[#0a1a35] text-white py-8 md:h-[300px] ">
       <div className="container   mx-2 flex md:flex-row flex-col-reverse justify-between items-center md:h-auto h-[500px]">
         {/* Left Section */}
         <div className="flex md:flex-row flex-col-reverse items-center justify-center">

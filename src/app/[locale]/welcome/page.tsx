@@ -9,7 +9,7 @@ import React from "react";
 function Welcome() {
   return (
     <>
-      <WelcomeComponent /> <Footer />
+      <WelcomeComponent />
     </>
   );
 }

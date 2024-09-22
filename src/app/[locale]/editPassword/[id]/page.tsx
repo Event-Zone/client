@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 function Page({ params: { id } }: { params: { id: string } }) {
   return (
     <>
-      <EditPassword id={id as string} /> <Footer />{" "}
+      <EditPassword id={id as string} />{" "}
     </>
   );
 }
