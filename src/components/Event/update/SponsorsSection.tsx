@@ -48,7 +48,7 @@ function SponsorsSection({
           <img
             alt="submittedicon"
             className="w-[25px] h-[25px]"
-            src="/icons/submittedIcon.png"
+            src="/icons/submittedIcon.svg"
           />
         ) : (
           <button

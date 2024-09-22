@@ -58,7 +58,7 @@ function Villes() {
             <img
               alt="event-img"
               className=" object-cover w-[76px] h-[76px] md:w-full md:h-[150px]  lg:h-[200px]   md:rounded-md rounded-full"
-              src="/images/Alger.png"
+              src="/images/Alger.svg"
             />{" "}
             <p className="md:hidden block text-gray-500 text-[10px] text-center mt-2  ">
               Alger
@@ -83,7 +83,7 @@ function Villes() {
             <img
               alt="event-img"
               className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px] lg:h-[200px]  md:rounded-md rounded-full"
-              src="/images/Oran.png"
+              src="/images/Oran.svg"
             />{" "}
             <p className="md:hidden block text-gray-500 text-[10px] text-center mt-2  ">
               Oran
@@ -108,7 +108,7 @@ function Villes() {
             <img
               alt="event-img"
               className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px] lg:h-[200px]  md:rounded-md rounded-full"
-              src="/images/Annaba.png"
+              src="/images/Annaba.svg"
             />{" "}
             <p className="md:hidden block text-gray-500 text-[10px] text-center mt-2  ">
               Annaba
@@ -133,7 +133,7 @@ function Villes() {
             <img
               alt="event-img"
               className="object-cover w-[76px] h-[76px] md:w-full md:h-[150px] lg:h-[200px]  md:rounded-md rounded-full"
-              src="/images/Constantine.png"
+              src="/images/Constantine.svg"
             />
             <p className="md:hidden block text-gray-500 text-[10px] text-center mt-2  ">
               Constantine

@@ -94,19 +94,19 @@ function RishTextEditor({
       <div className="flex mt-2 space-x-2">
         <img
           alt="bold"
-          src="/icons/ooui_bold-b.png"
+          src="/icons/ooui_bold-b.svg"
           className="w-5 h-5 cursor-pointer"
           onClick={() => applyFormat("bold")}
         />
         <img
           alt="list"
-          src="/icons/fe_list-bullet.png"
+          src="/icons/fe_list-bullet.svg"
           className="w-5 h-5 cursor-pointer"
           onClick={() => applyFormat("insertUnorderedList")}
         />
         <img
           alt="numbered-list"
-          src="/icons/ph_list-numbers-bold.png"
+          src="/icons/ph_list-numbers-bold.svg"
           className="w-5 h-5 cursor-pointer"
           onClick={() => applyFormat("insertOrderedList")}
         />

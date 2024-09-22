@@ -86,7 +86,7 @@ function ImagesSection({
           <div className="bg-white w-fit  poppins-medium text-titles flex rounded-lg p-3 absolute top-3 right-3">
             <img
               alt="show"
-              src={`/icons/Show.png`}
+              src={`/icons/Show.svg`}
               className="w-[23px] h-[23px] bg-white rounded-full  m-r-1 "
             />{" "}
             {t("ImgCouverture")}
@@ -96,7 +96,7 @@ function ImagesSection({
           <img
             alt="submittedicon"
             className="w-[25px] h-[25px] absolute right-0 top-0"
-            src="/icons/submittedIcon.png"
+            src="/icons/submittedIcon.svg"
           />
         ) : null}
         {/* Label acting as a button for file input */}
@@ -116,7 +116,7 @@ function ImagesSection({
                 if (event.target.files) {
                   const files = Array.from(event.target.files as FileList);
                   const imageFiles = files.filter((file) =>
-                    ["image/jpeg", "image/png", "image/svg+xml"].includes(
+                    ["image/jpeg", "image/svg", "image/svg+xml"].includes(
                       file.type
                     )
                   );
@@ -135,7 +135,7 @@ function ImagesSection({
             />
             <img
               alt="uploadicon"
-              src="/icons/upload.png"
+              src="/icons/upload.svg"
               className="md:w-16 md:h-16  "
             />
             <h3 className="text-mainBlue poppins-medium mt-2">
@@ -216,7 +216,7 @@ function ImagesSection({
                       />
                       <img
                         alt="uploadicon"
-                        src="/icons/ph_plus-bold.png"
+                        src="/icons/ph_plus-bold.svg"
                         className="md:w-[24px] md:h-[24px] mb-[3px] "
                       />
                     </label>
@@ -239,7 +239,7 @@ function ImagesSection({
                             {index === 0 && (
                               <img
                                 alt="show"
-                                src={`/icons/Show.png`}
+                                src={`/icons/Show.svg`}
                                 className="w-[23px] h-[23px] bg-white rounded-full  absolute right-1 top-1"
                               />
                             )}
@@ -290,7 +290,7 @@ function ImagesSection({
               <img
                 alt="runicon"
                 className="w-[17px] h-[17px]"
-                src="/icons/Property 34.png"
+                src="/icons/Property 34.svg"
               />
               <input
                 disabled={fetchedSubscription?.pack !== "Business"}

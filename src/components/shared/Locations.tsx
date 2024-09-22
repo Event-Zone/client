@@ -117,7 +117,7 @@ function Locations({ setShowDialog }: { setShowDialog: Function }) {
               >
                 <img
                   alt="locationIcon"
-                  src="/icons/mdi_calendar.png"
+                  src="/icons/mdi_calendar.svg"
                   className="w-6 h-6 mb-1"
                 />
                 <p className="poppins-medium text-base">{location} </p>

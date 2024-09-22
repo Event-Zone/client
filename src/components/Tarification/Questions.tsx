@@ -64,8 +64,8 @@ function Questions() {
                 <img
                   src={` ${
                     openQuestion !== index
-                      ? "/icons/ArrowDownCircle.png"
-                      : "/icons/ArrowUpCircle.png"
+                      ? "/icons/ArrowDownCircle.svg"
+                      : "/icons/ArrowUpCircle.svg"
                   }`}
                   alt="Arrow Icon"
                   className={`w-[24px] h-[24px] mr-2 transition-transform duration-300 ${

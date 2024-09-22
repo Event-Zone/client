@@ -27,7 +27,7 @@ function Collaborer() {
           onClick={() => router.push("/search")}
         >
           <div>
-            <img alt="search-icon" src="/icons/ion_search.png" />
+            <img alt="search-icon" src="/icons/ion_search.svg" />
           </div>
           <div>
             <div className="lg:pl-8 pl-2 flex items-start flex-col">
@@ -48,7 +48,7 @@ function Collaborer() {
           onClick={handleAddEventClick}
         >
           <div>
-            <img alt="plus-icon" src="/icons/ph_plus-bold.png" />
+            <img alt="plus-icon" src="/icons/ph_plus-bold.svg" />
           </div>
           <div>
             <div className="pl-8 flex items-start flex-col">

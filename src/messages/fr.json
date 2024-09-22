@@ -269,7 +269,7 @@
 },
 "localswitcher":{
   "label":"changer Langue",
-  "locale":"{locale , select , fr {'/images/fr.png'} en {English} other {unknown}}"
+  "locale":"{locale , select , fr {French} en {English} other {unknown}}"
 },
 "Terms": {
     "terms_conditions_title": "Conditions générales d'utilisation de la plateforme Eventzone",

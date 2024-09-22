@@ -239,7 +239,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
         >
           <img
             alt={"monthIcon"}
-            src="/icons/mdi_calendar.png"
+            src="/icons/mdi_calendar.svg"
             className="w-6 h-6 mb-1"
           />
           <p className="poppins-medium text-base">{format(month, "MMMM")}</p>

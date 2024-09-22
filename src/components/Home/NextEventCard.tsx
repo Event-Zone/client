@@ -56,7 +56,7 @@ function NextEventCard({ event }: { event: any }) {
           <div className=" md:w-auto w-fit px-1 md:bg-transparent bg-[#F9F9F9] rounded-md md:mx-0  my-2 flex text-[12px] sm:text-[14px] text-gray-600">
             <img
               alt="icon"
-              src="/icons/ph_seal-check-fill (1).png"
+              src="/icons/ph_seal-check-fill (1).svg"
               className="mr-2 max-w-[20px] max-h-[20px]"
             />
             {fetchedSubscription?.company}
@@ -69,7 +69,7 @@ function NextEventCard({ event }: { event: any }) {
                 <img
                   className="mr-2"
                   alt="location-icon"
-                  src="/icons/LocationGray.png"
+                  src="/icons/LocationGray.svg"
                 />
                 <p className="text-ellipsis line-clamp-1">
                   {event.location?.address?.commercial}
@@ -81,7 +81,7 @@ function NextEventCard({ event }: { event: any }) {
                   <img
                     className="mr-2"
                     alt="location-icon"
-                    src="/icons/LocationGray.png"
+                    src="/icons/LocationGray.svg"
                   />{" "}
                   <p className="text-ellipsis line-clamp-1">
                     {event.location?.address?.state}
@@ -95,7 +95,7 @@ function NextEventCard({ event }: { event: any }) {
           <img
             className="mr-2"
             alt="calendar-icon"
-            src="/icons/CalendarGray.png"
+            src="/icons/CalendarGray.svg"
           />
           {event.startdate
             ? formatDate(event.startdate as unknown as string)

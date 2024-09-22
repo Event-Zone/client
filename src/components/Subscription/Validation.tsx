@@ -13,7 +13,7 @@ function Validation() {
     <div className="flex flex-col justify-around items-center flex-1">
       <img
         alt="eventzone-logo"
-        src="/images/Logo.png"
+        src="/images/Logo.svg"
         className="md:block hidden"
       />
       <h3 className="text-titles text-center poppins-semibold text-[24px] md:text-4xl ">

@@ -388,7 +388,7 @@ function EventForm({
                 <div className="flex items-center justify-center">
                   <img
                     alt="glob"
-                    src="/icons/global.png"
+                    src="/icons/global.svg"
                     className="w-[20px] h-[20px]"
                   />
                   <div style={{ width: "50vw" }}>
@@ -416,7 +416,7 @@ function EventForm({
               <div className="flex flex-row">
                 <img
                   alt="calendar"
-                  src="/icons/CalendarGray.png"
+                  src="/icons/CalendarGray.svg"
                   className="mr-1 w-[20px] h-[20px]"
                 />
                 <DatePicker
@@ -439,7 +439,7 @@ function EventForm({
               <div className="flex flex-row">
                 <img
                   alt="calendar"
-                  src="/icons/CalendarGray.png"
+                  src="/icons/CalendarGray.svg"
                   className="mr-1 w-[20px] h-[20px]"
                 />
                 <DatePicker
@@ -489,7 +489,7 @@ function EventForm({
         <p className="text-gray-600 poppins-regular">{t("contacts")}</p>
 
         <div className="mb-2 border-gray-300 border-[1.3px] p-2 flex flex-row">
-          <img alt="mobile" src={"/icons/mobile.png"} />
+          <img alt="mobile" src={"/icons/mobile.svg"} />
           <input
             type="text"
             id="mobile"
@@ -502,7 +502,7 @@ function EventForm({
         </div>
 
         <div className="mb-2 border-gray-300 border-[1.3px] p-2 flex flex-row">
-          <img alt="global" src={"/icons/global.png"} />
+          <img alt="global" src={"/icons/global.svg"} />
 
           <input
             type="text"
@@ -516,7 +516,7 @@ function EventForm({
         </div>
 
         <div className="mb-2 border-gray-300 border-[1.3px] p-2 flex flex-row">
-          <img alt="linksubscription" src={"/icons/EditSquare.png"} />
+          <img alt="linksubscription" src={"/icons/EditSquare.svg"} />
 
           <input
             type="text"

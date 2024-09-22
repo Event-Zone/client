@@ -30,7 +30,6 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;700&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" type="image/png" href="/favicon.png" />
       </head>
       <body
         style={{ fontFamily: "Poppins , sans-serif" }}

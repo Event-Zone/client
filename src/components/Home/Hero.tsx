@@ -153,7 +153,7 @@ const Hero = () => {
             <p className="flex flex-row text-white poppins-regular  text-md  mt-1 items-center">
               <img
                 alt="location-icon"
-                src="/icons/LocationLight.png"
+                src="/icons/LocationLight.svg"
                 className="w-[20px] h-[20px] mr-2"
               />{" "}
               {eventAdds[currentBar]?.location ? (
@@ -172,7 +172,7 @@ const Hero = () => {
             <p className="flex flex-row text-white poppins-regular  text-md  mt-1 items-center">
               <img
                 alt="location-icon"
-                src="/icons/Calendar.png"
+                src="/icons/Calendar.svg"
                 className="w-[20px] h-[20px] mr-2"
               />{" "}
               {new Date(eventAdds[currentBar]?.startdate).toLocaleDateString(
@@ -256,7 +256,7 @@ const Hero = () => {
           <p className="p-2 border-b-2 border-gray-300 flex flex-row text-titles poppins-medium items-center">
             <img
               alt="location-icon"
-              src="/icons/LocationGray.png"
+              src="/icons/LocationGray.svg"
               className="w-[18px] h-[18px] mr-2"
             />
             <p className="text-ellipsis line-clamp-1">
@@ -277,7 +277,7 @@ const Hero = () => {
           <p className="p-2 flex flex-row text-titles poppins-medium items-center">
             <img
               alt="calendar-icon"
-              src="/icons/CalendarGray.png"
+              src="/icons/CalendarGray.svg"
               className="w-[18px] h-[18px] mr-2"
             />
             {new Date(eventAdds[currentBar]?.startdate).toLocaleDateString(
@@ -307,7 +307,7 @@ const Hero = () => {
           >
             <img
               alt="globe-icon"
-              src="/icons/globalDark.png"
+              src="/icons/globalDark.svg"
               className="w-[20px] h-[20px] mr-2"
             />
             Web Site

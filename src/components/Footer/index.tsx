@@ -42,7 +42,7 @@ function Footer() {
                 width={200}
                 height={30}
                 alt="logoEvenZone"
-                src={"/icons/Union1.png"}
+                src={"/icons/Union1.svg"}
                 className=" md:ml-8 md:w-[45px] md:h-[45px] w-[38px] h-[42px] md:mt-[-20px] mt-[20px]"
               />
             </div>
@@ -107,7 +107,7 @@ function Footer() {
               width={200}
               height={30}
               alt="logoEvenZone"
-              src={"/images/footerLogo.png"}
+              src={"/images/footerLogo.svg"}
               className="md:w-[200px] md:h-[30px] w-[140px] h-[20px]  "
             />
           </div>
@@ -126,7 +126,7 @@ function Footer() {
                 alt="facebookIcon"
                 width={26}
                 height={26}
-                src={"/icons/ic_baseline-facebook.png"}
+                src={"/icons/ic_baseline-facebook.svg"}
               />
             </a>
             <a
@@ -138,7 +138,7 @@ function Footer() {
                 alt="instaIcon"
                 width={20}
                 height={20}
-                src={"/icons/Vector (1).png"}
+                src={"/icons/Vector (1).svg"}
               />
             </a>
             <a
@@ -150,7 +150,7 @@ function Footer() {
                 alt="linkedinIcon"
                 width={20}
                 height={20}
-                src={"/icons/Vector (2).png"}
+                src={"/icons/Vector (2).svg"}
               />
             </a>
           </div>

@@ -9,7 +9,7 @@ function Welcome() {
 
   return (
     <div className="flex flex-col justify-around items-center flex-1">
-      <img alt="eventzone-logo" src="/images/Logo.png" />
+      <img alt="eventzone-logo" src="/images/Logo.svg" />
       <h3 className="text-titles text-3xl ">{t("Bienvenue sur EventZone!")}</h3>
       <p className="text-sm text-gray-600">{t("salutation")}</p>
       <div className=" flex flex-col md:flex-row items-center justify-between">
@@ -18,7 +18,7 @@ function Welcome() {
           className="mb-2 border-gray-600 border-2 md:p-10 p-5 md:m-5 flex flex-col justify-center items-center rounded-lg cursor-pointer"
         >
           <div>
-            <img alt="plus-icon" src="/icons/ion_search.png" />
+            <img alt="plus-icon" src="/icons/ion_search.svg" />
           </div>
           <h2 className="text-titles md:ml-14 mb-4 poppins-extrabold md:text-[30px]">
             {t("Explorer des événements")}{" "}
@@ -33,7 +33,7 @@ function Welcome() {
           className="md:w-auto w-full border-gray-600 border-2 md:p-10 p-5 md:m-5 flex flex-col justify-center items-center rounded-lg cursor-pointer"
         >
           <div>
-            <img alt="plus-icon" src="/icons/ph_plus-bold.png" />
+            <img alt="plus-icon" src="/icons/ph_plus-bold.svg" />
           </div>
           <h2 className="text-titles md:ml-14 mb-4 poppins-extrabold md:text-[30px]">
             {t("Organiser des événements")}{" "}

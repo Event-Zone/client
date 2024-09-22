@@ -17,7 +17,7 @@ const cardData = [
       { text: "Badge d'organisateur premium", checked: false },
       { text: "Support Prioritaire", checked: false },
     ],
-    icon: "/icons/starterIcon.png",
+    icon: "/icons/starterIcon.svg",
     borderColor: "border-gray-400",
   },
   {
@@ -34,7 +34,7 @@ const cardData = [
       { text: "Badge d'organisateur premium", checked: true },
       { text: "Support Prioritaire", checked: true },
     ],
-    icon: "/icons/businessIcon1.png",
+    icon: "/icons/businessIcon1.svg",
     borderColor: "border-mainBlue",
   },
   {
@@ -51,7 +51,7 @@ const cardData = [
       { text: "Badge d'organisateur premium", checked: false },
       { text: "Support Prioritaire", checked: false },
     ],
-    icon: "/icons/studentIcon.png",
+    icon: "/icons/studentIcon.svg",
     borderColor: "border-gray-400",
   },
 ];
@@ -113,7 +113,7 @@ function Cards({ price }: { price: number }) {
               <img
                 alt={feature.checked ? "check" : "uncheck"}
                 src={
-                  feature.checked ? "/icons/check.png" : "/icons/uncheck.png"
+                  feature.checked ? "/icons/check.svg" : "/icons/uncheck.svg"
                 }
                 className="mr-2 w-[20px] h-[20px]"
               />

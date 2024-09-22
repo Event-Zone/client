@@ -122,7 +122,7 @@ function Explore() {
     <div className="flex overflow-hidden ">
       <div className="md:block hidden relative w-1/3 h-screen overflow-hidden">
         <Image
-          src="/images/Frame 1063.png" // Update with your image path
+          src="/images/Frame 1063.svg" // Update with your image path
           alt="Static Image"
           width={600}
           height={600}

@@ -79,7 +79,7 @@ function ImagesSection({
           <img
             alt="submittedicon"
             className="w-[25px] h-[25px] absolute right-0 top-0"
-            src="/icons/submittedIcon.png"
+            src="/icons/submittedIcon.svg"
           />
         )}
       </div>
@@ -126,7 +126,7 @@ function ImagesSection({
                             {index === 0 && (
                               <img
                                 alt="show"
-                                src={`/icons/Show.png`}
+                                src={`/icons/Show.svg`}
                                 className="w-[23px] h-[23px] bg-white rounded-full  absolute right-1 top-1"
                               />
                             )}
@@ -161,7 +161,7 @@ function ImagesSection({
               <img
                 alt="runicon"
                 className="w-[17px] h-[17px]"
-                src="/icons/Property 34.png"
+                src="/icons/Property 34.svg"
               />
               <input
                 disabled={fetchedSubscription?.pack !== "Business"}

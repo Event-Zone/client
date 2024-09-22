@@ -72,7 +72,7 @@ function PropretiesSection({
         >
           {isSubmitted ? (
             <img
-              src="/icons/submittedIcon.png"
+              src="/icons/submittedIcon.svg"
               alt="submitted"
               className="w-6 h-6"
             />

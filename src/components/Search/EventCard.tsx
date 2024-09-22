@@ -97,7 +97,7 @@ function EventCard({ event }: EventCardProps) {
               <div className="flex items-center mr-4 mb-2">
                 <img
                   alt="icon"
-                  src="/icons/globalBlue.png"
+                  src="/icons/globalBlue.svg"
                   className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]"
                 />
                 <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-md">
@@ -109,7 +109,7 @@ function EventCard({ event }: EventCardProps) {
               <div className="flex items-center mr-4 mb-2">
                 <img
                   alt="icon"
-                  src="/icons/Ticket.png"
+                  src="/icons/Ticket.svg"
                   className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]"
                 />
                 <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-md">
@@ -121,7 +121,7 @@ function EventCard({ event }: EventCardProps) {
               <div className="flex items-center mb-2">
                 <img
                   alt="icon"
-                  src="/icons/ph_seal-check-fill (1).png"
+                  src="/icons/ph_seal-check-fill (1).svg"
                   className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]"
                 />
                 <p className="poppins-medium text-mainBlue ml-2 text-sm sm:text-md">

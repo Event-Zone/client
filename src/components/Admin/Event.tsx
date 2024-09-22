@@ -132,7 +132,7 @@ function Event({
               className="w-fit h-fit rounded-full"
             >
               <Image
-                src="/icons/Frame 1229.png"
+                src="/icons/Frame 1229.svg"
                 alt="approve"
                 width={500} // Specify width
                 height={300} // Specify height
@@ -145,7 +145,7 @@ function Event({
           {
             <button onClick={handleDelete} className="w-fit h-fit rounded-full">
               <Image
-                src="/icons/delete.png"
+                src="/icons/delete.svg"
                 alt="reject"
                 width={500} // Specify width
                 height={300} // Specify height
@@ -161,7 +161,7 @@ function Event({
               className="w-fit h-fit rounded-full"
             >
               <Image
-                src="/icons/Frame 1230.png"
+                src="/icons/Frame 1230.svg"
                 alt="reject"
                 width={500} // Specify width
                 height={300} // Specify height
@@ -174,7 +174,7 @@ function Event({
           {status === "approved" ? (
             <button onClick={handlePause} className="w-fit h-fit rounded-full">
               <Image
-                src="/icons/Frame 1229 (1).png"
+                src="/icons/Frame 1229 (1).svg"
                 alt="reject"
                 width={500} // Specify width
                 height={300} // Specify height
@@ -189,7 +189,7 @@ function Event({
             className="w-fit h-fit rounded-full"
           >
             <Image
-              src="/icons/Frame 1303.png"
+              src="/icons/Frame 1303.svg"
               className="w-[40px] h-[40px]"
               alt="view"
               width={500} // Specify width

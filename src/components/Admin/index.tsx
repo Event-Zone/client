@@ -112,7 +112,7 @@ function Admin() {
           </div>
         )}
         <div className="flex justify-center items-center">
-          <img src="/image/Frame 1 (1).png" alt="logo" />
+          <img src="/image/Frame 1 (1).svg" alt="logo" />
         </div>
         <div className="bg-[#001029] px-3 flex flex-col items-center min-h-[300px] justify-around">
           <div
@@ -121,7 +121,7 @@ function Admin() {
               page === 0 && "bg-[#203F6F]"
             }`}
           >
-            <img src="/icons/category.png" alt="icon" className="mr-3" />
+            <img src="/icons/category.svg" alt="icon" className="mr-3" />
             <p className="poppins-medium text-blewishGrey hidden md:block">
               Dashboard
             </p>
@@ -132,7 +132,7 @@ function Admin() {
               page === 1 && "bg-[#203F6F]"
             }`}
           >
-            <img src="/icons/document-normal.png" alt="icon" className="mr-3" />
+            <img src="/icons/document-normal.svg" alt="icon" className="mr-3" />
             <p className="poppins-medium text-blewishGrey hidden md:block">
               Events
             </p>
@@ -143,7 +143,7 @@ function Admin() {
               page === 2 && "bg-[#203F6F]"
             }`}
           >
-            <img src="/icons/video-octagon.png" alt="icon" className="mr-3" />
+            <img src="/icons/video-octagon.svg" alt="icon" className="mr-3" />
             <p className="poppins-medium text-blewishGrey hidden md:block">
               Media & Ads
             </p>
@@ -154,7 +154,7 @@ function Admin() {
               page === 3 && "bg-[#203F6F]"
             }`}
           >
-            <img src="/icons/profile-2user.png" alt="icon" className="mr-3" />
+            <img src="/icons/profile-2user.svg" alt="icon" className="mr-3" />
             <p className="poppins-medium text-blewishGrey hidden md:block">
               Users Management
             </p>
@@ -175,7 +175,7 @@ function Admin() {
         <div className="w-fit flex mb-6">
           <div className="mr-2">
             <img
-              src="/icons/Profile.png"
+              src="/icons/Profile.svg"
               alt="profile icon"
               className="bg-[#364153] rounded-full p-2"
             />
@@ -200,7 +200,7 @@ function Admin() {
               className="flex-grow flex items-center justify-center border-2 border-dashed cursor-pointer border-mainBlue"
             >
               <img
-                src="/icons/ph_plus-bold.png"
+                src="/icons/ph_plus-bold.svg"
                 alt="plusIcon"
                 className="w-[20px] h-[20px]"
               />

@@ -176,8 +176,8 @@ function LoginForm() {
         className="flex flex-col items-center p-6 md:mx-24"
       >
         <div className="flex flex-col justify-center items-center ">
-          <img src="/icons/Union.png" alt="Logo" className="mb-1" />
-          <img src="/images/Logo.png" alt="Logo" className="mb-6" />
+          <img src="/icons/Union.svg" alt="Logo" className="mb-1" />
+          <img src="/images/Logo.svg" alt="Logo" className="mb-6" />
         </div>
 
         {showA2FForm ? (

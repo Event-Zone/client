@@ -43,7 +43,7 @@ function SponsorsSection({
           <img
             alt="submittedicon"
             className="w-[25px] h-[25px]"
-            src="/icons/submittedIcon.png"
+            src="/icons/submittedIcon.svg"
           />
         ) : (
           <button
@@ -71,7 +71,7 @@ function SponsorsSection({
             />
             <img
               alt="uploadicon"
-              src="/icons/upload.png"
+              src="/icons/upload.svg"
               className="w-16 h-16"
             />
             <h3 className="text-mainBlue poppins-medium mt-2">

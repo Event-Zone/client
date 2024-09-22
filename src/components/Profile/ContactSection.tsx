@@ -21,7 +21,7 @@ const ContactSection = () => {
             width={24}
             height={24}
             alt="phoneicon"
-            src={"/icons/call.png"}
+            src={"/icons/call.svg"}
             className="mr-2"
           />
           +213 781 45 75 11
@@ -34,7 +34,7 @@ const ContactSection = () => {
             width={24}
             height={24}
             alt="emailicon"
-            src={"/icons/sms.png"}
+            src={"/icons/sms.svg"}
             className="mr-2"
           />{" "}
           support@eventzone.pro

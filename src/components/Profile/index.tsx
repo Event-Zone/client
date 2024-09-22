@@ -344,10 +344,10 @@ const Profile = ({ params: { userId } }: { params: { userId: string } }) => {
                       alt={fetchedSubscription._id}
                       src={
                         fetchedSubscription.pack === "Business"
-                          ? "/icons/BusinessIcon1.png"
+                          ? "/icons/BusinessIcon1.svg"
                           : fetchedSubscription.pack === "Starter"
-                          ? "/icons/starterIcon.png"
-                          : "/icons/studentIcon.png"
+                          ? "/icons/starterIcon.svg"
+                          : "/icons/studentIcon.svg"
                       }
                     />
                     {fetchedSubscription.pack}

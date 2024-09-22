@@ -272,7 +272,7 @@ function Navbar() {
           }}
         >
           <img
-            src="/images/footerLogo.png"
+            src="/images/footerLogo.svg"
             alt="Navbar Logo"
             className="md:max-w-[160px] max-w-[130px]"
           />
@@ -388,7 +388,7 @@ function Navbar() {
             </div>
           }
           <img
-            src="/icons/menu.png"
+            src="/icons/menu.svg"
             alt="Menu Icon"
             className="cursor-pointer"
             onClick={handleMenuToggle}
@@ -444,7 +444,7 @@ function Navbar() {
                 src={
                   user?.profilePicture
                     ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${user.profilePicture}`
-                    : "/icons/Profile.png"
+                    : "/icons/Profile.svg"
                 }
               />
             </div>
@@ -537,7 +537,7 @@ function Navbar() {
                             src={
                               user?.profilePicture
                                 ? `${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${user.profilePicture}`
-                                : "/icons/Profile.png"
+                                : "/icons/Profile.svg"
                             }
                           />
                         </div>

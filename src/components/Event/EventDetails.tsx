@@ -209,7 +209,7 @@ function EventDetails({
             <div className="mb-2 mr-2 rounded-3xl poppins-regular px-3 py-5  max-h-[33px]  text-white bg-mainBlue flex items-center justify-center ">
               <img
                 alt="icon"
-                src="/icons/Edit Square.png"
+                src="/icons/Edit Square.svg"
                 className="max-w-[30px] max-h-[30px]"
               />{" "}
               <a
@@ -230,7 +230,7 @@ function EventDetails({
               <img
                 alt="icon"
                 src={`${
-                  hovered === 0 ? "/icons/globalW.png" : "/icons/globalDark.png"
+                  hovered === 0 ? "/icons/globalW.svg" : "/icons/globalDark.svg"
                 }`}
                 className="max-w-[30px] max-h-[30px]"
               />{" "}
@@ -253,7 +253,7 @@ function EventDetails({
               <img
                 alt="icon"
                 src={`${
-                  hovered === 1 ? "/icons/mobileW.png" : "/icons/mobileB.png"
+                  hovered === 1 ? "/icons/mobileW.svg" : "/icons/mobileB.svg"
                 }`}
                 className="max-w-[30px] max-h-[30px]"
               />
@@ -272,7 +272,7 @@ function EventDetails({
               <img
                 alt="icon"
                 src={`${
-                  hovered === 2 ? "/icons/gpsWhite.png" : "/icons/gps.png"
+                  hovered === 2 ? "/icons/gpsWhite.svg" : "/icons/gps.svg"
                 }`}
                 className="max-w-[30px] max-h-[30px]"
               />{" "}
@@ -312,7 +312,7 @@ function EventDetails({
                       <div className="flex ">
                         <img
                           alt="icon"
-                          src="/icons/ph_seal-check-fill (1).png"
+                          src="/icons/ph_seal-check-fill (1).svg"
                           className="max-w-[20px] max-h-[20px]"
                         />
                       </div>
@@ -322,7 +322,7 @@ function EventDetails({
               </div>
               <div className="flex justify-between items-center cursor-pointer bg-[#DAE6F4] rounded-md p-2">
                 <p className="text-mainBlue poppins-regular text-sm  flex  ">
-                  <img alt="calendaricon" src="/icons/calendar-edit.png" />
+                  <img alt="calendaricon" src="/icons/calendar-edit.svg" />
                   {t("AutreEvents")}
                 </p>
               </div>
@@ -334,7 +334,7 @@ function EventDetails({
           <div className="flex items-center mt-3">
             <img
               alt="icon"
-              src="/icons/CalendarGray.png"
+              src="/icons/CalendarGray.svg"
               className="w-[15px] h-[15px] mr-2"
             />{" "}
             <p className="poppins-regular text-gray-600 rounded-lg px-4 py-2">
@@ -354,7 +354,7 @@ function EventDetails({
           <div className="flex items-center">
             <img
               alt="icon"
-              src="/icons/clock.png"
+              src="/icons/clock.svg"
               className="w-[15px] h-[15px] mr-2"
             />{" "}
             <p className="poppins-regular text-gray-600">
@@ -364,7 +364,7 @@ function EventDetails({
           <div className="flex items-center">
             <img
               alt="icon"
-              src="/icons/Frame 1170.png"
+              src="/icons/Frame 1170.svg"
               className="w-[15px] h-[15px] mr-2"
             />{" "}
             <a
@@ -392,7 +392,7 @@ function EventDetails({
             <img
               alt="icon"
               src={`/icons/${
-                firstFormData.location ? "Location.svg" : "globalDark.png"
+                firstFormData.location ? "Location.svg" : "globalDark.svg"
               }`}
               className="w-[20px] h-[20px] mr-2"
             />{" "}
@@ -420,7 +420,7 @@ function EventDetails({
             <div className="flex items-center">
               <img
                 alt="icon"
-                src="/icons/gps.png"
+                src="/icons/gps.svg"
                 className="w-[20px] h-[20px] mr-2"
               />{" "}
               <a
@@ -443,7 +443,7 @@ function EventDetails({
                 <div className="bg-[#206FDF0D]  p-2 rounded-md">
                   <img
                     alt="icon"
-                    src="/icons/bank.png"
+                    src="/icons/bank.svg"
                     className="max-w-[20px] max-h-[20px]"
                   />{" "}
                 </div>
@@ -457,7 +457,7 @@ function EventDetails({
                 <div className=" bg-[#206FDF0D]  p-2 rounded-md">
                   <img
                     alt="icon"
-                    src="/icons/Ticket.png"
+                    src="/icons/Ticket.svg"
                     className="max-w-[20px] max-h-[20px]"
                   />
                 </div>
@@ -471,7 +471,7 @@ function EventDetails({
                 <div className=" bg-[#206FDF0D] p-2 rounded-md">
                   <img
                     alt="icon"
-                    src="/icons/ph_seal-check-fill (1).png"
+                    src="/icons/ph_seal-check-fill (1).svg"
                     className="max-w-[20px] max-h-[20px]"
                   />{" "}
                 </div>

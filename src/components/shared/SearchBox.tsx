@@ -159,7 +159,7 @@ export default function SearchBox(props: SearchBoxProps) {
                     }}
                   >
                     <img
-                      src="/icons/locationIcon.png"
+                      src="/icons/locationIcon.svg"
                       alt="Placeholder"
                       className="w-10 h-10 mr-2"
                     />

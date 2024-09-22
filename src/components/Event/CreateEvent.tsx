@@ -74,7 +74,7 @@ function CreateEvent() {
               alt="icon"
               className="w-[30px] h-[30px] md:max-w-[50px] md:max-h-[50px] mr-2 md:mr-4"
               src={`/icons/${
-                page === 0 ? "Frame 1174.png" : "submittedIcon.png"
+                page === 0 ? "Frame 1174.svg" : "submittedIcon.svg"
               }`}
             />
             <p className="md:block hidden text-sm md:text-md text-titles poppins-medium">
@@ -88,10 +88,10 @@ function CreateEvent() {
               className="w-[30px] h-[30px] md:max-w-[50px] md:max-h-[50px] mr-2 md:mr-4"
               src={`/icons/${
                 page === 0
-                  ? "Frame 1174 (1).png"
+                  ? "Frame 1174 (1).svg"
                   : page === 1
-                  ? "Frame 1174 (5).png"
-                  : "submittedIcon.png"
+                  ? "Frame 1174 (5).svg"
+                  : "submittedIcon.svg"
               }`}
             />
             <p className="md:block hidden text-sm md:text-md text-titles poppins-medium">
@@ -105,8 +105,8 @@ function CreateEvent() {
               className="w-[30px] h-[30px] md:max-w-[50px] md:max-h-[50px] mr-2 md:mr-4"
               src={`/icons/${
                 page === 0 || page === 1
-                  ? "Frame 1174 (2).png"
-                  : "Frame 1174 (7).png"
+                  ? "Frame 1174 (2).svg"
+                  : "Frame 1174 (7).svg"
               }`}
             />
             <p className=" md:block hidden text-sm md:text-md text-titles poppins-medium">
