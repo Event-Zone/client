@@ -137,6 +137,13 @@ export const apiSlice = createApi({
 
             })
         }),
+        searchRunningEventsByUser: builder.query<any, string>({
+            query: (id) => ({
+                url: `event/search/user/running/${id}`,
+                method: 'GET',
+
+            })
+        }),
         searchEventsByCategorie: builder.query<any, string[]>({
             query: (categorie) => ({
                 url: `event/search/categorie`,
@@ -420,6 +427,7 @@ export const {
     useSearchEventsByLocationQuery,
     useSearchEventsByMonthQuery,
     useSearchEventsByDateRangeQuery,
+    useSearchRunningEventsByUserQuery,
     useSearchEventsByTypeQuery,
     useSearchEventsLocationsQuery,
     useSearchEventsByCategorieQuery,

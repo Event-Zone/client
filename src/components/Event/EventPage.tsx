@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   useGetSubscriptionQuery,
   useGetUserQuery,
-  useSearchEventsByUserQuery,
+  useSearchRunningEventsByUserQuery,
 } from "@/store/features/api/apiSlice";
 import { useDispatch } from "react-redux";
 import { setSearchedEvents } from "@/store/features/eventSlice";
@@ -70,7 +70,7 @@ function EventPage({ data }: { data: any }) {
     isError: eventsError,
     isLoading: eventsLoading,
     refetch: refetchEvents, // Access the refetch function
-  } = useSearchEventsByUserQuery(data?.organizerId as string, {
+  } = useSearchRunningEventsByUserQuery(data?.organizerId as string, {
     skip: !data?.organizerId,
   });
   const handleSearch = async () => {};
