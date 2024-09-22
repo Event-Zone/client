@@ -38,7 +38,7 @@ export default async function RootLayout({
         />
         <meta
           property="og:image"
-          content="https://www.eventzone.pro/images/footerLogo.svg"
+          content="https://www.eventzone.pro/images/registerimg.jpeg"
         />{" "}
         {/* Replace with your image URL */}
         <meta property="og:url" content="https://www.eventzone.pro" />
@@ -52,7 +52,7 @@ export default async function RootLayout({
         />
         <meta
           name="twitter:image"
-          content="https://www.eventzone.pro/image/footerLogo.svg"
+          content="https://www.eventzone.pro/images/registerimg.jpeg"
         />{" "}
         {/* Replace with your image URL */}
       </head>
