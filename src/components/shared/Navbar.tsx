@@ -161,12 +161,12 @@ function Navbar() {
   }, [dropdownRef]);
   const t = useTranslations("Search");
   return (
-    <div className="bg-white border-b-[1px] border-[#BCC6CE] ">
+    <div className="  bg-white border-b-[1px] border-[#BCC6CE] ">
       {/* Search Input for Small Screens */}
       {searchOpen && (
         <div
           onClick={() => setShowSearchs((prev) => !prev)}
-          className="py-7 md:hidden md:mt-0 mt-[56px]  lg:hidden z-50 absolute w-screen h-screen bg-white p-2 flex flex-col   "
+          className="border-b-[2px] border-[#BCC6CE] py-7 md:hidden md:mt-0 mt-[56px]  lg:hidden z-50 absolute w-screen h-screen bg-white p-2 flex flex-col   "
         >
           <div className="mt-3 flex-grow flex flex-col ">
             {" "}
@@ -249,7 +249,7 @@ function Navbar() {
               </p>
             </button>
           </div>
-          <div className="h-[635px]">
+          <div className="bg-white pb-4 h-[635px]">
             <Ads />
           </div>
         </div>
