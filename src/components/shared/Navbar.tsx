@@ -38,7 +38,9 @@ function Navbar() {
   const pathname = usePathname();
   const isV1 = pathname === "/welcome" || pathname === "/tarification";
   const fetchedSubscription = useSelector(selectSubscription);
-
+  useEffect(() => {
+    if (searchOpen) dispatch(setSearchedEvents(allInitEvents));
+  }, [searchOpen]);
   useEffect(() => {
     console.log("fetchedSubscriptionNav", fetchedSubscription);
   }, [fetchedSubscription, user]);
@@ -58,10 +60,13 @@ function Navbar() {
     if (searchTerm === "") dispatch(setSearchedEvents(allInitEvents));
   }, [searchTerm]);
   useEffect(() => {
-    console.log("searchedEvents", searchedEvents);
-    dispatch(setSearchedEvents(searchedEvents));
-    setShowSearchs(true);
-    // if (searchedEvents) router.push("/search");
+    if (searchedEvents) {
+      console.log("searchedEvents", searchedEvents);
+      dispatch(setSearchedEvents(searchedEvents));
+      setShowSearchs(true);
+    } else {
+      dispatch(setSearchedEvents(allInitEvents));
+    }
   }, [searchedEvents]);
   const {
     data: allEvents,
