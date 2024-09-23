@@ -81,7 +81,7 @@ function EventDetails({
   return (
     <div className="flex flex-col w-full items-center ">
       <div className="flex flex-col  lg:w-[1050px] px-2  md:px-4 lg:px-0  py-16">
-        <div className="relative flex items-center justify-center rounded-xl overflow-hidden h-[460px] w-full ">
+        <div className="relative flex items-center justify-center rounded-xl overflow-hidden h-[179px] md:h-[460px] w-full">
           {secondFormData?.get("videoUrl") && videoId && currentBar === -1 ? (
             <div className="absolute w-full h-full z-20">
               <iframe
@@ -96,21 +96,38 @@ function EventDetails({
               ></iframe>
             </div>
           ) : (
-            <Image
-              alt="coverImg"
-              className="h-full w-full"
-              src={
-                secondFormData.get("eventImages")
-                  ? URL.createObjectURL(
-                      secondFormData.getAll("eventImages")[currentImage]
-                    )
-                  : "https://via.placeholder.com/300"
-              }
-              width={500} // Specify width
-              height={300} // Specify height
-              quality={90} // Adjust quality to improve performance (default is 75)
-              // placeholder="blur" // Optionally use a low-quality placeholder
-            />
+            <div className="relative flex items-center w-full h-full">
+              {/* Blurred Background Image */}
+              <Image
+                alt="coverImg"
+                className="absolute blur-md top-0 h-full w-full object-cover"
+                src={
+                  secondFormData.get("eventImages")
+                    ? URL.createObjectURL(
+                        secondFormData.getAll("eventImages")[currentImage]
+                      )
+                    : "https://via.placeholder.com/300"
+                }
+                width={500}
+                height={300}
+                quality={10}
+              />
+              {/* Foreground Image */}
+              <Image
+                alt="coverImg"
+                className="z-40 w-auto h-full max-w-full object-contain md:object-cover mx-auto" // Use object-contain for small screens, object-cover for larger
+                src={
+                  secondFormData.get("eventImages")
+                    ? URL.createObjectURL(
+                        secondFormData.getAll("eventImages")[currentImage]
+                      )
+                    : "https://via.placeholder.com/300"
+                }
+                width={500}
+                height={300}
+                quality={90}
+              />
+            </div>
           )}
         </div>
         <div className="  flex flex-row z-30 justify-center items-center w-full p-4">
@@ -125,7 +142,9 @@ function EventDetails({
                         className={`progress-bar w-[5px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
                         onClick={() => handleBarClick(-1)}
                       >
-                        <div className="fill-bar-horizontal w-full h-full rounded-md bg-gray-700"></div>
+                        {-1 <= currentImage && (
+                          <div className=" w-full h-full rounded-md  bg-mainBlue"></div>
+                        )}{" "}
                       </div>
                     </>
                   )}
@@ -134,11 +153,15 @@ function EventDetails({
                     .map((_: any, index: number) => (
                       <div
                         key={index}
-                        className={`progress-bar w-[5px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer`}
+                        className={`progress-bar w-[5px] h-[60px] md:h-[100px] xl:h-[200px]  bg-gray-300 mb-2 rounded-md cursor-pointer ${
+                          index < currentImage && "bg-mainBlue"
+                        }`}
                         onClick={() => handleBarClick(index)}
                       >
                         {index <= currentImage && (
-                          <div className="fill-bar-horizontal w-full h-full rounded-md bg-gray-700"></div>
+                          <div
+                            className={`fill-bar-horizontal w-full h-full rounded-md bg-gray-700 `}
+                          ></div>
                         )}
                       </div>
                     ))}

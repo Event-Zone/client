@@ -43,6 +43,7 @@ function Page({ params: { id } }: { params: { id: string } }) {
   }, [fetchedSubscription, error, isLoading]);
 
   if (isLoading || subsLoading) return <Progress />;
+  if (!fetchedEvent) return null;
   return (
     <div>
       <EditEvent event={fetchedEvent} />

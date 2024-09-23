@@ -33,7 +33,6 @@ function EditEvent({ event }: { event: any }) {
     linkInscription,
     type,
     Categorie,
-
     accessibilite,
     portee,
     public: publicData,
