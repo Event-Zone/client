@@ -518,7 +518,8 @@ function EventDetails({
               {t("About")}
             </h3>
             <div className="flex flex-wrap mb-4 mt-3 ">
-              {secondFormData.get("lieu") ? (
+              {secondFormData.get("lieu") &&
+              secondFormData.get("lieu") !== "null" ? (
                 <div className="flex mr-4">
                   <img
                     alt="icon"
@@ -528,7 +529,8 @@ function EventDetails({
                   <p className="poppins-medium">{secondFormData.get("lieu")}</p>
                 </div>
               ) : null}
-              {secondFormData.get("accessibilite") ? (
+              {secondFormData.get("accessibilite") &&
+              secondFormData.get("accessibilite") !== "null" ? (
                 <div className="flex mr-4 ">
                   <img
                     alt="icon"
@@ -559,7 +561,9 @@ function EventDetails({
             />
           </div>
           <div className="mt-4 poppins-semibold text-titles mb-t">
-            <h3 className="text-2xl mb-3">Sponsors</h3>
+            {secondFormData?.getAll("sponsorImages")?.length !== 0 && (
+              <h3 className="text-2xl mb-3">Sponsors</h3>
+            )}{" "}
             <div className="flex w-full flex-wrap element-with-scrollbar items-center justify-center ">
               {secondFormData
                 ?.getAll("sponsorImages")

@@ -520,7 +520,7 @@ function EventPage({ data }: { data: any }) {
             {t("About")}
           </h3>
           <div className="flex flex-wrap mb-4 mt-3 ">
-            {data.lieu ? (
+            {data.lieu && data.lieu !== "null" && (
               <div className="flex mr-6 items-center">
                 <div className="bg-[#206FDF0D]  p-2 rounded-md">
                   {" "}
@@ -533,8 +533,8 @@ function EventPage({ data }: { data: any }) {
 
                 <p className="poppins-medium ml-2">{data.lieu}</p>
               </div>
-            ) : null}
-            {data.accessibilite ? (
+            )}
+            {data.accessibilite && data.accessibilite !== "null" && (
               <div className="flex mr-6 items-center">
                 <div className=" bg-[#206FDF0D]  p-2 rounded-md">
                   <img
@@ -545,8 +545,8 @@ function EventPage({ data }: { data: any }) {
                 </div>
                 <p className="poppins-medium ml-2">{data.accessibilite}</p>
               </div>
-            ) : null}
-            {subscritionData?.pack === "Business" ? (
+            )}
+            {subscritionData?.pack === "Business" && (
               <div className="flex items-center">
                 <div className=" bg-[#206FDF0D] p-2 rounded-md">
                   <img
@@ -557,7 +557,7 @@ function EventPage({ data }: { data: any }) {
                 </div>
                 <p className="poppins-medium ml-2">Premium Organiser</p>
               </div>
-            ) : null}
+            )}
           </div>
           <p
             dangerouslySetInnerHTML={{ __html: data.eventDescription }}
@@ -565,7 +565,9 @@ function EventPage({ data }: { data: any }) {
           />
         </div>
         <div className="mt-4 poppins-semibold text-titles mb-t">
-          <h3 className="text-2xl mb-3">Sponsors</h3>
+          {data?.sponsorImages?.length !== 0 && (
+            <h3 className="text-2xl mb-3">Sponsors</h3>
+          )}
           <div className="flex w-full flex-wrap element-with-scrollbar items-center md:justify-start justify-center ">
             {data?.sponsorImages.map((img: any, index: number) => (
               <div className="mb-2 flex items-center justify-center md:w-[128px]  md:h-[128px] w-[100px] h-[100px] rounded-lg border-[1.3px] mr-3 border-gray-300 p-[12px]">
