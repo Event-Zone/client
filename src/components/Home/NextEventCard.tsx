@@ -62,7 +62,7 @@ function NextEventCard({ event }: { event: any }) {
             {fetchedSubscription?.company}
           </div>
         ) : null}
-        {event.location?.address?.commercial && (
+        {event.location?.address && (
           <p className="    md:w-auto w-fit px-1 pl-1 py-1 my-2 md:bg-transparent bg-[#F9F9F9] rounded-md md:mx-0   text-gray-600 text-[12px] sm:text-[14px] flex flex-row items-center">
             {event.location?.address?.commercial ? (
               <>
