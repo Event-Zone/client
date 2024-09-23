@@ -93,7 +93,7 @@ function EventCard({ event }: EventCardProps) {
                 : event.location.address.state)}
           </p>
           <div className="flex flex-wrap ">
-            {event.lieu ? (
+            {event.lieu && event.lieu !== "null" ? (
               <div className="flex items-center mr-4 mb-2">
                 <img
                   alt="icon"
@@ -105,7 +105,7 @@ function EventCard({ event }: EventCardProps) {
                 </p>
               </div>
             ) : null}
-            {event.accessibilite ? (
+            {event.accessibilite && event.accessibilite !== "null" ? (
               <div className="flex items-center mr-4 mb-2">
                 <img
                   alt="icon"
