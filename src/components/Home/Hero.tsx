@@ -96,7 +96,9 @@ const Hero = () => {
           {eventAdds.map((_, index) => (
             <div
               key={index}
-              className={`progress-bar w-[10px] md:h-[65px] bg-gray-300 mb-2 rounded-md cursor-pointer`}
+              className={`progress-bar w-[10px] md:h-[65px] bg-gray-300 mb-2 rounded-md cursor-pointer ${
+                index < currentBar && "bg-white"
+              }`}
               onClick={() => handleBarClick(index)} // Wrap the function call in an anonymous function
             >
               {index <= currentBar && (
