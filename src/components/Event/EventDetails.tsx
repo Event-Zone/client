@@ -99,6 +99,7 @@ function EventDetails({
             <div className="relative flex items-center w-full h-full">
               {/* Blurred Background Image */}
               <Image
+                key={1}
                 alt="coverImg"
                 className="absolute blur-md top-0 h-full w-full object-cover"
                 src={
@@ -114,6 +115,7 @@ function EventDetails({
               />
               {/* Foreground Image */}
               <Image
+                key={2}
                 alt="coverImg"
                 className="z-40 w-auto h-full max-w-full object-contain md:object-cover mx-auto" // Use object-contain for small screens, object-cover for larger
                 src={
