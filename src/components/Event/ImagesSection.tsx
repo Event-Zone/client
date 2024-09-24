@@ -45,8 +45,8 @@ function ImagesSection({
   };
 
   useEffect(() => {
-    console.log(videoUrl);
-  }, [videoUrl]);
+    console.log("eventImages", eventImages);
+  }, [eventImages]);
   const handleBarClick = (index: number) => {
     setSelectedImage(index);
   };
@@ -116,9 +116,13 @@ function ImagesSection({
                 if (event.target.files) {
                   const files = Array.from(event.target.files as FileList);
                   const imageFiles = files.filter((file) =>
-                    ["image/jpeg", "image/svg", "image/svg+xml"].includes(
-                      file.type
-                    )
+                    [
+                      "image/jpeg",
+                      "image/jpg",
+                      "image/svg",
+                      "image/svg+xml",
+                      "image/png",
+                    ].includes(file.type)
                   );
                   if (eventImages.length >= numberImages) {
                     console.log("Images", numberImages);
@@ -198,8 +202,10 @@ function ImagesSection({
                             const imageFiles = files.filter((file) =>
                               [
                                 "image/jpeg",
-                                "image/png",
+                                "image/jpg",
+                                "image/svg",
                                 "image/svg+xml",
+                                "image/png",
                               ].includes(file.type)
                             );
                             if (eventImages.length >= numberImages) {
