@@ -215,12 +215,12 @@ function EventDetails({
 
           <div className=" md:block hidden">
             <p className="poppins-medium text-gray-600 rounded-lg px-4 py-2">
-              {new Date(firstFormData.startdate).toLocaleDateString("fr-FR", {
+              {new Date(firstFormData.startdate).toLocaleDateString(undefined, {
                 day: "2-digit",
                 month: "short",
               })}{" "}
               -{" "}
-              {new Date(firstFormData.enddate).toLocaleDateString("fr-FR", {
+              {new Date(firstFormData.enddate).toLocaleDateString(undefined, {
                 day: "2-digit",
                 month: "short",
                 year: "numeric",
@@ -262,12 +262,15 @@ function EventDetails({
                 src="/icons/CalendarGray.svg"
                 className="w-[18px] h-[18px] mr-2"
               />
-              {new Date(firstFormData?.startdate).toLocaleDateString("fr-FR", {
-                day: "2-digit",
-                month: "short",
-              })}{" "}
+              {new Date(firstFormData?.startdate).toLocaleDateString(
+                undefined,
+                {
+                  day: "2-digit",
+                  month: "short",
+                }
+              )}{" "}
               -{" "}
-              {new Date(firstFormData?.enddate).toLocaleDateString("fr-FR", {
+              {new Date(firstFormData?.enddate).toLocaleDateString(undefined, {
                 day: "2-digit",
                 month: "short",
                 year: "numeric",
@@ -407,12 +410,15 @@ function EventDetails({
               />{" "}
               <p className="poppins-regular text-gray-600 rounded-lg px-4 py-2">
                 {" "}
-                {new Date(firstFormData.startdate).toLocaleDateString("fr-FR", {
-                  day: "2-digit",
-                  month: "short",
-                })}{" "}
+                {new Date(firstFormData.startdate).toLocaleDateString(
+                  undefined,
+                  {
+                    day: "2-digit",
+                    month: "short",
+                  }
+                )}{" "}
                 -{" "}
-                {new Date(firstFormData.enddate).toLocaleDateString("fr-FR", {
+                {new Date(firstFormData.enddate).toLocaleDateString(undefined, {
                   day: "2-digit",
                   month: "short",
                   year: "numeric",

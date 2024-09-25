@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import RishTextEditor from "../../shared/RishTextEditor";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { addDays, format } from "date-fns";
+import { addDays, addMinutes, format } from "date-fns";
 import SearchBox from "../../shared/SearchBox";
 import TimePickerUi from "@/components/shared/TimePickerUi";
 import {
@@ -109,23 +109,41 @@ function EventForm({
   }, [formData]);
 
   const handleDateChange = (date: Date | null, type: "start" | "end") => {
-    if (type === "start") {
-      setStartDate(date || new Date());
-      if (endDate && date && date > endDate) {
-        setEndDate(date);
+    if (date) {
+      // Convert date to UTC by adjusting for the timezone offset
+      console.log(date.getTimezoneOffset(), "offset");
+      console.log(date, "date");
+      const utcDate = addMinutes(date, date.getTimezoneOffset());
+      console.log(utcDate, "utx");
+      console.log(format(utcDate, "yyyy-MM-dd"), "format(utcDate");
+
+      if (type === "start") {
+        setStartDate(utcDate);
+        if (endDate && utcDate > endDate) {
+          setEndDate(utcDate);
+        }
+        setFormData({
+          ...formData,
+          startdate: format(utcDate, "yyyy-MM-dd"), // Store UTC date in formData
+        });
+      } else {
+        setEndDate(utcDate);
+        setFormData({
+          ...formData,
+          enddate: format(utcDate, "yyyy-MM-dd"), // Store UTC date in formData
+        });
       }
-      setFormData({
-        ...formData,
-        startdate: date ? format(date, "yyyy-MM-dd") : "",
-      });
     } else {
-      setEndDate(date || new Date());
-      setFormData({
-        ...formData,
-        enddate: date ? format(date, "yyyy-MM-dd") : "",
-      });
+      if (type === "start") {
+        setStartDate(new Date());
+        setFormData({ ...formData, startdate: "" });
+      } else {
+        setEndDate(new Date());
+        setFormData({ ...formData, enddate: "" });
+      }
     }
   };
+
   const handleLocation = (position: any) => {
     setFormData({
       ...formData,

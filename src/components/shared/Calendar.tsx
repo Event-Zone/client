@@ -15,6 +15,13 @@ import { useSearchEventsByDateRangeQuery } from "@/store/features/api/apiSlice";
 import { useDispatch } from "react-redux";
 import { setSearchedEvents } from "@/store/features/eventSlice";
 import { useTranslations } from "next-intl";
+
+const toUTC = (date: Date) => {
+  return new Date(
+    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+  );
+};
+
 const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
   const t = useTranslations("Search");
 
@@ -70,7 +77,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
     }
     return { startDate: "", endDate: "" };
   };
-
+  const [currentMonth, setCurrentMonth] = useState(new Date(Date.now()));
   // Effect to log the ISO dates (replace with your fetch logic)
   useEffect(() => {
     const { startDate, endDate } = getISODateRange();
@@ -82,24 +89,24 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
   }, [selectedStartDate, selectedEndDate]);
 
   const handleDayClick = (day: Date) => {
+    const utcDay = toUTC(day);
     if (!selectedStartDate || (selectedStartDate && selectedEndDate)) {
-      console.log(day);
-      setSelectedStartDate(day);
+      setSelectedStartDate(utcDay);
       setSelectedEndDate(null);
       setIsSelectingEndDate(true);
     } else if (isSelectingEndDate) {
-      if (isBefore(day, selectedStartDate)) {
-        setSelectedStartDate(day);
+      if (isBefore(utcDay, selectedStartDate)) {
+        setSelectedStartDate(utcDay);
       } else {
-        setSelectedEndDate(day);
+        setSelectedEndDate(utcDay);
         setIsSelectingEndDate(false);
       }
     }
   };
 
   const handleSelectThisWeek = () => {
-    const start = startOfWeek(new Date(), { weekStartsOn: 1 });
-    const end = endOfWeek(new Date(), { weekStartsOn: 1 });
+    const start = toUTC(startOfWeek(new Date(), { weekStartsOn: 1 }));
+    const end = toUTC(endOfWeek(new Date(), { weekStartsOn: 1 }));
     setSelectedStartDate(start);
     setSelectedEndDate(end);
     setSelectedMonth(null);
@@ -109,8 +116,8 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
   };
 
   const handleSelectThisMonth = () => {
-    const start = startOfMonth(currentMonth);
-    const end = endOfMonth(currentMonth);
+    const start = toUTC(startOfMonth(currentMonth));
+    const end = toUTC(endOfMonth(currentMonth));
     setSelectedStartDate(start);
     setSelectedEndDate(end);
     setSelectedMonth(null);
@@ -118,12 +125,11 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
     setIsNextMonth(false);
     setIsMonth(true);
   };
-  const [currentMonth, setCurrentMonth] = useState(new Date(Date.now()));
 
   const handleSelectNextMonth = () => {
     const nextMonth = addMonths(currentMonth, 1);
-    const start = startOfMonth(nextMonth);
-    const end = endOfMonth(nextMonth);
+    const start = toUTC(startOfMonth(nextMonth));
+    const end = toUTC(endOfMonth(nextMonth));
     setSelectedMonth(null);
     setSelectedStartDate(start);
     setSelectedEndDate(end);
@@ -133,8 +139,8 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
   };
 
   const handleMonthClick = (month: Date) => {
-    const start = startOfMonth(month);
-    const end = endOfMonth(month);
+    const start = toUTC(startOfMonth(month));
+    const end = toUTC(endOfMonth(month));
 
     // Add or remove the month from the selected months array
     setSelectedMonths((prevSelectedMonths) => {
@@ -154,9 +160,9 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
           setSelectedEndDate(null);
         } else {
           // Set start and end date to the range of selected months
-          const newStart = startOfMonth(newSelectedMonths[0]);
-          const newEnd = endOfMonth(
-            newSelectedMonths[newSelectedMonths.length - 1]
+          const newStart = toUTC(startOfMonth(newSelectedMonths[0]));
+          const newEnd = toUTC(
+            endOfMonth(newSelectedMonths[newSelectedMonths.length - 1])
           );
           setSelectedStartDate(newStart);
           setSelectedEndDate(newEnd);
@@ -167,9 +173,9 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
         const newSelectedMonths = [...prevSelectedMonths, month].sort(
           (a, b) => a.getTime() - b.getTime()
         );
-        setSelectedStartDate(startOfMonth(newSelectedMonths[0]));
+        setSelectedStartDate(toUTC(startOfMonth(newSelectedMonths[0])));
         setSelectedEndDate(
-          endOfMonth(newSelectedMonths[newSelectedMonths.length - 1])
+          toUTC(endOfMonth(newSelectedMonths[newSelectedMonths.length - 1]))
         );
         return newSelectedMonths;
       }
@@ -286,7 +292,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
               {" "}
               <p className="border-b-2 border-b-mainBlue">
                 {selectedStartDate &&
-                  new Date(selectedStartDate).toLocaleDateString("fr-FR", {
+                  new Date(selectedStartDate).toLocaleDateString(undefined, {
                     day: "2-digit",
                     month: "short",
                     year: "numeric",
@@ -318,7 +324,7 @@ const Calendar = ({ setShowDialog }: { setShowDialog: Function }) => {
             <p className="flex justify-between pt-4 poppins-medium text-titles">
               <p className="border-b-2 border-b-mainBlue">
                 {selectedEndDate &&
-                  new Date(selectedEndDate).toLocaleDateString("fr-FR", {
+                  new Date(selectedEndDate).toLocaleDateString(undefined, {
                     day: "2-digit",
                     month: "short",
                     year: "numeric",

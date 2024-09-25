@@ -151,14 +151,14 @@ function Ad({
         {status === 0 ? (
           <>
             <div className="text-white">
-              {new Date(adds[index]?.createdAt).toLocaleDateString("fr-FR", {
+              {new Date(adds[index]?.createdAt).toLocaleDateString(undefined, {
                 day: "2-digit",
                 month: "short",
                 year: "numeric",
               })}
             </div>
             <div className="text-white">
-              {new Date(adds[index]?.endDate).toLocaleDateString("fr-FR", {
+              {new Date(adds[index]?.endDate).toLocaleDateString(undefined, {
                 day: "2-digit",
                 month: "short",
                 year: "numeric",
@@ -168,14 +168,14 @@ function Ad({
         ) : (
           <>
             <div className="text-white">
-              {new Date(event?.createdAt).toLocaleDateString("fr-FR", {
+              {new Date(event?.createdAt).toLocaleDateString(undefined, {
                 day: "2-digit",
                 month: "short",
                 year: "numeric",
               })}
             </div>
             <div className="text-white">
-              {new Date(event?.endDate).toLocaleDateString("fr-FR", {
+              {new Date(event?.endDate).toLocaleDateString(undefined, {
                 day: "2-digit",
                 month: "short",
                 year: "numeric",

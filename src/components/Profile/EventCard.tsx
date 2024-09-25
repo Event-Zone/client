@@ -128,12 +128,12 @@ function EventCard({ event, refetchEvents }: EventCardProps) {
         </h3>
 
         <p className="text-sm text-gray-500 text-ellipsis line-clamp-2 ">
-          {new Date(event.startdate).toLocaleDateString("fr-FR", {
+          {new Date(event.startdate).toLocaleDateString(undefined, {
             day: "2-digit",
             month: "short",
           })}{" "}
           -{" "}
-          {new Date(event.enddate).toLocaleDateString("fr-FR", {
+          {new Date(event.enddate).toLocaleDateString(undefined, {
             day: "2-digit",
             month: "short",
             year: "numeric",

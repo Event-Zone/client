@@ -112,14 +112,14 @@ function Event({
           <br />
         </div>
         <div className="text-white">
-          {new Date(event.createdAt).toLocaleDateString("fr-FR", {
+          {new Date(event.createdAt).toLocaleDateString(undefined, {
             day: "2-digit",
             month: "short",
             year: "numeric",
           })}
         </div>
         <div className="text-white">
-          {new Date(event.startdate).toLocaleDateString("fr-FR", {
+          {new Date(event.startdate).toLocaleDateString(undefined, {
             day: "2-digit",
             month: "short",
             year: "numeric",

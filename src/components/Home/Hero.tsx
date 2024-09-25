@@ -178,7 +178,7 @@ const Hero = () => {
                 className="w-[20px] h-[20px] mr-2"
               />{" "}
               {new Date(eventAdds[currentBar]?.startdate).toLocaleDateString(
-                "fr-FR",
+                undefined,
                 {
                   day: "2-digit",
                   month: "short",
@@ -186,7 +186,7 @@ const Hero = () => {
               )}{" "}
               -{" "}
               {new Date(eventAdds[currentBar]?.enddate).toLocaleDateString(
-                "fr-FR",
+                undefined,
                 {
                   day: "2-digit",
                   month: "short",
@@ -283,7 +283,7 @@ const Hero = () => {
               className="w-[18px] h-[18px] mr-2"
             />
             {new Date(eventAdds[currentBar]?.startdate).toLocaleDateString(
-              "fr-FR",
+              undefined,
               {
                 day: "2-digit",
                 month: "short",
@@ -291,7 +291,7 @@ const Hero = () => {
             )}{" "}
             -{" "}
             {new Date(eventAdds[currentBar]?.enddate).toLocaleDateString(
-              "fr-FR",
+              undefined,
               {
                 day: "2-digit",
                 month: "short",

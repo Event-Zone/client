@@ -20,7 +20,6 @@ function TimePickerUi({ setFormData, name, initTime }: TimePickerUiProps) {
   const INITTIME = initTime
     ? parse(initTime, "HH:mm", new Date()) // Parse "HH:mm" string into Date
     : new Date(); // Fallback to current date
-  console.log(INITTIME);
   const [time, setTime] = useState<Date | null | undefined>(INITTIME);
 
   const handleTimeChange = (newValue: Date | null) => {

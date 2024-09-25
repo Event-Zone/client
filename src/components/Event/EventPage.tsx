@@ -212,12 +212,12 @@ function EventPage({ data }: { data: any }) {
 
         <div className=" md:block hidden">
           <p className="poppins-medium text-gray-600 rounded-lg px-0 pt-5">
-            {new Date(data.startdate).toLocaleDateString("fr-FR", {
+            {new Date(data.startdate).toLocaleDateString(undefined, {
               day: "2-digit",
               month: "short",
             })}{" "}
             -{" "}
-            {new Date(data.enddate).toLocaleDateString("fr-FR", {
+            {new Date(data.enddate).toLocaleDateString(undefined, {
               day: "2-digit",
               month: "short",
               year: "numeric",
@@ -443,12 +443,12 @@ function EventPage({ data }: { data: any }) {
             />{" "}
             <p className="poppins-regular text-gray-600 rounded-lg  py-2">
               {" "}
-              {new Date(data.startdate).toLocaleDateString("fr-FR", {
+              {new Date(data.startdate).toLocaleDateString(undefined, {
                 day: "2-digit",
                 month: "short",
               })}{" "}
               -{" "}
-              {new Date(data.enddate).toLocaleDateString("fr-FR", {
+              {new Date(data.enddate).toLocaleDateString(undefined, {
                 day: "2-digit",
                 month: "short",
                 year: "numeric",

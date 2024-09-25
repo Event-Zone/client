@@ -65,11 +65,6 @@ function Search({ initEvents = [] }: { initEvents: any[] | null }) {
     setEvents(seachedEvents);
     console.log("seachedEvents", seachedEvents);
   }, [seachedEvents]);
-  // useEffect(() => {
-  //   if (initEvents)
-  //     if (initEvents?.length >= 1) setEvents(initEvents);
-  //     else setEvents([]);
-  // }, [initEvents]);
 
   const [adds, setAdds] = useState<any[] | null>([]);
   const [startDate, setStartDate] = useState<Date | null>(null);

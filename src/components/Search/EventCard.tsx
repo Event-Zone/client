@@ -66,12 +66,12 @@ function EventCard({ event }: EventCardProps) {
         />
         <div className="p-4 w-full sm:w-2/3">
           <p className="text-gray-500 text-sm sm:text-base poppins-regular">
-            {new Date(event.startdate).toLocaleDateString("fr-FR", {
+            {new Date(event.startdate).toLocaleDateString(undefined, {
               day: "2-digit",
               month: "short",
             })}{" "}
             -{" "}
-            {new Date(event.enddate).toLocaleDateString("fr-FR", {
+            {new Date(event.enddate).toLocaleDateString(undefined, {
               day: "2-digit",
               month: "short",
               year: "numeric",
