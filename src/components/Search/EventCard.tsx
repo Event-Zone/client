@@ -58,7 +58,7 @@ function EventCard({ event }: EventCardProps) {
         <Image
           src={`${process.env.NEXT_PUBLIC_SERVER_URL}event/image/${event?.eventImages[0]}`}
           alt={event.eventName}
-          className="w-full sm:w-[200px] md:w-[245px] rounded-md"
+          className="w-full sm:w-[200px] md:w-[245px] h-[110px] rounded-md"
           width={500} // Specify width
           height={300} // Specify height
           quality={90} // Adjust quality to improve performance (default is 75)
