@@ -1,1 +1,3 @@
-[<img src='/public/images.Logo.svg' alt='linkedin' height='100'>](https://opensourceclub-univ-alger1.dz/)
+<img src='/public/images/Logo.svg' alt='logo' height='100'>
+
+[visit eventzone](https://eventzone.pro)
